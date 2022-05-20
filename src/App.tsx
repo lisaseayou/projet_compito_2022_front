@@ -1,12 +1,16 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import Header from "./layout/Header";
+
 import MenuList from "./components/Menu";
+import Nav from "./layout/Nav";
 
 function App() {
   return (
-    <div>
+    <>
+    
+    <div className="mr-6">
+      
       <BrowserRouter basename="/">
-        <Header />
+      <Nav />
         <Routes>
           {MenuList.map(({ path, Component }, index) => (
             <Route path={path} key={index} element={<Component />} />
@@ -14,6 +18,7 @@ function App() {
         </Routes>
       </BrowserRouter>
     </div>
+    </>
   );
 }
 
