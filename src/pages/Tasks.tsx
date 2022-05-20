@@ -1,11 +1,12 @@
 import DataTasks from "../data/DataTasks";
 
+
 const Tasks = () => {
   return (
-    <div>
-      <h1>Tasks</h1>
+    <div className="pl-20">
+      <h1 className="flex justify-center text-4xl font-paytone-one text-violet-800 p-2">Liste des tâches</h1>
       <div>
-        <table className="m-4 leading-normal">
+        <table className="m-4  leading-normal font-poppins">
           <thead>
             <tr>
               <th className="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-center text-xs font-semibold text-gray-600 uppercase tracking-wider">
