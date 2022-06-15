@@ -30,7 +30,8 @@ const Tasks = () => {
       </h1>
       <div>
         <label>
-          <input type="checkbox" className="ml-1" onChange={showCards} />
+          <input type="checkbox" className="ml-3 mr-3" onChange={showCards} />
+          Afficher en Cards
         </label>
       </div>
       {isChecked ? (
