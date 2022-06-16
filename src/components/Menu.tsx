@@ -1,5 +1,6 @@
 import React from "react";
 
+import NotFound from "../pages/NotFound"
 import Home from "../pages/Home";
 import Tasks from "../pages/Tasks";
 import Projects from "../pages/Projects";
@@ -13,6 +14,11 @@ type Menu = {
 };
 
 const MenuList: Menu[] = [
+  {
+    path: "*",
+    title: "404",
+    Component: NotFound,
+  },
   {
     path: "/",
     title: "Home",
