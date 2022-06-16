@@ -1,7 +1,6 @@
 import { DotsVerticalIcon } from "@heroicons/react/solid";
 
-const Card = ({card} : {card: any}) => {
-
+const CardProject = ({ project }: { project: any }) => {
   return (
     <a
       className="relative block p-8 overflow-hidden border border-gray-100 rounded-lg  w-80 h-96 mr-1.5"
@@ -11,9 +10,9 @@ const Card = ({card} : {card: any}) => {
 
       <div className="justify-between sm:flex ">
         <div>
-          <h5 className="text-xl font-bold text-gray-900">{card.title}</h5>
+          <h5 className="text-xl font-bold text-gray-900">{project.title}</h5>
           <p className="mt-1 text-xs font-medium text-gray-600">
-            {card.dateStart} - {card.dateEnd}
+            {project.dateStart} - {project.dateEnd}
           </p>
         </div>
 
@@ -23,15 +22,15 @@ const Card = ({card} : {card: any}) => {
       </div>
       <dl className="flex mt-6">
         <div className="flex">
-          {/* {card.badges.map((badge) => (
+          {/* {project.badges.map((badge) => (
             <p className="flex mr-1.5">{badge.title}</p>
           ))} */}
         </div>
       </dl>
       <div className="mt-4 sm:pr-8">
-        <p className="text-sm text-gray-500">{card.description}</p>
+        <p className="text-sm text-gray-500">{project.description}</p>
       </div>
     </a>
   );
 };
-export default Card;
+export default CardProject;

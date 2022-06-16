@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 import { useState } from "react";
 import DataTasks from "../data/DataTasks";
 import Modal from "../components/Modal";
-import CardsList from "../components/CardsList";
+import CardTask from "../components/CardTask";
 
 const Tasks = () => {
   const [openModal, setOpenModal] = useState<number>();
@@ -16,7 +16,7 @@ const Tasks = () => {
   };
 
   const showCards = (e: any): void => {
-    if (e.target.checked) {
+    if (e.target) {
       setIsChecked(!isChecked);
     } else {
       setIsChecked(false);
@@ -28,13 +28,24 @@ const Tasks = () => {
       <h1 className="flex justify-center text-4xl font-paytone-one text-violet-800 p-2">
         Liste des tâches
       </h1>
-      <div>
-        <label>
-          <input type="checkbox" className="ml-3 mr-3" onChange={showCards} />
-          Afficher en Cards
-        </label>
-      </div>
+      <button
+        type="button"
+        className="ml-3 mr-3 mb-4 bg-gray-100 border border-gray-100 p-1 rounded-lg"
+        onClick={showCards}
+      >
+        {isChecked ? "Afficher en tableau" : "Afficher en card"}
+      </button>
       {isChecked ? (
+        <div className="flex flex-col justify-center items-center w-full h-full ">
+          <div className="w-full flex justify-start pl-24 ">
+            <div className="flex">
+              {DataTasks.map((task, index) => (
+                <CardTask key={index} task={task} />
+              ))}
+            </div>
+          </div>
+        </div>
+      ) : (
         <div>
           <table className="m-4  leading-normal font-poppins">
             <thead>
@@ -114,12 +125,6 @@ const Tasks = () => {
               })}
             </tbody>
           </table>
-        </div>
-      ) : (
-        <div className="flex flex-col justify-center items-center w-full h-full ">
-          <div className="w-full flex justify-start pl-24 ">
-            <CardsList />
-          </div>
         </div>
       )}
     </div>
