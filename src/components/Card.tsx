@@ -5,7 +5,7 @@ const Card = ({card} : {card: any}) => {
   return (
     <a
       className="relative block p-8 overflow-hidden border border-gray-100 rounded-lg  w-80 h-96 mr-1.5"
-      href=""
+      href="/"
     >
       <span className="absolute inset-x-0 bottom-0 h-2  bg-gradient-to-r from-green-300 via-blue-500 to-purple-600"></span>
 
