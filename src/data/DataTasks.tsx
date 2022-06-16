@@ -4,6 +4,7 @@ type Data = {
   id: number;
   name: string;
   subject: string;
+  description: string;
   priority: string;
   status: boolean;
   createDate: string;
@@ -15,6 +16,7 @@ const DataTasks: Data[] = [
     id: 1,
     name: "John Doe",
     subject: "Support of theme",
+    description: "blableublibloblu",
     priority: "High",
     status: true,
     createDate: "01/01/2021",
@@ -24,6 +26,7 @@ const DataTasks: Data[] = [
     id: 2,
     name: "Pedro Souza",
     subject: "Your application received",
+    description: "blableublibloblu",
     priority: "Low",
     status: false,
     createDate: "09/01/2021",

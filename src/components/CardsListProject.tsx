@@ -1,8 +1,8 @@
-import Card from "./Card";
+import CardProject from "./CardProject";
 
 const liste = [
   {
-    title: "First Task",
+    title: "First Project",
     dateStart: "Wed, 12 Jan",
     dateEnd: "Thu, 31 Mar",
     description:
@@ -11,7 +11,7 @@ const liste = [
   },
 
   {
-    title: "Second Task",
+    title: "Second Project",
     dateStart: "Wed, 12 Jan",
     dateEnd: "Thu, 31 Mar",
     description:
@@ -19,7 +19,7 @@ const liste = [
     badges: [{ title: "Illustration" }, { title: "Ux" }],
   },
   {
-    title: "Third Task",
+    title: "Third Project",
     dateStart: "Wed, 12 Jan",
     dateEnd: "Thu, 31 Mar",
     description:
@@ -29,11 +29,13 @@ const liste = [
 ];
 
 const CardsList = () => {
-  return <div className="flex">
-      {liste.map((card, index) =>
-    <Card key={index} card={card} />
-      )}
-  </div>;
+  return (
+    <div className="flex">
+      {liste.map((project, index) => (
+        <CardProject key={index} project={project} />
+      ))}
+    </div>
+  );
 };
 
 export default CardsList;
