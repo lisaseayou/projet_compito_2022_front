@@ -1,18 +1,17 @@
-import Card from "../components/Card";
-import CardsList from "../components/CardsList";
+import CardsListProject from "../components/CardsListProject";
 
 const Projects = () => {
-    return (
-      <div className="flex flex-col justify-center items-center w-full h-full ">
-        {" "}
-        <p className="text-6xl font-paytone-one text-violet-800 p-4">Project Page</p>
-        <div className="w-full flex justify-start pl-24 ">
- <CardsList />
-        </div>
-        
+  return (
+    <div className="flex flex-col justify-center items-center w-full h-full ">
+      {" "}
+      <p className="text-6xl font-paytone-one text-violet-800 p-4">
+        Project Page
+      </p>
+      <div className="w-full flex justify-start pl-24 ">
+        <CardsListProject />
       </div>
-    );
-  };
-  
-  export default Projects;
-  
+    </div>
+  );
+};
+
+export default Projects;

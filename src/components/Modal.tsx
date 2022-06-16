@@ -3,7 +3,7 @@ interface ModalProps {
   children: any;
 }
 
-const Modal = ({ children }: ModalProps) => {
+const Modal = ({ children, openModal }: ModalProps) => {
   return <div className="w-auto border border-black">{children}</div>;
 };
 
