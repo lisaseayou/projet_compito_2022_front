@@ -1,8 +1,18 @@
 import { ReactNode } from 'react';
 
+export enum variantEnum {
+    H1 = 'h1',
+    H2 = 'h2',
+    H3 = 'h3',
+    H4 = 'h4',
+    H5 = 'h5',
+    H6 = 'h6',
+    P = 'p',
+}
+
 type TypographyProps = {
     children: ReactNode;
-    variant: string;
+    variant: variantEnum;
     style?: object;
     className?: string;
     leading?: string;
@@ -19,7 +29,7 @@ const Typography = ({
     color,
     children,
 }: TypographyProps) => {
-    if (variant === 'h2') {
+    if (variant === variantEnum?.H2) {
         return (
             <h2
                 className={`not-italic font-extrabold ${
@@ -34,7 +44,7 @@ const Typography = ({
         );
     }
 
-    if (variant === 'h5') {
+    if (variant === variantEnum?.H5) {
         return (
             <h5
                 className={`not-italic font-normal leading-${
@@ -49,7 +59,7 @@ const Typography = ({
         );
     }
 
-    if (variant === 'p') {
+    if (variant === variantEnum?.P) {
         return (
             <p
                 className={`not-italic font-normal leading-${
