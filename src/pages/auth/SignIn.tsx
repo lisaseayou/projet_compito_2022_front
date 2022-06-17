@@ -1,13 +1,13 @@
 import Button from '../../components/ui/Button';
 import Typography from '../../components/ui/Typography';
+import InputText from '../../components/ui/InputText';
+import SocialButton from '../../components/ui/SocialButton';
 import {
     faFacebookF,
     faLinkedinIn,
     faGoogle,
 } from '@fortawesome/free-brands-svg-icons';
-import SocialButton from '../../components/ui/SocialButton';
-import ViewIcon from '../../assets/icons/view.svg';
-import InputText from '../../components/ui/InputText';
+import { ReactComponent as ViewIcon } from '../../assets/icons/view.svg';
 
 const SignIn = () => {
     return (
@@ -64,15 +64,34 @@ const SignIn = () => {
                 </Typography>
 
                 <div className="w-full" style={{ maxWidth: 546 }}>
-                    <InputText
-                        type="name"
-                        id="name"
-                        placeholder="Name"
-                        icon={ViewIcon}
-                    />
-                </div>
+                    <form onSubmit={() => {}}>
+                        <InputText
+                            type="name"
+                            id="name"
+                            placeholder="Name"
+                            icon={<ViewIcon />}
+                            className="mb-4"
+                        />
 
-                <Button variant="primary">Sign up</Button>
+                        <InputText
+                            type="email"
+                            id="email"
+                            placeholder="email"
+                            icon={<ViewIcon />}
+                            className="mb-4"
+                        />
+
+                        <InputText
+                            type="password"
+                            id="password"
+                            placeholder="password"
+                            icon={<ViewIcon />}
+                            className="mb-12"
+                        />
+
+                        <Button variant="primary">Sign up</Button>
+                    </form>
+                </div>
             </div>
         </div>
     );

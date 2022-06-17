@@ -21,7 +21,7 @@ const Typography = ({
 }: TypographyProps) => {
     if (variant === 'h2') {
         return (
-            <h1
+            <h2
                 className={`not-italic font-extrabold ${
                     leading ?? 'leading-none'
                 } ${fontSize ?? 'text-6xl'} capitalize ${
@@ -30,7 +30,7 @@ const Typography = ({
                 style={style}
             >
                 {children}
-            </h1>
+            </h2>
         );
     }
 
