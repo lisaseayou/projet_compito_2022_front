@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import CardsListProject from "../components/CardsListProject";
+import CardsListProject from "../components/Projects/CardsListProject";
 
 const Projects = () => {
   return (
