@@ -1,9 +1,23 @@
+import Button, { ButtonTypeEnum } from '../components/ui/Button';
+
 const NotFound = () => {
     return (
-        <div className="flex flex-col justify-center items-center w-full h-full">
-            <p className="text-6xl">404</p><br />
-            <p>Oh no, it seems you lost your path. Just sit here and relax, rescue will come soon.</p>
-            <p>I thought that 3 years ago. Don't worry. It will be ok. Stay calm. Don't panic. No no no.</p>
+        <div className="flex h-screen">
+            <div className="m-auto flex grid grid-cols-1 sm:grid-cols-1 xl:grid-cols-2 p-10">
+                <div>
+                    <img src="./assets/images/404.svg" alt="404-error" />
+                </div>
+                <div className="flex flex-col justify-center items-center">
+                    <p className="text-6xl font-bold uppercase text-sky-600">Oh no !!!</p>
+                    <p className="text-6xl font-bold uppercase text-sky-600">Error 404</p>
+                    <p className='mt-10 text-xl text-white text-sky-500'>we can't seem to find the page your looking for</p>
+                    <a className="mt-10" href="/">
+                        <Button type={ButtonTypeEnum?.SUBMIT} variant="primary">
+                            Go to home page
+                        </Button>
+                    </a>
+                </div>
+            </div>
         </div>
     );
 };
