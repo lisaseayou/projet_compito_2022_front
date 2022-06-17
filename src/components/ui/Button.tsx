@@ -1,6 +1,6 @@
 import { ReactNode } from 'react';
 
-enum ButtonTypeEnum {
+export enum ButtonTypeEnum {
     BUTTON = 'button',
     SUBMIT = 'submit',
 }

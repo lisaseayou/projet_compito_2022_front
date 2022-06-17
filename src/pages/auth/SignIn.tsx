@@ -1,4 +1,7 @@
-import Button from '../../components/ui/Button';
+import { ChangeEvent, useState } from 'react';
+import { useMutation } from '@apollo/client';
+import { Link, useNavigate } from 'react-router-dom';
+import Button, { ButtonTypeEnum } from '../../components/ui/Button';
 import Typography from '../../components/ui/Typography';
 import InputText from '../../components/ui/InputText';
 import SocialButton from '../../components/ui/SocialButton';
@@ -8,9 +11,44 @@ import {
     faGoogle,
 } from '@fortawesome/free-brands-svg-icons';
 import { ReactComponent as ViewIcon } from '../../assets/icons/view.svg';
-import { Link } from 'react-router-dom';
+import { ADD_USER } from '../../queries/mutation';
 
 const SignIn = () => {
+    const navigate = useNavigate();
+
+    const [formDatas, setFormDatas] = useState({
+        name: '',
+        email: '',
+        password: '',
+        roles: ['admin'],
+    });
+
+    const handleChange = (
+        e: ChangeEvent<HTMLInputElement | HTMLSelectElement>
+    ) => {
+        setFormDatas({ ...formDatas, [e?.target?.name]: e?.target.value });
+    };
+
+    const [createUser] = useMutation(ADD_USER, {
+        onCompleted: () => {
+            setFormDatas({
+                name: '',
+                email: '',
+                password: '',
+                roles: ['admin'],
+            });
+            navigate('/');
+        },
+        onError: (error) => {
+            console.log(error?.message);
+        },
+    });
+
+    const handleSubmit = (e: any) => {
+        e?.preventDefault();
+        createUser({ variables: formDatas });
+    };
+
     return (
         <div className="grid grid-cols-12 gap-0 min-h-screen text-center p-4">
             <div className="col-span-5 bg-primary-main hidden md:flex flex-col justify-center items-center">
@@ -81,32 +119,43 @@ const SignIn = () => {
                     className="w-full flex justify-center"
                     style={{ maxWidth: 546 }}
                 >
-                    <form className="w-full" onSubmit={() => {}}>
+                    <form className="w-full" onSubmit={handleSubmit}>
                         <InputText
-                            type="name"
+                            type="text"
+                            name="name"
                             id="name"
                             placeholder="Name"
                             icon={<ViewIcon className="h-6 w-6" />}
                             className="mb-4"
+                            value={formDatas?.name}
+                            handleChange={handleChange}
                         />
 
                         <InputText
-                            type="email"
+                            type="text"
+                            name="email"
                             id="email"
                             placeholder="email"
                             icon={<ViewIcon className="h-6 w-6" />}
                             className="mb-4"
+                            value={formDatas?.email}
+                            handleChange={handleChange}
                         />
 
                         <InputText
-                            type="password"
+                            type="text"
+                            name="password"
                             id="password"
                             placeholder="password"
                             icon={<ViewIcon className="h-6 w-6" />}
                             className="mb-12"
+                            value={formDatas?.password}
+                            handleChange={handleChange}
                         />
 
-                        <Button variant="primary">Sign up</Button>
+                        <Button type={ButtonTypeEnum?.SUBMIT} variant="primary">
+                            Sign up
+                        </Button>
                     </form>
                 </div>
             </div>
