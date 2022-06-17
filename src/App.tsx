@@ -13,7 +13,7 @@ function App() {
     <div className="mr-6">
       
       <BrowserRouter basename="/">
-      <Nav />
+      {/* <Nav /> */}
         <Routes>
           {MenuList.map(({ path, Component }, index) => (
             <Route path={path} key={index} element={<Component />} />
