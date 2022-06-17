@@ -8,17 +8,18 @@ import {
     faGoogle,
 } from '@fortawesome/free-brands-svg-icons';
 import { ReactComponent as ViewIcon } from '../../assets/icons/view.svg';
+import { Link } from 'react-router-dom';
 
 const SignIn = () => {
     return (
-        <div className="grid grid-cols-12 gap-0 min-h-screen text-center">
-            <div className="col-span-5 bg-primary-main flex flex-col justify-center items-center">
+        <div className="grid grid-cols-12 gap-0 min-h-screen text-center p-4">
+            <div className="col-span-5 bg-primary-main hidden md:flex flex-col justify-center items-center">
                 <Typography
                     variant="h2"
                     color="text-white"
                     fontSize="text-6xl"
                     className="mb-12"
-                    style={{ maxWidth: 430 }}
+                    style={{ width: '85%', maxWidth: 430 }}
                 >
                     Welcome Back
                 </Typography>
@@ -29,7 +30,7 @@ const SignIn = () => {
                     fontSize="text-2xl"
                     leading="leading-7"
                     className="mb-16"
-                    style={{ maxWidth: 430 }}
+                    style={{ width: '85%', maxWidth: 430 }}
                 >
                     To keep connected with us please login with your personnal
                     info
@@ -37,7 +38,20 @@ const SignIn = () => {
 
                 <Button variant="outline">Sign in</Button>
             </div>
-            <div className="col-span-7 flex flex-col justify-center items-center">
+
+            <div className="col-span-12 flex md:hidden justify-end">
+                <Link to="/" className="hover:underline decoration-primary">
+                    <Typography
+                        variant="p"
+                        color="text-primary-main"
+                        className="mb-0"
+                    >
+                        Not a member? Sign in now
+                    </Typography>
+                </Link>
+            </div>
+
+            <div className="col-span-12 md:col-span-7 flex flex-col justify-center items-center p-4">
                 <Typography
                     variant="h2"
                     color="text-primary-main"
@@ -63,8 +77,11 @@ const SignIn = () => {
                     or use your email for registration
                 </Typography>
 
-                <div className="w-full" style={{ maxWidth: 546 }}>
-                    <form onSubmit={() => {}}>
+                <div
+                    className="w-full flex justify-center"
+                    style={{ maxWidth: 546 }}
+                >
+                    <form className="w-full" onSubmit={() => {}}>
                         <InputText
                             type="name"
                             id="name"
@@ -85,7 +102,7 @@ const SignIn = () => {
                             type="password"
                             id="password"
                             placeholder="password"
-                            icon={<ViewIcon />}
+                            icon={<ViewIcon className="h-6 w-6" />}
                             className="mb-12"
                         />
 

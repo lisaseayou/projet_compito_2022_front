@@ -1,6 +1,13 @@
 module.exports = {
     content: ['./src/**/*.{js,jsx,ts,tsx}'],
     theme: {
+        screens: {
+            sm: '600px',
+            md: '960px',
+            lg: '1280px',
+            xl: '1536px',
+            '2xl': '1920',
+        },
         extend: {
             fontFamily: {
                 'biz-updgothic': ['"BIZ-UDPGothic"', 'sans-serif'],

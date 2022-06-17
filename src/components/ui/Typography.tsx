@@ -49,6 +49,21 @@ const Typography = ({
         );
     }
 
+    if (variant === 'p') {
+        return (
+            <p
+                className={`not-italic font-normal leading-${
+                    leading ?? 'leading-none'
+                } ${fontSize ?? 'text-base'} ${
+                    color ?? 'text-white'
+                } ${className}`}
+                style={style}
+            >
+                {children}
+            </p>
+        );
+    }
+
     return <></>;
 };
 
