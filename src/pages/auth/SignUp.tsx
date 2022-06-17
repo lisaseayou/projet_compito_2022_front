@@ -80,7 +80,10 @@ const SignUp = () => {
             </div>
 
             <div className="col-span-12 flex md:hidden justify-end">
-                <Link to="/" className="hover:underline decoration-primary">
+                <Link
+                    to="/signin"
+                    className="hover:underline decoration-primary"
+                >
                     <Typography
                         variant={variantEnum?.P}
                         color="text-primary-main"

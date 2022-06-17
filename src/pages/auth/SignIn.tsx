@@ -33,7 +33,10 @@ const SignIn = () => {
     return (
         <div className="grid grid-cols-12 gap-0 min-h-screen text-center">
             <div className="col-span-12 flex md:hidden justify-end">
-                <Link to="/" className="hover:underline decoration-primary">
+                <Link
+                    to="/signup"
+                    className="hover:underline decoration-primary"
+                >
                     <Typography
                         variant={variantEnum?.P}
                         color="text-primary-main"
