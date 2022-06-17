@@ -6,7 +6,7 @@ import Tasks from "../pages/Tasks";
 import Projects from "../pages/Projects";
 import Dashboard from "../pages/Dashboard";
 import Profil from "../pages/Profil";
-
+import ProjectsDetails from "../pages/ProjectsDetails"; 
 type Menu = {
   path: string;
   title: string;
@@ -44,6 +44,11 @@ const MenuList: Menu[] = [
     title: "Profil",
     Component: Profil,
   },
+  {
+    path:"/project-details/:projectId",
+    title: "Détail du projet",
+    Component: ProjectsDetails, 
+  }
 ];
 
 export default MenuList;

@@ -1,4 +1,4 @@
-import CardsListProject from "../components/CardsListProject";
+import CardsListProject from "../components/Projects/CardsListProject";
 
 const Projects = () => {
   return (
