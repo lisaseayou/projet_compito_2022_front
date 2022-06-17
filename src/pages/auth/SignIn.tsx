@@ -39,7 +39,7 @@ const SignIn = () => {
                         color="text-primary-main"
                         className="mb-0"
                     >
-                        Not a member? Sign in now
+                        Not a member? Sign up now
                     </Typography>
                 </Link>
             </div>
@@ -138,7 +138,9 @@ const SignIn = () => {
                     Enter your personnal details and start journey with us
                 </Typography>
 
-                <Button variant="outline">Sign up</Button>
+                <Button variant="outline" onClick={() => navigate('/signup')}>
+                    Sign up
+                </Button>
             </div>
         </div>
     );

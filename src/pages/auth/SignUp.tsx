@@ -74,7 +74,9 @@ const SignUp = () => {
                     info
                 </Typography>
 
-                <Button variant="outline">Sign in</Button>
+                <Button variant="outline" onClick={() => navigate('/signin')}>
+                    Sign in
+                </Button>
             </div>
 
             <div className="col-span-12 flex md:hidden justify-end">
@@ -84,7 +86,7 @@ const SignUp = () => {
                         color="text-primary-main"
                         className="mb-0"
                     >
-                        Not a member? Sign in now
+                        Already a member? Sign In
                     </Typography>
                 </Link>
             </div>
