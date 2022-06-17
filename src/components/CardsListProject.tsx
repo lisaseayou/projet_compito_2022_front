@@ -30,10 +30,12 @@ const liste = [
 
 const CardsList = () => {
   return (
-    <div className="flex">
+    <div className="flex flex-col justify-center items-center w-full h-full ">
+    <div className="w-full flex justify-start pl-24 ">
       {liste.map((project, index) => (
         <CardProject key={index} project={project} />
       ))}
+    </div>
     </div>
   );
 };
