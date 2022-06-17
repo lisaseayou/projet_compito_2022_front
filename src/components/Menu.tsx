@@ -7,6 +7,7 @@ import Projects from "../pages/Projects";
 import Dashboard from "../pages/Dashboard";
 import Profil from "../pages/Profil";
 import SignIn from "../pages/auth/SignIn";
+import SignUp from "../pages/auth/SignUp";
 
 type Menu = {
   path: string;
@@ -49,6 +50,11 @@ const MenuList: Menu[] = [
     path: "/signin",
     title: "signin",
     Component: SignIn,
+  },
+  {
+    path: "/signup",
+    title: "signup",
+    Component: SignUp,
   },
 ];
 
