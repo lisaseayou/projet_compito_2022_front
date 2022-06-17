@@ -86,7 +86,7 @@ const SignIn = () => {
                             type="name"
                             id="name"
                             placeholder="Name"
-                            icon={<ViewIcon />}
+                            icon={<ViewIcon className="h-6 w-6" />}
                             className="mb-4"
                         />
 
@@ -94,7 +94,7 @@ const SignIn = () => {
                             type="email"
                             id="email"
                             placeholder="email"
-                            icon={<ViewIcon />}
+                            icon={<ViewIcon className="h-6 w-6" />}
                             className="mb-4"
                         />
 
