@@ -1,10 +1,13 @@
 interface ModalProps {
-  openModal: number;
   children: any;
 }
 
-const Modal = ({ children, openModal }: ModalProps) => {
-  return <div className="w-auto border border-black">{children}</div>;
+const Modal = ({ children }: ModalProps) => {
+  return (
+    <div className="relative block p-1 text-center shadow overflow-hidden border border-gray-100 rounded-lg">
+      {children}
+    </div>
+  );
 };
 
 export default Modal;
