@@ -6,7 +6,7 @@ function AddProject() {
     const [formProject, setFormProject] = useState({
         name: '',
         description: '',
-        userId: '85d96da9-f31f-42ce-964c-8aaa6b9921a9',
+        userId: 'b4ee8791-b85c-43c2-8118-85105c026839',
     });
 
     console.log(formProject);
@@ -15,8 +15,8 @@ function AddProject() {
         onCompleted: () => {
             setFormProject({
                 name: '',
-                description: 'cgdfgvd',
                 userId: 'b4ee8791-b85c-43c2-8118-85105c026839',
+                description: 'cgdfgvd',
             });
             console.log('Project added successfully');
         },
