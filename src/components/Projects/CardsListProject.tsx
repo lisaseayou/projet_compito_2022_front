@@ -1,7 +1,6 @@
-import { useQuery } from "@apollo/client";
-import { GET_ALL_PROJECTS } from "../../queries/query";
-import CardProject from "./CardProject";
-
+import { useQuery } from '@apollo/client';
+import { GET_ALL_PROJECTS } from '../../queries/query';
+import CardProject from './CardProject';
 
 // const liste = [
 //   {
@@ -34,20 +33,23 @@ import CardProject from "./CardProject";
 //   },
 // ];
 
-
 const CardsList = () => {
-  const {loading, error, data} = useQuery(GET_ALL_PROJECTS); 
-  console.log(data);
-  if (loading) {
-    return <p>loading</p>
-  } 
-  return (
-    <div className="flex">
-      {data.allProjects.map((project : any) => (
-        <CardProject key={project.id} project={project} />
-      ))} 
-    </div>
-  );
+    const { loading, error, data } = useQuery(GET_ALL_PROJECTS);
+    console.log(data);
+    if (loading) {
+        return <p>loading</p>;
+    }
+
+    if (error) {
+        return <p>error</p>;
+    }
+    return (
+        <div className="flex">
+            {data.allProjects.map((project: any) => (
+                <CardProject key={project.id} project={project} />
+            ))}
+        </div>
+    );
 };
 
 export default CardsList;
