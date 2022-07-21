@@ -5,6 +5,7 @@ import { useNavigate } from "react-router-dom";
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { ToastError, ToastSuccess } from '../utils/Toast';
+import { GET_ALL_PROJECTS } from '../queries/query';
 
 function AddProject() {
 
@@ -27,7 +28,8 @@ function AddProject() {
                 description: '',
             });
         },
-        onError: () => { ToastError("Votre tâche n'a pas pu être ajoutée :(") }
+        onError: () => { ToastError("Votre tâche n'a pas pu être ajoutée :(") },
+        refetchQueries: [ GET_ALL_PROJECTS ]
     });
 
     const handleChange = (
