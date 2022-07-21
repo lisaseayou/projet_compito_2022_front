@@ -11,7 +11,7 @@ import {
     faGoogle,
 } from '@fortawesome/free-brands-svg-icons';
 import { ReactComponent as ViewIcon } from '../../assets/icons/view.svg';
-import { ADD_USER } from '../../queries/mutation';
+import { REGISTER } from '../../queries/mutation';
 
 const SignUp = () => {
     const navigate = useNavigate();
@@ -29,7 +29,7 @@ const SignUp = () => {
         setFormDatas({ ...formDatas, [e?.target?.name]: e?.target.value });
     };
 
-    const [createUser] = useMutation(ADD_USER, {
+    const [createUser] = useMutation(REGISTER, {
         onCompleted: () => {
             setFormDatas({
                 name: '',
