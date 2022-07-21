@@ -5,7 +5,7 @@ import 'react-toastify/dist/ReactToastify.css';
 
 const Projects = () => {
     return (
-        <div className="pl-20">
+        <div className="pl-20 pr-5">
             <div className="flex justify-between mt-3 mb-12">
                 <div></div>
                 <h1 className="flex justify-center text-4xl font-paytone-one text-violet-800 p-2">

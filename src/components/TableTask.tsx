@@ -39,7 +39,7 @@ const TableTask = ({
           {task.priority}
         </td>
         <td className="px-5 py-5 border-b border-gray-200 bg-white text-center text-sm w-64">
-          {task.status === true ? "Open" : "Closed"}
+          {task.status}
         </td>
         <td className="px-5 py-5 border-b border-gray-200 bg-white text-center text-sm w-64">
           {task.createDate}
@@ -50,7 +50,7 @@ const TableTask = ({
         <td className="border-b border-gray-200 bg-white text-center text-sm w-64">
           {task.id === openModal ? (
             <Modal>
-              <Link to={`/editTask/:${task.id}`}>Edit</Link>
+              <Link to={`/editTask/:${task.id}`}>Modifier</Link>
               {console.log(openModal)}
               <div>
                 <button type="button" onClick={hideModal}>
