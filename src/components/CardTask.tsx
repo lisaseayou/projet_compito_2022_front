@@ -50,11 +50,11 @@ const CardTask = ({
         <div className="flex-shrink-1 hidden sm:block">
           {task.id === openModal ? (
             <Modal>
-              <Link to={`/editTask/:${task.id}`}>Edit</Link>
+              <Link to={`/editTask/:${task.id}`}>Modifier</Link>
               {console.log(task.id)}
               <div>
                 <button type="button" onClick={hideModal}>
-                  Close
+                  Fermer
                 </button>
               </div>
             </Modal>
@@ -67,8 +67,7 @@ const CardTask = ({
       </div>
       <div className="flex mt-6">
         <p className="mt-1 text-xs font-medium text-blue-500">
-          Priority : {task.priority} <br /> Status :{" "}
-          {task.status === true ? "Open" : "Close"}
+          Priority : {task.priority} <br /> Status : {task.status}
         </p>
       </div>
       <div className="mt-4">

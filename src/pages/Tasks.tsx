@@ -71,9 +71,9 @@ console.log(data);
       </button>
       {handleDisplay ? (
         <div className="flex flex-col justify-center items-center w-full h-full ">
-          <div className="w-full flex justify-start pl-10 ">
-            <div className="flex">
-              {DataTasks.map((task) => (
+          <div className="w-full flex justify-center pl-10 ">
+          <div className="grid grid-cols-3 gap-10">
+              {data.allTasks.map((task: any) => (
                 <CardTask
                   key={task.id}
                   task={task}

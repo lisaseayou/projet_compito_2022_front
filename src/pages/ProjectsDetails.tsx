@@ -18,6 +18,9 @@ const ProjectsDetails = () => {
         <p className="text-6xl font-paytone-one text-violet-800 p-4">
         {data.project.name}
         </p>
+        <p className="text-xl font-paytone-on p-4">
+        {data.project.description}
+        </p>
         <div className="w-full flex justify-start pl-20 mb-20">
           <a
             className="inline-flex items-center px-8 py-3 text-white bg-indigo-600 border border-indigo-600 rounded hover:bg-transparent hover:text-indigo-600 active:text-indigo-500 focus:outline-none focus:ring"
