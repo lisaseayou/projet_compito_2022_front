@@ -1,26 +1,33 @@
 import { useMutation } from '@apollo/client';
 import { ChangeEvent, useState } from 'react';
 import { ADD_PROJECT } from '../queries/mutation';
+import { useNavigate } from "react-router-dom";
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import { ToastError, ToastSuccess } from '../utils/Toast';
 
 function AddProject() {
+
+    const navigate = useNavigate();
+
     const [formProject, setFormProject] = useState({
         name: '',
         description: '',
-        userId: 'b4ee8791-b85c-43c2-8118-85105c026839',
+        userId: 'ae12d2bf-d6cc-4679-aa1f-2975b73c7fd0',
     });
 
     console.log(formProject);
 
     const [addProject] = useMutation(ADD_PROJECT, {
         onCompleted: () => {
+            ToastSuccess("Votre tâche est ajoutée!");
             setFormProject({
                 name: '',
-                userId: 'b4ee8791-b85c-43c2-8118-85105c026839',
-                description: 'cgdfgvd',
+                userId: 'ae12d2bf-d6cc-4679-aa1f-2975b73c7fd0',
+                description: '',
             });
-            console.log('Project added successfully');
         },
-        onError: () => console.log('Project failed'),
+        onError: () => { ToastError("Votre tâche n'a pas pu être ajoutée :(") }
     });
 
     const handleChange = (
@@ -32,6 +39,7 @@ function AddProject() {
     const handleSubmit: any = (e: SubmitEvent) => {
         e.preventDefault();
         addProject({ variables: formProject });
+        navigate("../projects", { replace: true });
     };
 
     return (
@@ -105,6 +113,7 @@ function AddProject() {
                     </button>
                 </div>
             </form>
+            <ToastContainer />
         </div>
     );
 }
