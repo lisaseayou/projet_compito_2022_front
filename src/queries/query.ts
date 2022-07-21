@@ -42,3 +42,37 @@ query Project($projectId: ID!) {
     }
   }
 `; 
+ 
+export const GET_ALL_TASKS = gql`
+query allTasks {
+  allTasks {
+    id
+    subject
+    status
+    dueDate
+    initialSpentTime
+    additionalSpentTime
+    advancement
+    createdAt
+    updatedAt
+    project {
+      id
+      name
+    }
+    comments {
+      id
+      comment
+    }
+    documents {
+      id
+      name
+      size
+    }
+    users {
+      id
+      name
+      email
+    }
+  }
+}
+`;

@@ -2,8 +2,16 @@ import { useMutation } from "@apollo/client";
 import { ChangeEvent, useState } from "react";
 import SelectStatus from "../components/SelectStatus";
 import { ADD_TASK } from "../queries/mutation";
+import { useNavigate } from "react-router-dom";
+import "react-toastify/dist/ReactToastify.css";
+import { ToastContainer } from "react-toastify";
+import { ToastSuccess, ToastError } from "../utils/Toast";
+import { GET_ALL_TASKS } from "../queries/query";
 
 function AddTask() {
+
+  const navigate = useNavigate();
+
   const [formData, setFormData] = useState({
     subject: "",
     project: "",
@@ -12,12 +20,13 @@ function AddTask() {
     initialSpentTime: 0,
     additionalSpentTime: [],
     advancement: 0,
-    projectId: "329dc1c7-38c8-43c5-9113-ec5b88ac990b",
-    userId: "85d96da9-f31f-42ce-964c-8aaa6b9921a9",
+    projectId: "c078be0a-d21c-44da-a6b9-60d822ddc52e",
+    userId: "ae12d2bf-d6cc-4679-aa1f-2975b73c7fd0",
   });
 
   const [addTask] = useMutation(ADD_TASK, {
     onCompleted: () => {
+      ToastSuccess("Votre tâche est ajoutée!");
       setFormData({
         subject: "",
         project: "",
@@ -26,12 +35,14 @@ function AddTask() {
         initialSpentTime: 0,
         additionalSpentTime: [],
         advancement: 0,
-        projectId: "329dc1c7-38c8-43c5-9113-ec5b88ac990b",
-        userId: "85d96da9-f31f-42ce-964c-8aaa6b9921a9",
+        projectId: "c078be0a-d21c-44da-a6b9-60d822ddc52e",
+        userId: "ae12d2bf-d6cc-4679-aa1f-2975b73c7fd0",
       });
-      console.log("Task added successfully");
     },
-    onError: () => console.log("Task failed"),
+    onError: () => {
+      ToastError("Votre tâche n'a pas pu être ajoutée :(");
+    },
+    refetchQueries: [ GET_ALL_TASKS ]
   });
 
   const handleChange = (
@@ -43,6 +54,7 @@ function AddTask() {
   const handleSubmit: any = (e: SubmitEvent) => {
     e.preventDefault();
     addTask({ variables: formData });
+    navigate("../tasks", { replace: true });
   };
 
   return (
@@ -128,6 +140,7 @@ function AddTask() {
           </button>
         </div>
       </form>
+      <ToastContainer />
     </div>
   );
 }

@@ -1,5 +1,7 @@
 import { Link } from 'react-router-dom';
 import CardsListProject from '../components/Projects/CardsListProject';
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const Projects = () => {
     return (
@@ -34,9 +36,10 @@ const Projects = () => {
                     </span>
                 </Link>
             </div>
-            <div className="w-full flex justify-start pl-24 ">
+            <div className="w-full flex justify-center pl-24 ">
                 <CardsListProject />
             </div>
+            <ToastContainer />
         </div>
     );
 };
