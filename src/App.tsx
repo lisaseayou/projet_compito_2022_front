@@ -8,6 +8,7 @@ import SignUp from './pages/auth/SignUp';
 import SignIn from './pages/auth/SignIn';
 import Auth from './pages/auth/Auth';
 import PrivateRoute from './pages/PrivateRoute';
+import Logout from './pages/auth/Logout';
 
 function App() {
     return (
@@ -37,6 +38,8 @@ function App() {
                             <Route path="login" element={<SignIn />} />
                             <Route path="register" element={<SignUp />} />
                         </Route>
+
+                        <Route path="logout" element={<Logout />} />
                     </Routes>
                 </BrowserRouter>
             </div>
