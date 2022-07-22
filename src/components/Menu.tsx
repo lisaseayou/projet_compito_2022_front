@@ -52,16 +52,16 @@ const MenuList: Menu[] = [
     title: "Détail du projet",
     Component: ProjectsDetails, 
   },
-  {
-    path: "/signin",
-    title: "signin",
-    Component: SignIn,
-  },
-  {
-    path: "/signup",
-    title: "signup",
-    Component: SignUp,
-  },
+  // {
+  //   path: "/signin",
+  //   title: "signin",
+  //   Component: SignIn,
+  // },
+  // {
+  //   path: "/signup",
+  //   title: "signup",
+  //   Component: SignUp,
+  // },
 ];
 
 export default MenuList;

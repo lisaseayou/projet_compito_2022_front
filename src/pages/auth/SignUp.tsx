@@ -29,15 +29,23 @@ const SignUp = () => {
         setFormDatas({ ...formDatas, [e?.target?.name]: e?.target.value });
     };
 
-    const [createUser] = useMutation(REGISTER, {
-        onCompleted: () => {
+    const [register] = useMutation(REGISTER, {
+        onCompleted: (data) => {
+            // create the cookie of login
+            document.cookie = 'signedin=true;path=/';
+
+            // save the user's datas in local storage
+            const { success, ...user } = data.register;
+            localStorage.setItem('userLogged', JSON.stringify(user));
+
             setFormDatas({
                 name: '',
                 email: '',
                 password: '',
                 roles: ['admin'],
             });
-            navigate('/');
+
+            navigate('/', { replace: true, state: { ...user } });
         },
         onError: (error) => {
             console.log(error?.message);
@@ -46,7 +54,7 @@ const SignUp = () => {
 
     const handleSubmit = (e: any) => {
         e?.preventDefault();
-        createUser({ variables: formDatas });
+        register({ variables: formDatas });
     };
 
     return (
@@ -74,14 +82,17 @@ const SignUp = () => {
                     info
                 </Typography>
 
-                <Button variant="outline" onClick={() => navigate('/signin')}>
+                <Button
+                    variant="outline"
+                    onClick={() => navigate('/auth/login')}
+                >
                     Sign in
                 </Button>
             </div>
 
             <div className="col-span-12 flex md:hidden justify-end">
                 <Link
-                    to="/signin"
+                    to="/auth/login"
                     className="hover:underline decoration-primary"
                 >
                     <Typography
@@ -148,7 +159,7 @@ const SignUp = () => {
                         />
 
                         <InputText
-                            type="text"
+                            type="password"
                             name="password"
                             id="password"
                             placeholder="password"
