@@ -10,6 +10,8 @@ import {
     faGoogle,
 } from '@fortawesome/free-brands-svg-icons';
 import { ReactComponent as ViewIcon } from '../../assets/icons/view.svg';
+import { useLazyQuery } from '@apollo/client';
+import { LOGIN } from '../../queries/query';
 
 const SignIn = () => {
     const navigate = useNavigate();
@@ -17,6 +19,22 @@ const SignIn = () => {
     const [formDatas, setFormDatas] = useState({
         email: '',
         password: '',
+    });
+
+    const [login] = useLazyQuery(LOGIN, {
+        onCompleted(data) {
+            // check if user is login
+            document.cookie = 'signedin=true;path=/';
+            const { success, ...user } = data.login;
+
+            localStorage.setItem('userLogged', JSON.stringify(user));
+
+            // on transmet le user loggé pour la première navigation, pour pouvoir récupérer le username au niveau du App
+            navigate('/', { replace: true, state: { ...user } });
+        },
+        onError(error) {
+            console.log(error?.message);
+        },
     });
 
     const handleChange = (
@@ -27,14 +45,14 @@ const SignIn = () => {
 
     const handleSubmit = (e: any) => {
         e?.preventDefault();
-        console.log('submit');
+        login({ variables: formDatas });
     };
 
     return (
         <div className="grid grid-cols-12 gap-0 min-h-screen text-center">
             <div className="col-span-12 flex md:hidden justify-end">
                 <Link
-                    to="/signup"
+                    to="/auth/register"
                     className="hover:underline decoration-primary"
                 >
                     <Typography
@@ -141,7 +159,10 @@ const SignIn = () => {
                     Enter your personnal details and start journey with us
                 </Typography>
 
-                <Button variant="outline" onClick={() => navigate('/signup')}>
+                <Button
+                    variant="outline"
+                    onClick={() => navigate('/auth/register')}
+                >
                     Sign up
                 </Button>
             </div>
