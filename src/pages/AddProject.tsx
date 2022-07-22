@@ -1,36 +1,69 @@
+import { ChangeEvent, useEffect, useState } from 'react';
 import { useMutation } from '@apollo/client';
-import { ChangeEvent, useState } from 'react';
 import { ADD_PROJECT } from '../queries/mutation';
-import { useNavigate } from "react-router-dom";
+import { useNavigate } from 'react-router-dom';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { ToastError, ToastSuccess } from '../utils/Toast';
 import { GET_ALL_PROJECTS } from '../queries/query';
+import Cookies from 'js-cookie';
+
+interface IFormProject {
+    name: string;
+    description: string;
+    userId: string;
+}
+
+interface IUserDatas {
+    id: string;
+    name: string;
+    email: string;
+}
 
 function AddProject() {
-
     const navigate = useNavigate();
 
-    const [formProject, setFormProject] = useState({
+    const [userDatas, setUserDatas] = useState<IUserDatas>({
+        id: '',
         name: '',
-        description: '',
-        userId: 'ae12d2bf-d6cc-4679-aa1f-2975b73c7fd0',
+        email: '',
     });
 
-    console.log(formProject);
+    const [formProject, setFormProject] = useState<IFormProject>({
+        name: '',
+        description: '',
+        userId: '',
+    });
 
     const [addProject] = useMutation(ADD_PROJECT, {
         onCompleted: () => {
-            ToastSuccess("Votre tâche est ajoutée!");
+            ToastSuccess('Votre tâche est ajoutée!');
             setFormProject({
                 name: '',
-                userId: 'ae12d2bf-d6cc-4679-aa1f-2975b73c7fd0',
+                userId: userDatas?.id,
                 description: '',
             });
         },
-        onError: () => { ToastError("Votre tâche n'a pas pu être ajoutée :(") },
-        refetchQueries: [ GET_ALL_PROJECTS ]
+        onError: () => {
+            ToastError("Votre tâche n'a pas pu être ajoutée :(");
+        },
+        refetchQueries: [GET_ALL_PROJECTS],
     });
+
+    useEffect(() => {
+        if (Cookies.get('signedin')) {
+            setUserDatas(
+                JSON.parse(localStorage.getItem('userLogged') as string)
+            );
+        }
+    }, []);
+
+    useEffect(() => {
+        setFormProject({
+            ...formProject,
+            userId: userDatas?.id ?? '',
+        });
+    }, [userDatas]);
 
     const handleChange = (
         e: ChangeEvent<HTMLInputElement | HTMLSelectElement>
@@ -41,7 +74,7 @@ function AddProject() {
     const handleSubmit: any = (e: SubmitEvent) => {
         e.preventDefault();
         addProject({ variables: formProject });
-        navigate("../projects", { replace: true });
+        navigate('../projects', { replace: true });
     };
 
     return (
@@ -61,11 +94,11 @@ function AddProject() {
                         fill="none"
                         viewBox="0 0 24 24"
                         stroke="currentColor"
-                        stroke-width="2"
+                        strokeWidth="2"
                     >
                         <path
-                            stroke-linecap="round"
-                            stroke-linejoin="round"
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
                             d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"
                         />
                     </svg>
@@ -87,11 +120,11 @@ function AddProject() {
                         fill="none"
                         viewBox="0 0 24 24"
                         stroke="currentColor"
-                        stroke-width="2"
+                        strokeWidth="2"
                     >
                         <path
-                            stroke-linecap="round"
-                            stroke-linejoin="round"
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
                             d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"
                         />
                     </svg>
