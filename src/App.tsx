@@ -7,6 +7,7 @@ import AddProject from './pages/AddProject';
 import SignUp from './pages/auth/SignUp';
 import SignIn from './pages/auth/SignIn';
 import Auth from './pages/auth/Auth';
+import PrivateRoute from './pages/PrivateRoute';
 
 function App() {
     return (
@@ -22,7 +23,14 @@ function App() {
                                 element={<Component />}
                             />
                         ))}
-                        <Route path="/addtask" element={<AddTask />} />
+                        <Route
+                            path="/addtask"
+                            element={
+                                <PrivateRoute>
+                                    <AddTask />
+                                </PrivateRoute>
+                            }
+                        />
                         <Route path="/addproject" element={<AddProject />} />
 
                         <Route path="auth" element={<Auth />}>
