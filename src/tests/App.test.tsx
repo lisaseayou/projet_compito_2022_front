@@ -1,5 +1,5 @@
-import { render, screen } from "@testing-library/react";
-import App from "../App";
+import { render, screen } from '@testing-library/react';
+import App from '../App';
 
 // test("renders learn react link", () => {
 //   render(<App />);
@@ -9,6 +9,10 @@ import App from "../App";
 
 describe('test', () => {
     it('addition', () => {
-        expect(1 + 1).toStrictEqual(2)
-    })
-})
+        expect(1 + 1).toStrictEqual(2);
+    });
+
+    describe('if user not connected, hide the navbar', () => {});
+
+    describe('if user connected, show the navbar', () => {});
+});
