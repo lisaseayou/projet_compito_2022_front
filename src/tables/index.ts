@@ -1,5 +1,5 @@
 import { format } from 'date-fns';
-import { enUS } from 'date-fns/locale';
+import { fr } from 'date-fns/locale';
 
 // labels of each column for tasks list
 const TASKS_COLUMNS = [
@@ -16,14 +16,14 @@ const TASKS_COLUMNS = [
         Footer: 'Date de création',
         accessor: 'createdAt',
         Cell: ({ value }: { value: string }) =>
-            format(new Date(value), 'dd/MM/yyyy à h:mm', { locale: enUS }),
+            format(new Date(value), 'dd/MM/yyyy à h:mm', { locale: fr }),
     },
     {
         Header: 'Dernière mise à jour',
         Footer: 'Dernière mise à jour',
         accessor: 'updatedAt',
         Cell: ({ value }: { value: string }) =>
-            format(new Date(value), 'dd/MM/yyyy à h:mm', { locale: enUS }),
+            format(new Date(value), 'dd/MM/yyyy à h:mm', { locale: fr }),
     },
     {
         Header: 'Commentaires',

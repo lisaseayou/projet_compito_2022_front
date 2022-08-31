@@ -1,23 +1,33 @@
 // @ts-nocheck
 import { useMemo } from 'react';
-import { Link } from 'react-router-dom';
-import { useTable } from 'react-table';
+import { useTable, usePagination } from 'react-table';
 import TASKS_COLUMNS from '../../tables';
-import Modal from './Modal';
-import { DotsHorizontalIcon } from '@heroicons/react/solid';
 
 const TasksList = ({ data }: { data: any }) => {
-    // Mémoriser les columns
     const columns = useMemo(() => TASKS_COLUMNS, []);
 
     const {
         headerGroups,
         footerGroups,
-        rows,
         getTableProps,
         getTableBodyProps,
         prepareRow,
-    } = useTable({ columns, data });
+        page,
+        previousPage,
+        nextPage,
+        canPreviousPage,
+        canNextPage,
+        setPageSize,
+        gotoPage,
+        pageCount,
+        pageOptions,
+        state,
+    } = useTable(
+        { columns, data, initialState: { pageIndex: 0 } },
+        usePagination
+    );
+
+    const { pageIndex, pageSize } = state;
 
     return (
         <div>
@@ -40,7 +50,7 @@ const TasksList = ({ data }: { data: any }) => {
                 </thead>
 
                 <tbody {...getTableBodyProps()}>
-                    {rows.map((row) => {
+                    {page.map((row) => {
                         prepareRow(row);
 
                         return (
@@ -77,6 +87,56 @@ const TasksList = ({ data }: { data: any }) => {
                     ))}
                 </tfoot>
             </table>
+
+            <div style={{ marginTop: '1rem' }}>
+                <span>
+                    Page {pageIndex + 1} sur {pageOptions.length}
+                </span>
+
+                <select
+                    className="mx-2"
+                    value={pageSize}
+                    onChange={(e) => setPageSize(Number(e.target.value))}
+                >
+                    {[2, 5, 10].map((pageSize) => (
+                        <option key={pageSize} value={pageSize}>
+                            Afficher {pageSize} par page
+                        </option>
+                    ))}
+                </select>
+
+                <button
+                    className="mx-2"
+                    onClick={() => gotoPage(0)}
+                    disabled={!canPreviousPage}
+                >
+                    1ère page
+                </button>
+
+                <button
+                    className="mx-2"
+                    onClick={() => previousPage()}
+                    disabled={!canPreviousPage}
+                >
+                    Page précédente
+                </button>
+
+                <button
+                    className="mx-2"
+                    onClick={() => nextPage()}
+                    disabled={!canNextPage}
+                >
+                    Page suivante
+                </button>
+
+                <button
+                    className="mx-2"
+                    onClick={() => gotoPage(pageCount - 1)}
+                    disabled={!canNextPage}
+                >
+                    Dernière page
+                </button>
+            </div>
         </div>
     );
 };
