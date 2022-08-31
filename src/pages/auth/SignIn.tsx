@@ -12,9 +12,13 @@ import {
 import { ReactComponent as ViewIcon } from '../../assets/icons/view.svg';
 import { useLazyQuery } from '@apollo/client';
 import { LOGIN } from '../../queries/query';
+import { useDispatch } from 'react-redux'; //appel les actions
+import { LOGIN as LOGINAUTH } from '../../context/actions';
 
 const SignIn = () => {
     const navigate = useNavigate();
+
+    const dispatch = useDispatch();
 
     const [formDatas, setFormDatas] = useState({
         email: '',
@@ -26,10 +30,12 @@ const SignIn = () => {
             // check if user is login
             document.cookie = 'signedin=true;path=/';
             const { success, ...user } = data.login;
-
             localStorage.setItem('userLogged', JSON.stringify(user));
-
-            // on transmet le user loggé pour la première navigation, pour pouvoir récupérer le username au niveau du App
+            dispatch({type: LOGINAUTH, payload: user});
+            //on veux que sa renvoie dans redux
+            //on transmet le user loggé pour la première navigation, pour pouvoir récupérer le username au niveau du App
+            //useselector sur profil pour recup les informations
+            //usedispach ici pour enregister pour modif state avec reducer
             navigate('/', { replace: true, state: { ...user } });
         },
         onError(error) {

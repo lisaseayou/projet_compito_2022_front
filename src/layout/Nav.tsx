@@ -4,7 +4,7 @@ import {
     TemplateIcon,
     UserIcon,
 } from '@heroicons/react/solid';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 function Nav() {
     const navigate = useNavigate();
 
@@ -23,8 +23,7 @@ function Nav() {
                     <nav className="flex flex-col p-2">
                         <ul className="pt-4 space-y-1 border-t border-gray-100">
                             <li>
-                                <a
-                                    href="/projects"
+                                <Link to="/projects"
                                     className="flex justify-center px-2 py-1.5 text-violet-500 rounded hover:bg-gray-50 hover:text-violet-500 relative group"
                                 >
                                     <ClipboardListIcon className="text-violet-300 w-16" />
@@ -32,12 +31,11 @@ function Nav() {
                                     <span className="absolute text-xs font-medium text-white bg-violet-300 left-full ml-4 px-2 py-1.5 top-1/2 -translate-y-1/2 rounded opacity-0 group-hover:opacity-100">
                                         Projets
                                     </span>
-                                </a>
+                                </Link>
                             </li>
 
                             <li>
-                                <a
-                                    href="/tasks"
+                            <Link to="/tasks"
                                     className="flex justify-center px-2 py-1.5 text-violet-400 rounded hover:bg-gray-50 hover:text-gray-700 relative group"
                                 >
                                     <TagIcon className="text-violet-400 w-16" />
@@ -45,12 +43,11 @@ function Nav() {
                                     <span className="absolute text-xs font-medium text-white bg-violet-400 left-full ml-4 px-2 py-1.5 top-1/2 -translate-y-1/2 rounded opacity-0 group-hover:opacity-100">
                                         Tasks
                                     </span>
-                                </a>
+                                </Link>
                             </li>
 
                             <li>
-                                <a
-                                    href="/dashboard"
+                            <Link to="/dashboard"
                                     className="flex relative group justify-center px-2 py-1.5 text-violet-500 rounded hover:bg-gray-50 hover:text-gray-700"
                                 >
                                     <TemplateIcon className="text-violet-500 w-16" />
@@ -58,12 +55,11 @@ function Nav() {
                                     <span className="absolute text-xs font-medium text-white bg-violet-500 left-full ml-4 px-2 py-1.5 top-1/2 -translate-y-1/2 rounded opacity-0 group-hover:opacity-100">
                                         Dashboard
                                     </span>
-                                </a>
+                                </Link>
                             </li>
 
                             <li>
-                                <a
-                                    href="/profil"
+                            <Link to="/profil"
                                     className="flex justify-center px-2 py-1.5 text-violet-600 rounded hover:bg-gray-50 hover:text-gray-700 relative group"
                                 >
                                     <UserIcon className="text-violet-800 w-16" />
@@ -71,7 +67,7 @@ function Nav() {
                                     <span className="absolute text-xs font-medium text-white bg-violet-800 left-full ml-4 px-2 py-1.5 top-1/2 -translate-y-1/2 rounded opacity-0 group-hover:opacity-100">
                                         Profil
                                     </span>
-                                </a>
+                                </Link>
                             </li>
                         </ul>
                     </nav>
