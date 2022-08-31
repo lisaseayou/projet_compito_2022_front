@@ -1,6 +1,6 @@
-import { SelectPropsType } from "../types";
+import { SelectPropsType } from "../../types";
 
-function SelectStatus({handleSelect, value}: SelectPropsType) {
+function SelectStatus({ handleSelect, value }: SelectPropsType) {
   return (
     <div>
       <select

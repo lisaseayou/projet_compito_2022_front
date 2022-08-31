@@ -1,13 +1,11 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
-import CardTask from "../components/CardTask";
-import TableTask from "../components/TableTask";
-import DataTasks from "../data/DataTasks";
+import CardTask from "../components/Tasks/CardTask";
+import TableTask from "../components/Tasks/TableTask";
 import "react-toastify/dist/ReactToastify.css";
 import { ToastContainer } from "react-toastify";
 import { useQuery } from "@apollo/client";
-import { GET_ALL_TASKS } from '../queries/query'
-
+import { GET_ALL_TASKS } from "../queries/query";
 
 const Tasks = () => {
   const [handleDisplay, setHandleDisplay] = useState<boolean>(false);
@@ -15,12 +13,12 @@ const Tasks = () => {
 
   const { loading, error, data } = useQuery(GET_ALL_TASKS);
   if (loading) {
-        return <p>loading</p>;
-    }
-console.log(data);
-    if (error) {
-        return <p>error</p>;
-    }
+    return <p>loading</p>;
+  }
+  console.log(data);
+  if (error) {
+    return <p>error</p>;
+  }
 
   const showCards = (e: any): void => {
     if (e.target) {
@@ -29,6 +27,8 @@ console.log(data);
       setHandleDisplay(false);
     }
   };
+
+  const find = data.allTasks.map((task: any) => task.created_at);
 
   return (
     <div className="pl-20">
@@ -39,7 +39,7 @@ console.log(data);
         </h1>
         <Link
           to="/addtask"
-          className="relative inline-flex items-center px-8 py-3 overflow-hidden text-white bg-violet-800 rounded group active:bg-violet-500 focus:outline-none focus:ring"
+          className="relative mr-2 inline-flex items-center px-8 py-3 overflow-hidden text-white bg-violet-800 rounded group active:bg-violet-500 focus:outline-none focus:ring"
         >
           <span className="text-sm font-medium transition-all group-hover:ml-4">
             <span className="absolute left-0 transition-transform -translate-x-full group-hover:translate-x-4">
@@ -72,7 +72,7 @@ console.log(data);
       {handleDisplay ? (
         <div className="flex flex-col justify-center items-center w-full h-full ">
           <div className="w-full flex justify-center pl-10 ">
-          <div className="grid grid-cols-3 gap-10">
+            <div className="grid grid-cols-3 gap-10">
               {data.allTasks.map((task: any) => (
                 <CardTask
                   key={task.id}
@@ -91,9 +91,6 @@ console.log(data);
               <tr>
                 <th className="px-5 py-3 border-b-2 border-gray-200 text-center text-xs font-bold text-blue-600 tracking-wider">
                   ID
-                </th>
-                <th className="px-5 py-3 border-b-2 border-gray-200 text-center text-xs font-bold text-blue-600 tracking-wider">
-                  Name
                 </th>
                 <th className="px-5 py-3 border-b-2 border-gray-200 text-center text-xs font-bold text-blue-600 tracking-wider">
                   Subject

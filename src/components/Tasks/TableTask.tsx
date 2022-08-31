@@ -1,4 +1,3 @@
-import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import Modal from "./Modal";
 import { DotsHorizontalIcon } from "@heroicons/react/solid";
@@ -12,10 +11,6 @@ const TableTask = ({
   openModal?: number;
   setOpenModal: (id: number) => void;
 }) => {
-  useEffect(() => {
-    console.log("render");
-  }, [openModal]);
-
   const showModal = (id: number) => {
     setOpenModal(id);
   };
@@ -30,9 +25,6 @@ const TableTask = ({
           {task.id}
         </td>
         <td className="px-5 py-5 border-b border-gray-200 bg-white text-center text-sm w-64">
-          {task.name}
-        </td>
-        <td className="px-5 py-5 border-b border-gray-200 bg-white text-center text-sm w-64">
           {task.subject}
         </td>
         <td className="px-5 py-5 border-b border-gray-200 bg-white text-center text-sm w-64">
@@ -42,7 +34,7 @@ const TableTask = ({
           {task.status}
         </td>
         <td className="px-5 py-5 border-b border-gray-200 bg-white text-center text-sm w-64">
-          {task.createDate}
+          {task.createdAt}
         </td>
         <td className="px-5 py-5 border-b border-gray-200 bg-white text-center text-sm w-64">
           {task.dueDate}
@@ -51,7 +43,6 @@ const TableTask = ({
           {task.id === openModal ? (
             <Modal>
               <Link to={`/editTask/:${task.id}`}>Modifier</Link>
-              {console.log(openModal)}
               <div>
                 <button type="button" onClick={hideModal}>
                   Close

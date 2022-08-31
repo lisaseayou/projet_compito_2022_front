@@ -1,7 +1,6 @@
 import { DotsVerticalIcon } from "@heroicons/react/solid";
 import { ClockIcon, FlagIcon } from "@heroicons/react/outline";
 import { Link } from "react-router-dom";
-import { useState } from "react";
 import Modal from "./Modal";
 
 const CardTask = ({
@@ -39,7 +38,7 @@ const CardTask = ({
           </p>
           <p className="mt-1 text-xs font-medium text-blue-300 flex">
             <ClockIcon className="w-3 mr-1" />
-            {task.createDate} - {task.dueDate}
+            {task.createdAt} - {task.dueDate}
           </p>
           <div className="flex mt-5 text-center">
             <FlagIcon className="w-4 mr-2" />
@@ -51,7 +50,6 @@ const CardTask = ({
           {task.id === openModal ? (
             <Modal>
               <Link to={`/editTask/:${task.id}`}>Modifier</Link>
-              {console.log(task.id)}
               <div>
                 <button type="button" onClick={hideModal}>
                   Fermer
@@ -70,6 +68,11 @@ const CardTask = ({
           Priority : {task.priority} <br /> Status : {task.status}
         </p>
       </div>
+      {/* <div className="flex mt-6">
+        <p className="mt-1 text-xs font-medium text-blue-400">
+          Due Date : {task.dueDate}
+        </p>
+      </div> */}
       <div className="mt-4">
         <p className="text-sm text-blue-400">{task.description}</p>
       </div>
