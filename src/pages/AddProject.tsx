@@ -73,7 +73,7 @@ function AddProject() {
 
     const handleSubmit: any = (e: SubmitEvent) => {
         e.preventDefault();
-        addProject({ variables: formProject });
+        addProject({ variables: { data: formProject } });
         navigate('../projects', { replace: true });
     };
 

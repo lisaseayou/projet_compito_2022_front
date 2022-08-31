@@ -42,7 +42,7 @@ function AddTask() {
     initialSpentTime: 0,
     additionalSpentTime: [],
     advancement: 0,
-    projectId: "9e6e4f94-c4d6-42d3-a65c-60917ec2b970",
+    projectId: '570033c9-72a5-4a13-882f-1cec98d240cb',
     userId: userDatas?.id,
   });
 
@@ -56,7 +56,7 @@ function AddTask() {
         initialSpentTime: 0,
         additionalSpentTime: [],
         advancement: 0,
-        projectId: "9e6e4f94-c4d6-42d3-a65c-60917ec2b970",
+        projectId: '570033c9-72a5-4a13-882f-1cec98d240cb',
         userId: userDatas?.id,
       });
     },
@@ -74,7 +74,7 @@ function AddTask() {
 
   const handleSubmit: any = (e: SubmitEvent) => {
     e.preventDefault();
-    addTask({ variables: formData });
+    addTask({ variables: { data: formData } });
     navigate("../tasks", { replace: true });
   };
 
