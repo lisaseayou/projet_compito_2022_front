@@ -17,6 +17,7 @@ import {
     ArrowCircleUpIcon,
 } from '@heroicons/react/solid';
 import GlobalFilter from './GlobalFilter';
+import InputTextWithIcon from '../ui/form/InputTextWithIcon';
 
 const TasksList = ({ data }: { data: any }) => {
     const columns = useMemo(() => TASKS_COLUMNS, []);
@@ -49,6 +50,7 @@ const TasksList = ({ data }: { data: any }) => {
 
     return (
         <div>
+            <InputTextWithIcon />
             <GlobalFilter filter={globalFilter} setFilter={setGlobalFilter} />
 
             <table {...getTableProps()} className="m-4 leading-normal">

@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import CardTask from '../components/Tasks/CardTask';
@@ -7,6 +9,12 @@ import { ToastContainer } from 'react-toastify';
 import { useQuery } from '@apollo/client';
 import { GET_ALL_TASKS } from '../queries/query';
 import TasksList from '../components/Tasks/TasksList';
+import {
+    ViewGridIcon,
+    ViewListIcon,
+    ArrowNarrowLeftIcon,
+} from '@heroicons/react/solid';
+import Typography, { variantEnum } from '../components/ui/Typography';
 
 const Tasks = () => {
     const [handleDisplay, setHandleDisplay] = useState<boolean>(false);
@@ -17,7 +25,7 @@ const Tasks = () => {
     if (loading) {
         return <p>loading</p>;
     }
-    console.log(data);
+
     if (error) {
         return <p>error</p>;
     }
@@ -33,45 +41,43 @@ const Tasks = () => {
     const find = data.allTasks.map((task: any) => task.created_at);
 
     return (
-        <div className="pl-20">
-            <div className="flex justify-between mt-3">
-                <div></div>
-                <h1 className="flex justify-center text-4xl font-paytone-one text-violet-800 p-2">
+        <div className="grid grid-cols-12 gap-0 pl-20">
+            <div className="col-start-1 col-end-11 flex justify-center mt-3">
+                <Typography
+                    variant={variantEnum?.H1}
+                    color="text-primary-main"
+                    fontSize="text-4xl"
+                    className="flex justify-center font-paytone-one "
+                >
                     Liste des tâches
-                </h1>
+                </Typography>
+            </div>
+
+            <div className="col-start-11 col-end-13 flex justify-center mt-3">
                 <Link
                     to="/addtask"
-                    className="relative mr-2 inline-flex items-center px-8 py-3 overflow-hidden text-white bg-violet-800 rounded group active:bg-violet-500 focus:outline-none focus:ring"
+                    className="relative mr-2 inline-flex items-center px-8 py-3 overflow-hidden text-white bg-primary-main rounded group active:bg-violet-500 focus:outline-none focus:ring"
                 >
                     <span className="text-sm font-medium transition-all group-hover:ml-4">
                         <span className="absolute left-0 transition-transform -translate-x-full group-hover:translate-x-4">
-                            <svg
-                                className="w-5 h-5"
-                                xmlns="http://www.w3.org/2000/svg"
-                                fill="none"
-                                viewBox="0 0 24 24"
-                                stroke="currentColor"
-                            >
-                                <path
-                                    stroke-linecap="round"
-                                    stroke-linejoin="round"
-                                    stroke-width="2"
-                                    d="M17 8l4 4m0 0l-4 4m4-4H3"
-                                />
-                            </svg>
+                            <ArrowNarrowLeftIcon className="w-5 h-5 text-white" />
                         </span>
                         Ajouter une tâche
                     </span>
                 </Link>
             </div>
-            <button
+            {/* <button
                 type="button"
                 className="ml-3 mr-3 mb-4 bg-gray-100 border border-gray-100 p-1 rounded-lg"
                 onClick={showCards}
             >
-                {handleDisplay ? 'Afficher en tableau' : 'Afficher en card'}
-            </button>
-            {handleDisplay ? (
+                {handleDisplay ? (
+                    <ViewListIcon className="w-8 h-8" />
+                ) : (
+                    <ViewGridIcon className="w-8 h-8" />
+                )}
+            </button> */}
+            {/* {handleDisplay ? (
                 <div className="flex flex-col justify-center items-center w-full h-full ">
                     <div className="w-full flex justify-center pl-10 ">
                         <div className="grid grid-cols-3 gap-10">
@@ -89,7 +95,7 @@ const Tasks = () => {
             ) : (
                 <div>
                     <TasksList data={data?.allTasks} />
-                    {/* <table className="m-4 leading-normal ">
+                    <table className="m-4 leading-normal ">
             <thead>
               <tr>
                 <th className="px-5 py-3 border-b-2 border-gray-200 text-center text-xs font-bold text-blue-600 tracking-wider">
@@ -123,9 +129,9 @@ const Tasks = () => {
                 setOpenModal={setOpenModal}
               />
             ))}
-          </table> */}
+          </table>
                 </div>
-            )}
+            )} */}
             <ToastContainer />
         </div>
     );
