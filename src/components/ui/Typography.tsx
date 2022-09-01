@@ -29,6 +29,21 @@ const Typography = ({
     color,
     children,
 }: TypographyProps) => {
+    if (variant === variantEnum?.H1) {
+        return (
+            <h1
+                className={`not-italic font-extrabold ${
+                    leading ?? 'leading-none'
+                } ${fontSize ?? 'text-6xl'} capitalize ${
+                    color ?? 'text-white'
+                } ${className}`}
+                style={style}
+            >
+                {children}
+            </h1>
+        );
+    }
+
     if (variant === variantEnum?.H2) {
         return (
             <h2
