@@ -54,7 +54,7 @@ const SignUp = () => {
 
     const handleSubmit = (e: any) => {
         e?.preventDefault();
-        register({ variables: formDatas });
+        register({ variables: { data: formDatas } });
     };
 
     return (
