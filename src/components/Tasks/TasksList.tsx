@@ -1,7 +1,22 @@
 // @ts-nocheck
 import { useMemo } from 'react';
-import { useTable, usePagination } from 'react-table';
+import {
+    useTable,
+    usePagination,
+    useSortBy,
+    useGlobalFilter,
+} from 'react-table';
 import TASKS_COLUMNS from '../../tables';
+import {
+    ChevronLeftIcon,
+    ChevronRightIcon,
+    ChevronDoubleRightIcon,
+    ChevronDoubleLeftIcon,
+    ArrowCircleDownIcon,
+    ArrowCircleLeftIcon,
+    ArrowCircleUpIcon,
+} from '@heroicons/react/solid';
+import GlobalFilter from './GlobalFilter';
 
 const TasksList = ({ data }: { data: any }) => {
     const columns = useMemo(() => TASKS_COLUMNS, []);
@@ -22,15 +37,20 @@ const TasksList = ({ data }: { data: any }) => {
         pageCount,
         pageOptions,
         state,
+        setGlobalFilter,
     } = useTable(
         { columns, data, initialState: { pageIndex: 0 } },
+        useGlobalFilter,
+        useSortBy,
         usePagination
     );
 
-    const { pageIndex, pageSize } = state;
+    const { pageIndex, pageSize, globalFilter } = state;
 
     return (
         <div>
+            <GlobalFilter filter={globalFilter} setFilter={setGlobalFilter} />
+
             <table {...getTableProps()} className="m-4 leading-normal">
                 <thead>
                     {headerGroups.map((headerGroup) => (
@@ -38,10 +58,28 @@ const TasksList = ({ data }: { data: any }) => {
                             {headerGroup.headers.map((column) => {
                                 return (
                                     <th
-                                        {...column.getHeaderProps()}
+                                        {...column.getHeaderProps(
+                                            column.getSortByToggleProps()
+                                        )}
                                         className="px-5 py-3 border-b-2 border-gray-200 text-center text-xs font-bold text-blue-600 tracking-wider"
                                     >
                                         {column.render('Header')}
+                                        <span
+                                            style={{
+                                                color: 'blue',
+                                                fontSize: '1.5rem',
+                                            }}
+                                        >
+                                            {column.isSorted ? (
+                                                column.isSortedDesc ? (
+                                                    <ArrowCircleUpIcon className="h5 w-5 text-black" />
+                                                ) : (
+                                                    <ArrowCircleDownIcon className="h5 w-5 text-black" />
+                                                )
+                                            ) : (
+                                                <ArrowCircleLeftIcon className="h5 w-5 text-black" />
+                                            )}
+                                        </span>
                                     </th>
                                 );
                             })}
@@ -88,7 +126,7 @@ const TasksList = ({ data }: { data: any }) => {
                 </tfoot>
             </table>
 
-            <div style={{ marginTop: '1rem' }}>
+            <div className="inline-flex border border-[#e4e4e4] bg-white p-4 mx-4 rounded-xl">
                 <span>
                     Page {pageIndex + 1} sur {pageOptions.length}
                 </span>
@@ -106,35 +144,35 @@ const TasksList = ({ data }: { data: any }) => {
                 </select>
 
                 <button
-                    className="mx-2"
+                    className="opacity-100 disabled:opacity-25 mx-2 w-9 h-9 flex items-center justify-center rounded-md border border-[#EDEFF1] text-[#838995] text-base hover:bg-primary hover:border-primary hover:text-white"
                     onClick={() => gotoPage(0)}
                     disabled={!canPreviousPage}
                 >
-                    1ère page
+                    <ChevronDoubleLeftIcon className="h5 w-5 text-black" />
                 </button>
 
                 <button
-                    className="mx-2"
+                    className="opacity-100 disabled:opacity-25 mx-2 w-9 h-9 flex items-center justify-center rounded-md border border-[#EDEFF1] text-[#838995] text-base hover:bg-primary hover:border-primary hover:text-white"
                     onClick={() => previousPage()}
                     disabled={!canPreviousPage}
                 >
-                    Page précédente
+                    <ChevronLeftIcon className="h5 w-5 text-black" />
                 </button>
 
                 <button
-                    className="mx-2"
+                    className="opacity-100 disabled:opacity-25 mx-2 w-9 h-9 flex items-center justify-center rounded-md border border-[#EDEFF1] text-[#838995] text-base hover:bg-primary hover:border-primary hover:text-white"
                     onClick={() => nextPage()}
                     disabled={!canNextPage}
                 >
-                    Page suivante
+                    <ChevronRightIcon className="h5 w-5 text-black" />
                 </button>
 
                 <button
-                    className="mx-2"
+                    className="opacity-100 disabled:opacity-25 mx-2 w-9 h-9 flex items-center justify-center rounded-md border border-[#EDEFF1] text-[#838995] text-base hover:bg-primary hover:border-primary hover:text-white"
                     onClick={() => gotoPage(pageCount - 1)}
                     disabled={!canNextPage}
                 >
-                    Dernière page
+                    <ChevronDoubleRightIcon className="h5 w-5 text-black" />
                 </button>
             </div>
         </div>

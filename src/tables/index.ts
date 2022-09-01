@@ -3,7 +3,7 @@ import { fr } from 'date-fns/locale';
 
 // labels of each column for tasks list
 const TASKS_COLUMNS = [
-    { Header: 'ID', Footer: 'ID', accessor: 'id' },
+    // { Header: 'ID', Footer: 'ID', accessor: 'id' },
     { Header: 'Subject', Footer: 'Subject', accessor: 'subject' },
     { Header: 'Status', Footer: 'Status', accessor: 'status' },
     {
