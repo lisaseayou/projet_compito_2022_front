@@ -54,11 +54,11 @@ const MenuList: Menu[] = [
         title: 'Détail du projet',
         Component: ProjectsDetails,
     },
-    {
-        path: '/user/home',
-        title: 'welcome',
-        Component: UserHome,
-    },
+    // {
+    //     path: '/user/home',
+    //     title: 'welcome',
+    //     Component: UserHome,
+    // },
     // {
     //   path: "/signin",
     //   title: "signin",

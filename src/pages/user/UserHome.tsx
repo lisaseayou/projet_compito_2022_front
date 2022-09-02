@@ -25,11 +25,13 @@ const UserHome = () => {
         return <p>error</p>;
     }
 
+    const user = JSON.parse(localStorage.getItem('userLogged') as string);
+
     return (
         <section className="pl-32 pr-10">
             <div className="px-4 py-16 max-w-screen-xl sm:px-6 lg:px-8">
                 <div className="max-w-xl">
-                    <HeaderGlobal dateIsShow />
+                    <HeaderGlobal title={`Bonjour ${user?.name} `} dateIsShow />
                 </div>
 
                 <div className="grid grid-cols-12 gap-2">
@@ -47,7 +49,10 @@ const UserHome = () => {
                             {data.allProjects
                                 .slice(0, 3)
                                 .map((project: any) => (
-                                    <CardSmall title={project?.name} />
+                                    <CardSmall
+                                        key={project?.id}
+                                        title={project?.name}
+                                    />
                                 ))}
 
                             <div className="flex flex-col items-center justify-center bg-white border-2 border-primary-main rounded p-6">
@@ -73,6 +78,7 @@ const UserHome = () => {
                                 .slice(0, 4)
                                 .map((project: any) => (
                                     <CardList
+                                        key={project?.id}
                                         title={project?.name}
                                         icon={
                                             <ColorSwatchIcon className="h-6 w-6 text-white" />

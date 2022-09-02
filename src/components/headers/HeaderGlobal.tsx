@@ -2,10 +2,11 @@ import { formatDate } from '../../utils';
 import Typography, { variantEnum } from '../ui/Typography';
 
 type HeaderGlobalProps = {
+    title: string;
     dateIsShow?: boolean;
 };
 
-const HeaderGlobal = ({ dateIsShow }: HeaderGlobalProps) => {
+const HeaderGlobal = ({ title, dateIsShow }: HeaderGlobalProps) => {
     return (
         <div className="col-start-1 col-end-8 flex flex-col justify-center items-start">
             <Typography
@@ -13,7 +14,7 @@ const HeaderGlobal = ({ dateIsShow }: HeaderGlobalProps) => {
                 color="text-primary-main"
                 fontSize="text-3xl"
             >
-                Bonjour, Jerem
+                {title}
             </Typography>
 
             {dateIsShow && (

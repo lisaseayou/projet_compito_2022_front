@@ -45,7 +45,7 @@ const SignUp = () => {
                 roles: ['admin'],
             });
 
-            navigate('/', { replace: true, state: { ...user } });
+            navigate('/user/home', { replace: true, state: { ...user } });
         },
         onError: (error) => {
             console.log(error?.message);
