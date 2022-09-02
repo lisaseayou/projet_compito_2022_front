@@ -4,7 +4,9 @@ import {
     TemplateIcon,
     UserIcon,
 } from '@heroicons/react/solid';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link as RouterLink, useNavigate } from 'react-router-dom';
+import Link from '../components/ui/Link';
+
 function Nav() {
     const navigate = useNavigate();
 
@@ -12,64 +14,60 @@ function Nav() {
         <div className="flex flex-col justify-between w-20 h-screen bg-white border-r fixed mr-6">
             <div>
                 <div className="flex items-center justify-center w-18 h-16 pt-1,5">
-                <Link to="/">
-                    <img
-                        src="./assets/logo/logoswag.svg"
-                        alt="logo"
-                        className="w-18"
-                    />
-                    </Link>
+                    <RouterLink to="/user/home">
+                        <img
+                            src="./assets/logo/logoswag.svg"
+                            alt="logo"
+                            className="w-18"
+                        />
+                    </RouterLink>
                 </div>
 
                 <div className="">
                     <nav className="flex flex-col p-2">
                         <ul className="pt-4 space-y-1 border-t border-gray-100">
                             <li>
-                                <Link to="/projects"
-                                    className="flex justify-center px-2 py-1.5 text-violet-500 rounded hover:bg-gray-50 hover:text-violet-500 relative group"
-                                >
-                                    <ClipboardListIcon className="text-violet-300 w-16" />
-
-                                    <span className="absolute text-xs font-medium text-white bg-violet-300 left-full ml-4 px-2 py-1.5 top-1/2 -translate-y-1/2 rounded opacity-0 group-hover:opacity-100">
-                                        Projets
-                                    </span>
-                                </Link>
+                                <Link
+                                    variant="nav"
+                                    to="/projects"
+                                    icon={
+                                        <ClipboardListIcon className="text-violet-400 w-16" />
+                                    }
+                                    label="Projets"
+                                />
                             </li>
 
                             <li>
-                            <Link to="/tasks"
-                                    className="flex justify-center px-2 py-1.5 text-violet-400 rounded hover:bg-gray-50 hover:text-gray-700 relative group"
-                                >
-                                    <TagIcon className="text-violet-400 w-16" />
-
-                                    <span className="absolute text-xs font-medium text-white bg-violet-400 left-full ml-4 px-2 py-1.5 top-1/2 -translate-y-1/2 rounded opacity-0 group-hover:opacity-100">
-                                        Tasks
-                                    </span>
-                                </Link>
+                                <Link
+                                    variant="nav"
+                                    to="/tasks"
+                                    icon={
+                                        <TagIcon className="text-violet-400 w-16" />
+                                    }
+                                    label="Tasks"
+                                />
                             </li>
 
                             <li>
-                            <Link to="/dashboard"
-                                    className="flex relative group justify-center px-2 py-1.5 text-violet-500 rounded hover:bg-gray-50 hover:text-gray-700"
-                                >
-                                    <TemplateIcon className="text-violet-500 w-16" />
-
-                                    <span className="absolute text-xs font-medium text-white bg-violet-500 left-full ml-4 px-2 py-1.5 top-1/2 -translate-y-1/2 rounded opacity-0 group-hover:opacity-100">
-                                        Dashboard
-                                    </span>
-                                </Link>
+                                <Link
+                                    variant="nav"
+                                    to="/dashboard"
+                                    icon={
+                                        <TemplateIcon className="text-violet-500 w-16" />
+                                    }
+                                    label="Dashboard"
+                                />
                             </li>
 
                             <li>
-                            <Link to="/profil"
-                                    className="flex justify-center px-2 py-1.5 text-violet-600 rounded hover:bg-gray-50 hover:text-gray-700 relative group"
-                                >
-                                    <UserIcon className="text-violet-800 w-16" />
-
-                                    <span className="absolute text-xs font-medium text-white bg-violet-800 left-full ml-4 px-2 py-1.5 top-1/2 -translate-y-1/2 rounded opacity-0 group-hover:opacity-100">
-                                        Profil
-                                    </span>
-                                </Link>
+                                <Link
+                                    variant="nav"
+                                    to="/profil"
+                                    icon={
+                                        <UserIcon className="text-violet-800 w-16" />
+                                    }
+                                    label="Profil"
+                                />
                             </li>
                         </ul>
                     </nav>
