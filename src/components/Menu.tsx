@@ -7,6 +7,8 @@ import Projects from '../pages/Projects';
 import Dashboard from '../pages/Dashboard';
 import Profil from '../pages/Profil';
 import ProjectsDetails from '../pages/ProjectsDetails';
+import UserHome from '../pages/user/UserHome';
+
 // import SignIn from "../pages/auth/SignIn";
 // import SignUp from "../pages/auth/SignUp";
 
@@ -51,6 +53,11 @@ const MenuList: Menu[] = [
         path: '/project-details/:projectId',
         title: 'Détail du projet',
         Component: ProjectsDetails,
+    },
+    {
+        path: '/user/home',
+        title: 'welcome',
+        Component: UserHome,
     },
     // {
     //   path: "/signin",
