@@ -6,6 +6,11 @@ export const LOGIN = gql`
             id
             name
             email
+            url
+            description
+            linkedin
+            twitter
+            github
         }
     }
 `;

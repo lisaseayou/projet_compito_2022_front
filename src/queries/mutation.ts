@@ -9,6 +9,11 @@ export const REGISTER = gql`
             createdAt
             updatedAt
             roles
+            url
+            description
+            twitter
+            github
+            linkedin
         }
     }
 `;
@@ -44,3 +49,21 @@ export const ADD_PROJECT = gql`
         }
     }
 `;
+ export const UPDATE_PROFILE = gql`
+ mutation updateUser($data: UpdateUserInput!, $updateUserId: String!) {
+    updateUser(data: $data, id: $updateUserId) {
+      id
+      name
+      email
+      roles
+      password
+      createdAt
+      updatedAt
+      url
+      twitter
+      linkedin
+      github
+      description
+    }
+  }
+ `

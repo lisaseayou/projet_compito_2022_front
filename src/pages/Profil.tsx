@@ -38,6 +38,21 @@ const Profil = () => {
             <p className="flex justify-center items-center w-full h-full">
               {user.email}
             </p>
+            <p className="flex justify-center items-center w-full h-full">
+              {user.url}
+            </p>
+            <p className="flex justify-center items-center w-full h-full">
+              {user.linkedin}
+            </p>
+            <p className="flex justify-center items-center w-full h-full">
+              {user.twitter}
+            </p>
+            <p className="flex justify-center items-center w-full h-full">
+              {user.github}
+            </p>
+            <p className="flex justify-center items-center w-full h-full">
+              {user.description}
+            </p>
           </div>
         </>
    

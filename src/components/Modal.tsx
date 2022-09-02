@@ -1,3 +1,4 @@
+// @ts-nocheck
 import * as React from "react";
 import Button from "@mui/material/Button";
 import { styled } from "@mui/material/styles";
@@ -9,7 +10,9 @@ import IconButton from "@mui/material/IconButton";
 import CloseIcon from "@mui/icons-material/Close";
 import TextField from "@material-ui/core/TextField";
 import { useSelector } from "react-redux";
-import { useState } from "react";
+import { ChangeEvent, useState } from "react";
+import { useMutation } from "@apollo/client";
+import { UPDATE_PROFILE } from "../queries/mutation";
 
 const BootstrapDialog = styled(Dialog)(({ theme }) => ({
   "& .MuiDialogContent-root": {
@@ -51,22 +54,45 @@ const BootstrapDialogTitle = (props: DialogTitleProps) => {
 };
 
 export default function CustomizedDialogs() {
+  const user: any = useSelector((state: any) => state.auth.user);
   const [open, setOpen] = React.useState(false);
+  const [form, setForm] = useState({
+    name: user.name,
+    email: user.email,
+    url: user.url,
+    description: user.description,
+    linkedin: user.linkedin,
+    twitter: user.twitter,
+    github: user.github,
+  });
 
+  const [updateProfile] = useMutation(UPDATE_PROFILE, {
+    onCompleted: () => {
+      console.log("success");
+      return "succes";
+    },
+    onError: () => {
+      console.log("error");
+    },
+  });
   const handleClickOpen = () => {
     setOpen(true);
   };
   const handleClose = () => {
     setOpen(false);
   };
+  const handleChange = (
+    e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => {
+    setForm({ ...form, [e.target.name]: e.target.value });
+  };
 
-  const user: any = useSelector((state: any) => state.auth.user);
-  const [edition, setEdition] = useState(false);
-  const [form, setForm] = useState({
-    name: user.name,
-    email: user.email,
-  });
-
+  const handleSubmit = (e: SubmitEvent) => {
+    e.preventDefault();
+    updateProfile({ variables: { updateUserId: user.id, data: form } });
+    handleClose();
+  };
+ 
   return (
     <div>
       <Button variant="outlined" color="secondary" onClick={handleClickOpen}>
@@ -84,62 +110,83 @@ export default function CustomizedDialogs() {
           Modifie ton profil
         </BootstrapDialogTitle>
         <DialogContent dividers>
-          <div className="flex">
-            <div className="flex justify-center flex-col m-5">
+          <form onSubmit={handleSubmit}>
+            <div className="flex">
+              <div className="flex justify-center flex-col m-5">
+                <TextField
+                  required
+                  id="outlined-required"
+                  label="Nom"
+                  margin="dense"
+                  defaultValue={user.name}
+                  name={"name"}
+                  onChange={handleChange}
+                />
+                <TextField
+                  required
+                  id="outlined-required"
+                  label="E-mail"
+                  margin="dense"
+                  defaultValue={user.email}
+                  name={"email"}
+                  onChange={handleChange}
+                />
+                <TextField
+                  id="outlined-password-input"
+                  label="Site Web"
+                  type="Site Web"
+                  name="url"
+                  defaultValue={user.url}
+                  onChange={handleChange}
+                />
+              </div>
+              <div className="flex justify-center flex-col m-5">
+                <TextField
+                  id="outlined-password-input"
+                  label="LinkedIn"
+                  type="LinkedIn"
+                  name="linkedin"
+                  dafaultValue={user.linkedin}
+                  onChange={handleChange}
+                />
+                <TextField
+                  id="outlined-password-input"
+                  label="GitHub"
+                  type="GitHub"
+                  name="github"
+                  defaultValue={user.github}
+                  onChange={handleChange}
+                />
+                <TextField
+                  id="outlined-password-input"
+                  label="Twitter"
+                  type="Twitter"
+                  name="twitter"
+                  defaultValue={user.twitter}
+                  onChange={handleChange}
+                />
+              </div>{" "}
+            </div>
+            <div className="m-5">
               <TextField
-                required
-                id="outlined-required"
-                label="Nom"
+                fullWidth
+                id="outlined-multiline-static"
+                label="Description"
+                multiline
+                rows={8}
                 margin="dense"
-                defaultValue={user.name}
-              />
-              <TextField
-                required
-                id="outlined-required"
-                label="E-mail"
-                margin="dense"
-                defaultValue={user.email}
-              />
-              <TextField
-                id="outlined-password-input"
-                label="Site Web"
-                type="Site Web"
+                name="description"
+                defaultValue={user.description}
+                onChange={handleChange}
               />
             </div>
-            <div className="flex justify-center flex-col m-5">
-              <TextField
-                id="outlined-password-input"
-                label="LinkedIn"
-                type="LinkedIn"
-              />
-              <TextField
-                id="outlined-password-input"
-                label="GitHub"
-                type="GitHub"
-              />
-              <TextField
-                id="outlined-password-input"
-                label="Twitter"
-                type="Twitter"
-              />
-            </div>{" "}
-          </div>
-          <div className="m-5">
-            <TextField
-              fullWidth
-              id="outlined-multiline-static"
-              label="Description"
-              multiline
-              rows={8}
-              margin="dense"
-            />
-          </div>
+            <DialogActions>
+              <Button autoFocus type="submit">
+                Sauvegarder
+              </Button>
+            </DialogActions>
+          </form>
         </DialogContent>
-        <DialogActions>
-          <Button autoFocus onClick={handleClose}>
-            Sauvegarder
-          </Button>
-        </DialogActions>
       </BootstrapDialog>
     </div>
   );
