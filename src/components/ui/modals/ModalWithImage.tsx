@@ -1,8 +1,12 @@
 import ReactModal from 'react-modal';
-import Button from '../Button';
 import Typography, { variantEnum } from '../Typography';
 import Work from '../../../assets/work-pressure.svg';
 import { XCircleIcon } from '@heroicons/react/solid';
+import { ADD_PROJECT } from '../../../queries/mutation';
+import { useMutation } from '@apollo/client';
+import { ToastError, ToastSuccess } from '../../../utils/Toast';
+import { ChangeEvent, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 type ModalWithImageProps = {
     show: boolean;
@@ -10,6 +14,42 @@ type ModalWithImageProps = {
 };
 
 const ModalWithImage = ({ show, setShow }: ModalWithImageProps) => {
+    const navigate = useNavigate();
+
+    const user = JSON.parse(localStorage.getItem('userLogged') as string);
+
+    const [formProject, setFormProject] = useState({
+        name: '',
+        description: '',
+        userId: user?.id,
+    });
+
+    const [addProject] = useMutation(ADD_PROJECT, {
+        onCompleted: () => {
+            ToastSuccess('Votre tâche est ajoutée!');
+            setFormProject({
+                name: '',
+                userId: user?.id,
+                description: '',
+            });
+        },
+        onError: () => {
+            ToastError("Votre tâche n'a pas pu être ajoutée :(");
+        },
+    });
+
+    const handleChange = (
+        e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+    ) => {
+        setFormProject({ ...formProject, [e.target.name]: e.target.value });
+    };
+
+    const handleSubmit: any = (e: SubmitEvent) => {
+        e.preventDefault();
+        addProject({ variables: { data: formProject } });
+        navigate('../projects', { replace: true });
+    };
+
     return (
         <div>
             <ReactModal
@@ -76,7 +116,7 @@ const ModalWithImage = ({ show, setShow }: ModalWithImageProps) => {
                         </div>
 
                         <form
-                            action=""
+                            onSubmit={handleSubmit}
                             className="max-w-md mx-auto mt-8 mb-0 space-y-4"
                         >
                             <div>
@@ -88,6 +128,9 @@ const ModalWithImage = ({ show, setShow }: ModalWithImageProps) => {
                                     placeholder="Name"
                                     type="text"
                                     id="name"
+                                    name="name"
+                                    value={formProject.name}
+                                    onChange={handleChange}
                                 />
                             </div>
 
@@ -100,6 +143,9 @@ const ModalWithImage = ({ show, setShow }: ModalWithImageProps) => {
                                     placeholder="description"
                                     rows={8}
                                     id="description"
+                                    name="description"
+                                    value={formProject.description}
+                                    onChange={handleChange}
                                 ></textarea>
                             </div>
 
