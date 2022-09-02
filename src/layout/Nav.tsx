@@ -12,18 +12,24 @@ function Nav() {
         <div className="flex flex-col justify-between w-20 h-screen bg-white border-r fixed mr-6">
             <div>
                 <div className="flex items-center justify-center w-18 h-16 pt-1,5">
-                    <img
-                        src="./assets/logo/logoswag.svg"
-                        alt="logo"
-                        className="w-18"
-                    />
+                    <Link
+                        to="/user/home"
+                        className="flex justify-center px-2 py-1.5 text-violet-500 rounded hover:bg-gray-50 hover:text-violet-500 relative group"
+                    >
+                        <img
+                            src="./assets/logo/logoswag.svg"
+                            alt="logo"
+                            className="w-18"
+                        />
+                    </Link>
                 </div>
 
                 <div className="">
                     <nav className="flex flex-col p-2">
                         <ul className="pt-4 space-y-1 border-t border-gray-100">
                             <li>
-                                <Link to="/projects"
+                                <Link
+                                    to="/projects"
                                     className="flex justify-center px-2 py-1.5 text-violet-500 rounded hover:bg-gray-50 hover:text-violet-500 relative group"
                                 >
                                     <ClipboardListIcon className="text-violet-300 w-16" />
@@ -35,7 +41,8 @@ function Nav() {
                             </li>
 
                             <li>
-                            <Link to="/tasks"
+                                <Link
+                                    to="/tasks"
                                     className="flex justify-center px-2 py-1.5 text-violet-400 rounded hover:bg-gray-50 hover:text-gray-700 relative group"
                                 >
                                     <TagIcon className="text-violet-400 w-16" />
@@ -47,7 +54,8 @@ function Nav() {
                             </li>
 
                             <li>
-                            <Link to="/dashboard"
+                                <Link
+                                    to="/dashboard"
                                     className="flex relative group justify-center px-2 py-1.5 text-violet-500 rounded hover:bg-gray-50 hover:text-gray-700"
                                 >
                                     <TemplateIcon className="text-violet-500 w-16" />
@@ -59,7 +67,8 @@ function Nav() {
                             </li>
 
                             <li>
-                            <Link to="/profil"
+                                <Link
+                                    to="/profil"
                                     className="flex justify-center px-2 py-1.5 text-violet-600 rounded hover:bg-gray-50 hover:text-gray-700 relative group"
                                 >
                                     <UserIcon className="text-violet-800 w-16" />
