@@ -44,17 +44,17 @@ function App() {
                         />
                         <Route path="/addproject" element={<AddProject />} />
 
-                        <Route path="auth" element={<Auth />}>
-                            <Route path="login" element={<SignIn />} />
-                            <Route path="register" element={<SignUp />} />
-                        </Route>
+            <Route path="auth" element={<Auth />}>
+              <Route path="login" element={<SignIn />} />
+              <Route path="register" element={<SignUp />} />
+            </Route>
 
-                        <Route path="logout" element={<Logout />} />
-                    </Routes>
-                </BrowserRouter>
-            </div>
-        </>
-    );
+            <Route path="logout" element={<Logout />} />
+          </Routes>
+        </BrowserRouter>
+      </div>
+    </>
+  );
 }
 
 export default App;

@@ -12,11 +12,13 @@ function Nav() {
         <div className="flex flex-col justify-between w-20 h-screen bg-white border-r fixed mr-6">
             <div>
                 <div className="flex items-center justify-center w-18 h-16 pt-1,5">
+                <Link to="/">
                     <img
                         src="./assets/logo/logoswag.svg"
                         alt="logo"
                         className="w-18"
                     />
+                    </Link>
                 </div>
 
                 <div className="">

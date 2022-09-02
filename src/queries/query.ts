@@ -33,7 +33,7 @@ export const GET_ALL_PROJECTS = gql`
 `;
 
 export const GET_PROJECT = gql`
-    query Project($projectId: ID!) {
+    query Project($projectId: String!) {
         project(id: $projectId) {
             id
             name
