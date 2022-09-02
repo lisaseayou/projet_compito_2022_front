@@ -18,6 +18,8 @@ type TypographyProps = {
     leading?: string;
     fontSize?: string;
     color?: string;
+    textTransform?: string;
+    fontWeight?: string;
 };
 
 const Typography = ({
@@ -27,6 +29,8 @@ const Typography = ({
     leading,
     fontSize,
     color,
+    textTransform,
+    fontWeight,
     children,
 }: TypographyProps) => {
     if (variant === variantEnum?.H1) {
@@ -59,10 +63,40 @@ const Typography = ({
         );
     }
 
+    if (variant === variantEnum?.H3) {
+        return (
+            <h3
+                className={`not-italic font-normal leading-${
+                    leading ?? 'leading-none'
+                } ${fontSize ?? 'text-xl'} ${textTransform ?? 'normal'} ${
+                    color ?? 'text-white'
+                } ${className}`}
+                style={style}
+            >
+                {children}
+            </h3>
+        );
+    }
+
+    if (variant === variantEnum?.H4) {
+        return (
+            <h4
+                className={`not-italic font-normal leading-${
+                    leading ?? 'leading-none'
+                } ${fontSize ?? 'text-lg'} ${textTransform ?? 'normal'} ${
+                    color ?? 'text-white'
+                } ${className}`}
+                style={style}
+            >
+                {children}
+            </h4>
+        );
+    }
+
     if (variant === variantEnum?.H5) {
         return (
             <h5
-                className={`not-italic font-normal leading-${
+                className={`not-italic ${fontWeight ?? 'font-normal'} leading-${
                     leading ?? 'leading-none'
                 } ${fontSize ?? 'text-2xl'} capitalize ${
                     color ?? 'text-white'
@@ -74,10 +108,25 @@ const Typography = ({
         );
     }
 
+    if (variant === variantEnum?.H6) {
+        return (
+            <h6
+                className={`not-italic font-normal leading-${
+                    leading ?? 'leading-none'
+                } ${fontSize ?? 'text-sm'} ${textTransform ?? 'normal'} ${
+                    color ?? 'text-white'
+                } ${className}`}
+                style={style}
+            >
+                {children}
+            </h6>
+        );
+    }
+
     if (variant === variantEnum?.P) {
         return (
             <p
-                className={`not-italic font-normal leading-${
+                className={`not-italic ${fontWeight ?? 'font-normal'} leading-${
                     leading ?? 'leading-none'
                 } ${fontSize ?? 'text-base'} ${
                     color ?? 'text-white'

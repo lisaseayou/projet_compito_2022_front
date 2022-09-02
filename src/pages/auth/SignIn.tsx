@@ -31,12 +31,12 @@ const SignIn = () => {
             document.cookie = 'signedin=true;path=/';
             const { success, ...user } = data.login;
             localStorage.setItem('userLogged', JSON.stringify(user));
-            dispatch({type: LOGINAUTH, payload: user});
+            dispatch({ type: LOGINAUTH, payload: user });
             //on veux que sa renvoie dans redux
             //on transmet le user loggé pour la première navigation, pour pouvoir récupérer le username au niveau du App
             //useselector sur profil pour recup les informations
             //usedispach ici pour enregister pour modif state avec reducer
-            navigate('/', { replace: true, state: { ...user } });
+            navigate('/user/home', { replace: true, state: { ...user } });
         },
         onError(error) {
             console.log(error?.message);
