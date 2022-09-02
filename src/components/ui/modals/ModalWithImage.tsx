@@ -2,6 +2,7 @@ import ReactModal from 'react-modal';
 import Button from '../Button';
 import Typography, { variantEnum } from '../Typography';
 import Work from '../../../assets/work-pressure.svg';
+import { XCircleIcon } from '@heroicons/react/solid';
 
 type ModalWithImageProps = {
     show: boolean;
@@ -42,7 +43,13 @@ const ModalWithImage = ({ show, setShow }: ModalWithImageProps) => {
                 }}
             >
                 <section className="relative flex flex-wrap lg:items-center w-full h-full">
-                    {/* <button onClick={() => setShow(false)}>Close Modal</button> */}
+                    <button
+                        className="absolute top-4 right-4 z-50"
+                        onClick={() => setShow(false)}
+                    >
+                        <XCircleIcon className="h-12 w-12 text-white" />
+                    </button>
+
                     <div className="w-full lg:w-1/2">
                         <div className="max-w-lg mx-auto text-center">
                             <Typography
