@@ -7,13 +7,15 @@ import { useMutation } from '@apollo/client';
 import { ToastError, ToastSuccess } from '../../../utils/Toast';
 import { ChangeEvent, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import InputText from '../form/InputText';
+import TextArea from '../form/TextArea';
 
-type ModalWithImageProps = {
+type ModalCreateProjectProps = {
     show: boolean;
     setShow: (value: boolean) => void;
 };
 
-const ModalWithImage = ({ show, setShow }: ModalWithImageProps) => {
+const ModalCreateProject = ({ show, setShow }: ModalCreateProjectProps) => {
     const navigate = useNavigate();
 
     const user = JSON.parse(localStorage.getItem('userLogged') as string);
@@ -120,14 +122,9 @@ const ModalWithImage = ({ show, setShow }: ModalWithImageProps) => {
                             className="max-w-md mx-auto mt-8 mb-0 space-y-4"
                         >
                             <div>
-                                <label className="sr-only" htmlFor="name">
-                                    Nom du projet
-                                </label>
-                                <input
-                                    className="w-full p-3 text-sm border border-gray-200 rounded-lg"
+                                <InputText
+                                    label="Nom du projet"
                                     placeholder="Name"
-                                    type="text"
-                                    id="name"
                                     name="name"
                                     value={formProject.name}
                                     onChange={handleChange}
@@ -135,18 +132,14 @@ const ModalWithImage = ({ show, setShow }: ModalWithImageProps) => {
                             </div>
 
                             <div>
-                                <label className="sr-only" htmlFor="message">
-                                    Entrer une Description
-                                </label>
-                                <textarea
-                                    className="w-full p-3 text-sm border border-gray-200 rounded-lg"
-                                    placeholder="description"
-                                    rows={8}
-                                    id="description"
+                                <TextArea
+                                    label="Entrer une Description"
+                                    row={8}
+                                    placeholder="Description"
                                     name="description"
                                     value={formProject.description}
                                     onChange={handleChange}
-                                ></textarea>
+                                />
                             </div>
 
                             <button
@@ -175,4 +168,4 @@ const ModalWithImage = ({ show, setShow }: ModalWithImageProps) => {
     );
 };
 
-export default ModalWithImage;
+export default ModalCreateProject;

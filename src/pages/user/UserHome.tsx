@@ -14,7 +14,7 @@ import Typography, { variantEnum } from '../../components/ui/Typography';
 import Work from '../../assets/work-pressure.svg';
 import CardList from '../../components/cards/CardList';
 import { useState } from 'react';
-import ModalWithImage from '../../components/ui/modals/ModalWithImage';
+import ModalWithImage from '../../components/ui/modals/ModalCreateProject';
 
 const UserHome = () => {
     const { loading, error, data } = useQuery(GET_ALL_PROJECTS);
