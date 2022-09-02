@@ -14,10 +14,7 @@ function Nav() {
         <div className="flex flex-col justify-between w-20 h-screen bg-white border-r fixed mr-6">
             <div>
                 <div className="flex items-center justify-center w-18 h-16 pt-1,5">
-                    <RouterLink
-                        to="/user/home"
-                        className="flex justify-center px-2 py-1.5 text-violet-500 rounded hover:bg-gray-50 hover:text-violet-500 relative group"
-                    >
+                    <RouterLink to="/user/home">
                         <img
                             src="./assets/logo/logoswag.svg"
                             alt="logo"

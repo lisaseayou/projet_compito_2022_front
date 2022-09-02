@@ -9,6 +9,7 @@ import { ChangeEvent, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import InputText from '../form/InputText';
 import TextArea from '../form/TextArea';
+import { GET_ALL_PROJECTS } from '../../../queries/query';
 
 type ModalCreateProjectProps = {
     show: boolean;
@@ -38,6 +39,7 @@ const ModalCreateProject = ({ show, setShow }: ModalCreateProjectProps) => {
         onError: () => {
             ToastError("Votre tâche n'a pas pu être ajoutée :(");
         },
+        refetchQueries: [GET_ALL_PROJECTS],
     });
 
     const handleChange = (
