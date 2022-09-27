@@ -1,5 +1,5 @@
 import { useQuery } from '@apollo/client';
-import { GET_ALL_PROJECTS } from '../../queries/query';
+import { GET_ALL_PROJECTS } from '../../graphql/query';
 import CardProject from './CardProject';
 
 const CardsList = () => {

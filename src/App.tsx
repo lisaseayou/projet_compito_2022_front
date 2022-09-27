@@ -4,8 +4,8 @@ import MenuList from './components/Menu';
 import Nav from './layout/Nav';
 import AddTask from './pages/AddTask';
 import AddProject from './pages/AddProject';
-import SignUp from './pages/auth/SignUp';
-import SignIn from './pages/auth/SignIn';
+import Register from './pages/auth/Register';
+import Login from './pages/auth/Login';
 import Auth from './pages/auth/Auth';
 import PrivateRoute from './pages/PrivateRoute';
 import Logout from './pages/auth/Logout';
@@ -18,7 +18,7 @@ function App() {
                 <BrowserRouter basename="/">
                     <Nav />
 
-                    <div className="mb-20 sm:mb-4 sm:ml-16 min-h-screen">
+                    <div className="mb-20 sm:mb-0 sm:ml-16 min-h-screen">
                         <Routes>
                             {MenuList.map(({ path, Component }, index) => (
                                 <Route
@@ -50,8 +50,8 @@ function App() {
                             />
 
                             <Route path="auth" element={<Auth />}>
-                                <Route path="login" element={<SignIn />} />
-                                <Route path="register" element={<SignUp />} />
+                                <Route path="login" element={<Login />} />
+                                <Route path="register" element={<Register />} />
                             </Route>
 
                             <Route path="logout" element={<Logout />} />

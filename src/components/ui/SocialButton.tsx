@@ -1,14 +1,15 @@
+import { IconProp } from '@fortawesome/fontawesome-svg-core';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 type SocialButtonProps = {
-    icon: any;
+    icon: IconProp;
 };
 
 const SocialButton = ({ icon }: SocialButtonProps) => {
     return (
-        <button className="group border border-solid border-gray-secondary hover:bg-primary-main rounded-full w-20 h-20">
+        <button className="group flex justify-center items-center border border-solid border-gray-secondary hover:bg-primary-main rounded-full w-12 h-12">
             <FontAwesomeIcon
-                className="text-primary-main text-3xl group-hover:text-white"
+                className="text-primary-main text-xl group-hover:text-white"
                 icon={icon}
             />
         </button>

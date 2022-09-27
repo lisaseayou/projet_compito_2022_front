@@ -1,6 +1,7 @@
 import { ChangeEvent, useState } from 'react';
+import { useMutation } from '@apollo/client';
 import { Link, useNavigate } from 'react-router-dom';
-import Button, { ButtonTypeEnum } from '../../components/ui/Button';
+import Button from '../../components/ui/Button';
 import Typography from '../../components/ui/Typography';
 import InputText from '../../components/ui/InputText';
 import SocialButton from '../../components/ui/SocialButton';
@@ -10,39 +11,22 @@ import {
     faGoogle,
 } from '@fortawesome/free-brands-svg-icons';
 import { ReactComponent as ViewIcon } from '../../assets/icons/view.svg';
-import { useLazyQuery } from '@apollo/client';
-import { LOGIN } from '../../queries/query';
-import { useDispatch } from 'react-redux'; //appel les actions
-import { LOGIN as LOGINAUTH } from '../../context/actions';
-import { FontSizeEnum, TypographyVariantEnum } from '../../enums';
+import { REGISTER } from '../../graphql/mutation';
+import {
+    ButtonTypeEnum,
+    ButtonVariantEnum,
+    FontSizeEnum,
+    TypographyVariantEnum,
+} from '../../enums';
 
-const SignIn = () => {
+const Register = () => {
     const navigate = useNavigate();
 
-    const dispatch = useDispatch();
-
     const [formDatas, setFormDatas] = useState({
+        name: '',
         email: '',
         password: '',
-    });
-
-    const [login] = useLazyQuery(LOGIN, {
-        onCompleted(data) {
-            console.log(data);
-            // check if user is login
-            document.cookie = 'signedin=true;path=/';
-            const { success, ...user } = data.login;
-            localStorage.setItem('userLogged', JSON.stringify(user));
-            dispatch({ type: LOGINAUTH, payload: user });
-            //on veux que sa renvoie dans redux
-            //on transmet le user loggé pour la première navigation, pour pouvoir récupérer le username au niveau du App
-            //useselector sur profil pour recup les informations
-            //usedispach ici pour enregister pour modif state avec reducer
-            navigate('/user/home', { replace: true, state: { ...user } });
-        },
-        onError(error) {
-            console.log(error?.message);
-        },
+        roles: ['admin'],
     });
 
     const handleChange = (
@@ -51,16 +35,70 @@ const SignIn = () => {
         setFormDatas({ ...formDatas, [e?.target?.name]: e?.target.value });
     };
 
+    const [register] = useMutation(REGISTER, {
+        onCompleted: (data) => {
+            // create the cookie of login
+            document.cookie = 'signedin=true;path=/';
+
+            // save the user's datas in local storage
+            const { success, ...user } = data.register;
+            localStorage.setItem('userLogged', JSON.stringify(user));
+
+            setFormDatas({
+                name: '',
+                email: '',
+                password: '',
+                roles: ['admin'],
+            });
+
+            navigate('/user/home', { replace: true, state: { ...user } });
+        },
+        onError: (error) => {
+            console.log(error?.message);
+        },
+    });
+
     const handleSubmit = (e: any) => {
         e?.preventDefault();
-        login({ variables: formDatas });
+        register({ variables: { data: formDatas } });
     };
 
     return (
         <div className="grid grid-cols-12 gap-0 min-h-screen text-center">
+            <div className="col-span-5 bg-primary-main hidden md:flex flex-col justify-center items-center p-4">
+                <Typography
+                    variant={TypographyVariantEnum.H2}
+                    color="text-white"
+                    fontSize="text-6xl"
+                    className="mb-12"
+                    style={{ width: '85%', maxWidth: 430 }}
+                >
+                    Welcome Back
+                </Typography>
+
+                <Typography
+                    variant={TypographyVariantEnum.H5}
+                    color="text-white"
+                    fontSize="text-2xl"
+                    leading="leading-7"
+                    className="mb-16"
+                    style={{ width: '85%', maxWidth: 430 }}
+                >
+                    To keep connected with us please login with your personnal
+                    info
+                </Typography>
+
+                <Button
+                    variant={ButtonVariantEnum.OUTLINE}
+                    onClick={() => navigate('/auth/login')}
+                >
+                    Sign in
+                </Button>
+            </div>
+
             <div className="col-span-12 flex md:hidden justify-end">
                 <Link
-                    to="/auth/register"
+                    to="/auth/login"
                     className="hover:underline decoration-primary"
                 >
                     <Typography
@@ -69,7 +107,7 @@ const SignIn = () => {
                         className="mb-0"
                         fontSize={FontSizeEnum.SM}
                     >
-                        Not a member? Sign up now
+                        Already a member? Sign In
                     </Typography>
                 </Link>
             </div>
@@ -81,7 +119,7 @@ const SignIn = () => {
                     fontSize="text-6xl"
                     className="mb-12"
                 >
-                    Sign in to Compito
+                    Create account
                 </Typography>
 
                 <div className="flex gap-5 mb-14">
@@ -97,7 +135,7 @@ const SignIn = () => {
                     leading="leading-7"
                     className="mb-12"
                 >
-                    or use your email account
+                    or use your email for registration
                 </Typography>
 
                 <div
@@ -107,9 +145,20 @@ const SignIn = () => {
                     <form className="w-full" onSubmit={handleSubmit}>
                         <InputText
                             type="text"
+                            name="name"
+                            id="name"
+                            placeholder="Name"
+                            icon={<ViewIcon className="h-6 w-6" />}
+                            className="mb-4"
+                            value={formDatas?.name}
+                            handleChange={handleChange}
+                        />
+
+                        <InputText
+                            type="text"
                             name="email"
                             id="email"
-                            placeholder="Email"
+                            placeholder="email"
                             icon={<ViewIcon className="h-6 w-6" />}
                             className="mb-4"
                             value={formDatas?.email}
@@ -117,66 +166,27 @@ const SignIn = () => {
                         />
 
                         <InputText
-                            type="text"
+                            type="password"
                             name="password"
                             id="password"
-                            placeholder="Password"
+                            placeholder="password"
                             icon={<ViewIcon className="h-6 w-6" />}
                             className="mb-12"
                             value={formDatas?.password}
                             handleChange={handleChange}
                         />
 
-                        <Link to="/">
-                            <Typography
-                                variant={TypographyVariantEnum.H5}
-                                color="text-secondary-main"
-                                fontSize="text-2xl"
-                                leading="leading-7"
-                                className="mb-12"
-                            >
-                                Forgot your password ?
-                            </Typography>
-                        </Link>
-
-                        <Button type={ButtonTypeEnum?.SUBMIT} variant="primary">
-                            Sign in
+                        <Button
+                            type={ButtonTypeEnum?.SUBMIT}
+                            variant={ButtonVariantEnum.PRIMARY}
+                        >
+                            Sign up
                         </Button>
                     </form>
                 </div>
-            </div>
-
-            <div className="col-span-5 bg-primary-main hidden md:flex flex-col justify-center items-center p-4">
-                <Typography
-                    variant={TypographyVariantEnum.H2}
-                    color="text-white"
-                    fontSize="text-6xl"
-                    className="mb-12"
-                    style={{ width: '85%', maxWidth: 430 }}
-                >
-                    Hello, friend
-                </Typography>
-
-                <Typography
-                    variant={TypographyVariantEnum.H5}
-                    color="text-white"
-                    fontSize="text-2xl"
-                    leading="leading-7"
-                    className="mb-16"
-                    style={{ width: '85%', maxWidth: 430 }}
-                >
-                    Enter your personnal details and start journey with us
-                </Typography>
-
-                <Button
-                    variant="outline"
-                    onClick={() => navigate('/auth/register')}
-                >
-                    Sign up
-                </Button>
             </div>
         </div>
     );
 };
 
-export default SignIn;
+export default Register;

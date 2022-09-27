@@ -5,7 +5,7 @@ import {
     ClipboardCheckIcon,
 } from '@heroicons/react/solid';
 import { ClockIcon as ClockIconOutline } from '@heroicons/react/outline';
-import { GET_ALL_PROJECTS } from '../../queries/query';
+import { GET_ALL_PROJECTS } from '../../graphql/query';
 import HeaderGlobal from '../../components/headers/HeaderGlobal';
 import TitleBlock from '../../components/titles/TitleBlock';
 import CardSmall from '../../components/cards/CardSmall';

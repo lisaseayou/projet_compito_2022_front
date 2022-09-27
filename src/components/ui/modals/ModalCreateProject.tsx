@@ -2,14 +2,14 @@ import ReactModal from 'react-modal';
 import Typography from '../Typography';
 import Work from '../../../assets/work-pressure.svg';
 import { XCircleIcon } from '@heroicons/react/solid';
-import { ADD_PROJECT } from '../../../queries/mutation';
+import { ADD_PROJECT } from '../../../graphql/mutation';
 import { useMutation } from '@apollo/client';
 import { ToastError, ToastSuccess } from '../../../utils/Toast';
 import { ChangeEvent, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import InputText from '../form/InputText';
 import TextArea from '../form/TextArea';
-import { GET_ALL_PROJECTS } from '../../../queries/query';
+import { GET_ALL_PROJECTS } from '../../../graphql/query';
 import { TypographyVariantEnum } from '../../../enums';
 
 type ModalCreateProjectProps = {

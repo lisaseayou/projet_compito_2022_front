@@ -1,11 +1,11 @@
 import { ChangeEvent, useEffect, useState } from 'react';
 import { useMutation } from '@apollo/client';
-import { ADD_PROJECT } from '../queries/mutation';
+import { ADD_PROJECT } from '../graphql/mutation';
 import { useNavigate } from 'react-router-dom';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { ToastError, ToastSuccess } from '../utils/Toast';
-import { GET_ALL_PROJECTS } from '../queries/query';
+import { GET_ALL_PROJECTS } from '../graphql/query';
 import Cookies from 'js-cookie';
 
 interface IFormProject {

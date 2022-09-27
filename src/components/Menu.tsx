@@ -9,8 +9,8 @@ import Profil from '../pages/Profil';
 import ProjectsDetails from '../pages/ProjectsDetails';
 import UserHome from '../pages/user/UserHome';
 
-// import SignIn from "../pages/auth/SignIn";
-// import SignUp from "../pages/auth/SignUp";
+// import Login from "../pages/auth/Login";
+// import Register from "../pages/auth/Register";
 
 type Menu = {
     path: string;
@@ -60,14 +60,14 @@ const MenuList: Menu[] = [
     //     Component: UserHome,
     // },
     // {
-    //   path: "/signin",
-    //   title: "signin",
-    //   Component: SignIn,
+    //   path: "/Login",
+    //   title: "Login",
+    //   Component: Login,
     // },
     // {
-    //   path: "/signup",
-    //   title: "signup",
-    //   Component: SignUp,
+    //   path: "/Register",
+    //   title: "Register",
+    //   Component: Register,
     // },
 ];
 

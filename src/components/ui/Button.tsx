@@ -1,23 +1,22 @@
 import { ReactNode } from 'react';
-
-export enum ButtonTypeEnum {
-    BUTTON = 'button',
-    SUBMIT = 'submit',
-}
+import { ButtonTypeEnum, ButtonVariantEnum } from '../../enums';
 
 type ButtonProps = {
     children: ReactNode;
-    variant: string;
+    variant: ButtonVariantEnum;
+    className?: string;
     type?: ButtonTypeEnum;
     onClick?: () => void;
 };
 
-const Button = ({ children, variant, type, onClick }: ButtonProps) => {
-    if (variant === 'outline') {
+const Button = ({ children, variant, className, type, onClick }: ButtonProps) => {
+    if (variant === ButtonVariantEnum.OUTLINE) {
         return (
             <button
                 type={type ?? ButtonTypeEnum.BUTTON}
-                className="inline-block py-3.5 px-16 leading-7 text-xl font-extrabold not-italic text-white uppercase border-2 border-solid border-white rounded-full hover:bg-primary-dark hover:text-white active:bg-primary-dark focus:outline-none focus:ring"
+                className={`inline-block py-2 px-14 leading-7 text-base font-extrabold not-italic text-white border-2 border-solid border-white rounded-full hover:bg-primary-dark hover:text-white active:bg-primary-dark focus:outline-none focus:ring ${
+                    className ?? ''
+                }`}
                 onClick={onClick}
             >
                 {children}
@@ -25,12 +24,41 @@ const Button = ({ children, variant, type, onClick }: ButtonProps) => {
         );
     }
 
-    if (variant === 'primary') {
+    if (variant === ButtonVariantEnum.PRIMARY) {
         return (
             <button
                 type={type ?? ButtonTypeEnum.BUTTON}
-                className="inline-block py-3.5 px-16 leading-7 text-xl font-extrabold not-italic bg-primary-main text-white uppercase border-2 border-solid border-primary-main rounded-full hover:bg-primary-dark hover:border-primary-dark hover:text-white active:bg-primary-dark focus:outline-none focus:ring"
+                className={`inline-block py-2 px-14 leading-7 text-base font-extrabold not-italic bg-primary-main text-white border-2 border-solid border-primary-main rounded-full hover:bg-primary-dark hover:border-primary-dark hover:text-white active:bg-primary-dark focus:outline-none focus:ring ${
+                    className ?? ''
+                }`}
                 onClick={onClick}
+            >
+                {children}
+            </button>
+        );
+    }
+
+    if (variant === ButtonVariantEnum.LIGHT) {
+        return (
+            <button
+                type={type ?? ButtonTypeEnum.BUTTON}
+                className={`inline-block py-1 px-6 leading-7 text-sm font-extrabold not-italic bg-primary-main text-white normal border-2 border-solid border-primary-main rounded-md hover:bg-primary-dark hover:border-primary-dark hover:text-white active:bg-primary-dark focus:outline-none focus:ring ${
+                    className ?? ''
+                }`}
+                onClick={onClick}
+            >
+                {children}
+            </button>
+        );
+    }
+
+    if (variant === ButtonVariantEnum.FORM) {
+        return (
+            <button
+                type={ButtonTypeEnum.SUBMIT}
+                className={`block w-full px-5 py-3 text-sm font-medium text-white bg-primary-main rounded-lg ${
+                    className ?? ''
+                }`}
             >
                 {children}
             </button>

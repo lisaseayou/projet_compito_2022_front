@@ -7,7 +7,7 @@ import TableTask from '../components/Tasks/TableTask';
 import 'react-toastify/dist/ReactToastify.css';
 import { ToastContainer } from 'react-toastify';
 import { useQuery } from '@apollo/client';
-import { GET_ALL_TASKS } from '../queries/query';
+import { GET_ALL_TASKS } from '../graphql/query';
 import TasksList from '../components/Tasks/TasksList';
 import Typography, { variantEnum } from '../components/ui/Typography';
 import ButtonCta from '../components/ui/ButtonCta';
