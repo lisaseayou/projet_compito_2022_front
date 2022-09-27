@@ -17,6 +17,7 @@ import {
     FontSizeEnum,
     IconEnum,
     OpacityEnum,
+    RoleEnum,
     TextLineHeightEnum,
     TextTransformEnum,
     TypographyVariantEnum,
@@ -32,7 +33,12 @@ const Register = () => {
         email: '',
         password: '',
         passwordConfirm: '',
-        roles: ['admin'],
+        roles: [RoleEnum.ADMIN],
+    });
+
+    const [passwordShown, setPasswordShown] = useState({
+        password: true,
+        passwordConfirm: true,
     });
 
     const handleChange = (
@@ -55,7 +61,7 @@ const Register = () => {
                 email: '',
                 password: '',
                 passwordConfirm: '',
-                roles: ['admin'],
+                roles: [RoleEnum.ADMIN],
             });
 
             navigate('/user/home', { replace: true, state: { ...user } });
@@ -187,7 +193,7 @@ const Register = () => {
                         />
 
                         <InputText
-                            type="text"
+                            type={!passwordShown.password ? 'text' : 'password'}
                             name="password"
                             id="password"
                             placeholder="Mot de passe"
@@ -195,6 +201,22 @@ const Register = () => {
                                 <Icon
                                     variant={IconEnum.LOCK_CLOSED}
                                     opacity={OpacityEnum.OPACITY_70}
+                                />
+                            }
+                            iconShow={
+                                <Icon
+                                    variant={
+                                        passwordShown
+                                            ? IconEnum.EYE_OFF
+                                            : IconEnum.EYE
+                                    }
+                                    opacity={OpacityEnum.OPACITY_70}
+                                    onClick={() =>
+                                        setPasswordShown({
+                                            ...passwordShown,
+                                            password: !passwordShown.password,
+                                        })
+                                    }
                                 />
                             }
                             className="mb-4 w-full max-w-sm"
@@ -205,7 +227,11 @@ const Register = () => {
                         />
 
                         <InputText
-                            type="text"
+                            type={
+                                !passwordShown.passwordConfirm
+                                    ? 'text'
+                                    : 'password'
+                            }
                             name="passwordConfirm"
                             id="passwordConfirm"
                             placeholder="Confirmation de mot de passe"
@@ -213,6 +239,23 @@ const Register = () => {
                                 <Icon
                                     variant={IconEnum.LOCK_CLOSED}
                                     opacity={OpacityEnum.OPACITY_70}
+                                />
+                            }
+                            iconShow={
+                                <Icon
+                                    variant={
+                                        passwordShown
+                                            ? IconEnum.EYE_OFF
+                                            : IconEnum.EYE
+                                    }
+                                    opacity={OpacityEnum.OPACITY_70}
+                                    onClick={() =>
+                                        setPasswordShown({
+                                            ...passwordShown,
+                                            passwordConfirm:
+                                                !passwordShown.passwordConfirm,
+                                        })
+                                    }
                                 />
                             }
                             className="mb-6 sm:mb-8 w-full max-w-sm"

@@ -1,5 +1,5 @@
 import React, { ChangeEvent } from 'react';
-import { InputTextVariantEnum } from '../../../enums';
+import { TextFieldVariantEnum } from '../../../enums';
 
 type InputTextProps = {
     label: string;
@@ -7,7 +7,7 @@ type InputTextProps = {
     name: string;
     value: string;
     onChange: (e: ChangeEvent<HTMLInputElement>) => void;
-    variant?: InputTextVariantEnum;
+    variant?: TextFieldVariantEnum;
     labelClassName?: string;
 };
 
@@ -17,10 +17,10 @@ const InputText = ({
     name,
     value,
     onChange,
-    variant = InputTextVariantEnum.NO_LABEL,
+    variant = TextFieldVariantEnum.NO_LABEL,
     labelClassName,
 }: InputTextProps) => {
-    if (variant === InputTextVariantEnum.NO_LABEL) {
+    if (variant === TextFieldVariantEnum.NO_LABEL) {
         return (
             <>
                 <label className="sr-only" htmlFor={name}>

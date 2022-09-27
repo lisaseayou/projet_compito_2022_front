@@ -30,13 +30,14 @@ import { handleResetDefault } from '../../utils';
 
 const Login = () => {
     const navigate = useNavigate();
-
     const dispatch = useDispatch();
 
     const [formDatas, setFormDatas] = useState({
         email: '',
         password: '',
     });
+
+    const [passwordShown, setPasswordShown] = useState(true);
 
     const [login] = useLazyQuery(LOGIN, {
         onCompleted(data) {
@@ -140,7 +141,7 @@ const Login = () => {
                         />
 
                         <InputText
-                            type="text"
+                            type={!passwordShown ? 'text' : 'password'}
                             name="password"
                             id="password"
                             placeholder="Mot de passe"
@@ -148,6 +149,19 @@ const Login = () => {
                                 <Icon
                                     variant={IconEnum.LOCK_CLOSED}
                                     opacity={OpacityEnum.OPACITY_70}
+                                />
+                            }
+                            iconShow={
+                                <Icon
+                                    variant={
+                                        passwordShown
+                                            ? IconEnum.EYE_OFF
+                                            : IconEnum.EYE
+                                    }
+                                    opacity={OpacityEnum.OPACITY_70}
+                                    onClick={() =>
+                                        setPasswordShown(!passwordShown)
+                                    }
                                 />
                             }
                             className="mb-6 sm:mb-12 w-full max-w-sm"

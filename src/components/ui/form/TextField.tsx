@@ -1,10 +1,12 @@
 import React, { ChangeEvent, ClipboardEvent } from 'react';
+
 type TextFieldProps = {
     placeholder: string;
     type: string;
     name: string;
     id: string;
     icon: any;
+    iconShow?: any;
     className?: string;
     value: any;
     handleChange: (
@@ -13,6 +15,7 @@ type TextFieldProps = {
     handlePaste?: (e: ClipboardEvent<HTMLInputElement>) => boolean;
     handleCopy?: (e: ClipboardEvent<HTMLInputElement>) => boolean;
 };
+
 const TextField = ({
     type,
     name,
@@ -20,6 +23,7 @@ const TextField = ({
     className,
     placeholder,
     icon,
+    iconShow,
     value,
     handleChange,
     handlePaste,
@@ -35,13 +39,21 @@ const TextField = ({
                 type={type}
                 id={id}
                 name={name}
-                className="w-full p-4 pl-12 font-display not-italic text-primary-main font-normal text-lg leading-none normal-case bg-gray-light lightborder-gray-200 rounded-2lg shadow-sm focus-visible:outline-0 placeholder:italic placeholder:opacity-50 placeholder:text-base placeholder:text-primary-main"
+                className={`w-full p-4 pl-12 ${
+                    iconShow ? 'pr-12' : 'pr-4'
+                } font-display not-italic text-primary-main font-normal text-base leading-none normal-case bg-gray-light lightborder-gray-200 rounded-2lg shadow-sm focus-visible:outline-0 placeholder:italic placeholder:opacity-50 placeholder:text-base placeholder:text-primary-main`}
                 placeholder={placeholder}
                 value={value}
                 onChange={handleChange}
                 onPaste={handlePaste}
                 onCopy={handleCopy}
             />
+
+            {iconShow && (
+                <span className="absolute inset-y-0 right-3 w-auto inline-flex items-center text-primary-main">
+                    {iconShow}
+                </span>
+            )}
         </div>
     );
 };

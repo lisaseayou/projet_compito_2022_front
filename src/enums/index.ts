@@ -87,6 +87,8 @@ export enum ButtonVariantEnum {
 }
 
 export enum IconEnum {
+    EYE = 'EyeIcon',
+    EYE_OFF = 'EyeOffIcon',
     LOCK_CLOSED = 'LockClosed',
     MAIL = 'MailIcon',
     USER = 'UserIcon',
@@ -112,7 +114,13 @@ export enum OpacityEnum {
     OPACITY_100 = 'opacity-100',
 }
 
-export enum InputTextVariantEnum {
+export enum TextFieldVariantEnum {
     NO_LABEL = 'no-label',
     LABEL = 'label',
+}
+
+export enum RoleEnum {
+    USER = 'USER',
+    ADMIN = 'ADMIN',
+    SUPER_ADMIN = 'SUPER_ADMIN',
 }
