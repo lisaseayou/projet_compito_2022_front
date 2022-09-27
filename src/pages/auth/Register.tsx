@@ -22,6 +22,7 @@ import {
     TypographyVariantEnum,
 } from '../../enums';
 import Icon from '../../components/ui/Icons/Icon';
+import { handleResetDefault } from '../../utils';
 
 const Register = () => {
     const navigate = useNavigate();
@@ -199,6 +200,8 @@ const Register = () => {
                             className="mb-4 w-full max-w-sm"
                             value={formDatas?.password}
                             handleChange={handleChange}
+                            handlePaste={handleResetDefault}
+                            handleCopy={handleResetDefault}
                         />
 
                         <InputText
@@ -215,6 +218,8 @@ const Register = () => {
                             className="mb-6 sm:mb-8 w-full max-w-sm"
                             value={formDatas?.passwordConfirm}
                             handleChange={handleChange}
+                            handlePaste={handleResetDefault}
+                            handleCopy={handleResetDefault}
                         />
 
                         <Button

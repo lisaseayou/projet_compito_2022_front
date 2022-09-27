@@ -26,6 +26,7 @@ import {
 } from '../../enums';
 import Icon from '../../components/ui/Icons/Icon';
 import IconWithBg from '../../components/ui/Icons/IconWithBg';
+import { handleResetDefault } from '../../utils';
 
 const Login = () => {
     const navigate = useNavigate();
@@ -152,6 +153,8 @@ const Login = () => {
                             className="mb-6 sm:mb-12 w-full max-w-sm"
                             value={formDatas?.password}
                             handleChange={handleChange}
+                            handlePaste={handleResetDefault}
+                            handleCopy={handleResetDefault}
                         />
 
                         <Link

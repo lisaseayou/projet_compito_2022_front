@@ -1,4 +1,4 @@
-import React, { ChangeEvent } from 'react';
+import React, { ChangeEvent, ClipboardEvent } from 'react';
 type TextFieldProps = {
     placeholder: string;
     type: string;
@@ -10,6 +10,8 @@ type TextFieldProps = {
     handleChange: (
         e: ChangeEvent<HTMLInputElement | HTMLSelectElement>
     ) => void;
+    handlePaste?: (e: ClipboardEvent<HTMLInputElement>) => boolean;
+    handleCopy?: (e: ClipboardEvent<HTMLInputElement>) => boolean;
 };
 const TextField = ({
     type,
@@ -20,6 +22,8 @@ const TextField = ({
     icon,
     value,
     handleChange,
+    handlePaste,
+    handleCopy,
 }: TextFieldProps) => {
     return (
         <div className={`relative ${className}`}>
@@ -35,6 +39,8 @@ const TextField = ({
                 placeholder={placeholder}
                 value={value}
                 onChange={handleChange}
+                onPaste={handlePaste}
+                onCopy={handleCopy}
             />
         </div>
     );
