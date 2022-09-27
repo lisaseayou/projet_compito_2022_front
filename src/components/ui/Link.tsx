@@ -1,22 +1,77 @@
 import { Link as RouterLink } from 'react-router-dom';
+import { ArrowLeftIcon } from '@heroicons/react/solid';
+import Typography from './Typography';
+import {
+    FontSizeEnum,
+    FontWeightEnum,
+    LinkVariantEnum,
+    TypographyVariantEnum,
+} from '../../enums';
+import { ReactNode } from 'react';
 
 type LinkProps = {
-    variant: string;
+    variant: LinkVariantEnum;
     label: string;
-    icon: any;
+    iconNav?: ReactNode;
+    iconBack?: ReactNode;
     to: string;
+    navIsOpen?: boolean;
+    setNavIsOpen?: (value: boolean) => void;
+    classNameBack?: string;
 };
-const Link = ({ variant, label, to, icon }: LinkProps) => {
-    if (variant === 'nav') {
+const Link = ({
+    variant,
+    label,
+    to,
+    iconNav,
+    iconBack,
+    navIsOpen,
+    setNavIsOpen,
+    classNameBack,
+}: LinkProps) => {
+    if (variant === LinkVariantEnum.NAV) {
         return (
             <RouterLink
                 to={to}
-                className="flex justify-center px-2 py-1.5 text-violet-500 rounded hover:bg-gray-50 hover:text-violet-500 relative group"
+                className={`flex ${
+                    !navIsOpen ? 'justify-center' : 'justify-start'
+                } items-center ml-1 px-2 py-1.5 text-primary-main rounded hover:bg-gray-50 hover:text-primary-main relative group`}
+                onClick={() => (setNavIsOpen ? setNavIsOpen(false) : {})}
             >
-                {icon}
-                <span className="absolute text-xs font-medium text-white bg-violet-300 left-full ml-4 px-2 py-1.5 top-1/2 -translate-y-1/2 rounded opacity-0 group-hover:opacity-100">
+                {iconNav}
+                <span
+                    className={`${
+                        !navIsOpen
+                            ? 'hidden absolute opacity-0 top-0 -translate-y-full sm:top-1/2 sm:left-full sm:-translate-y-1/2 text-white bg-primary-main ml-4'
+                            : 'hidden sm:flex relative opacity-100 text-primary-main'
+                    } z-50 sm:flex text-sm font-medium w-max px-2 py-1.5 rounded group-hover:opacity-100`}
+                >
                     {label}
                 </span>
+            </RouterLink>
+        );
+    }
+
+    if (variant === LinkVariantEnum.BACK) {
+        return (
+            <RouterLink
+                to={to}
+                className={`flex justify-center items-center mt-8 hover:underline ${
+                    classNameBack ?? ''
+                }`}
+            >
+                {iconBack ?? (
+                    <ArrowLeftIcon className="h-4 w-4 text-primary-main" />
+                )}
+                <Typography
+                    variant={TypographyVariantEnum?.BUTTON}
+                    color="text-primary-main"
+                    fontSize={FontSizeEnum.SM}
+                    fontWeight={FontWeightEnum.NORMAL}
+                    className="ml-2"
+                >
+                    {label}
+                </Typography>
             </RouterLink>
         );
     }

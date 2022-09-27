@@ -10,11 +10,12 @@ import HeaderGlobal from '../../components/headers/HeaderGlobal';
 import TitleBlock from '../../components/titles/TitleBlock';
 import CardSmall from '../../components/cards/CardSmall';
 import CardAddSmall from '../../components/cards/CardAddSmall';
-import Typography, { variantEnum } from '../../components/ui/Typography';
 import Work from '../../assets/work-pressure.svg';
 import CardList from '../../components/cards/CardList';
 import { useState } from 'react';
 import ModalWithImage from '../../components/ui/modals/ModalCreateProject';
+import Typography from '../../components/ui/Typography';
+import { TypographyVariantEnum } from '../../enums';
 
 const UserHome = () => {
     const { loading, error, data } = useQuery(GET_ALL_PROJECTS);
@@ -96,7 +97,9 @@ const UserHome = () => {
                                             <div className="flex items-center">
                                                 <ClockIconOutline className="h-6 w-6 text-primary-main mr-1" />
                                                 <Typography
-                                                    variant={variantEnum?.H6}
+                                                    variant={
+                                                        TypographyVariantEnum.H6
+                                                    }
                                                     color="text-primary-main"
                                                     fontSize="text-xs"
                                                     fontWeight="font-bold"

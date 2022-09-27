@@ -1,25 +1,22 @@
 import { ReactNode } from 'react';
-
-export enum variantEnum {
-    H1 = 'h1',
-    H2 = 'h2',
-    H3 = 'h3',
-    H4 = 'h4',
-    H5 = 'h5',
-    H6 = 'h6',
-    P = 'p',
-}
+import {
+    FontSizeEnum,
+    FontWeightEnum,
+    TextLineHeightEnum,
+    TextTransformEnum,
+    TypographyVariantEnum,
+} from '../../enums';
 
 type TypographyProps = {
     children: ReactNode;
-    variant: variantEnum;
+    variant: TypographyVariantEnum | string;
     style?: object;
     className?: string;
-    leading?: string;
-    fontSize?: string;
+    leading?: TextLineHeightEnum | string;
+    fontSize: string | FontSizeEnum | string[];
     color?: string;
-    textTransform?: string;
-    fontWeight?: string;
+    textTransform?: TextTransformEnum | string;
+    fontWeight?: FontWeightEnum | string;
 };
 
 const Typography = ({
@@ -33,14 +30,14 @@ const Typography = ({
     fontWeight,
     children,
 }: TypographyProps) => {
-    if (variant === variantEnum?.H1) {
+    if (variant === TypographyVariantEnum.H1) {
         return (
             <h1
-                className={`not-italic font-extrabold ${
-                    leading ?? 'leading-none'
-                } ${fontSize ?? 'text-6xl'} capitalize ${
-                    color ?? 'text-white'
-                } ${className}`}
+                className={`not-italic ${FontWeightEnum.EXTRABOLD} ${
+                    leading ?? TextLineHeightEnum.NONE
+                } ${Array.isArray(fontSize) ? fontSize.join(' ') : fontSize} ${
+                    textTransform ?? TextTransformEnum.NORMAL
+                } ${color ?? 'text-white'} ${className}`}
                 style={style}
             >
                 {children}
@@ -48,14 +45,14 @@ const Typography = ({
         );
     }
 
-    if (variant === variantEnum?.H2) {
+    if (variant === TypographyVariantEnum.H2) {
         return (
             <h2
-                className={`not-italic font-extrabold ${
-                    leading ?? 'leading-none'
-                } ${fontSize ?? 'text-6xl'} capitalize ${
-                    color ?? 'text-white'
-                } ${className}`}
+                className={`not-italic ${FontWeightEnum.EXTRABOLD} ${
+                    leading ?? TextLineHeightEnum.NONE
+                } ${Array.isArray(fontSize) ? fontSize.join(' ') : fontSize} ${
+                    textTransform ?? TextTransformEnum.NORMAL
+                } ${color ?? 'text-white'} ${className}`}
                 style={style}
             >
                 {children}
@@ -63,14 +60,14 @@ const Typography = ({
         );
     }
 
-    if (variant === variantEnum?.H3) {
+    if (variant === TypographyVariantEnum.H3) {
         return (
             <h3
-                className={`not-italic font-normal leading-${
-                    leading ?? 'leading-none'
-                } ${fontSize ?? 'text-xl'} ${textTransform ?? 'normal'} ${
-                    color ?? 'text-white'
-                } ${className}`}
+                className={`not-italic ${FontWeightEnum.NORMAL} leading-${
+                    leading ?? TextLineHeightEnum.NONE
+                } ${Array.isArray(fontSize) ? fontSize.join(' ') : fontSize} ${
+                    textTransform ?? TextTransformEnum.NORMAL
+                } ${color ?? 'text-white'} ${className}`}
                 style={style}
             >
                 {children}
@@ -78,12 +75,14 @@ const Typography = ({
         );
     }
 
-    if (variant === variantEnum?.H4) {
+    if (variant === TypographyVariantEnum.H4) {
         return (
             <h4
-                className={`not-italic font-normal leading-${
-                    leading ?? 'leading-none'
-                } ${fontSize ?? 'text-lg'} ${textTransform ?? 'normal'} ${
+                className={`not-italic ${
+                    fontWeight ?? FontWeightEnum.NORMAL
+                } leading-${leading ?? TextLineHeightEnum.NONE} ${
+                    Array.isArray(fontSize) ? fontSize.join(' ') : fontSize
+                } ${textTransform ?? TextTransformEnum.NORMAL} ${
                     color ?? 'text-white'
                 } ${className}`}
                 style={style}
@@ -93,12 +92,14 @@ const Typography = ({
         );
     }
 
-    if (variant === variantEnum?.H5) {
+    if (variant === TypographyVariantEnum.H5) {
         return (
             <h5
-                className={`not-italic ${fontWeight ?? 'font-normal'} leading-${
-                    leading ?? 'leading-none'
-                } ${fontSize ?? 'text-2xl'} capitalize ${
+                className={`not-italic ${
+                    fontWeight ?? FontWeightEnum.NORMAL
+                } leading-${leading ?? TextLineHeightEnum.NONE} ${
+                    Array.isArray(fontSize) ? fontSize.join(' ') : fontSize
+                } ${textTransform ?? TextTransformEnum.NORMAL} ${
                     color ?? 'text-white'
                 } ${className}`}
                 style={style}
@@ -108,14 +109,14 @@ const Typography = ({
         );
     }
 
-    if (variant === variantEnum?.H6) {
+    if (variant === TypographyVariantEnum.H6) {
         return (
             <h6
-                className={`not-italic font-normal leading-${
-                    leading ?? 'leading-none'
-                } ${fontSize ?? 'text-sm'} ${textTransform ?? 'normal'} ${
-                    color ?? 'text-white'
-                } ${className}`}
+                className={`not-italic ${FontWeightEnum.NORMAL} leading-${
+                    leading ?? TextLineHeightEnum.NONE
+                } ${Array.isArray(fontSize) ? fontSize.join(' ') : fontSize} ${
+                    textTransform ?? TextTransformEnum.NORMAL
+                } ${color ?? 'text-white'} ${className}`}
                 style={style}
             >
                 {children}
@@ -123,18 +124,33 @@ const Typography = ({
         );
     }
 
-    if (variant === variantEnum?.P) {
+    if (variant === TypographyVariantEnum.P) {
         return (
             <p
-                className={`not-italic ${fontWeight ?? 'font-normal'} leading-${
-                    leading ?? 'leading-none'
-                } ${fontSize ?? 'text-base'} ${
-                    color ?? 'text-white'
-                } ${className}`}
+                className={`not-italic ${
+                    fontWeight ?? FontWeightEnum.NORMAL
+                } leading-${leading ?? TextLineHeightEnum.NONE} ${
+                    Array.isArray(fontSize) ? fontSize.join(' ') : fontSize
+                } ${color ?? 'text-white'} ${className}`}
                 style={style}
             >
                 {children}
             </p>
+        );
+    }
+
+    if (variant === TypographyVariantEnum.BUTTON) {
+        return (
+            <h6
+                className={`not-italic ${
+                    fontWeight ?? FontWeightEnum.NORMAL
+                } leading-${leading ?? TextLineHeightEnum.NONE} ${
+                    Array.isArray(fontSize) ? fontSize.join(' ') : fontSize
+                } ${color ?? 'text-white'} ${className}`}
+                style={style}
+            >
+                {children}
+            </h6>
         );
     }
 

@@ -1,7 +1,7 @@
 import { ChangeEvent, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import Button, { ButtonTypeEnum } from '../../components/ui/Button';
-import Typography, { variantEnum } from '../../components/ui/Typography';
+import Typography from '../../components/ui/Typography';
 import InputText from '../../components/ui/InputText';
 import SocialButton from '../../components/ui/SocialButton';
 import {
@@ -14,6 +14,7 @@ import { useLazyQuery } from '@apollo/client';
 import { LOGIN } from '../../queries/query';
 import { useDispatch } from 'react-redux'; //appel les actions
 import { LOGIN as LOGINAUTH } from '../../context/actions';
+import { FontSizeEnum, TypographyVariantEnum } from '../../enums';
 
 const SignIn = () => {
     const navigate = useNavigate();
@@ -27,7 +28,7 @@ const SignIn = () => {
 
     const [login] = useLazyQuery(LOGIN, {
         onCompleted(data) {
-            console.log(data)
+            console.log(data);
             // check if user is login
             document.cookie = 'signedin=true;path=/';
             const { success, ...user } = data.login;
@@ -63,9 +64,10 @@ const SignIn = () => {
                     className="hover:underline decoration-primary"
                 >
                     <Typography
-                        variant={variantEnum?.P}
+                        variant={TypographyVariantEnum.P}
                         color="text-primary-main"
                         className="mb-0"
+                        fontSize={FontSizeEnum.SM}
                     >
                         Not a member? Sign up now
                     </Typography>
@@ -74,7 +76,7 @@ const SignIn = () => {
 
             <div className="col-span-12 md:col-span-7 flex flex-col justify-center items-center p-4">
                 <Typography
-                    variant={variantEnum?.H2}
+                    variant={TypographyVariantEnum.H2}
                     color="text-primary-main"
                     fontSize="text-6xl"
                     className="mb-12"
@@ -89,7 +91,7 @@ const SignIn = () => {
                 </div>
 
                 <Typography
-                    variant={variantEnum?.H5}
+                    variant={TypographyVariantEnum.H5}
                     color="text-secondary-main"
                     fontSize="text-2xl"
                     leading="leading-7"
@@ -127,7 +129,7 @@ const SignIn = () => {
 
                         <Link to="/">
                             <Typography
-                                variant={variantEnum?.H5}
+                                variant={TypographyVariantEnum.H5}
                                 color="text-secondary-main"
                                 fontSize="text-2xl"
                                 leading="leading-7"
@@ -146,7 +148,7 @@ const SignIn = () => {
 
             <div className="col-span-5 bg-primary-main hidden md:flex flex-col justify-center items-center p-4">
                 <Typography
-                    variant={variantEnum?.H2}
+                    variant={TypographyVariantEnum.H2}
                     color="text-white"
                     fontSize="text-6xl"
                     className="mb-12"
@@ -156,7 +158,7 @@ const SignIn = () => {
                 </Typography>
 
                 <Typography
-                    variant={variantEnum?.H5}
+                    variant={TypographyVariantEnum.H5}
                     color="text-white"
                     fontSize="text-2xl"
                     leading="leading-7"

@@ -17,44 +17,50 @@ function App() {
             <div className="mr-0">
                 <BrowserRouter basename="/">
                     <Nav />
-                    <Routes>
-                        {MenuList.map(({ path, Component }, index) => (
+
+                    <div className="mb-20 sm:mb-4 sm:ml-16 min-h-screen">
+                        <Routes>
+                            {MenuList.map(({ path, Component }, index) => (
+                                <Route
+                                    path={path}
+                                    key={index}
+                                    element={<Component />}
+                                />
+                            ))}
                             <Route
-                                path={path}
-                                key={index}
-                                element={<Component />}
+                                path="/addtask"
+                                element={
+                                    <PrivateRoute>
+                                        <AddTask />
+                                    </PrivateRoute>
+                                }
                             />
-                        ))}
-                        <Route
-                            path="/addtask"
-                            element={
-                                <PrivateRoute>
-                                    <AddTask />
-                                </PrivateRoute>
-                            }
-                        />
 
-                        <Route
-                            path="/user/home"
-                            element={
-                                <PrivateRoute>
-                                    <UserHome />
-                                </PrivateRoute>
-                            }
-                        />
-                        <Route path="/addproject" element={<AddProject />} />
+                            <Route
+                                path="/user/home"
+                                element={
+                                    <PrivateRoute>
+                                        <UserHome />
+                                    </PrivateRoute>
+                                }
+                            />
+                            <Route
+                                path="/addproject"
+                                element={<AddProject />}
+                            />
 
-            <Route path="auth" element={<Auth />}>
-              <Route path="login" element={<SignIn />} />
-              <Route path="register" element={<SignUp />} />
-            </Route>
+                            <Route path="auth" element={<Auth />}>
+                                <Route path="login" element={<SignIn />} />
+                                <Route path="register" element={<SignUp />} />
+                            </Route>
 
-            <Route path="logout" element={<Logout />} />
-          </Routes>
-        </BrowserRouter>
-      </div>
-    </>
-  );
+                            <Route path="logout" element={<Logout />} />
+                        </Routes>
+                    </div>
+                </BrowserRouter>
+            </div>
+        </>
+    );
 }
 
 export default App;

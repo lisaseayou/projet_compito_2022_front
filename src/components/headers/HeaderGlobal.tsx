@@ -1,5 +1,6 @@
+import { FontSizeEnum, TypographyVariantEnum } from '../../enums';
 import { formatDate } from '../../utils';
-import Typography, { variantEnum } from '../ui/Typography';
+import Typography from '../ui/Typography';
 
 type HeaderGlobalProps = {
     title: string;
@@ -10,18 +11,19 @@ const HeaderGlobal = ({ title, dateIsShow }: HeaderGlobalProps) => {
     return (
         <div className="col-start-1 col-end-8 flex flex-col justify-center items-start">
             <Typography
-                variant={variantEnum?.H1}
+                variant={TypographyVariantEnum.H1}
                 color="text-primary-main"
-                fontSize="text-3xl"
+                fontSize={FontSizeEnum['3XL']}
             >
                 {title}
             </Typography>
 
             {dateIsShow && (
                 <Typography
-                    variant={variantEnum?.H6}
+                    variant={TypographyVariantEnum.H6}
                     color="text-primary-main"
                     className="mt-2"
+                    fontSize={FontSizeEnum.SM}
                 >
                     Aujoud'hui nous sommes le {formatDate('dd MMMM yyyy')}
                 </Typography>

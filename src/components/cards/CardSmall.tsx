@@ -1,5 +1,6 @@
 import { DotsVerticalIcon, ColorSwatchIcon } from '@heroicons/react/solid';
-import Typography, { variantEnum } from '../ui/Typography';
+import { TypographyVariantEnum } from '../../enums';
+import Typography from '../ui/Typography';
 
 type CardSmallProps = {
     title: string;
@@ -14,7 +15,7 @@ const CardSmall = ({ title }: CardSmallProps) => {
             </div>
 
             <Typography
-                variant={variantEnum?.H5}
+                variant={TypographyVariantEnum.H5}
                 color="text-primary-main"
                 fontSize="text-1xl"
                 fontWeight="font-bold"
@@ -25,7 +26,7 @@ const CardSmall = ({ title }: CardSmallProps) => {
 
             <div className="w-full mt-2">
                 <Typography
-                    variant={variantEnum?.P}
+                    variant={TypographyVariantEnum.P}
                     color="text-primary-main"
                     fontSize="text-xs"
                     fontWeight="font-medium"

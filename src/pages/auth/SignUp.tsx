@@ -2,7 +2,7 @@ import { ChangeEvent, useState } from 'react';
 import { useMutation } from '@apollo/client';
 import { Link, useNavigate } from 'react-router-dom';
 import Button, { ButtonTypeEnum } from '../../components/ui/Button';
-import Typography, { variantEnum } from '../../components/ui/Typography';
+import Typography from '../../components/ui/Typography';
 import InputText from '../../components/ui/InputText';
 import SocialButton from '../../components/ui/SocialButton';
 import {
@@ -12,6 +12,7 @@ import {
 } from '@fortawesome/free-brands-svg-icons';
 import { ReactComponent as ViewIcon } from '../../assets/icons/view.svg';
 import { REGISTER } from '../../queries/mutation';
+import { FontSizeEnum, TypographyVariantEnum } from '../../enums';
 
 const SignUp = () => {
     const navigate = useNavigate();
@@ -61,7 +62,7 @@ const SignUp = () => {
         <div className="grid grid-cols-12 gap-0 min-h-screen text-center">
             <div className="col-span-5 bg-primary-main hidden md:flex flex-col justify-center items-center p-4">
                 <Typography
-                    variant={variantEnum?.H2}
+                    variant={TypographyVariantEnum.H2}
                     color="text-white"
                     fontSize="text-6xl"
                     className="mb-12"
@@ -71,7 +72,7 @@ const SignUp = () => {
                 </Typography>
 
                 <Typography
-                    variant={variantEnum?.H5}
+                    variant={TypographyVariantEnum.H5}
                     color="text-white"
                     fontSize="text-2xl"
                     leading="leading-7"
@@ -96,9 +97,10 @@ const SignUp = () => {
                     className="hover:underline decoration-primary"
                 >
                     <Typography
-                        variant={variantEnum?.P}
+                        variant={TypographyVariantEnum.P}
                         color="text-primary-main"
                         className="mb-0"
+                        fontSize={FontSizeEnum.SM}
                     >
                         Already a member? Sign In
                     </Typography>
@@ -107,7 +109,7 @@ const SignUp = () => {
 
             <div className="col-span-12 md:col-span-7 flex flex-col justify-center items-center p-4">
                 <Typography
-                    variant={variantEnum?.H2}
+                    variant={TypographyVariantEnum.H2}
                     color="text-primary-main"
                     fontSize="text-6xl"
                     className="mb-12"
@@ -122,7 +124,7 @@ const SignUp = () => {
                 </div>
 
                 <Typography
-                    variant={variantEnum?.H5}
+                    variant={TypographyVariantEnum.H5}
                     color="text-secondary-main"
                     fontSize="text-2xl"
                     leading="leading-7"

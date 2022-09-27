@@ -1,4 +1,5 @@
-import Typography, { variantEnum } from '../ui/Typography';
+import { FontSizeEnum, TypographyVariantEnum } from '../../enums';
+import Typography from '../ui/Typography';
 
 type TitleBlockProps = {
     title: string;
@@ -10,7 +11,11 @@ const TitleBlock = ({ title, icon }: TitleBlockProps) => {
         <div className="flex flex-col mt-8">
             <div className="flex items-center">
                 {icon}
-                <Typography variant={variantEnum?.H3} color="text-primary-main">
+                <Typography
+                    variant={TypographyVariantEnum.H3}
+                    color="text-primary-main"
+                    fontSize={FontSizeEnum.XL}
+                >
                     {title}
                 </Typography>
             </div>
