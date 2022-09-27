@@ -89,6 +89,7 @@ export enum ButtonVariantEnum {
 export enum IconEnum {
     LOCK_CLOSED = 'LockClosed',
     MAIL = 'MailIcon',
+    USER = 'UserIcon',
 }
 
 export enum OpacityEnum {

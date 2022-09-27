@@ -3,21 +3,25 @@ import { useMutation } from '@apollo/client';
 import { Link, useNavigate } from 'react-router-dom';
 import Button from '../../components/ui/Button';
 import Typography from '../../components/ui/Typography';
-import InputText from '../../components/ui/InputText';
+import InputText from '../../components/ui/form/TextField';
 import SocialButton from '../../components/ui/SocialButton';
 import {
     faFacebookF,
     faLinkedinIn,
     faGoogle,
 } from '@fortawesome/free-brands-svg-icons';
-import { ReactComponent as ViewIcon } from '../../assets/icons/view.svg';
 import { REGISTER } from '../../graphql/mutation';
 import {
     ButtonTypeEnum,
     ButtonVariantEnum,
     FontSizeEnum,
+    IconEnum,
+    OpacityEnum,
+    TextLineHeightEnum,
+    TextTransformEnum,
     TypographyVariantEnum,
 } from '../../enums';
+import Icon from '../../components/ui/Icons/Icon';
 
 const Register = () => {
     const navigate = useNavigate();
@@ -26,6 +30,7 @@ const Register = () => {
         name: '',
         email: '',
         password: '',
+        passwordConfirm: '',
         roles: ['admin'],
     });
 
@@ -48,6 +53,7 @@ const Register = () => {
                 name: '',
                 email: '',
                 password: '',
+                passwordConfirm: '',
                 roles: ['admin'],
             });
 
@@ -64,92 +70,101 @@ const Register = () => {
     };
 
     return (
-        <div className="grid grid-cols-12 gap-0 min-h-screen text-center">
+        <div className="relative grid grid-cols-12 gap-0 min-h-screen text-center">
             <div className="col-span-5 bg-primary-main hidden md:flex flex-col justify-center items-center p-4">
                 <Typography
-                    variant={TypographyVariantEnum.H2}
+                    variant={TypographyVariantEnum?.H2}
                     color="text-white"
-                    fontSize="text-6xl"
-                    className="mb-12"
+                    fontSize={'text-3xl sm:text-4xl'}
+                    className="mb-10"
                     style={{ width: '85%', maxWidth: 430 }}
                 >
                     Welcome Back
                 </Typography>
 
                 <Typography
-                    variant={TypographyVariantEnum.H5}
+                    variant={TypographyVariantEnum?.H5}
                     color="text-white"
-                    fontSize="text-2xl"
-                    leading="leading-7"
-                    className="mb-16"
+                    fontSize={FontSizeEnum.LG}
+                    leading={TextLineHeightEnum.LINE_HEIGHT_7}
+                    className="mb-14"
                     style={{ width: '85%', maxWidth: 430 }}
                 >
-                    To keep connected with us please login with your personnal
-                    info
+                    Pour rester connecté, veuillez vous connecter avec vos
+                    informations de connexion.
                 </Typography>
 
                 <Button
                     variant={ButtonVariantEnum.OUTLINE}
                     onClick={() => navigate('/auth/login')}
                 >
-                    Sign in
+                    Se connecter
                 </Button>
             </div>
 
-            <div className="col-span-12 flex md:hidden justify-end">
+            <div className="absolute right-2 flex md:hidden justify-end">
                 <Link
                     to="/auth/login"
                     className="hover:underline decoration-primary"
                 >
                     <Typography
-                        variant={TypographyVariantEnum.P}
+                        variant={TypographyVariantEnum?.P}
                         color="text-primary-main"
                         className="mb-0"
                         fontSize={FontSizeEnum.SM}
                     >
-                        Already a member? Sign In
+                        Déjà membre. Se connecter.
                     </Typography>
                 </Link>
             </div>
 
-            <div className="col-span-12 md:col-span-7 flex flex-col justify-center items-center p-4">
+            <div className="col-span-12 md:col-span-7 flex flex-col justify-center items-center pt-10 px-4">
                 <Typography
-                    variant={TypographyVariantEnum.H2}
+                    variant={TypographyVariantEnum?.H2}
                     color="text-primary-main"
-                    fontSize="text-6xl"
-                    className="mb-12"
+                    fontSize={'text-3xl sm:text-4xl'}
+                    textTransform={TextTransformEnum.NORMAL}
+                    className="mb-6 sm:mb-12"
                 >
-                    Create account
+                    Créer un compte
                 </Typography>
 
-                <div className="flex gap-5 mb-14">
+                <div className="flex gap-4 mb-4 sm:mb-6">
                     <SocialButton icon={faFacebookF} />
                     <SocialButton icon={faLinkedinIn} />
                     <SocialButton icon={faGoogle} />
                 </div>
 
                 <Typography
-                    variant={TypographyVariantEnum.H5}
-                    color="text-secondary-main"
-                    fontSize="text-2xl"
-                    leading="leading-7"
-                    className="mb-12"
+                    variant={TypographyVariantEnum?.H5}
+                    color="text-primary-main"
+                    fontSize={FontSizeEnum.LG}
+                    leading={TextLineHeightEnum.LINE_HEIGHT_7}
+                    className="mb-6 sm:mb-8"
                 >
-                    or use your email for registration
+                    ou utiliser votre adresse email pour vous inscrire.
                 </Typography>
 
                 <div
                     className="w-full flex justify-center"
                     style={{ maxWidth: 546 }}
                 >
-                    <form className="w-full" onSubmit={handleSubmit}>
+                    <form
+                        className="flex flex-col items-center w-full"
+                        onSubmit={handleSubmit}
+                    >
                         <InputText
                             type="text"
                             name="name"
                             id="name"
-                            placeholder="Name"
-                            icon={<ViewIcon className="h-6 w-6" />}
-                            className="mb-4"
+                            placeholder="Nom"
+                            icon={
+                                <Icon
+                                    variant={IconEnum.USER}
+                                    opacity={OpacityEnum.OPACITY_70}
+                                />
+                            }
+                            className="mb-4 w-full max-w-sm"
                             value={formDatas?.name}
                             handleChange={handleChange}
                         />
@@ -158,21 +173,47 @@ const Register = () => {
                             type="text"
                             name="email"
                             id="email"
-                            placeholder="email"
-                            icon={<ViewIcon className="h-6 w-6" />}
-                            className="mb-4"
+                            placeholder="Adresse email"
+                            icon={
+                                <Icon
+                                    variant={IconEnum.MAIL}
+                                    opacity={OpacityEnum.OPACITY_70}
+                                />
+                            }
+                            className="mb-4 w-full max-w-sm"
                             value={formDatas?.email}
                             handleChange={handleChange}
                         />
 
                         <InputText
-                            type="password"
+                            type="text"
                             name="password"
                             id="password"
-                            placeholder="password"
-                            icon={<ViewIcon className="h-6 w-6" />}
-                            className="mb-12"
+                            placeholder="Mot de passe"
+                            icon={
+                                <Icon
+                                    variant={IconEnum.LOCK_CLOSED}
+                                    opacity={OpacityEnum.OPACITY_70}
+                                />
+                            }
+                            className="mb-4 w-full max-w-sm"
                             value={formDatas?.password}
+                            handleChange={handleChange}
+                        />
+
+                        <InputText
+                            type="text"
+                            name="passwordConfirm"
+                            id="passwordConfirm"
+                            placeholder="Confirmation de mot de passe"
+                            icon={
+                                <Icon
+                                    variant={IconEnum.LOCK_CLOSED}
+                                    opacity={OpacityEnum.OPACITY_70}
+                                />
+                            }
+                            className="mb-6 sm:mb-8 w-full max-w-sm"
+                            value={formDatas?.passwordConfirm}
                             handleChange={handleChange}
                         />
 
@@ -180,7 +221,7 @@ const Register = () => {
                             type={ButtonTypeEnum?.SUBMIT}
                             variant={ButtonVariantEnum.PRIMARY}
                         >
-                            Sign up
+                            S'incrire
                         </Button>
                     </form>
                 </div>

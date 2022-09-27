@@ -1,5 +1,5 @@
 import { IconEnum, OpacityEnum } from '../../../enums';
-import { LockClosedIcon, MailIcon } from '@heroicons/react/solid';
+import { LockClosedIcon, MailIcon, UserIcon } from '@heroicons/react/solid';
 
 type IconProps = {
     variant: IconEnum;
@@ -15,9 +15,17 @@ const Icon = ({ variant, opacity = OpacityEnum.OPACITY_100 }: IconProps) => {
                         className={`w-6 h-6 text-primary-main ${opacity} `}
                     />
                 );
+                
             case IconEnum.MAIL:
                 return (
                     <MailIcon
+                        className={`w-6 h-6 text-primary-main ${opacity} `}
+                    />
+                );
+
+                case IconEnum.USER:
+                return (
+                    <UserIcon
                         className={`w-6 h-6 text-primary-main ${opacity} `}
                     />
                 );
