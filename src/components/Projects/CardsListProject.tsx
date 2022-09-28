@@ -1,9 +1,11 @@
 import { useQuery } from '@apollo/client';
 import { GET_ALL_PROJECTS } from '../../graphql/query';
+import { IGetAllProjects } from '../../types/Project';
 import CardProject from './CardProject';
 
 const CardsList = () => {
-    const { loading, error, data } = useQuery(GET_ALL_PROJECTS);
+    const { loading, error, data } =
+        useQuery<IGetAllProjects>(GET_ALL_PROJECTS);
     console.log(data);
     if (loading) {
         return <p>loading</p>;
@@ -14,7 +16,7 @@ const CardsList = () => {
     }
     return (
         <div className="grid grid-cols-3 gap-10">
-            {data.allProjects.map((project: any) => (
+            {data?.allProjects.map((project: any) => (
                 <CardProject key={project.id} project={project} />
             ))}
         </div>

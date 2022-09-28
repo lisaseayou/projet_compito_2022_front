@@ -1,4 +1,4 @@
-import { ChangeEvent, useState } from 'react';
+import { ChangeEvent, FormEvent, useState } from 'react';
 import { useMutation } from '@apollo/client';
 import { Link, useNavigate } from 'react-router-dom';
 import Button from '../../components/ui/Buttons/Button';
@@ -24,11 +24,13 @@ import {
 } from '../../enums';
 import Icon from '../../components/ui/Icons/Icon';
 import { handleResetDefault } from '../../utils';
+import { IPasswordShown, OnSubmitFormType } from '../../types';
+import { IRegisterUser, RegisterUserVariables } from '../../types/User';
 
 const Register = () => {
     const navigate = useNavigate();
 
-    const [formDatas, setFormDatas] = useState({
+    const [formDatas, setFormDatas] = useState<RegisterUserVariables>({
         name: '',
         email: '',
         password: '',
@@ -36,7 +38,7 @@ const Register = () => {
         roles: [RoleEnum.ADMIN],
     });
 
-    const [passwordShown, setPasswordShown] = useState({
+    const [passwordShown, setPasswordShown] = useState<IPasswordShown>({
         password: true,
         passwordConfirm: true,
     });
@@ -47,7 +49,7 @@ const Register = () => {
         setFormDatas({ ...formDatas, [e?.target?.name]: e?.target.value });
     };
 
-    const [register] = useMutation(REGISTER, {
+    const [register] = useMutation<IRegisterUser>(REGISTER, {
         onCompleted: (data) => {
             // create the cookie of login
             document.cookie = 'signedin=true;path=/';
@@ -71,7 +73,7 @@ const Register = () => {
         },
     });
 
-    const handleSubmit = (e: any) => {
+    const handleSubmit: OnSubmitFormType = (e: FormEvent<HTMLFormElement>) => {
         e?.preventDefault();
         register({ variables: { data: formDatas } });
     };

@@ -8,10 +8,10 @@ import {
 } from '@heroicons/react/solid';
 import { Link as RouterLink } from 'react-router-dom';
 import Link from '../components/ui/Link';
-import { LinkVariantEnum } from '../enums';
 import { ReactComponent as Logout } from '../assets/icons/logout.svg';
 import { ReactComponent as Logo } from '../assets/logoswag.svg';
 import { useState } from 'react';
+import { LinkVariantEnum } from '../enums';
 
 function Nav() {
     const [isOpen, setIsOpen] = useState<boolean>(false);

@@ -1,14 +1,14 @@
-import { Link } from "react-router-dom";
+import { Link } from 'react-router-dom';
 
 const Home = () => {
-  return (
-    <div className="pl-20 pr-5">
-    <div className="flex justify-between mt-3 mb-12">
-        <div></div>
-        <h1 className="flex justify-center text-4xl font-paytone-one text-violet-800 p-2">
-        Home Page
-        </h1>
-      <Link
+    return (
+        <div className="pl-20 pr-5">
+            <div className="flex justify-between mt-3 mb-12">
+                <div></div>
+                <h1 className="flex justify-center text-4xl font-paytone-one text-violet-800 p-2">
+                    Home Page
+                </h1>
+                <Link
                     to="/auth/login"
                     className="relative inline-flex items-center px-8 py-3 overflow-hidden text-white bg-violet-800 rounded group active:bg-violet-500 focus:outline-none focus:ring"
                 >
@@ -32,9 +32,9 @@ const Home = () => {
                         Se connecter
                     </span>
                 </Link>
-    </div>
-    </div>
-  );
+            </div>
+        </div>
+    );
 };
 
 export default Home;

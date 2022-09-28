@@ -17,15 +17,19 @@ import {
 import Link from '../../components/ui/Link';
 import IconWithBg from '../../components/ui/Icons/IconWithBg';
 import ImageSplitFullHeight from '../../components/images/ImageSplitFullHeight';
+import { IForgotPassword } from '../../types/User';
 
 const CheckEmail = () => {
     const location = useLocation();
 
-    const [resetPassword] = useMutation(REQUEST_RESET_PASSWORD, {
-        onCompleted: () => {
-            ToastSuccess('Un email viens de vous être envoyé');
-        },
-    });
+    const [resetPassword] = useMutation<IForgotPassword>(
+        REQUEST_RESET_PASSWORD,
+        {
+            onCompleted: () => {
+                ToastSuccess('Un email viens de vous être envoyé');
+            },
+        }
+    );
 
     return (
         <section className="relative flex flex-wrap md:items-center w-full min-h-screen">

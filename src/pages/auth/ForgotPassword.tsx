@@ -20,24 +20,29 @@ import Button from '../../components/ui/Buttons/Button';
 import IconWithBg from '../../components/ui/Icons/IconWithBg';
 import ImageSplitFullHeight from '../../components/images/ImageSplitFullHeight';
 import Icon from '../../components/ui/Icons/Icon';
+import { OnSubmitFormType } from '../../types';
+import { ForgotPasswordVariables, IForgotPassword } from '../../types/User';
 
 const ForgotPassword = () => {
     const navigate = useNavigate();
-    const [formData, setFormData] = useState({
+    const [formData, setFormData] = useState<ForgotPasswordVariables>({
         email: '',
     });
 
-    const [resetPassword] = useMutation(REQUEST_RESET_PASSWORD, {
-        onCompleted: () => {
-            setFormData({
-                email: '',
-            });
+    const [resetPassword] = useMutation<IForgotPassword>(
+        REQUEST_RESET_PASSWORD,
+        {
+            onCompleted: () => {
+                setFormData({
+                    email: '',
+                });
 
-            navigate('/auth/check-email', {
-                state: { email: formData.email },
-            });
-        },
-    });
+                navigate('/auth/check-email', {
+                    state: { email: formData.email },
+                });
+            },
+        }
+    );
 
     const handleChange = (
         e: ChangeEvent<HTMLInputElement | HTMLSelectElement>
@@ -45,7 +50,7 @@ const ForgotPassword = () => {
         setFormData({ ...formData, [e.target.name]: e.target.value });
     };
 
-    const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
+    const handleSubmit: OnSubmitFormType = (e: FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         resetPassword({ variables: { email: formData.email } });
     };

@@ -1,4 +1,3 @@
-import { Link } from 'react-router-dom';
 import { PlusCircleIcon } from '@heroicons/react/solid';
 import Typography from '../ui/Typography';
 import { TypographyVariantEnum } from '../../enums';

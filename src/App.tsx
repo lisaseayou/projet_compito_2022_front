@@ -4,12 +4,12 @@ import MenuList from './components/Menu';
 import Nav from './layout/Nav';
 import AddTask from './pages/AddTask';
 import AddProject from './pages/AddProject';
-import Register from './pages/auth/Register';
-import Login from './pages/auth/Login';
 import Auth from './pages/auth/Auth';
 import PrivateRoute from './pages/PrivateRoute';
 import Logout from './pages/auth/Logout';
 import UserHome from './pages/user/UserHome';
+import Login from './pages/auth/Login';
+import Register from './pages/auth/Register';
 
 function App() {
     return (

@@ -21,26 +21,35 @@ import {
 } from '../../enums';
 import { REQUEST_PASSWORD } from '../../graphql/mutation';
 import { GET_USER_BY_RESET_TOKEN } from '../../graphql/query';
+import { OnSubmitFormType } from '../../types';
+import {
+    IGetUserByResetToken,
+    IPasswordUser,
+    IResetPassword,
+} from '../../types/User';
 
 const ResetPassword = () => {
     const navigate = useNavigate();
     const params = useParams();
 
-    const [formDatas, setFormData] = useState({
+    const [formDatas, setFormData] = useState<IPasswordUser>({
         password: '',
         passwordConfirm: '',
     });
 
-    const { data, loading, error } = useQuery(GET_USER_BY_RESET_TOKEN, {
-        variables: { resetToken: params?.resetToken },
-    });
+    const { data, loading, error } = useQuery<IGetUserByResetToken>(
+        GET_USER_BY_RESET_TOKEN,
+        {
+            variables: { resetToken: params?.resetToken },
+        }
+    );
 
     const [passwordShown, setPasswordShown] = useState({
         password: true,
         passwordConfirm: true,
     });
 
-    const [resetPassword] = useMutation(REQUEST_PASSWORD, {
+    const [resetPassword] = useMutation<IResetPassword>(REQUEST_PASSWORD, {
         onCompleted: () => {
             setFormData({
                 password: '',
@@ -67,7 +76,7 @@ const ResetPassword = () => {
         setFormData({ ...formDatas, [e.target.name]: e.target.value });
     };
 
-    const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
+    const handleSubmit: OnSubmitFormType = (e: FormEvent<HTMLFormElement>) => {
         console.log(data);
         e.preventDefault();
         resetPassword({

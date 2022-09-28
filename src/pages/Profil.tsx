@@ -1,67 +1,68 @@
-import { useState } from "react";
-import { useSelector } from "react-redux";
-import { Button, TextField } from "@material-ui/core";
-import Modal from "../components/Modal";
+import { useState } from 'react';
+import { useSelector } from 'react-redux';
+import { Button, TextField } from '@material-ui/core';
+import Modal from '../components/Modal';
 
 const Profil = () => {
-  const user: any = useSelector((state: any) => state.auth.user);
-  const [edition, setEdition] = useState(false);
-  const [form, setForm] = useState({
-    name: user.name,
-    email: user.email,
-  });
+    const user: any = useSelector((state: any) => state.auth.user);
+    const [edition, setEdition] = useState<boolean>(false);
+    const [form, setForm] = useState({
+        name: user.name,
+        email: user.email,
+    });
 
-  const handleEdition = () => {
-    setEdition(true);
-  };
+    const handleEdition = () => {
+        setEdition(true);
+    };
 
-  const handleChange = (e: any) => {
-    setForm((oldValues) => ({ ...oldValues, [e.target.name]: e.target.value }));
-  };
+    const handleChange = (e: any) => {
+        setForm((oldValues) => ({
+            ...oldValues,
+            [e.target.name]: e.target.value,
+        }));
+    };
 
-  const handleClick = async () => {};
+    const handleClick = async () => {};
 
-  return (
-<>
-    <div className="pl-20 pr-5">
-   
-        <div></div>
-        <h1 className="flex justify-center text-4xl font-paytone-one text-violet-800 p-2">
-        Profil Page
-        </h1>
-        </div>
+    return (
         <>
-          <div>
-            <p className="flex justify-center items-center w-full h-full">
-              {user.name}
-            </p>
-            <p className="flex justify-center items-center w-full h-full">
-              {user.email}
-            </p>
-            <p className="flex justify-center items-center w-full h-full">
-              {user.url}
-            </p>
-            <p className="flex justify-center items-center w-full h-full">
-              {user.linkedin}
-            </p>
-            <p className="flex justify-center items-center w-full h-full">
-              {user.twitter}
-            </p>
-            <p className="flex justify-center items-center w-full h-full">
-              {user.github}
-            </p>
-            <p className="flex justify-center items-center w-full h-full">
-              {user.description}
-            </p>
-          </div>
-        </>
-   
-        <div className="flex justify-center items-center m-5">
-            <Modal />
-        </div>
-    </>
+            <div className="pl-20 pr-5">
+                <div></div>
+                <h1 className="flex justify-center text-4xl font-paytone-one text-violet-800 p-2">
+                    Profil Page
+                </h1>
+            </div>
+            <>
+                <div>
+                    <p className="flex justify-center items-center w-full h-full">
+                        {user.name}
+                    </p>
+                    <p className="flex justify-center items-center w-full h-full">
+                        {user.email}
+                    </p>
+                    <p className="flex justify-center items-center w-full h-full">
+                        {user.url}
+                    </p>
+                    <p className="flex justify-center items-center w-full h-full">
+                        {user.linkedin}
+                    </p>
+                    <p className="flex justify-center items-center w-full h-full">
+                        {user.twitter}
+                    </p>
+                    <p className="flex justify-center items-center w-full h-full">
+                        {user.github}
+                    </p>
+                    <p className="flex justify-center items-center w-full h-full">
+                        {user.description}
+                    </p>
+                </div>
+            </>
 
-  );
+            <div className="flex justify-center items-center m-5">
+                <Modal />
+            </div>
+        </>
+    );
 };
 
 export default Profil;
