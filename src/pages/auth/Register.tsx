@@ -125,7 +125,7 @@ const Register = () => {
                 </Link>
             </div>
 
-            <div className="col-span-12 md:col-span-7 flex flex-col justify-center items-center pt-14 pb-10 sm:py-10 px-4">
+            <div className="col-span-12 md:col-span-7 flex flex-col justify-center items-center pt-20 pb-10 sm:py-10 px-4">
                 <Typography
                     variant={TypographyVariantEnum?.H2}
                     color="text-primary-main"

@@ -87,7 +87,7 @@ const Login = () => {
                 </Link>
             </div>
 
-            <div className="col-span-12 md:col-span-7 flex flex-col justify-center items-center pt-14 pb-10 sm:py-10 px-2">
+            <div className="col-span-12 md:col-span-7 flex flex-col justify-center items-center pt-20 pb-10 sm:py-10 px-2">
                 <IconWithBg variant={IconEnum.LOCK_CLOSED} />
 
                 <Typography

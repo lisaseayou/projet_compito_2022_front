@@ -9,6 +9,7 @@ import Profil from '../pages/Profil';
 import ProjectsDetails from '../pages/ProjectsDetails';
 import UserHome from '../pages/user/UserHome';
 import ForgotPassword from '../pages/auth/ForgotPassword';
+import CheckEmail from '../pages/auth/CheckEmail';
 
 // import Login from "../pages/auth/Login";
 // import Register from "../pages/auth/Register";
@@ -59,6 +60,11 @@ const MenuList: Menu[] = [
         path: '/auth/forgot-password',
         title: 'Forgot password',
         Component: ForgotPassword,
+    },
+    {
+        path: '/auth/check-email',
+        title: 'Check elementmail',
+        Component: CheckEmail,
     },
     // {
     //     path: '/user/home',
