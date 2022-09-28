@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom';
 import { PlusCircleIcon } from '@heroicons/react/solid';
-import Typography, { variantEnum } from '../ui/Typography';
+import Typography from '../ui/Typography';
+import { TypographyVariantEnum } from '../../enums';
 
 type CardAddSmallProps = {
     onClick: () => void;
@@ -12,7 +13,7 @@ const CardAddSmall = ({ onClick }: CardAddSmallProps) => {
                 <PlusCircleIcon className="h-10 w-10 text-primary-main" />
             </button>
             <Typography
-                variant={variantEnum?.P}
+                variant={TypographyVariantEnum.P}
                 color="text-primary-main"
                 fontSize="text-xs"
                 fontWeight="font-bold"

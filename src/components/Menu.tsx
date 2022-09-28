@@ -8,9 +8,13 @@ import Dashboard from '../pages/Dashboard';
 import Profil from '../pages/Profil';
 import ProjectsDetails from '../pages/ProjectsDetails';
 import UserHome from '../pages/user/UserHome';
+import ForgotPassword from '../pages/auth/ForgotPassword';
+import CheckEmail from '../pages/auth/CheckEmail';
+import ResetPassword from '../pages/auth/ResetPassword';
+import ResetPasswordConfirm from '../pages/auth/ResetPasswordConfirm';
 
-// import SignIn from "../pages/auth/SignIn";
-// import SignUp from "../pages/auth/SignUp";
+// import Login from "../pages/auth/Login";
+// import Register from "../pages/auth/Register";
 
 type Menu = {
     path: string;
@@ -54,20 +58,40 @@ const MenuList: Menu[] = [
         title: 'Détail du projet',
         Component: ProjectsDetails,
     },
+    {
+        path: '/auth/forgot-password',
+        title: 'Forgot password',
+        Component: ForgotPassword,
+    },
+    {
+        path: '/auth/check-email',
+        title: 'Check elementmail',
+        Component: CheckEmail,
+    },
+    {
+        path: '/auth/reset-password/:resetToken',
+        title: 'Reset password',
+        Component: ResetPassword,
+    },
+    {
+        path: '/auth/reset-password-confirm',
+        title: 'Reset password confirm',
+        Component: ResetPasswordConfirm,
+    },
     // {
     //     path: '/user/home',
     //     title: 'welcome',
     //     Component: UserHome,
     // },
     // {
-    //   path: "/signin",
-    //   title: "signin",
-    //   Component: SignIn,
+    //   path: "/Login",
+    //   title: "Login",
+    //   Component: Login,
     // },
     // {
-    //   path: "/signup",
-    //   title: "signup",
-    //   Component: SignUp,
+    //   path: "/Register",
+    //   title: "Register",
+    //   Component: Register,
     // },
 ];
 

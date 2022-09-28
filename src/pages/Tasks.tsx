@@ -7,11 +7,12 @@ import TableTask from '../components/Tasks/TableTask';
 import 'react-toastify/dist/ReactToastify.css';
 import { ToastContainer } from 'react-toastify';
 import { useQuery } from '@apollo/client';
-import { GET_ALL_TASKS } from '../queries/query';
+import { GET_ALL_TASKS } from '../graphql/query';
 import TasksList from '../components/Tasks/TasksList';
 import Typography, { variantEnum } from '../components/ui/Typography';
 import ButtonCta from '../components/ui/ButtonCta';
 import ButtonSwitch from '../components/ui/ButtonSwitch';
+import { TypographyVariantEnum } from '../enums';
 
 const Tasks = () => {
     const [showTaskCard, setShowTaskCard] = useState<boolean>(false);
@@ -41,7 +42,7 @@ const Tasks = () => {
         <div className="grid grid-cols-12 gap-0 pl-20">
             <div className="col-start-1 col-end-11 flex justify-center mt-3">
                 <Typography
-                    variant={variantEnum?.H1}
+                    variant={TypographyVariantEnum?.H1}
                     color="text-primary-main"
                     fontSize="text-4xl"
                     className="flex justify-center font-paytone-one "
@@ -55,8 +56,7 @@ const Tasks = () => {
             </div>
 
             <div className="col-start-1 col-end-13">
-                <ButtonSwitch onClick={showCards} show={showTaskCard}/>
-                
+                <ButtonSwitch onClick={showCards} show={showTaskCard} />
             </div>
             {showTaskCard ? (
                 <div className="flex flex-col justify-center items-center w-full h-full">

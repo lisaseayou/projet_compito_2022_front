@@ -1,15 +1,16 @@
 import ReactModal from 'react-modal';
-import Typography, { variantEnum } from '../Typography';
+import Typography from '../Typography';
 import Work from '../../../assets/work-pressure.svg';
 import { XCircleIcon } from '@heroicons/react/solid';
-import { ADD_PROJECT } from '../../../queries/mutation';
+import { ADD_PROJECT } from '../../../graphql/mutation';
 import { useMutation } from '@apollo/client';
 import { ToastError, ToastSuccess } from '../../../utils/Toast';
 import { ChangeEvent, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import InputText from '../form/InputText';
 import TextArea from '../form/TextArea';
-import { GET_ALL_PROJECTS } from '../../../queries/query';
+import { GET_ALL_PROJECTS } from '../../../graphql/query';
+import { TypographyVariantEnum } from '../../../enums';
 
 type ModalCreateProjectProps = {
     show: boolean;
@@ -97,7 +98,7 @@ const ModalCreateProject = ({ show, setShow }: ModalCreateProjectProps) => {
                     <div className="w-full lg:w-1/2">
                         <div className="max-w-lg mx-auto text-center">
                             <Typography
-                                variant={variantEnum?.H1}
+                                variant={TypographyVariantEnum.H1}
                                 color="text-primary-main"
                                 fontSize="text-3xl"
                                 fontWeight="font-bold"
@@ -107,7 +108,7 @@ const ModalCreateProject = ({ show, setShow }: ModalCreateProjectProps) => {
                             </Typography>
 
                             <Typography
-                                variant={variantEnum?.H5}
+                                variant={TypographyVariantEnum.H5}
                                 color="text-gray-500"
                                 fontSize="text-md"
                                 fontWeight="font-semibold"

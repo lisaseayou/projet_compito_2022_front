@@ -1,5 +1,6 @@
 import { ReactNode } from 'react';
-import Typography, { variantEnum } from '../ui/Typography';
+import { TypographyVariantEnum } from '../../enums';
+import Typography from '../ui/Typography';
 
 type CardListProps = {
     title: string;
@@ -16,7 +17,7 @@ const CardList = ({ title, icon, children }: CardListProps) => {
             <div className="flex justify-between items-center w-full">
                 <div className="flex">
                     <Typography
-                        variant={variantEnum?.H5}
+                        variant={TypographyVariantEnum.H5}
                         color="text-primary-main"
                         fontSize="text-1xl"
                         fontWeight="font-semi-bold"

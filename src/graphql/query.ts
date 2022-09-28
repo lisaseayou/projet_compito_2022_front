@@ -15,6 +15,16 @@ export const LOGIN = gql`
     }
 `;
 
+export const GET_USER_BY_RESET_TOKEN = gql`
+    query UserByResetToken($resetToken: String!) {
+        userByResetToken(resetToken: $resetToken) {
+            id
+            email
+            resetToken
+        }
+    }
+`;
+
 export const GET_ALL_PROJECTS = gql`
     query AllProjects {
         allProjects {
