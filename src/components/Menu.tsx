@@ -10,6 +10,7 @@ import ProjectsDetails from '../pages/ProjectsDetails';
 import UserHome from '../pages/user/UserHome';
 import ForgotPassword from '../pages/auth/ForgotPassword';
 import CheckEmail from '../pages/auth/CheckEmail';
+import ResetPassword from '../pages/auth/ResetPassword';
 
 // import Login from "../pages/auth/Login";
 // import Register from "../pages/auth/Register";
@@ -65,6 +66,11 @@ const MenuList: Menu[] = [
         path: '/auth/check-email',
         title: 'Check elementmail',
         Component: CheckEmail,
+    },
+    {
+        path: '/auth/reset-password/:resetToken',
+        title: 'Reset password',
+        Component: ResetPassword,
     },
     // {
     //     path: '/user/home',

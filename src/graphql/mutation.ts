@@ -31,6 +31,29 @@ export const REQUEST_RESET_PASSWORD = gql`
     }
 `;
 
+export const REQUEST_PASSWORD = gql`
+    mutation ResetPassword(
+        $resetToken: String!
+        $passwordConfirm: String!
+        $password: String!
+        $email: String!
+    ) {
+        resetPassword(
+            resetToken: $resetToken
+            passwordConfirm: $passwordConfirm
+            password: $password
+            email: $email
+        ) {
+            id
+            name
+            roles
+            email
+            resetToken
+            resetTokenExpiry
+        }
+    }
+`;
+
 export const ADD_TASK = gql`
     mutation addTask($data: AddTaskInput!) {
         addTask(data: $data) {
