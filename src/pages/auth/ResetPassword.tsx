@@ -31,12 +31,9 @@ const ResetPassword = () => {
         passwordConfirm: '',
     });
 
-    const { data, loading, error } = useQuery(
-        GET_USER_BY_RESET_TOKEN,
-        {
-            variables: { resetToken: params?.resetToken },
-        }
-    );
+    const { data, loading, error } = useQuery(GET_USER_BY_RESET_TOKEN, {
+        variables: { resetToken: params?.resetToken },
+    });
 
     const [passwordShown, setPasswordShown] = useState({
         password: true,
@@ -154,9 +151,7 @@ const ResetPassword = () => {
 
                     <TextField
                         type={
-                            !passwordShown.passwordConfirm
-                                ? 'text'
-                                : 'password'
+                            !passwordShown.passwordConfirm ? 'text' : 'password'
                         }
                         name="passwordConfirm"
                         id="passwordConfirm"

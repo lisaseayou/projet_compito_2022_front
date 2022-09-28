@@ -1,5 +1,5 @@
 import { IconEnum } from '../../../enums';
-import { LockClosedIcon, MailIcon } from '@heroicons/react/solid';
+import { CheckCircleIcon, LockClosedIcon, MailIcon } from '@heroicons/react/solid';
 
 type IconProps = {
     variant: IconEnum;
@@ -8,6 +8,10 @@ type IconProps = {
 const IconWithBg = ({ variant }: IconProps) => {
     const getIconComponent = () => {
         switch (variant) {
+            case IconEnum.CHECK_CIRCLE:
+                return (
+                    <CheckCircleIcon className="w-6 h-6 text-primary-main" />
+                );
             case IconEnum.LOCK_CLOSED:
                 return <LockClosedIcon className="w-6 h-6 text-primary-main" />;
             case IconEnum.MAIL:

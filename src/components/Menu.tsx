@@ -11,6 +11,7 @@ import UserHome from '../pages/user/UserHome';
 import ForgotPassword from '../pages/auth/ForgotPassword';
 import CheckEmail from '../pages/auth/CheckEmail';
 import ResetPassword from '../pages/auth/ResetPassword';
+import ResetPasswordConfirm from '../pages/auth/ResetPasswordConfirm';
 
 // import Login from "../pages/auth/Login";
 // import Register from "../pages/auth/Register";
@@ -71,6 +72,11 @@ const MenuList: Menu[] = [
         path: '/auth/reset-password/:resetToken',
         title: 'Reset password',
         Component: ResetPassword,
+    },
+    {
+        path: '/auth/reset-password-confirm',
+        title: 'Reset password confirm',
+        Component: ResetPasswordConfirm,
     },
     // {
     //     path: '/user/home',

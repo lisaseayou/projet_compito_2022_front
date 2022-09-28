@@ -87,6 +87,7 @@ export enum ButtonVariantEnum {
 }
 
 export enum IconEnum {
+    CHECK_CIRCLE = 'checkCircleIcon',
     EYE = 'EyeIcon',
     EYE_OFF = 'EyeOffIcon',
     LOCK_CLOSED = 'LockClosed',
