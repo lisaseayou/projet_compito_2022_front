@@ -1,6 +1,6 @@
 import { ChangeEvent, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import Button from '../../components/ui/Button';
+import Button from '../../components/ui/Buttons/Button';
 import Typography from '../../components/ui/Typography';
 import InputText from '../../components/ui/form/TextField';
 import SocialButton from '../../components/ui/SocialButton';
@@ -87,7 +87,7 @@ const Login = () => {
                 </Link>
             </div>
 
-            <div className="col-span-12 md:col-span-7 flex flex-col justify-center items-center pt-10 px-2">
+            <div className="col-span-12 md:col-span-7 flex flex-col justify-center items-center pt-14 pb-10 sm:py-10 px-2">
                 <IconWithBg variant={IconEnum.LOCK_CLOSED} />
 
                 <Typography
@@ -164,7 +164,7 @@ const Login = () => {
                                     }
                                 />
                             }
-                            className="mb-6 sm:mb-12 w-full max-w-sm"
+                            className="mb-4 sm:mb-6 w-full max-w-sm"
                             value={formDatas?.password}
                             handleChange={handleChange}
                             handlePaste={handleResetDefault}
@@ -177,8 +177,8 @@ const Login = () => {
                         >
                             <Typography
                                 variant={TypographyVariantEnum?.H5}
-                                color="text-secondary-main"
-                                fontSize={FontSizeEnum.LG}
+                                color="text-primary-main"
+                                fontSize={FontSizeEnum.SM}
                                 leading={TextLineHeightEnum.LINE_HEIGHT_7}
                                 className="mb-6 sm:mb-8"
                             >
@@ -196,7 +196,7 @@ const Login = () => {
                 </div>
             </div>
 
-            <div className="col-span-5 bg-primary-main hidden md:flex flex-col justify-center items-center p-4">
+            <div className="col-span-5 bg-primary-main hidden md:flex flex-col justify-center items-center p-4 py-10">
                 <Typography
                     variant={TypographyVariantEnum?.H2}
                     color="text-white"

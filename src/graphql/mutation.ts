@@ -18,6 +18,19 @@ export const REGISTER = gql`
     }
 `;
 
+export const REQUEST_RESET_PASSWORD = gql`
+    mutation requestResetPassword($email: String!) {
+        requestResetPassword(email: $email) {
+            id
+            name
+            email
+            roles
+            resetToken
+            resetTokenExpiry
+        }
+    }
+`;
+
 export const ADD_TASK = gql`
     mutation addTask($data: AddTaskInput!) {
         addTask(data: $data) {
@@ -49,21 +62,21 @@ export const ADD_PROJECT = gql`
         }
     }
 `;
- export const UPDATE_PROFILE = gql`
- mutation updateUser($data: UpdateUserInput!, $updateUserId: String!) {
-    updateUser(data: $data, id: $updateUserId) {
-      id
-      name
-      email
-      roles
-      password
-      createdAt
-      updatedAt
-      url
-      twitter
-      linkedin
-      github
-      description
+export const UPDATE_PROFILE = gql`
+    mutation updateUser($data: UpdateUserInput!, $updateUserId: String!) {
+        updateUser(data: $data, id: $updateUserId) {
+            id
+            name
+            email
+            roles
+            password
+            createdAt
+            updatedAt
+            url
+            twitter
+            linkedin
+            github
+            description
+        }
     }
-  }
- `
+`;

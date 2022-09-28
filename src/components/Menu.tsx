@@ -8,6 +8,7 @@ import Dashboard from '../pages/Dashboard';
 import Profil from '../pages/Profil';
 import ProjectsDetails from '../pages/ProjectsDetails';
 import UserHome from '../pages/user/UserHome';
+import ForgotPassword from '../pages/auth/ForgotPassword';
 
 // import Login from "../pages/auth/Login";
 // import Register from "../pages/auth/Register";
@@ -53,6 +54,11 @@ const MenuList: Menu[] = [
         path: '/project-details/:projectId',
         title: 'Détail du projet',
         Component: ProjectsDetails,
+    },
+    {
+        path: '/auth/forgot-password',
+        title: 'Forgot password',
+        Component: ForgotPassword,
     },
     // {
     //     path: '/user/home',

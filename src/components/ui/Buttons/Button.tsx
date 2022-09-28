@@ -1,5 +1,5 @@
 import { ReactNode } from 'react';
-import { ButtonTypeEnum, ButtonVariantEnum } from '../../enums';
+import { ButtonTypeEnum, ButtonVariantEnum } from '../../../enums';
 
 type ButtonProps = {
     children: ReactNode;

@@ -1,7 +1,7 @@
 import { ChangeEvent, useState } from 'react';
 import { useMutation } from '@apollo/client';
 import { Link, useNavigate } from 'react-router-dom';
-import Button from '../../components/ui/Button';
+import Button from '../../components/ui/Buttons/Button';
 import Typography from '../../components/ui/Typography';
 import InputText from '../../components/ui/form/TextField';
 import SocialButton from '../../components/ui/SocialButton';
@@ -78,7 +78,7 @@ const Register = () => {
 
     return (
         <div className="relative grid grid-cols-12 gap-0 min-h-screen text-center">
-            <div className="col-span-5 bg-primary-main hidden md:flex flex-col justify-center items-center p-4">
+            <div className="col-span-5 bg-primary-main hidden md:flex flex-col justify-center items-center p-4 py-10">
                 <Typography
                     variant={TypographyVariantEnum?.H2}
                     color="text-white"
@@ -125,7 +125,7 @@ const Register = () => {
                 </Link>
             </div>
 
-            <div className="col-span-12 md:col-span-7 flex flex-col justify-center items-center pt-10 px-4">
+            <div className="col-span-12 md:col-span-7 flex flex-col justify-center items-center pt-14 pb-10 sm:py-10 px-4">
                 <Typography
                     variant={TypographyVariantEnum?.H2}
                     color="text-primary-main"
@@ -206,7 +206,7 @@ const Register = () => {
                             iconShow={
                                 <Icon
                                     variant={
-                                        passwordShown
+                                        passwordShown.password
                                             ? IconEnum.EYE_OFF
                                             : IconEnum.EYE
                                     }
@@ -244,7 +244,7 @@ const Register = () => {
                             iconShow={
                                 <Icon
                                     variant={
-                                        passwordShown
+                                        passwordShown.passwordConfirm
                                             ? IconEnum.EYE_OFF
                                             : IconEnum.EYE
                                     }
