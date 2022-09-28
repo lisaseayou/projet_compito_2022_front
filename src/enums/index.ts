@@ -94,6 +94,8 @@ export enum IconEnum {
     LOCK_CLOSED = 'LockClosed',
     MAIL = 'MailIcon',
     USER = 'UserIcon',
+    CLOCK_OUTLINE = 'ClockIcon',
+    CHAT_ALT_OUTLINE = 'ChatAltIcon',
 }
 
 export enum OpacityEnum {
@@ -125,4 +127,8 @@ export enum RoleEnum {
     USER = 'USER',
     ADMIN = 'ADMIN',
     SUPER_ADMIN = 'SUPER_ADMIN',
+}
+
+export enum ProgressTypeEnum {
+    TASK = 'task',
 }

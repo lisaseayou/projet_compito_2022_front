@@ -6,15 +6,18 @@ import {
     MailIcon,
     UserIcon,
 } from '@heroicons/react/solid';
+import { ClockIcon, ChatAltIcon } from '@heroicons/react/outline';
 
 type IconProps = {
     variant: IconEnum;
     opacity: OpacityEnum;
+    className?: string;
     onClick?: () => void;
 };
 
 const Icon = ({
     variant,
+    className,
     onClick,
     opacity = OpacityEnum.OPACITY_100,
 }: IconProps) => {
@@ -65,6 +68,26 @@ const Icon = ({
                         className={`w-6 h-6 text-primary-main ${opacity} ${
                             onClick ? 'cursor-pointer' : 'cursor-default'
                         }`}
+                        onClick={onClick}
+                    />
+                );
+
+            case IconEnum.CLOCK_OUTLINE:
+                return (
+                    <ClockIcon
+                        className={`w-6 h-6 text-primary-main ${opacity} ${
+                            onClick ? 'cursor-pointer' : 'cursor-default'
+                        } ${className ?? ''}`}
+                        onClick={onClick}
+                    />
+                );
+
+            case IconEnum.CHAT_ALT_OUTLINE:
+                return (
+                    <ChatAltIcon
+                        className={`w-6 h-6 text-primary-main ${opacity} ${
+                            onClick ? 'cursor-pointer' : 'cursor-default'
+                        } ${className ?? ''}`}
                         onClick={onClick}
                     />
                 );

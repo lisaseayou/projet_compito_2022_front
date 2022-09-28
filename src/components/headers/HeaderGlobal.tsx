@@ -11,7 +11,7 @@ const HeaderGlobal = ({ title, dateIsShow }: HeaderGlobalProps) => {
     return (
         <div className="col-start-1 col-end-8 flex flex-col justify-center items-start">
             <Typography
-                variant={TypographyVariantEnum.H1}
+                variant={TypographyVariantEnum?.H1}
                 color="text-primary-main"
                 fontSize={FontSizeEnum['3XL']}
             >
@@ -20,12 +20,13 @@ const HeaderGlobal = ({ title, dateIsShow }: HeaderGlobalProps) => {
 
             {dateIsShow && (
                 <Typography
-                    variant={TypographyVariantEnum.H6}
+                    variant={TypographyVariantEnum?.H6}
                     color="text-primary-main"
                     className="mt-2"
-                    fontSize={FontSizeEnum.SM}
+                    fontSize={FontSizeEnum['SM']}
                 >
-                    Aujoud'hui nous sommes le {formatDate('dd MMMM yyyy')}
+                    Aujoud'hui nous sommes le{' '}
+                    {formatDate(new Date(), 'dd MMMM yyyy')}
                 </Typography>
             )}
         </div>
