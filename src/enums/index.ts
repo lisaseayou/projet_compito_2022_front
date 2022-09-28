@@ -84,6 +84,7 @@ export enum ButtonVariantEnum {
     PRIMARY = 'primary',
     LIGHT = 'light',
     FORM = 'form',
+    CTA = 'cta',
 }
 
 export enum IconEnum {

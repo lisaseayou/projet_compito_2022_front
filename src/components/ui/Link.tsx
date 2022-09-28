@@ -19,6 +19,7 @@ type LinkProps = {
     setNavIsOpen?: (value: boolean) => void;
     classNameBack?: string;
 };
+
 const Link = ({
     variant,
     label,

@@ -3,8 +3,8 @@ import { useMutation } from '@apollo/client';
 import { Link, useNavigate } from 'react-router-dom';
 import Button from '../../components/ui/Buttons/Button';
 import Typography from '../../components/ui/Typography';
-import InputText from '../../components/ui/form/TextField';
-import SocialButton from '../../components/ui/SocialButton';
+import TextField from '../../components/ui/form/TextField';
+import SocialButton from '../../components/ui/Buttons/SocialButton';
 import {
     faFacebookF,
     faLinkedinIn,
@@ -160,7 +160,7 @@ const Register = () => {
                         className="flex flex-col items-center w-full"
                         onSubmit={handleSubmit}
                     >
-                        <InputText
+                        <TextField
                             type="text"
                             name="name"
                             id="name"
@@ -176,7 +176,7 @@ const Register = () => {
                             handleChange={handleChange}
                         />
 
-                        <InputText
+                        <TextField
                             type="text"
                             name="email"
                             id="email"
@@ -192,7 +192,7 @@ const Register = () => {
                             handleChange={handleChange}
                         />
 
-                        <InputText
+                        <TextField
                             type={!passwordShown.password ? 'text' : 'password'}
                             name="password"
                             id="password"
@@ -226,7 +226,7 @@ const Register = () => {
                             handleCopy={handleResetDefault}
                         />
 
-                        <InputText
+                        <TextField
                             type={
                                 !passwordShown.passwordConfirm
                                     ? 'text'

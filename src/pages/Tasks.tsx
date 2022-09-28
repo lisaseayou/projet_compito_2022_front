@@ -9,10 +9,10 @@ import { ToastContainer } from 'react-toastify';
 import { useQuery } from '@apollo/client';
 import { GET_ALL_TASKS } from '../graphql/query';
 import TasksList from '../components/Tasks/TasksList';
-import Typography, { variantEnum } from '../components/ui/Typography';
-import ButtonCta from '../components/ui/ButtonCta';
-import ButtonSwitch from '../components/ui/ButtonSwitch';
-import { TypographyVariantEnum } from '../enums';
+import Typography from '../components/ui/Typography';
+import Button from '../components/ui/Buttons/Button';
+import { ButtonVariantEnum, TypographyVariantEnum } from '../enums';
+import SwitchButton from '../components/ui/Buttons/SwitchButton';
 
 const Tasks = () => {
     const [showTaskCard, setShowTaskCard] = useState<boolean>(false);
@@ -52,11 +52,16 @@ const Tasks = () => {
             </div>
 
             <div className="col-start-11 col-end-13 flex justify-center mt-3">
-                <ButtonCta link="/addtask">Ajouter une tâche</ButtonCta>
+                <Button
+                    variant={ButtonVariantEnum.CTA}
+                    onClick={() => navigate('/addtask')}
+                >
+                    Ajouter une tâche
+                </Button>
             </div>
 
             <div className="col-start-1 col-end-13">
-                <ButtonSwitch onClick={showCards} show={showTaskCard} />
+                <SwitchButton onClick={showCards} show={showTaskCard} />
             </div>
             {showTaskCard ? (
                 <div className="flex flex-col justify-center items-center w-full h-full">

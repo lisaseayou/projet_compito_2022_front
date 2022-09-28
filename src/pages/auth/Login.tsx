@@ -2,8 +2,8 @@ import { ChangeEvent, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import Button from '../../components/ui/Buttons/Button';
 import Typography from '../../components/ui/Typography';
-import InputText from '../../components/ui/form/TextField';
-import SocialButton from '../../components/ui/SocialButton';
+import TextField from '../../components/ui/form/TextField';
+import SocialButton from '../../components/ui/Buttons/SocialButton';
 import {
     faFacebookF,
     faLinkedinIn,
@@ -124,7 +124,7 @@ const Login = () => {
                         className="flex flex-col items-center w-full"
                         onSubmit={handleSubmit}
                     >
-                        <InputText
+                        <TextField
                             type="text"
                             name="email"
                             id="email"
@@ -140,7 +140,7 @@ const Login = () => {
                             handleChange={handleChange}
                         />
 
-                        <InputText
+                        <TextField
                             type={!passwordShown ? 'text' : 'password'}
                             name="password"
                             id="password"

@@ -7,7 +7,7 @@ import { useMutation } from '@apollo/client';
 import { ToastError, ToastSuccess } from '../../../utils/Toast';
 import { ChangeEvent, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import InputText from '../form/InputText';
+import TextField from '../form/TextField';
 import TextArea from '../form/TextArea';
 import { GET_ALL_PROJECTS } from '../../../graphql/query';
 import { TypographyVariantEnum } from '../../../enums';
@@ -120,12 +120,12 @@ const ModalCreateProject = ({ show, setShow }: ModalCreateProjectProps) => {
                             </Typography>
                         </div>
 
-                        <form
+                        {/* <form
                             onSubmit={handleSubmit}
                             className="max-w-md mx-auto mt-8 mb-0 space-y-4"
                         >
                             <div>
-                                <InputText
+                                <TextField
                                     label="Nom du projet"
                                     placeholder="Name"
                                     name="name"
@@ -151,7 +151,7 @@ const ModalCreateProject = ({ show, setShow }: ModalCreateProjectProps) => {
                             >
                                 Créer un projet
                             </button>
-                        </form>
+                        </form> */}
                     </div>
 
                     <div
