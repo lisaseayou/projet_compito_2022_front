@@ -55,7 +55,7 @@ const BootstrapDialogTitle = (props: DialogTitleProps) => {
 
 export default function CustomizedDialogs() {
     const user: any = useSelector((state: any) => state.auth.user);
-    const [open, setOpen] = React.useState(false);
+    const [open, setOpen] = React.useState<boolean>(false);
     const [form, setForm] = useState({
         name: user.name,
         email: user.email,

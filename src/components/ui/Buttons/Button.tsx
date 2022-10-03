@@ -1,5 +1,6 @@
 import { ReactNode } from 'react';
 import { ButtonTypeEnum, ButtonVariantEnum } from '../../../enums';
+import { ArrowNarrowLeftIcon } from '@heroicons/react/solid';
 
 type ButtonProps = {
     children: ReactNode;
@@ -9,7 +10,13 @@ type ButtonProps = {
     onClick?: () => void;
 };
 
-const Button = ({ children, variant, className, type, onClick }: ButtonProps) => {
+const Button = ({
+    children,
+    variant,
+    className,
+    type,
+    onClick,
+}: ButtonProps) => {
     if (variant === ButtonVariantEnum.OUTLINE) {
         return (
             <button
@@ -57,6 +64,48 @@ const Button = ({ children, variant, className, type, onClick }: ButtonProps) =>
             <button
                 type={ButtonTypeEnum.SUBMIT}
                 className={`block w-full px-5 py-3 text-sm font-medium text-white bg-primary-main rounded-lg ${
+                    className ?? ''
+                }`}
+            >
+                {children}
+            </button>
+        );
+    }
+
+    if (variant === ButtonVariantEnum.CTA) {
+        return (
+            <button
+                onClick={onClick}
+                className="relative mr-0 inline-flex items-center px-8 py-3 overflow-hidden text-white bg-primary-main rounded group active:bg-violet-500 focus:outline-none focus:ring"
+            >
+                <span className="text-sm font-medium transition-all group-hover:ml-4">
+                    <span className="absolute left-0 transition-transform -translate-x-full group-hover:translate-x-4">
+                        <ArrowNarrowLeftIcon className="w-5 h-5 text-white" />
+                    </span>
+                    {children}
+                </span>
+            </button>
+        );
+    }
+
+    if (variant === ButtonVariantEnum.CANCEL) {
+        return (
+            <button
+                onClick={onClick}
+                className={`relative mr-0 inline-flex items-center px-8 py-2.5 overflow-hidden text-primary-main bg-info-light rounded-lg group active:bg-violet-500 focus:outline-none focus:ring capitalize ${
+                    className ?? ''
+                }`}
+            >
+                {children}
+            </button>
+        );
+    }
+
+    if (variant === ButtonVariantEnum.DELETE) {
+        return (
+            <button
+                onClick={onClick}
+                className={`relative mr-0 inline-flex items-center px-8 py-2.5 overflow-hidden text-danger-main bg-danger-light rounded-lg group active:bg-violet-500 focus:outline-none focus:ring capitalize ${
                     className ?? ''
                 }`}
             >

@@ -85,6 +85,17 @@ export const ADD_PROJECT = gql`
         }
     }
 `;
+
+export const DELETE_PROJECT = gql`
+    mutation deleteProject($deleteProjectId: String!) {
+        deleteProject(id: $deleteProjectId) {
+            id
+            name
+            description
+        }
+    }
+`;
+
 export const UPDATE_PROFILE = gql`
     mutation updateUser($data: UpdateUserInput!, $updateUserId: String!) {
         updateUser(data: $data, id: $updateUserId) {

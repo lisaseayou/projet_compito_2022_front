@@ -5,7 +5,7 @@ type ButtonSwitchProps = {
     show: boolean;
 };
 
-const ButtonSwitch = ({ onClick, show }: ButtonSwitchProps) => {
+const SwitchButton = ({ onClick, show }: ButtonSwitchProps) => {
     return (
         <button
             type="button"
@@ -21,4 +21,4 @@ const ButtonSwitch = ({ onClick, show }: ButtonSwitchProps) => {
     );
 };
 
-export default ButtonSwitch;
+export default SwitchButton;

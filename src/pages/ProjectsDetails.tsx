@@ -2,13 +2,14 @@ import ProjectMembersList from '../components/Projects/ProjectMembersList';
 import { useParams } from 'react-router-dom';
 import { useQuery } from '@apollo/client';
 import { GET_PROJECT } from '../graphql/query';
+import { IGetProject } from '../types/Project';
 
 const ProjectsDetails = () => {
     const params = useParams();
-    const { loading, error, data } = useQuery(GET_PROJECT, {
+    const { loading, error, data } = useQuery<IGetProject>(GET_PROJECT, {
         variables: { projectId: params.projectId },
     });
-    console.log(data);
+
     if (loading) {
         return <p>loading</p>;
     }
@@ -18,10 +19,10 @@ const ProjectsDetails = () => {
             <div className="flex flex-col justify-center items-center w-full h-full ">
                 {' '}
                 <p className="text-6xl font-paytone-one text-violet-800 p-4">
-                    {data.project.name}
+                    {data?.project?.name}
                 </p>
                 <p className="text-xl font-paytone-on p-4">
-                    {data.project.description}
+                    {data?.project?.description}
                 </p>
                 <div className="w-full flex justify-start pl-20 mb-20">
                     <a

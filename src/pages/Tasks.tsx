@@ -1,7 +1,7 @@
 // @ts-nocheck
 
-import { useState } from 'react';
-import { Link } from 'react-router-dom';
+import React, { useState } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
 import CardTask from '../components/Tasks/CardTask';
 import TableTask from '../components/Tasks/TableTask';
 import 'react-toastify/dist/ReactToastify.css';
@@ -9,16 +9,18 @@ import { ToastContainer } from 'react-toastify';
 import { useQuery } from '@apollo/client';
 import { GET_ALL_TASKS } from '../graphql/query';
 import TasksList from '../components/Tasks/TasksList';
-import Typography, { variantEnum } from '../components/ui/Typography';
-import ButtonCta from '../components/ui/ButtonCta';
-import ButtonSwitch from '../components/ui/ButtonSwitch';
-import { TypographyVariantEnum } from '../enums';
+import Typography from '../components/ui/Typography';
+import { ButtonVariantEnum, TypographyVariantEnum } from '../enums';
+import { ITask } from '../types';
+import Button from '../components/ui/Buttons/Button';
+import SwitchButton from '../components/ui/Buttons/SwitchButton';
 
 const Tasks = () => {
+    const navigate = useNavigate();
     const [showTaskCard, setShowTaskCard] = useState<boolean>(false);
     const [openModal, setOpenModal] = useState<number>();
 
-    const { loading, error, data } = useQuery(GET_ALL_TASKS);
+    const { loading, error, data } = useQuery<Itask>(GET_ALL_TASKS);
 
     if (loading) {
         return <p>loading</p>;
@@ -28,7 +30,7 @@ const Tasks = () => {
         return <p>error</p>;
     }
 
-    const showCards = (e: any): void => {
+    const showCards = (e: any) => {
         if (e.target) {
             setShowTaskCard(!showTaskCard);
         } else {
@@ -36,7 +38,7 @@ const Tasks = () => {
         }
     };
 
-    const find = data.allTasks.map((task: any) => task.created_at);
+    const find = data.allTasks.map((task: ITask) => task.created_at);
 
     return (
         <div className="grid grid-cols-12 gap-0 pl-20">
@@ -52,17 +54,22 @@ const Tasks = () => {
             </div>
 
             <div className="col-start-11 col-end-13 flex justify-center mt-3">
-                <ButtonCta link="/addtask">Ajouter une tâche</ButtonCta>
+                <Button
+                    variant={ButtonVariantEnum.CTA}
+                    onClick={() => navigate('/addtask')}
+                >
+                    Ajouter une tâche
+                </Button>
             </div>
 
             <div className="col-start-1 col-end-13">
-                <ButtonSwitch onClick={showCards} show={showTaskCard} />
+                <SwitchButton onClick={showCards} show={showTaskCard} />
             </div>
             {showTaskCard ? (
                 <div className="flex flex-col justify-center items-center w-full h-full">
                     {/* <div className="w-full flex justify-center pl-10 ">
                         
-                            {data.allTasks.map((task: any) => (
+                            {data.allTasks.map((task: ITask) => (
                                 <CardTask
                                     key={task.id}
                                     task={task}
@@ -104,7 +111,7 @@ const Tasks = () => {
                 </th>
               </tr>
             </thead>
-            {data.allTasks.map((task: any) => (
+            {data.allTasks.map((task: ITask) => (
               <TableTask
                 key={task.id}
                 task={task}

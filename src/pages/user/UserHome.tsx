@@ -19,7 +19,7 @@ import { TypographyVariantEnum } from '../../enums';
 
 const UserHome = () => {
     const { loading, error, data } = useQuery(GET_ALL_PROJECTS);
-    const [showModal, setShowModal] = useState(false);
+    const [showModal, setShowModal] = useState<boolean>(false);
 
     if (loading) {
         return <p>loading</p>;

@@ -1,5 +1,8 @@
-import { format } from 'date-fns';
-import { fr } from 'date-fns/locale';
+// @ts-nocheck
+
+import { IProject } from '../types/Project';
+import { IUser } from '../types/User';
+import { formatDate } from '../utils';
 
 // labels of each column for tasks list
 const TASKS_COLUMNS = [
@@ -16,14 +19,14 @@ const TASKS_COLUMNS = [
         Footer: 'Date de création',
         accessor: 'createdAt',
         Cell: ({ value }: { value: string }) =>
-            format(new Date(value), 'dd/MM/yyyy à h:mm', { locale: fr }),
+            formatDate(new Date(value), 'dd/MM/yyyy à h:mm'),
     },
     {
         Header: 'Dernière mise à jour',
         Footer: 'Dernière mise à jour',
         accessor: 'updatedAt',
         Cell: ({ value }: { value: string }) =>
-            format(new Date(value), 'dd/MM/yyyy à h:mm', { locale: fr }),
+            formatDate(new Date(value), 'dd/MM/yyyy à h:mm'),
     },
     {
         Header: 'Commentaires',
@@ -37,7 +40,7 @@ const TASKS_COLUMNS = [
         Header: 'Users',
         Footer: 'Users',
         accessor: 'users',
-        Cell: ({ value }: { value: object[] }) => {
+        Cell: ({ value }: { value: IUser[] }) => {
             return value?.length;
         },
     },
@@ -45,7 +48,7 @@ const TASKS_COLUMNS = [
         Header: 'Projet',
         Footer: 'Projet',
         accessor: 'project',
-        Cell: ({ value }: { value: any }) => {
+        Cell: ({ value }: { value: IProject }) => {
             return value?.name;
         },
     },

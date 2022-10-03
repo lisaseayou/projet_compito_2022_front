@@ -1,9 +1,9 @@
-import { ChangeEvent, useState } from 'react';
+import { ChangeEvent, FormEvent, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import Button from '../../components/ui/Buttons/Button';
 import Typography from '../../components/ui/Typography';
-import InputText from '../../components/ui/form/TextField';
-import SocialButton from '../../components/ui/SocialButton';
+import TextField from '../../components/ui/form/TextField';
+import SocialButton from '../../components/ui/Buttons/SocialButton';
 import {
     faFacebookF,
     faLinkedinIn,
@@ -27,17 +27,19 @@ import {
 import Icon from '../../components/ui/Icons/Icon';
 import IconWithBg from '../../components/ui/Icons/IconWithBg';
 import { handleResetDefault } from '../../utils';
+import { OnSubmitFormType } from '../../types';
+import { LoginUserVariables } from '../../types/User';
 
 const Login = () => {
     const navigate = useNavigate();
     const dispatch = useDispatch();
 
-    const [formDatas, setFormDatas] = useState({
+    const [formDatas, setFormDatas] = useState<LoginUserVariables>({
         email: '',
         password: '',
     });
 
-    const [passwordShown, setPasswordShown] = useState(true);
+    const [passwordShown, setPasswordShown] = useState<boolean>(true);
 
     const [login] = useLazyQuery(LOGIN, {
         onCompleted(data) {
@@ -64,7 +66,7 @@ const Login = () => {
         setFormDatas({ ...formDatas, [e?.target?.name]: e?.target.value });
     };
 
-    const handleSubmit = (e: any) => {
+    const handleSubmit: OnSubmitFormType = (e: FormEvent<HTMLFormElement>) => {
         e?.preventDefault();
         login({ variables: formDatas });
     };
@@ -124,7 +126,7 @@ const Login = () => {
                         className="flex flex-col items-center w-full"
                         onSubmit={handleSubmit}
                     >
-                        <InputText
+                        <TextField
                             type="text"
                             name="email"
                             id="email"
@@ -140,7 +142,7 @@ const Login = () => {
                             handleChange={handleChange}
                         />
 
-                        <InputText
+                        <TextField
                             type={!passwordShown ? 'text' : 'password'}
                             name="password"
                             id="password"
