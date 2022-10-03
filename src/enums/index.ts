@@ -85,6 +85,8 @@ export enum ButtonVariantEnum {
     LIGHT = 'light',
     FORM = 'form',
     CTA = 'cta',
+    CANCEL = "cancel",
+    DELETE = "delete"
 }
 
 export enum IconEnum {
@@ -96,6 +98,9 @@ export enum IconEnum {
     USER = 'UserIcon',
     CLOCK_OUTLINE = 'ClockIcon',
     CHAT_ALT_OUTLINE = 'ChatAltIcon',
+    PENCIL_OUTLINE = 'PencilIcon',
+    TRASH_OUTLINE = 'TrashIcon',
+    TRASH = 'TrashIcon',
 }
 
 export enum OpacityEnum {

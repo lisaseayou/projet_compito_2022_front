@@ -88,6 +88,32 @@ const Button = ({
         );
     }
 
+    if (variant === ButtonVariantEnum.CANCEL) {
+        return (
+            <button
+                onClick={onClick}
+                className={`relative mr-0 inline-flex items-center px-8 py-2.5 overflow-hidden text-primary-main bg-info-light rounded-lg group active:bg-violet-500 focus:outline-none focus:ring capitalize ${
+                    className ?? ''
+                }`}
+            >
+                {children}
+            </button>
+        );
+    }
+
+    if (variant === ButtonVariantEnum.DELETE) {
+        return (
+            <button
+                onClick={onClick}
+                className={`relative mr-0 inline-flex items-center px-8 py-2.5 overflow-hidden text-danger-main bg-danger-light rounded-lg group active:bg-violet-500 focus:outline-none focus:ring capitalize ${
+                    className ?? ''
+                }`}
+            >
+                {children}
+            </button>
+        );
+    }
+
     return <></>;
 };
 

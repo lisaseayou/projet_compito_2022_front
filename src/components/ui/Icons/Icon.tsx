@@ -6,7 +6,7 @@ import {
     MailIcon,
     UserIcon,
 } from '@heroicons/react/solid';
-import { ClockIcon, ChatAltIcon } from '@heroicons/react/outline';
+import { ChatAltIcon, ClockIcon, PencilIcon, TrashIcon } from '@heroicons/react/outline';
 
 type IconProps = {
     variant: IconEnum;
@@ -85,6 +85,26 @@ const Icon = ({
             case IconEnum.CHAT_ALT_OUTLINE:
                 return (
                     <ChatAltIcon
+                        className={`w-6 h-6 text-primary-main ${opacity} ${
+                            onClick ? 'cursor-pointer' : 'cursor-default'
+                        } ${className ?? ''}`}
+                        onClick={onClick}
+                    />
+                );
+
+            case IconEnum.PENCIL_OUTLINE:
+                return (
+                    <PencilIcon
+                        className={`w-6 h-6 text-primary-main ${opacity} ${
+                            onClick ? 'cursor-pointer' : 'cursor-default'
+                        } ${className ?? ''}`}
+                        onClick={onClick}
+                    />
+                );
+
+            case IconEnum.TRASH_OUTLINE:
+                return (
+                    <TrashIcon
                         className={`w-6 h-6 text-primary-main ${opacity} ${
                             onClick ? 'cursor-pointer' : 'cursor-default'
                         } ${className ?? ''}`}

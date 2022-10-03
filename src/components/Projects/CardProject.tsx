@@ -19,12 +19,39 @@ import Progress from '../ui/progress/Progress';
 import Typography from '../ui/Typography';
 import avatar1 from '../../assets/avatar/avatar-1.jpg';
 import avatar2 from '../../assets/avatar/avatar-2.jpg';
+import { useState } from 'react';
+import ActionBase from '../actions/ActionBase';
+import ModalDelete from '../modals/ModalDelete';
+import { useMutation } from '@apollo/client';
+import { ToastError, ToastSuccess } from '../../utils/Toast';
+import { GET_ALL_PROJECTS } from '../../graphql/query';
+import { DELETE_PROJECT } from '../../graphql/mutation';
 
 type CardProjectProps = {
     project: IProject;
 };
 
 const CardProject = ({ project }: CardProjectProps) => {
+    const [showAction, setShowAction] = useState<boolean>(false);
+    const [showDeleteProject, setShowDeleteProject] = useState<boolean>(false);
+
+    const [deleteProject] = useMutation(DELETE_PROJECT, {
+        onCompleted: () => {
+            ToastSuccess('Votre tâche a bien été supprimé!');
+        },
+        onError: () => {
+            ToastError("Votre tâche n'a pas pu être supprimé :(");
+        },
+        refetchQueries: [GET_ALL_PROJECTS],
+    });
+
+    const handleDelete = () =>
+        deleteProject({
+            variables: {
+                deleteProjectId: project.id,
+            },
+        });
+
     return (
         <div className="relative block col-span-12 sm:col-span-6 md:col-span-4 lg:col-span-3 p-5 w-full h-96 border border-gray-100 rounded-lg shadow-lg">
             <div className="flex flex-col justify-between h-full">
@@ -46,9 +73,18 @@ const CardProject = ({ project }: CardProjectProps) => {
                         </div>
 
                         <div className="relative flex-shrink-0 ml-3 block">
-                            <button onClick={() => {}}>
+                            <button onClick={() => setShowAction(!showAction)}>
                                 <DotsVerticalIcon className="h-5 w-5 text-primary-main" />
                             </button>
+
+                            {showAction && (
+                                <ActionBase
+                                    className="top-8 right-2"
+                                    dataId={project.id}
+                                    setShowAction={setShowAction}
+                                    setShowDeleteData={setShowDeleteProject}
+                                />
+                            )}
                         </div>
                     </div>
 
@@ -112,7 +148,7 @@ const CardProject = ({ project }: CardProjectProps) => {
                                     more={project?.users?.length - 3}
                                     className="-ml-3"
                                 />
-                            )} 
+                            )}
                         </div>
 
                         <div className="flex">
@@ -133,6 +169,14 @@ const CardProject = ({ project }: CardProjectProps) => {
                     </div>
                 </div>
             </div>
+
+            <ModalDelete
+                show={showDeleteProject}
+                setShow={setShowDeleteProject}
+                title="Supprimer le projet"
+                description="Êtes vous sûr de vouloir supprimer ce projet ? Cette action est irréversible."
+                onDelete={handleDelete}
+            />
         </div>
     );
 };

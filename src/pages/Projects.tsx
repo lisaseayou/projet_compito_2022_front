@@ -6,7 +6,6 @@ import {
     TextTransformEnum,
     TypographyVariantEnum,
 } from '../enums';
-import Button from '../components/ui/Buttons/Button';
 
 const Projects = () => {
     return (
