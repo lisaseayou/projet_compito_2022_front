@@ -9,7 +9,7 @@ import {
     TextTransformEnum,
     TypographyVariantEnum,
 } from '../../enums';
-import { IProject } from '../../types/Project';
+import { IDeleteProject, IProject } from '../../types/Project';
 import { IUser } from '../../types/User';
 import { FirstLetterUpperCase, formatDate, truncate } from '../../utils';
 import Avatar from '../ui/avatar/Avatar';
@@ -35,12 +35,12 @@ const CardProject = ({ project }: CardProjectProps) => {
     const [showAction, setShowAction] = useState<boolean>(false);
     const [showDeleteProject, setShowDeleteProject] = useState<boolean>(false);
 
-    const [deleteProject] = useMutation(DELETE_PROJECT, {
+    const [deleteProject] = useMutation<IDeleteProject>(DELETE_PROJECT, {
         onCompleted: () => {
-            ToastSuccess('Votre tâche a bien été supprimé!');
+            ToastSuccess('Votre projet a bien été supprimé ! 😊');
         },
         onError: () => {
-            ToastError("Votre tâche n'a pas pu être supprimé :(");
+            ToastError("Votre projet n'a pas pu être supprimé :(");
         },
         refetchQueries: [GET_ALL_PROJECTS],
     });

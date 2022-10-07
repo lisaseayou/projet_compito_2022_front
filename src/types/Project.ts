@@ -20,3 +20,13 @@ export interface IGetAllProjects {
 export interface IGetProject {
     project: IProject;
 }
+
+export interface IAddProject {
+    addProject: IProject;
+}
+
+export interface IDeleteProject {
+    addProject: Pick<IProject, 'id' | 'name' | 'description'>;
+}
+
+export type CreateProjectVariables = Pick<IProject, 'name' | 'description'>;

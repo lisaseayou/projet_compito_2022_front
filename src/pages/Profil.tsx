@@ -1,28 +1,9 @@
-import { useState } from 'react';
 import { useSelector } from 'react-redux';
-import { Button, TextField } from '@material-ui/core';
 import Modal from '../components/Modal';
+import { IUser } from '../types/User';
 
 const Profil = () => {
-    const user: any = useSelector((state: any) => state.auth.user);
-    const [edition, setEdition] = useState<boolean>(false);
-    const [form, setForm] = useState({
-        name: user.name,
-        email: user.email,
-    });
-
-    const handleEdition = () => {
-        setEdition(true);
-    };
-
-    const handleChange = (e: any) => {
-        setForm((oldValues) => ({
-            ...oldValues,
-            [e.target.name]: e.target.value,
-        }));
-    };
-
-    const handleClick = async () => {};
+    const user: IUser = useSelector((state: any) => state.auth.user);
 
     return (
         <>

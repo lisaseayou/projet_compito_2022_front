@@ -1,14 +1,14 @@
-import React, { ChangeEvent, ClipboardEvent } from 'react';
+import React, { ChangeEvent, ClipboardEvent, ReactNode } from 'react';
 
 type TextFieldProps = {
     placeholder: string;
     type: string;
     name: string;
     id: string;
-    icon: any;
-    iconShow?: any;
+    icon: ReactNode;
+    iconShow?: ReactNode;
     className?: string;
-    value: any;
+    value: string | number;
     handleChange: (
         e: ChangeEvent<HTMLInputElement | HTMLSelectElement>
     ) => void;
@@ -41,7 +41,7 @@ const TextField = ({
                 name={name}
                 className={`w-full p-4 pl-12 ${
                     iconShow ? 'pr-12' : 'pr-4'
-                } font-display not-italic text-primary-main font-normal text-base leading-none normal-case bg-gray-light lightborder-gray-200 rounded-2lg shadow-sm focus-visible:outline-0 placeholder:italic placeholder:opacity-50 placeholder:text-base placeholder:text-primary-main`}
+                } font-display not-italic text-primary-main font-normal text-base leading-none normal-case bg-gray-light lightborder-gray-200 rounded-2lg shadow-sm focus-visible:outline-0 placeholder:italic placeholder:opacity-50 placeholder:text-base placeholder:text-primary-main outline-none`}
                 placeholder={placeholder}
                 value={value}
                 onChange={handleChange}

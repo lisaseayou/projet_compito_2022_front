@@ -13,6 +13,7 @@ import { useSelector } from 'react-redux';
 import { ChangeEvent, useState } from 'react';
 import { useMutation } from '@apollo/client';
 import { UPDATE_PROFILE } from '../graphql/mutation';
+import { IUser } from '../types/User';
 
 const BootstrapDialog = styled(Dialog)(({ theme }) => ({
     '& .MuiDialogContent-root': {
@@ -54,7 +55,7 @@ const BootstrapDialogTitle = (props: DialogTitleProps) => {
 };
 
 export default function CustomizedDialogs() {
-    const user: any = useSelector((state: any) => state.auth.user);
+    const user: IUser = useSelector((state: any) => state.auth.user);
     const [open, setOpen] = React.useState<boolean>(false);
     const [form, setForm] = useState({
         name: user.name,
