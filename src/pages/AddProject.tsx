@@ -1,4 +1,4 @@
-import { ChangeEvent, useEffect, useState } from 'react';
+import { ChangeEvent, FormEvent, useEffect, useState } from 'react';
 import { useMutation } from '@apollo/client';
 import { ADD_PROJECT } from '../graphql/mutation';
 import { useNavigate } from 'react-router-dom';
@@ -7,6 +7,8 @@ import 'react-toastify/dist/ReactToastify.css';
 import { ToastError, ToastSuccess } from '../utils/Toast';
 import { GET_ALL_PROJECTS } from '../graphql/query';
 import Cookies from 'js-cookie';
+import { OnSubmitFormType } from '../types';
+import { IAddProject } from '../types/Project';
 
 interface IFormProject {
     name: string;
@@ -35,7 +37,7 @@ function AddProject() {
         userId: '',
     });
 
-    const [addProject] = useMutation(ADD_PROJECT, {
+    const [addProject] = useMutation<IAddProject>(ADD_PROJECT, {
         onCompleted: () => {
             ToastSuccess('Votre tâche est ajoutée!');
             setFormProject({
@@ -71,7 +73,7 @@ function AddProject() {
         setFormProject({ ...formProject, [e.target.name]: e.target.value });
     };
 
-    const handleSubmit: any = (e: SubmitEvent) => {
+    const handleSubmit: OnSubmitFormType = (e: FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         addProject({ variables: { data: formProject } });
         navigate('../projects', { replace: true });

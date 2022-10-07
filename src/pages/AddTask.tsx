@@ -1,5 +1,5 @@
 import { useMutation } from '@apollo/client';
-import { ChangeEvent, useEffect, useState } from 'react';
+import { ChangeEvent, FormEvent, useEffect, useState } from 'react';
 import SelectStatus from '../components/Tasks/SelectStatus';
 import { ADD_TASK } from '../graphql/mutation';
 import { useNavigate } from 'react-router-dom';
@@ -8,6 +8,7 @@ import { ToastContainer } from 'react-toastify';
 import { ToastSuccess, ToastError } from '../utils/Toast';
 import { GET_ALL_TASKS } from '../graphql/query';
 import Cookies from 'js-cookie';
+import { OnSubmitFormType } from '../types';
 
 interface IUserDatas {
     id: string;
@@ -72,7 +73,7 @@ function AddTask() {
         setFormData({ ...formData, [e.target.name]: e.target.value });
     };
 
-    const handleSubmit: any = (e: SubmitEvent) => {
+    const handleSubmit: OnSubmitFormType = (e: FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         addTask({ variables: { data: formData } });
         navigate('../tasks', { replace: true });

@@ -14,3 +14,7 @@ export interface ITask {
     project: IProject;
     users: IUser[];
 }
+
+export interface IAddTask {
+    addProject: IProject;
+}

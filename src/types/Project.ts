@@ -20,3 +20,7 @@ export interface IGetAllProjects {
 export interface IGetProject {
     project: IProject;
 }
+
+export interface IAddProject {
+    addProject: IProject;
+}
