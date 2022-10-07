@@ -13,6 +13,7 @@ import Icon from '../ui/Icons/Icon';
 import Modal from '../ui/modals/Modal';
 import Work from '../../assets/work-pressure.svg';
 import TextAreaField from '../ui/form/TextAreaField';
+import { CreateProjectVariables, IAddProject } from '../../types/Project';
 
 type ModalCreateProjectProps = {
     show: boolean;
@@ -22,12 +23,12 @@ type ModalCreateProjectProps = {
 const ModalCreateProject = ({ show, setShow }: ModalCreateProjectProps) => {
     const navigate = useNavigate();
 
-    const [formDatas, setFormDatas] = useState({
+    const [formDatas, setFormDatas] = useState<CreateProjectVariables>({
         name: '',
         description: '',
     });
 
-    const [addProject] = useMutation(ADD_PROJECT, {
+    const [addProject] = useMutation<IAddProject>(ADD_PROJECT, {
         onCompleted: () => {
             ToastSuccess('Votre projet a bien été ajoutée!');
             setFormDatas({
