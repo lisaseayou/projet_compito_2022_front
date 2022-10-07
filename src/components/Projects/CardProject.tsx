@@ -37,10 +37,10 @@ const CardProject = ({ project }: CardProjectProps) => {
 
     const [deleteProject] = useMutation(DELETE_PROJECT, {
         onCompleted: () => {
-            ToastSuccess('Votre tâche a bien été supprimé!');
+            ToastSuccess('Votre projet a bien été supprimé ! 😊');
         },
         onError: () => {
-            ToastError("Votre tâche n'a pas pu être supprimé :(");
+            ToastError("Votre projet n'a pas pu être supprimé :(");
         },
         refetchQueries: [GET_ALL_PROJECTS],
     });
