@@ -1,5 +1,7 @@
+import { ReactNode } from "react";
+
 interface ModalProps {
-  children: any;
+  children: ReactNode;
 }
 
 const Modal = ({ children }: ModalProps) => {

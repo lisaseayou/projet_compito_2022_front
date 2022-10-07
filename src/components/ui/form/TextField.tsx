@@ -1,14 +1,14 @@
-import React, { ChangeEvent, ClipboardEvent } from 'react';
+import React, { ChangeEvent, ClipboardEvent, ReactNode } from 'react';
 
 type TextFieldProps = {
     placeholder: string;
     type: string;
     name: string;
     id: string;
-    icon: any;
-    iconShow?: any;
+    icon: ReactNode;
+    iconShow?: ReactNode;
     className?: string;
-    value: any;
+    value: string | number;
     handleChange: (
         e: ChangeEvent<HTMLInputElement | HTMLSelectElement>
     ) => void;

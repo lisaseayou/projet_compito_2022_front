@@ -4,7 +4,7 @@ import Typography from '../ui/Typography';
 
 type CardListProps = {
     title: string;
-    icon: any;
+    icon: ReactNode;
     children: ReactNode;
 };
 const CardList = ({ title, icon, children }: CardListProps) => {

@@ -16,6 +16,7 @@ import { useState } from 'react';
 import ModalWithImage from '../../components/modals/ModalCreateProject';
 import Typography from '../../components/ui/Typography';
 import { TypographyVariantEnum } from '../../enums';
+import { IProject } from '../../types/Project';
 
 const UserHome = () => {
     const { loading, error, data } = useQuery(GET_ALL_PROJECTS);
@@ -56,7 +57,7 @@ const UserHome = () => {
                             <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
                                 {data.allProjects
                                     .slice(0, 3)
-                                    .map((project: any) => (
+                                    .map((project: IProject) => (
                                         <CardSmall
                                             key={project?.id}
                                             title={project?.name}
@@ -86,7 +87,7 @@ const UserHome = () => {
                             <div className="flex flex-col">
                                 {data.allProjects
                                     .slice(0, 4)
-                                    .map((project: any) => (
+                                    .map((project: IProject) => (
                                         <CardList
                                             key={project?.id}
                                             title={project?.name}
