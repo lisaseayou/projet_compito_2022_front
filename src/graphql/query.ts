@@ -68,6 +68,30 @@ export const GET_PROJECT = gql`
     }
 `;
 
+
+export const GET_LAST_PROJECTS_UPDATE = gql`
+    query LastProject($number: Float!) {
+        lastProject(number: $number) {
+            id
+            name
+            description
+            createdAt
+            updatedAt
+            tasks {
+                id
+                subject
+                status
+                dueDate
+                initialSpentTime
+                additionalSpentTime
+                advancement
+                createdAt
+                updatedAt
+            }
+        }
+    }
+`;
+
 export const GET_ALL_TASKS = gql`
     query allTasks {
         allTasks {
