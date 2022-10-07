@@ -13,7 +13,7 @@ import CardAddSmall from '../../components/cards/CardAddSmall';
 import Work from '../../assets/work-pressure.svg';
 import CardList from '../../components/cards/CardList';
 import { useState } from 'react';
-import ModalWithImage from '../../components/ui/modals/ModalCreateProject';
+import ModalWithImage from '../../components/modals/ModalCreateProject';
 import Typography from '../../components/ui/Typography';
 import { TypographyVariantEnum } from '../../enums';
 

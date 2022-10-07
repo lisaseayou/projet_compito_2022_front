@@ -1,5 +1,11 @@
 import { IconEnum } from '../../../enums';
-import { CheckCircleIcon, LockClosedIcon, MailIcon, TrashIcon } from '@heroicons/react/solid';
+import {
+    BriefcaseIcon,
+    CheckCircleIcon,
+    LockClosedIcon,
+    MailIcon,
+    TrashIcon,
+} from '@heroicons/react/solid';
 
 type IconProps = {
     variant: IconEnum;
@@ -16,8 +22,10 @@ const IconWithBg = ({ variant }: IconProps) => {
                 return <LockClosedIcon className="w-6 h-6 text-primary-main" />;
             case IconEnum.MAIL:
                 return <MailIcon className="w-6 h-6 text-primary-main" />;
-                case IconEnum.TRASH:
-                    return <TrashIcon className="w-6 h-6 text-primary-main" />;
+            case IconEnum.TRASH:
+                return <TrashIcon className="w-6 h-6 text-primary-main" />;
+            case IconEnum.BRIEFCASE:
+                return <BriefcaseIcon className="w-6 h-6 text-primary-main" />;
             default:
                 break;
         }

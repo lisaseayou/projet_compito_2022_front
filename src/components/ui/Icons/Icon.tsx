@@ -1,12 +1,18 @@
 import { IconEnum, OpacityEnum } from '../../../enums';
 import {
+    BriefcaseIcon,
     EyeIcon,
     EyeOffIcon,
     LockClosedIcon,
     MailIcon,
     UserIcon,
 } from '@heroicons/react/solid';
-import { ChatAltIcon, ClockIcon, PencilIcon, TrashIcon } from '@heroicons/react/outline';
+import {
+    ChatAltIcon,
+    ClockIcon,
+    PencilIcon,
+    TrashIcon,
+} from '@heroicons/react/outline';
 
 type IconProps = {
     variant: IconEnum;
@@ -65,6 +71,16 @@ const Icon = ({
             case IconEnum.USER:
                 return (
                     <UserIcon
+                        className={`w-6 h-6 text-primary-main ${opacity} ${
+                            onClick ? 'cursor-pointer' : 'cursor-default'
+                        }`}
+                        onClick={onClick}
+                    />
+                );
+
+            case IconEnum.BRIEFCASE:
+                return (
+                    <BriefcaseIcon
                         className={`w-6 h-6 text-primary-main ${opacity} ${
                             onClick ? 'cursor-pointer' : 'cursor-default'
                         }`}

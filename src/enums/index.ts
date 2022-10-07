@@ -101,6 +101,7 @@ export enum IconEnum {
     PENCIL_OUTLINE = 'PencilIcon',
     TRASH_OUTLINE = 'TrashIcon',
     TRASH = 'TrashIcon',
+    BRIEFCASE = ' BriefcaseIcon',
 }
 
 export enum OpacityEnum {
