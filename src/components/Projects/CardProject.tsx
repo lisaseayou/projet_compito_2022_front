@@ -1,5 +1,31 @@
-import { DotsVerticalIcon } from '@heroicons/react/solid';
+// hooks
+import { useState } from 'react';
+import { useMutation } from '@apollo/client';
 import { Link } from 'react-router-dom';
+
+// components
+import Avatar from '../ui/avatar/Avatar';
+import AvatarEmpty from '../ui/avatar/AvatarEmpty';
+import Icon from '../ui/Icons/Icon';
+import Progress from '../ui/progress/Progress';
+import Typography from '../ui/Typography';
+import ActionBase from '../actions/ActionBase';
+import ModalDelete from '../modals/ModalDelete';
+
+// utils & helpers
+import { firstLetterUpperCase, formatDate, truncate } from '../../utils';
+import { ToastError, ToastSuccess } from '../../utils/Toast';
+
+// graphql
+import {
+    GET_LAST_PROJECTS_UPDATE_BY_USER,
+    GET_PROJECT_BY_USER,
+} from '../../graphql/query';
+import { DELETE_PROJECT } from '../../graphql/mutation';
+
+// types, interfaces & enums
+import { IDeleteProject, IProject } from '../../types/Project';
+import { IUser } from '../../types/User';
 import {
     FontSizeEnum,
     FontWeightEnum,
@@ -9,29 +35,23 @@ import {
     TextTransformEnum,
     TypographyVariantEnum,
 } from '../../enums';
-import { IDeleteProject, IProject } from '../../types/Project';
-import { IUser } from '../../types/User';
-import { FirstLetterUpperCase, formatDate, truncate } from '../../utils';
-import Avatar from '../ui/avatar/Avatar';
-import AvatarEmpty from '../ui/avatar/AvatarEmpty';
-import Icon from '../ui/Icons/Icon';
-import Progress from '../ui/progress/Progress';
-import Typography from '../ui/Typography';
+
+// images & icons
+import { DotsVerticalIcon } from '@heroicons/react/solid';
 import avatar1 from '../../assets/avatar/avatar-1.jpg';
 import avatar2 from '../../assets/avatar/avatar-2.jpg';
-import { useState } from 'react';
-import ActionBase from '../actions/ActionBase';
-import ModalDelete from '../modals/ModalDelete';
-import { useMutation } from '@apollo/client';
-import { ToastError, ToastSuccess } from '../../utils/Toast';
-import { GET_ALL_PROJECTS } from '../../graphql/query';
-import { DELETE_PROJECT } from '../../graphql/mutation';
 
 type CardProjectProps = {
     project: IProject;
+    modalUpdateOrDeleteID: string;
+    setModalUpdateOrDeleteID: (value: string) => void;
 };
 
-const CardProject = ({ project }: CardProjectProps) => {
+const CardProject = ({
+    project,
+    modalUpdateOrDeleteID,
+    setModalUpdateOrDeleteID,
+}: CardProjectProps) => {
     const [showAction, setShowAction] = useState<boolean>(false);
     const [showDeleteProject, setShowDeleteProject] = useState<boolean>(false);
 
@@ -42,7 +62,7 @@ const CardProject = ({ project }: CardProjectProps) => {
         onError: () => {
             ToastError("Votre projet n'a pas pu être supprimé :(");
         },
-        refetchQueries: [GET_ALL_PROJECTS],
+        refetchQueries: [GET_PROJECT_BY_USER, GET_LAST_PROJECTS_UPDATE_BY_USER],
     });
 
     const handleDelete = () =>
@@ -67,24 +87,34 @@ const CardProject = ({ project }: CardProjectProps) => {
                                     fontWeight={FontWeightEnum.BOLD}
                                     textTransform={TextTransformEnum.NORMAL}
                                 >
-                                    {FirstLetterUpperCase(project.name)}
+                                    {firstLetterUpperCase(project.name)}
                                 </Typography>
                             </Link>
                         </div>
 
                         <div className="relative flex-shrink-0 ml-3 block">
-                            <button onClick={() => setShowAction(!showAction)}>
+                            <button
+                                onClick={() => {
+                                    setShowAction(!showAction);
+                                    setModalUpdateOrDeleteID(
+                                        project.id !== modalUpdateOrDeleteID
+                                            ? project.id
+                                            : ''
+                                    );
+                                }}
+                            >
                                 <DotsVerticalIcon className="h-5 w-5 text-primary-main" />
                             </button>
 
-                            {showAction && (
-                                <ActionBase
-                                    className="top-8 right-2"
-                                    dataId={project.id}
-                                    setShowAction={setShowAction}
-                                    setShowDeleteData={setShowDeleteProject}
-                                />
-                            )}
+                            {showAction &&
+                                modalUpdateOrDeleteID === project.id && (
+                                    <ActionBase
+                                        className="top-8 right-2"
+                                        dataId={project.id}
+                                        setShowAction={setShowAction}
+                                        setShowDeleteData={setShowDeleteProject}
+                                    />
+                                )}
                         </div>
                     </div>
 

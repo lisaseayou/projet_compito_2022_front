@@ -1,5 +1,10 @@
-import React from 'react';
+// hooks
 import { Link } from 'react-router-dom';
+
+// components
+import Typography from '../ui/Typography';
+
+// types, interfaces & enums
 import {
     FontSizeEnum,
     FontWeightEnum,
@@ -8,8 +13,9 @@ import {
     TextTransformEnum,
     TypographyVariantEnum,
 } from '../../enums';
+
+// images & icons
 import Icon from '../ui/Icons/Icon';
-import Typography from '../ui/Typography';
 
 type ActionBaseProps = {
     dataId: string;

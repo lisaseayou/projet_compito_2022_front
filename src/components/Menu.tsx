@@ -1,5 +1,7 @@
-import React from 'react';
+// react
+import { ComponentType } from 'react';
 
+// components
 import NotFound from '../pages/NotFound';
 import Home from '../pages/Home';
 import Tasks from '../pages/Tasks';
@@ -12,87 +14,111 @@ import ForgotPassword from '../pages/auth/ForgotPassword';
 import CheckEmail from '../pages/auth/CheckEmail';
 import ResetPassword from '../pages/auth/ResetPassword';
 import ResetPasswordConfirm from '../pages/auth/ResetPasswordConfirm';
+import Register from '../pages/auth/Register';
+import Login from '../pages/auth/Login';
+import AddProject from '../pages/AddProject';
+import AddTask from '../pages/AddTask';
+import Logout from '../pages/auth/Logout';
 
-// import Login from "../pages/auth/Login";
-// import Register from "../pages/auth/Register";
+// types, interfaces & enums
+import { RouteEnum } from '../enums';
 
-type Menu = {
-    path: string;
+export interface Menu {
+    path: RouteEnum;
     title: string;
-    Component: React.ComponentType;
-};
+    Component: ComponentType;
+}
 
-const MenuList: Menu[] = [
+export const MenuList: Menu[] = [
     {
-        path: '*',
+        path: RouteEnum.NOT_FOUND,
         title: '404',
         Component: NotFound,
     },
     {
-        path: '/',
+        path: RouteEnum.HOME,
         title: 'Home',
         Component: Home,
     },
+];
+
+export const MenuListAuth: Menu[] = [
     {
-        path: '/tasks',
-        title: 'Tasks',
-        Component: Tasks,
+        path: RouteEnum.LOGIN,
+        title: 'Login',
+        Component: Login,
     },
     {
-        path: '/projects',
-        title: 'Projects',
-        Component: Projects,
+        path: RouteEnum.REGISTER,
+        title: 'Register',
+        Component: Register,
     },
     {
-        path: '/dashboard',
-        title: 'Dashboard',
-        Component: Dashboard,
-    },
-    {
-        path: '/profil',
-        title: 'Profil',
-        Component: Profil,
-    },
-    {
-        path: '/project-details/:projectId',
-        title: 'Détail du projet',
-        Component: ProjectsDetails,
-    },
-    {
-        path: '/auth/forgot-password',
+        path: RouteEnum.FORGOT_PASSWORD,
         title: 'Forgot password',
         Component: ForgotPassword,
     },
     {
-        path: '/auth/check-email',
+        path: RouteEnum.CHECK_EMAIL,
         title: 'Check elementmail',
         Component: CheckEmail,
     },
     {
-        path: '/auth/reset-password/:resetToken',
+        path: RouteEnum.RESET_PASSWORD,
         title: 'Reset password',
         Component: ResetPassword,
     },
     {
-        path: '/auth/reset-password-confirm',
+        path: RouteEnum.RESET_PASSWORD_CONFIRM,
         title: 'Reset password confirm',
         Component: ResetPasswordConfirm,
     },
-    // {
-    //     path: '/user/home',
-    //     title: 'welcome',
-    //     Component: UserHome,
-    // },
-    // {
-    //   path: "/Login",
-    //   title: "Login",
-    //   Component: Login,
-    // },
-    // {
-    //   path: "/Register",
-    //   title: "Register",
-    //   Component: Register,
-    // },
 ];
 
-export default MenuList;
+export const MenuListProtected: Menu[] = [
+    {
+        path: RouteEnum.USER_HOME,
+        title: 'welcome',
+        Component: UserHome,
+    },
+    {
+        path: RouteEnum.PROJECTS,
+        title: 'Projects',
+        Component: Projects,
+    },
+    {
+        path: RouteEnum.ADD_PROJECT,
+        title: 'add project',
+        Component: AddProject,
+    },
+    {
+        path: RouteEnum.PROJECT_DETAILS,
+        title: 'Détail du projet',
+        Component: ProjectsDetails,
+    },
+    {
+        path: RouteEnum.TASKS,
+        title: 'Tasks',
+        Component: Tasks,
+    },
+    {
+        path: RouteEnum.ADD_TASK,
+        title: 'Add Tasks',
+        Component: AddTask,
+    },
+    {
+        path: RouteEnum.DASHBOARD,
+        title: 'Dashboard',
+        Component: Dashboard,
+    },
+    {
+        path: RouteEnum.PROFIL,
+        title: 'Profil',
+        Component: Profil,
+    },
+    {
+        path: RouteEnum.LOGOUT,
+        title: 'Logout',
+        Component: Logout,
+    },
+];

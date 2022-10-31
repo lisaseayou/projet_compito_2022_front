@@ -1,3 +1,14 @@
+// hooks
+import { useState } from 'react';
+import { Link as RouterLink } from 'react-router-dom';
+
+// components
+import Link from '../components/ui/Link';
+
+// types, interfaces & enums
+import { LinkVariantEnum, RouteEnum } from '../enums';
+
+// images & icons
 import {
     ClipboardListIcon,
     MinusIcon,
@@ -6,12 +17,8 @@ import {
     TemplateIcon,
     UserIcon,
 } from '@heroicons/react/solid';
-import { Link as RouterLink } from 'react-router-dom';
-import Link from '../components/ui/Link';
 import { ReactComponent as Logout } from '../assets/icons/logout.svg';
 import { ReactComponent as Logo } from '../assets/logoswag.svg';
-import { useState } from 'react';
-import { LinkVariantEnum } from '../enums';
 
 function Nav() {
     const [isOpen, setIsOpen] = useState<boolean>(false);
@@ -38,7 +45,7 @@ function Nav() {
             </div>
 
             <div className="flex items-center justify-start w-auto sm:h-16 pr-4 sm:pr-0 pt-1,5 border-r sm:border-r-0 sm:border-b border-secondary-light">
-                <RouterLink to="/user/home">
+                <RouterLink to={RouteEnum.USER_HOME}>
                     <Logo className="w-14" />
                 </RouterLink>
             </div>
@@ -48,7 +55,7 @@ function Nav() {
                     <li className="w-full">
                         <Link
                             variant={LinkVariantEnum.NAV}
-                            to="/projects"
+                            to={RouteEnum.PROJECTS}
                             iconNav={
                                 <ClipboardListIcon className="text-primary-main w-8 sm:w-8" />
                             }
@@ -61,7 +68,7 @@ function Nav() {
                     <li>
                         <Link
                             variant={LinkVariantEnum.NAV}
-                            to="/tasks"
+                            to={RouteEnum.TASKS}
                             iconNav={
                                 <TagIcon className="text-primary-main w-8 sm:w-8" />
                             }
@@ -74,7 +81,7 @@ function Nav() {
                     <li>
                         <Link
                             variant={LinkVariantEnum.NAV}
-                            to="/dashboard"
+                            to={RouteEnum.DASHBOARD}
                             iconNav={
                                 <TemplateIcon className="text-primary-main w-8 sm:w-8" />
                             }
@@ -87,7 +94,7 @@ function Nav() {
                     <li>
                         <Link
                             variant={LinkVariantEnum.NAV}
-                            to="/profil"
+                            to={RouteEnum.PROFIL}
                             iconNav={
                                 <UserIcon className="text-primary-main w-8 sm:w-8" />
                             }
@@ -102,7 +109,7 @@ function Nav() {
             <div className="sticky flex justify-start inset-x-0 bottom-0 bg-white border-l sm:border-l-0 sm:border-t border-secondary-light ml-1">
                 <Link
                     variant={LinkVariantEnum.NAV}
-                    to="/logout"
+                    to={RouteEnum.LOGOUT}
                     iconNav={
                         <Logout className="text-primary-main w-8 sm:w-8 opacity-60 group-hover:opacity-100" />
                     }

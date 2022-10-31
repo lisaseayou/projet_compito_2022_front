@@ -8,6 +8,7 @@ type ButtonProps = {
     className?: string;
     type?: ButtonTypeEnum;
     onClick?: () => void;
+    disabled?: boolean;
 };
 
 const Button = ({
@@ -15,13 +16,14 @@ const Button = ({
     variant,
     className,
     type,
+    disabled,
     onClick,
 }: ButtonProps) => {
     if (variant === ButtonVariantEnum.OUTLINE) {
         return (
             <button
                 type={type ?? ButtonTypeEnum.BUTTON}
-                className={`inline-block py-2 px-14 leading-7 text-base font-extrabold not-italic text-white border-2 border-solid border-white rounded-full hover:bg-primary-dark hover:text-white active:bg-primary-dark focus:outline-none focus:ring ${
+                className={`inline-block py-2 px-14 leading-7 text-base font-extrabold not-italic text-white border-2 border-solid border-white rounded-full hover:bg-primary-dark hover:text-white active:bg-primary-dark focus:outline-none focus:shadow-none ${
                     className ?? ''
                 }`}
                 onClick={onClick}
@@ -35,9 +37,10 @@ const Button = ({
         return (
             <button
                 type={type ?? ButtonTypeEnum.BUTTON}
-                className={`inline-block py-2 px-14 leading-7 text-base font-extrabold not-italic bg-primary-main text-white border-2 border-solid border-primary-main rounded-full hover:bg-primary-dark hover:border-primary-dark hover:text-white active:bg-primary-dark focus:outline-none focus:ring ${
+                className={`inline-block py-2 px-14 leading-7 text-base font-extrabold not-italic bg-primary-main text-white border-2 border-solid border-primary-main rounded-full hover:bg-primary-dark hover:border-primary-dark hover:text-white active:bg-primary-dark focus:outline-none focus:shadow-none disabled:opacity-30 disabled:hover:bg-primary-main disabled:hover:border-primary-main ${
                     className ?? ''
                 }`}
+                disabled={disabled}
                 onClick={onClick}
             >
                 {children}
@@ -49,7 +52,7 @@ const Button = ({
         return (
             <button
                 type={type ?? ButtonTypeEnum.BUTTON}
-                className={`inline-block py-1 px-6 leading-7 text-sm font-extrabold not-italic bg-primary-main text-white normal border-2 border-solid border-primary-main rounded-md hover:bg-primary-dark hover:border-primary-dark hover:text-white active:bg-primary-dark focus:outline-none focus:ring ${
+                className={`inline-block py-1 px-6 leading-7 text-sm font-extrabold not-italic bg-primary-main text-white normal border-2 border-solid border-primary-main rounded-md hover:bg-primary-dark hover:border-primary-dark hover:text-white active:bg-primary-dark focus:outline-none focus:shadow-none ${
                     className ?? ''
                 }`}
                 onClick={onClick}
@@ -63,9 +66,10 @@ const Button = ({
         return (
             <button
                 type={ButtonTypeEnum.SUBMIT}
-                className={`block w-full px-5 py-3 text-sm font-medium text-white bg-primary-main rounded-lg ${
+                className={`block w-full px-5 py-3 text-sm font-medium text-white bg-primary-main rounded-lg disabled:opacity-30 disabled:hover:bg-primary-main ${
                     className ?? ''
                 }`}
+                disabled={disabled}
             >
                 {children}
             </button>
@@ -76,7 +80,7 @@ const Button = ({
         return (
             <button
                 onClick={onClick}
-                className="relative mr-0 inline-flex items-center px-8 py-3 overflow-hidden text-white bg-primary-main rounded group active:bg-primary-main focus:outline-none focus:ring"
+                className="relative mr-0 inline-flex items-center px-8 py-3 overflow-hidden text-white bg-primary-main rounded group active:bg-primary-main focus:outline-none focus:shadow-none"
             >
                 <span className="text-sm font-medium transition-all group-hover:ml-4">
                     <span className="absolute left-0 transition-transform -translate-x-full group-hover:translate-x-4">
@@ -92,7 +96,7 @@ const Button = ({
         return (
             <button
                 onClick={onClick}
-                className={`relative mr-0 inline-flex items-center px-8 py-2.5 overflow-hidden text-primary-main bg-info-light rounded-lg group active:bg-primary-main focus:outline-none focus:ring capitalize ${
+                className={`relative mr-0 inline-flex items-center px-8 py-2.5 overflow-hidden text-primary-main bg-info-light rounded-lg group active:bg-primary-main focus:outline-none focus:shadow-none capitalize ${
                     className ?? ''
                 }`}
             >
@@ -105,7 +109,7 @@ const Button = ({
         return (
             <button
                 onClick={onClick}
-                className={`relative mr-0 inline-flex items-center px-8 py-2.5 overflow-hidden text-danger-main bg-danger-light rounded-lg group active:bg-primary-main focus:outline-none focus:ring capitalize ${
+                className={`relative mr-0 inline-flex items-center px-8 py-2.5 overflow-hidden text-danger-main bg-danger-light rounded-lg group active:bg-primary-main focus:outline-none focus:shadow-none capitalize ${
                     className ?? ''
                 }`}
             >

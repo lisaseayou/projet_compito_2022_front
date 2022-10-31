@@ -1,6 +1,11 @@
-import { PlusCircleIcon } from '@heroicons/react/solid';
+// components
 import Typography from '../ui/Typography';
+
+// types, interfaces & enums
 import { TypographyVariantEnum } from '../../enums';
+
+// images & icons
+import { PlusCircleIcon } from '@heroicons/react/solid';
 
 type CardAddSmallProps = {
     onClick: () => void;

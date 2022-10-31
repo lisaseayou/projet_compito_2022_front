@@ -1,21 +1,29 @@
+// hooks
+import { FieldValues, SubmitHandler, useForm } from 'react-hook-form';
+import { ReactNode, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { useSelector } from 'react-redux';
+
+// components
 import ReactModal from 'react-modal';
 import Typography from '../Typography';
-import { XCircleIcon } from '@heroicons/react/solid';
-import { FormEvent, ReactNode } from 'react';
-import { useNavigate } from 'react-router-dom';
+import IconWithBg from '../Icons/IconWithBg';
+import ImageModalSplitFullHeight from '../../images/ImageModalSplitFullHeight';
+import Form from '../../Form/Form';
+import FormError from '../../Form/FormError';
+
+// types, interfaces & enums
+import { IUser } from '../../../types/User';
 import {
-    ButtonVariantEnum,
     FontSizeEnum,
     FontWeightEnum,
     IconEnum,
     TextTransformEnum,
     TypographyVariantEnum,
 } from '../../../enums';
-import IconWithBg from '../Icons/IconWithBg';
-import { OnSubmitFormType } from '../../../types';
-import { IUser } from '../../../types/User';
-import Button from '../Buttons/Button';
-import ImageModalSplitFullHeight from '../../images/ImageModalSplitFullHeight';
+
+// images & icons
+import { XCircleIcon } from '@heroicons/react/solid';
 
 type ModalProps = {
     show: boolean;
@@ -48,12 +56,16 @@ const Modal = ({
 }: ModalProps) => {
     const navigate = useNavigate();
 
-    const user: IUser = JSON.parse(
-        localStorage.getItem('userLogged') as string
-    );
+    const user: IUser = useSelector((state: any) => state.user);
 
-    const handleSubmit: OnSubmitFormType = (e: FormEvent<HTMLFormElement>) => {
-        e.preventDefault();
+    const {
+        handleSubmit,
+        formState: { errors, isSubmitted, isValid },
+    } = useForm({ mode: 'onBlur' });
+
+    const [globalErrorMessage, setGlobalFormMessage] = useState('');
+
+    const onSubmit: SubmitHandler<FieldValues> = (data: FieldValues) => {
         mutationFn({ variables: { data: { ...formDatas, userId: user?.id } } });
         navigate(onSuccessRedirect, { replace: true });
     };
@@ -101,19 +113,22 @@ const Modal = ({
                             </Typography>
                         </div>
 
-                        <form
-                            onSubmit={handleSubmit}
-                            className="flex flex-col items-center justify-center w-full mx-auto mt-8 mb-0"
+                        <Form
+                            containerClassName="w-full flex flex-col items-center"
+                            containerStyle={{ maxWidth: 546 }}
+                            formClassName="flex flex-col items-center justify-center w-full mx-auto mt-8 mb-0"
+                            buttonSubmitLabel={buttonLabel}
+                            isValid={isValid}
+                            handleSubmit={handleSubmit}
+                            onSubmit={onSubmit}
                         >
+                            <FormError
+                                isSubmitted={isSubmitted}
+                                globalErrorMessage={globalErrorMessage}
+                                containerClassName="w-11/12 max-w-sm flex justify-center"
+                            />
                             {renderInputs}
-
-                            <Button
-                                variant={ButtonVariantEnum.FORM}
-                                className="w-full max-w-sm"
-                            >
-                                {buttonLabel}
-                            </Button>
-                        </form>
+                        </Form>
                     </div>
 
                     <ImageModalSplitFullHeight

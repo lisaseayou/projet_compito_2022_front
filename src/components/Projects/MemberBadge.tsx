@@ -1,3 +1,8 @@
+import Avatar from '../ui/avatar/Avatar';
+import avatar1 from '../../assets/avatar/avatar-1.jpg';
+import Typography from '../ui/Typography';
+import { TypographyVariantEnum, FontSizeEnum, FontWeightEnum } from '../../enums';
+
 export type Member = {
     name: string;
     role: string;
@@ -10,21 +15,30 @@ type MemberProps = {
 const MemberBadge = ({ member }: MemberProps) => {
     return (
         <>
-            <strong className="inline-flex items-center bg-gray-100 px-5 py-1.5 rounded-full mb-4">
-                <img
-                    className="object-cover w-6 h-6 rounded-full -ml-2.5 mr-2.5"
-                    src="https://www.hyperui.dev/photos/man-4.jpeg"
-                    alt="Simon Lewis"
-                />
+            <div className="inline-flex items-center bg-gray-100 px-5 py-1.5 rounded-full mb-4">
+                <Avatar src={avatar1} alt="user" />
+
                 <div className="flex flex-col">
-                    <span className="text-[12px] font-medium mr-1">
+                    <Typography
+                        variant={TypographyVariantEnum?.P}
+                        color="text-primary-main"
+                        className="mr-1 font-medium"
+                        fontSize={FontSizeEnum.XS}
+                        fontWeight={FontWeightEnum.BOLD}
+                    >
                         {member.name}
-                    </span>
-                    <span className="text-[12px] font-medium">
+                    </Typography>
+
+                    <Typography
+                        variant={TypographyVariantEnum?.P}
+                        color="text-primary-main"
+                        className="mr-1 font-medium"
+                        fontSize={FontSizeEnum.XS}
+                    >
                         {member.role}
-                    </span>
+                    </Typography>
                 </div>
-            </strong>
+            </div>
         </>
     );
 };

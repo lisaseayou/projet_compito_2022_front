@@ -1,12 +1,17 @@
+// components
+import Typography from '../Typography';
+
+// utils & helpers
+import { getPlural } from '../../../utils';
+
+// types, interfaces & enums
+import { ITask } from '../../../types/Task';
 import {
     FontSizeEnum,
     FontWeightEnum,
     ProgressTypeEnum,
     TypographyVariantEnum,
 } from '../../../enums';
-import { ITask } from '../../../types/Task';
-import { getPlural } from '../../../utils';
-import Typography from '../Typography';
 
 type ProgressProps = {
     items: ITask[];

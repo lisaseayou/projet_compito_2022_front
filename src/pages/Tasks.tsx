@@ -56,7 +56,7 @@ const Tasks = () => {
             <div className="col-start-11 col-end-13 flex justify-center mt-3">
                 <Button
                     variant={ButtonVariantEnum.CTA}
-                    onClick={() => navigate('/addtask')}
+                    onClick={() => navigate(RouteEnum.ADD_TASK)}
                 >
                     Ajouter une tâche
                 </Button>

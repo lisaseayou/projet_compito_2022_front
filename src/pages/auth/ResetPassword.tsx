@@ -1,46 +1,56 @@
-import { useMutation, useQuery } from '@apollo/client';
-import { ChangeEvent, ClipboardEvent, FormEvent, useState } from 'react';
+// hooks
+import { ClipboardEvent, useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
-import Work from '../../assets/work-pressure.svg';
-import ImageSplitFullHeight from '../../components/images/ImageSplitFullHeight';
-import Button from '../../components/ui/Buttons/Button';
+import { useMutation, useQuery } from '@apollo/client';
+import { FieldValues, SubmitHandler, useForm } from 'react-hook-form';
+
+// components
 import TextField from '../../components/ui/form/TextField';
 import Icon from '../../components/ui/Icons/Icon';
-import IconWithBg from '../../components/ui/Icons/IconWithBg';
-import Link from '../../components/ui/Link';
-import Typography from '../../components/ui/Typography';
-import {
-    ButtonVariantEnum,
-    FontSizeEnum,
-    FontWeightEnum,
-    IconEnum,
-    LinkVariantEnum,
-    OpacityEnum,
-    TextTransformEnum,
-    TypographyVariantEnum,
-} from '../../enums';
+import NoResult from '../../components/errors/NoResult';
+import ForgotPasswordLayout from '../../layout/ForgotPasswordLayout';
+import FormError from '../../components/Form/FormError';
+import Form from '../../components/Form/Form';
+
+// utils & helpers
+import validation from '../../validation';
+
+// graphql
 import { REQUEST_PASSWORD } from '../../graphql/mutation';
 import { GET_USER_BY_RESET_TOKEN } from '../../graphql/query';
-import { OnSubmitFormType } from '../../types';
+
+// types, interfaces & enums
+import { IGetUserByResetToken, IResetPassword } from '../../types/User';
 import {
-    IGetUserByResetToken,
-    IPasswordUser,
-    IResetPassword,
-} from '../../types/User';
+    FontWeightEnum,
+    IconEnum,
+    OpacityEnum,
+    RouteEnum,
+    TypographyVariantEnum,
+} from '../../enums';
+
+// images & icons
+import workImg from '../../assets/work-pressure.svg';
+import NotAuthorizedImg from '../../assets/not-authorized.svg';
 
 const ResetPassword = () => {
     const navigate = useNavigate();
     const params = useParams();
 
-    const [formDatas, setFormData] = useState<IPasswordUser>({
-        password: '',
-        passwordConfirm: '',
-    });
+    const {
+        control,
+        handleSubmit,
+        watch,
+        formState: { errors, isSubmitted, isValid },
+    } = useForm({ mode: 'onChange' });
 
     const { data, loading, error } = useQuery<IGetUserByResetToken>(
         GET_USER_BY_RESET_TOKEN,
         {
             variables: { resetToken: params?.resetToken },
+            onError(error) {
+                setGlobalFormMessage(error?.message);
+            },
         }
     );
 
@@ -48,17 +58,19 @@ const ResetPassword = () => {
         password: true,
         passwordConfirm: true,
     });
+    const [globalErrorMessage, setGlobalFormMessage] = useState('');
 
-    const [resetPassword] = useMutation<IResetPassword>(REQUEST_PASSWORD, {
-        onCompleted: () => {
-            setFormData({
-                password: '',
-                passwordConfirm: '',
-            });
-
-            navigate('/auth/reset-password-confirm');
-        },
-    });
+    const [resetPassword, { error: errorReset }] = useMutation<IResetPassword>(
+        REQUEST_PASSWORD,
+        {
+            onCompleted: () => {
+                navigate(RouteEnum.RESET_PASSWORD_CONFIRM);
+            },
+            onError(error) {
+                setGlobalFormMessage(error?.message);
+            },
+        }
+    );
 
     const handleCopy = (e: ClipboardEvent<HTMLInputElement>) => {
         e.preventDefault();
@@ -70,15 +82,7 @@ const ResetPassword = () => {
         return false;
     };
 
-    const handleChange = (
-        e: ChangeEvent<HTMLInputElement | HTMLSelectElement>
-    ) => {
-        setFormData({ ...formDatas, [e.target.name]: e.target.value });
-    };
-
-    const handleSubmit: OnSubmitFormType = (e: FormEvent<HTMLFormElement>) => {
-        console.log(data);
-        e.preventDefault();
+    const onSubmit: SubmitHandler<FieldValues> = (formDatas: FieldValues) => {
         resetPassword({
             variables: {
                 email: data?.userByResetToken?.email,
@@ -89,133 +93,125 @@ const ResetPassword = () => {
         });
     };
 
-    return (
-        <section className="relative flex flex-wrap md:items-center w-full min-h-screen">
-            <div className="flex flex-col justify-center w-full md:w-3/5 lg:w-1/2 text-center px-4 sm:pl-8">
-                <div className="max-w-lg mx-auto text-center">
-                    <IconWithBg variant={IconEnum.LOCK_CLOSED} />
+    useEffect(() => {
+        const subscription = watch(() => {
+            setGlobalFormMessage('');
+        });
 
-                    <Typography
-                        variant={TypographyVariantEnum?.H1}
-                        color="text-primary-main"
-                        fontSize={'text-3xl sm:text-4xl'}
+        return () => subscription.unsubscribe();
+    }, [watch]);
+
+    if (error) {
+        return (
+            <section className="relative flex items-center justify-center w-full min-h-screen">
+                <div className="relative block col-span-12 w-full max-w-lg">
+                    <NoResult
+                        typoVariant={TypographyVariantEnum.H4}
+                        fontSize="text-2xl sm:text-3xl"
                         fontWeight={FontWeightEnum.BOLD}
-                        textTransform={TextTransformEnum.NORMAL}
-                        className="w-full mt-6 mb-6 sm:mb-6"
-                    >
-                        Définissez votre nouveau mot de passe
-                    </Typography>
-
-                    <Typography
-                        variant={TypographyVariantEnum?.H5}
-                        color="text-primary-main"
-                        fontSize={FontSizeEnum.BASE}
-                        fontWeight={FontWeightEnum.NORMAL}
-                        textTransform={TextTransformEnum.NORMAL}
-                        className="w-full mt-6"
-                    >
-                        Votre nouveau mot de passe doit être différent que les
-                        mots de passe utilisé précédemment.
-                    </Typography>
+                        image={NotAuthorizedImg}
+                        text={error.message}
+                        btnLabel="Se connecter"
+                        btnOnclick={() => navigate(RouteEnum.LOGIN)}
+                    />
                 </div>
+            </section>
+        );
+    }
 
-                <form
-                    onSubmit={handleSubmit}
-                    className="flex flex-col items-center justify-center w-full mx-auto mt-8 mb-0 space-y-4"
-                    style={{ maxWidth: 546 }}
-                >
-                    <TextField
-                        type={!passwordShown.password ? 'text' : 'password'}
-                        name="password"
-                        id="password"
-                        placeholder="Mot de passe"
-                        icon={
-                            <Icon
-                                variant={IconEnum.LOCK_CLOSED}
-                                opacity={OpacityEnum.OPACITY_70}
-                            />
-                        }
-                        iconShow={
-                            <Icon
-                                variant={
-                                    passwordShown.password
-                                        ? IconEnum.EYE_OFF
-                                        : IconEnum.EYE
-                                }
-                                opacity={OpacityEnum.OPACITY_70}
-                                onClick={() =>
-                                    setPasswordShown({
-                                        ...passwordShown,
-                                        password: !passwordShown.password,
-                                    })
-                                }
-                            />
-                        }
-                        className="mb-0 sm:mb-0 mt-0 w-full max-w-sm"
-                        value={formDatas?.password}
-                        handleChange={handleChange}
-                        handlePaste={handlePaste}
-                        handleCopy={handleCopy}
-                    />
-
-                    <TextField
-                        type={
-                            !passwordShown.passwordConfirm ? 'text' : 'password'
-                        }
-                        name="passwordConfirm"
-                        id="passwordConfirm"
-                        placeholder="Confirmation de mot de passe"
-                        icon={
-                            <Icon
-                                variant={IconEnum.LOCK_CLOSED}
-                                opacity={OpacityEnum.OPACITY_70}
-                            />
-                        }
-                        iconShow={
-                            <Icon
-                                variant={
-                                    passwordShown.passwordConfirm
-                                        ? IconEnum.EYE_OFF
-                                        : IconEnum.EYE
-                                }
-                                opacity={OpacityEnum.OPACITY_70}
-                                onClick={() =>
-                                    setPasswordShown({
-                                        ...passwordShown,
-                                        passwordConfirm:
-                                            !passwordShown.passwordConfirm,
-                                    })
-                                }
-                            />
-                        }
-                        className="mb-4 sm:mb-4 mt-0 w-full max-w-sm"
-                        value={formDatas?.passwordConfirm}
-                        handleChange={handleChange}
-                        handlePaste={handlePaste}
-                        handleCopy={handleCopy}
-                    />
-
-                    <Button
-                        variant={ButtonVariantEnum.FORM}
-                        className="w-full max-w-sm"
-                    >
-                        Changer le mot de passe
-                    </Button>
-                </form>
-
-                <Link
-                    variant={LinkVariantEnum.BACK}
-                    to="/auth/login"
-                    label="Revenir à la connexion"
-                    classNameBack="mb-24"
+    return (
+        <ForgotPasswordLayout
+            imageSplit={workImg}
+            icon={IconEnum.LOCK_CLOSED}
+            title="Définissez votre nouveau mot de passe"
+            subtitle="Votre nouveau mot de passe doit être différent que les mots de passe utilisé précédemment."
+        >
+            <Form
+                containerClassName="w-full flex flex-col items-center mt-8 mb-0 mx-auto"
+                containerStyle={{ maxWidth: 546 }}
+                formClassName="flex flex-col items-center justify-center w-full mx-auto"
+                isValid={isValid}
+                handleSubmit={handleSubmit}
+                onSubmit={onSubmit}
+                buttonSubmitLabel="Changer le mot de passe"
+            >
+                <FormError
+                    isSubmitted={isSubmitted}
+                    globalErrorMessage={globalErrorMessage}
                 />
-            </div>
 
-            <ImageSplitFullHeight
-                src={Work}
-                classNameContainer="hidden md:flex"
-            />
-        </section>
+                <TextField
+                    control={control}
+                    validation={validation.resetPassword.password}
+                    type={!passwordShown.password ? 'text' : 'password'}
+                    name="password"
+                    id="password"
+                    placeholder="Mot de passe"
+                    icon={
+                        <Icon
+                            variant={IconEnum.LOCK_CLOSED}
+                            opacity={OpacityEnum.OPACITY_70}
+                        />
+                    }
+                    iconShow={
+                        <Icon
+                            variant={
+                                passwordShown.password
+                                    ? IconEnum.EYE_OFF
+                                    : IconEnum.EYE
+                            }
+                            opacity={OpacityEnum.OPACITY_70}
+                            onClick={() =>
+                                setPasswordShown({
+                                    ...passwordShown,
+                                    password: !passwordShown.password,
+                                })
+                            }
+                        />
+                    }
+                    containerClassName="mb-4 sm:mb-4 mt-0 w-full max-w-sm"
+                    handlePaste={handlePaste}
+                    handleCopy={handleCopy}
+                    error={errors?.password}
+                />
+
+                <TextField
+                    control={control}
+                    validation={validation.resetPassword.passwordConfirm}
+                    type={!passwordShown.passwordConfirm ? 'text' : 'password'}
+                    name="passwordConfirm"
+                    id="passwordConfirm"
+                    placeholder="Confirmation de mot de passe"
+                    icon={
+                        <Icon
+                            variant={IconEnum.LOCK_CLOSED}
+                            opacity={OpacityEnum.OPACITY_70}
+                        />
+                    }
+                    iconShow={
+                        <Icon
+                            variant={
+                                passwordShown.passwordConfirm
+                                    ? IconEnum.EYE_OFF
+                                    : IconEnum.EYE
+                            }
+                            opacity={OpacityEnum.OPACITY_70}
+                            onClick={() =>
+                                setPasswordShown({
+                                    ...passwordShown,
+                                    passwordConfirm:
+                                        !passwordShown.passwordConfirm,
+                                })
+                            }
+                        />
+                    }
+                    containerClassName="mb-4 sm:mb-4 mt-0 w-full max-w-sm"
+                    handlePaste={handlePaste}
+                    handleCopy={handleCopy}
+                    error={errors?.passwordConfirm}
+                />
+            </Form>
+        </ForgotPasswordLayout>
     );
 };
 

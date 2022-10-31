@@ -1,36 +1,72 @@
+// hooks
+import { useState } from 'react';
 import { useQuery } from '@apollo/client';
+import { useSelector } from 'react-redux';
+
+// components
+import HeaderGlobal from '../../components/headers/HeaderGlobal';
+import TitleBlock from '../../components/titles/TitleBlock';
+import Typography from '../../components/ui/Typography';
+import Alert from '../../components/ui/Alert';
+import CardSmall from '../../components/cards/CardSmall';
+import CardAddSmall from '../../components/cards/CardAddSmall';
+import CardList from '../../components/cards/CardList';
+import ModalWithImage from '../../components/modals/ModalCreateProject';
+import Loader from '../../components/ui/loader/Loader';
+import { ToastContainer } from 'react-toastify';
+
+// utils & helpers
+import { firstLetterUpperCase } from '../../utils';
+
+// graphql
+import {
+    GET_LAST_PROJECTS_UPDATE_BY_USER,
+    GET_TASKS_BY_DAY_TODAY,
+} from '../../graphql/query';
+
+// types, interfaces & enums
+import { IProject } from '../../types/Project';
+import { IUser } from '../../types/User';
+import { ITask } from '../../types/Task';
+import { TypographyVariantEnum, AlertVariantEnum } from '../../enums';
+
+// images & icons
 import {
     ColorSwatchIcon,
     ClockIcon,
     ClipboardCheckIcon,
 } from '@heroicons/react/solid';
 import { ClockIcon as ClockIconOutline } from '@heroicons/react/outline';
-import { GET_ALL_PROJECTS } from '../../graphql/query';
-import HeaderGlobal from '../../components/headers/HeaderGlobal';
-import TitleBlock from '../../components/titles/TitleBlock';
-import CardSmall from '../../components/cards/CardSmall';
-import CardAddSmall from '../../components/cards/CardAddSmall';
 import Work from '../../assets/work-pressure.svg';
-import CardList from '../../components/cards/CardList';
-import { useState } from 'react';
-import ModalWithImage from '../../components/modals/ModalCreateProject';
-import Typography from '../../components/ui/Typography';
-import { TypographyVariantEnum } from '../../enums';
-import { IProject } from '../../types/Project';
 
 const UserHome = () => {
-    const { loading, error, data } = useQuery(GET_ALL_PROJECTS);
     const [showModal, setShowModal] = useState<boolean>(false);
+    const [modalUpdateOrDeleteID, setModalUpdateOrDeleteID] = useState('');
 
-    if (loading) {
-        return <p>loading</p>;
+    const user: IUser = useSelector((state: any) => state.user);
+
+    const { loading, error, data } = useQuery(
+        GET_LAST_PROJECTS_UPDATE_BY_USER,
+        {
+            variables: { limit: 3, userId: user.id },
+        }
+    );
+
+    const {
+        loading: tasksLoading,
+        error: tasksError,
+        data: tasksData,
+    } = useQuery(GET_TASKS_BY_DAY_TODAY, {
+        variables: { limit: 3, userId: user.id },
+    });
+
+    if (loading || tasksLoading) {
+        return <Loader label="Chargement..." />;
     }
 
-    if (error) {
+    if (error || tasksError) {
         return <p>error</p>;
     }
-
-    const user = JSON.parse(localStorage.getItem('userLogged') as string);
 
     return (
         <>
@@ -38,7 +74,9 @@ const UserHome = () => {
                 <div className="px-4 py-16 max-w-screen-xl sm:px-6 lg:px-8">
                     <div className="max-w-xl">
                         <HeaderGlobal
-                            title={`Bonjour ${user?.name} `}
+                            title={`Bonjour ${firstLetterUpperCase(
+                                user?.name
+                            )} `}
                             dateIsShow
                         />
                     </div>
@@ -55,12 +93,18 @@ const UserHome = () => {
                             <hr className="col-start-1 col-end-13 h-1 w-24 bg-primary-main mt-2 mb-4" />
 
                             <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
-                                {data.allProjects
+                                {data.lastProjectByUser
                                     .slice(0, 3)
                                     .map((project: IProject) => (
                                         <CardSmall
                                             key={project?.id}
-                                            title={project?.name}
+                                            project={project}
+                                            modalUpdateOrDeleteID={
+                                                modalUpdateOrDeleteID
+                                            }
+                                            setModalUpdateOrDeleteID={
+                                                setModalUpdateOrDeleteID
+                                            }
                                         />
                                     ))}
 
@@ -85,45 +129,59 @@ const UserHome = () => {
                             <hr className="col-start-1 col-end-13 h-1 w-24 bg-primary-main mt-2 mb-4" />
 
                             <div className="flex flex-col">
-                                {data.allProjects
-                                    .slice(0, 4)
-                                    .map((project: IProject) => (
-                                        <CardList
-                                            key={project?.id}
-                                            title={project?.name}
-                                            icon={
-                                                <ColorSwatchIcon className="h-6 w-6 text-white" />
-                                            }
-                                        >
-                                            <div className="flex items-center">
-                                                <ClockIconOutline className="h-6 w-6 text-primary-main mr-1" />
-                                                <Typography
-                                                    variant={
-                                                        TypographyVariantEnum.H6
-                                                    }
-                                                    color="text-primary-main"
-                                                    fontSize="text-xs"
-                                                    fontWeight="font-bold"
-                                                    className="w-full"
-                                                >
-                                                    3h
-                                                </Typography>
-                                            </div>
-                                        </CardList>
-                                    ))}
+                                {tasksData.tasksByDay.length > 0 ? (
+                                    tasksData.tasksByDay
+                                        .slice(0, 4)
+                                        .map((task: ITask) => (
+                                            <CardList
+                                                key={task?.id}
+                                                task={task}
+                                                icon={
+                                                    <ColorSwatchIcon className="h-6 w-6 text-white" />
+                                                }
+                                            >
+                                                <div className="flex items-center">
+                                                    <ClockIconOutline className="h-6 w-6 text-primary-main mr-1" />
+                                                    <Typography
+                                                        variant={
+                                                            TypographyVariantEnum.H6
+                                                        }
+                                                        color="text-primary-main"
+                                                        fontSize="text-xs"
+                                                        fontWeight="font-bold"
+                                                        className="w-full"
+                                                    >
+                                                        3h
+                                                    </Typography>
+                                                </div>
+                                            </CardList>
+                                        ))
+                                ) : (
+                                    <Alert
+                                        variant={AlertVariantEnum.FORM_ERROR}
+                                        containerClassName="w-11/12 max-w-sm flex justify-center mx-0"
+                                    >
+                                        Aucune tache n'est assigné pour le
+                                        moment.
+                                    </Alert>
+                                )}
                             </div>
                         </div>
 
-                        <div
-                            className="row-start-3 md:row-start-2 col-span-12 md:col-span-4 mt-12"
-                            style={{
-                                background: `url(${Work}) no-repeat`,
-                                backgroundSize: 'cover',
-                                backgroundPosition: 'center',
-                            }}
-                        />
+                        {tasksData.tasksByDay.length > 0 && (
+                            <div
+                                className="row-start-3 md:row-start-2 col-span-12 md:col-span-4 mt-12"
+                                style={{
+                                    background: `url(${Work}) no-repeat`,
+                                    backgroundSize: 'cover',
+                                    backgroundPosition: 'center',
+                                }}
+                            />
+                        )}
                     </div>
                 </div>
+
+                <ToastContainer />
             </section>
 
             <ModalWithImage

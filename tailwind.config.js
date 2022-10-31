@@ -30,6 +30,8 @@ module.exports = {
                 danger: {
                     main: '#c53030',
                     light: '#fed7d7',
+                    ultralight: '#f5eaea',
+                    dark: '#b91c1c',
                 },
                 info: {
                     light: '#edf2f7',

@@ -1,47 +1,38 @@
+// hooks
 import { useSelector } from 'react-redux';
+
+// components
 import Modal from '../components/Modal';
+import ProfilItem from '../components/profile/ProfilItem';
+import PrimaryLayout from '../layout/PrimaryLayout';
+
+// types, interfaces & enums
 import { IUser } from '../types/User';
+import { JustifyContentEnum } from '../enums';
 
 const Profil = () => {
-    const user: IUser = useSelector((state: any) => state.auth.user);
+    const user: IUser = useSelector((state: any) => state.user);
 
     return (
         <>
-            <div className="pl-20 pr-5">
-                <div></div>
-                <h1 className="flex justify-center text-4xl font-paytone-one text-violet-800 p-2">
-                    Profil Page
-                </h1>
-            </div>
-            <>
-                <div>
-                    <p className="flex justify-center items-center w-full h-full">
-                        {user.name}
-                    </p>
-                    <p className="flex justify-center items-center w-full h-full">
-                        {user.email}
-                    </p>
-                    <p className="flex justify-center items-center w-full h-full">
-                        {user.url}
-                    </p>
-                    <p className="flex justify-center items-center w-full h-full">
-                        {user.linkedin}
-                    </p>
-                    <p className="flex justify-center items-center w-full h-full">
-                        {user.twitter}
-                    </p>
-                    <p className="flex justify-center items-center w-full h-full">
-                        {user.github}
-                    </p>
-                    <p className="flex justify-center items-center w-full h-full">
-                        {user.description}
-                    </p>
+            <PrimaryLayout
+                title="Page de Profil"
+                titleBoxAlign={JustifyContentEnum.CENTER}
+            >
+                <div className="flex flex-col justify-center w-full">
+                    <ProfilItem>{user.name}</ProfilItem>
+                    <ProfilItem>{user.email}</ProfilItem>
+                    <ProfilItem>{user.url}</ProfilItem>
+                    <ProfilItem>{user.linkedin}</ProfilItem>
+                    <ProfilItem>{user.twitter}</ProfilItem>
+                    <ProfilItem>{user.github}</ProfilItem>
+                    <ProfilItem>{user.description}</ProfilItem>
                 </div>
-            </>
 
-            <div className="flex justify-center items-center m-5">
-                <Modal />
-            </div>
+                <div className="flex justify-center items-center m-5">
+                    <Modal />
+                </div>
+            </PrimaryLayout>
         </>
     );
 };

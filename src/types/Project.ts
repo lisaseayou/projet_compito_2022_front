@@ -17,6 +17,9 @@ export interface IGetAllProjects {
     allProjects: IProject[];
 }
 
+export interface IGetProjectsByUser {
+    projectsByUser: IProject[];
+}
 export interface IGetProject {
     project: IProject;
 }

@@ -1,13 +1,20 @@
+// hooks
+import { ReactNode } from 'react';
 import { Link as RouterLink } from 'react-router-dom';
-import { ArrowLeftIcon } from '@heroicons/react/solid';
+
+// components
 import Typography from './Typography';
+
+// types, interfaces & enums
 import {
     FontSizeEnum,
     FontWeightEnum,
     LinkVariantEnum,
     TypographyVariantEnum,
 } from '../../enums';
-import { ReactNode } from 'react';
+
+// images & icons
+import { ArrowLeftIcon } from '@heroicons/react/solid';
 
 type LinkProps = {
     variant: LinkVariantEnum;

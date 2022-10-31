@@ -1,19 +1,32 @@
+// hooks
+import { ChangeEvent, useEffect, useState } from 'react';
 import { useMutation } from '@apollo/client';
-import { ChangeEvent, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { IconEnum, OpacityEnum } from '../../enums';
-import { ADD_PROJECT } from '../../graphql/mutation';
-import {
-    GET_ALL_PROJECTS,
-    GET_LAST_PROJECTS_UPDATE,
-} from '../../graphql/query';
-import { ToastError, ToastSuccess } from '../../utils/Toast';
+import { FieldValues, SubmitHandler, useForm } from 'react-hook-form';
+
+// components
 import TextField from '../ui/form/TextField';
 import Icon from '../ui/Icons/Icon';
 import Modal from '../ui/modals/Modal';
-import Work from '../../assets/work-pressure.svg';
 import TextAreaField from '../ui/form/TextAreaField';
-import { CreateProjectVariables, IAddProject } from '../../types/Project';
+
+// utils & helpers
+import { ToastSuccess } from '../../utils/Toast';
+import validation from '../../validation';
+
+// graphql
+import { ADD_PROJECT } from '../../graphql/mutation';
+import {
+    GET_PROJECT_BY_USER,
+    GET_LAST_PROJECTS_UPDATE_BY_USER,
+} from '../../graphql/query';
+
+// types, interfaces & enums
+import { IAddProject } from '../../types/Project';
+import { IconEnum, OpacityEnum, RouteEnum } from '../../enums';
+
+// images & icons
+import Work from '../../assets/work-pressure.svg';
 
 type ModalCreateProjectProps = {
     show: boolean;
@@ -23,34 +36,26 @@ type ModalCreateProjectProps = {
 const ModalCreateProject = ({ show, setShow }: ModalCreateProjectProps) => {
     const navigate = useNavigate();
 
-    const [formDatas, setFormDatas] = useState<CreateProjectVariables>({
-        name: '',
-        description: '',
-    });
+    const {
+        control,
+        watch,
+        formState: { errors },
+    } = useForm({ mode: 'onBlur' });
+
+    const [globalErrorMessage, setGlobalFormMessage] = useState('');
 
     const [addProject] = useMutation<IAddProject>(ADD_PROJECT, {
         onCompleted: () => {
             ToastSuccess('Votre projet a bien été ajoutée!');
-            setFormDatas({
-                name: '',
-                description: '',
-            });
             setShow(false);
-            navigate('/projects');
+            navigate(RouteEnum.PROJECTS);
         },
-        onError: () => {
-            ToastError("Votre projet n'a pas pu être ajoutée :(");
+        onError: (error) => {
+            setGlobalFormMessage(error?.message);
+            // ToastError("Votre projet n'a pas pu être ajoutée :(");
         },
-        refetchQueries: [GET_ALL_PROJECTS, GET_LAST_PROJECTS_UPDATE],
+        refetchQueries: [GET_PROJECT_BY_USER, GET_LAST_PROJECTS_UPDATE_BY_USER],
     });
-
-    const handleChange = (
-        e: ChangeEvent<
-            HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement
-        >
-    ) => {
-        setFormDatas({ ...formDatas, [e.target.name]: e.target.value });
-    };
 
     return (
         <Modal
@@ -61,6 +66,8 @@ const ModalCreateProject = ({ show, setShow }: ModalCreateProjectProps) => {
             renderInputs={
                 <>
                     <TextField
+                        control={control}
+                        validation={validation.addProject.name}
                         type="text"
                         name="name"
                         id="name"
@@ -71,12 +78,13 @@ const ModalCreateProject = ({ show, setShow }: ModalCreateProjectProps) => {
                                 opacity={OpacityEnum.OPACITY_70}
                             />
                         }
-                        className="mb-4 w-full max-w-sm"
-                        value={formDatas.name}
-                        handleChange={handleChange}
+                        containerClassName="mb-4 w-full max-w-sm"
+                        error={errors?.name}
                     />
 
                     <TextAreaField
+                        control={control}
+                        validation={validation.addProject.description}
                         name="description"
                         id="description"
                         row={8}
@@ -87,16 +95,15 @@ const ModalCreateProject = ({ show, setShow }: ModalCreateProjectProps) => {
                                 opacity={OpacityEnum.OPACITY_70}
                             />
                         }
-                        className="mb-4 w-full max-w-sm"
-                        value={formDatas.description}
-                        handleChange={handleChange}
+                        containerClassName="mb-4 w-full max-w-sm"
+                        error={errors?.password}
                     />
                 </>
             }
             buttonLabel="Créer un projet"
             image={Work}
             mutationFn={addProject}
-            formDatas={formDatas}
+            formDatas={watch()}
             onSuccessRedirect="../projects"
             icon={IconEnum.BRIEFCASE}
         />

@@ -1,4 +1,10 @@
+// components
 import ReactModal from 'react-modal';
+import Button from '../ui/Buttons/Button';
+import IconWithBg from '../ui/Icons/IconWithBg';
+import Typography from '../ui/Typography';
+
+// types, interfaces & enums
 import {
     ButtonTypeEnum,
     ButtonVariantEnum,
@@ -8,9 +14,6 @@ import {
     TextTransformEnum,
     TypographyVariantEnum,
 } from '../../enums';
-import Button from '../ui/Buttons/Button';
-import IconWithBg from '../ui/Icons/IconWithBg';
-import Typography from '../ui/Typography';
 
 type ModalDeleteProps = {
     show: boolean;

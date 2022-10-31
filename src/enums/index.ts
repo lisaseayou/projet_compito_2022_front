@@ -74,6 +74,15 @@ export enum TextLineHeightEnum {
     LOOSE = 'leading-loose',
 }
 
+export enum JustifyContentEnum {
+    START = "justify-start",
+    END = "justify-end",
+    CENTER = "justify-center",
+    BETWEEN = "justify-between",
+    AROUND = "justify-around",
+    EVENLY = "justify-evenly",
+}
+
 export enum ButtonTypeEnum {
     BUTTON = 'button',
     SUBMIT = 'submit',
@@ -85,8 +94,8 @@ export enum ButtonVariantEnum {
     LIGHT = 'light',
     FORM = 'form',
     CTA = 'cta',
-    CANCEL = "cancel",
-    DELETE = "delete"
+    CANCEL = 'cancel',
+    DELETE = 'delete',
 }
 
 export enum IconEnum {
@@ -137,4 +146,34 @@ export enum RoleEnum {
 
 export enum ProgressTypeEnum {
     TASK = 'task',
+}
+
+export enum AlertVariantEnum {
+    INPUT_ERROR = 'input_error',
+    FORM_ERROR = 'form_error',
+}
+
+export enum RouteEnum {
+    NOT_FOUND = '*',
+    HOME = '/',
+    LOGIN = '/auth/login',
+    REGISTER = '/auth/register',
+    FORGOT_PASSWORD = '/auth/forgot-password',
+    CHECK_EMAIL = '/auth/check-email',
+    RESET_PASSWORD = '/auth/reset-password/:resetToken',
+    RESET_PASSWORD_CONFIRM = '/auth/reset-password-confirm',
+    LOGOUT = '/logout',
+    USER_HOME = '/user/home',
+    PROJECTS = '/projects',
+    ADD_PROJECT = '/addproject',
+    PROJECT_DETAILS = '/project-details/:projectId',
+    TASKS = '/tasks',
+    ADD_TASK = '/addtask',
+    DASHBOARD = '/dashboard',
+    PROFIL = '/profil',
+}
+
+export enum AuthLayoutVariantEnum {
+    LOGIN = "login",
+    REGISTER = "register"
 }

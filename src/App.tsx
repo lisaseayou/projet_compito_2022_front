@@ -1,60 +1,78 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 
-import MenuList from './components/Menu';
 import Nav from './layout/Nav';
-import AddTask from './pages/AddTask';
-import AddProject from './pages/AddProject';
 import Auth from './pages/auth/Auth';
 import PrivateRoute from './pages/PrivateRoute';
-import Logout from './pages/auth/Logout';
-import UserHome from './pages/user/UserHome';
-import Login from './pages/auth/Login';
-import Register from './pages/auth/Register';
+import {
+    Menu,
+    MenuList,
+    MenuListAuth,
+    MenuListProtected,
+} from './components/Menu';
+import { useSelector } from 'react-redux';
+import { IUser } from './types/User';
+
+export type MenuItem = Pick<Menu, 'path' | 'Component'>;
 
 function App() {
+    const user: IUser = useSelector((state: any) => state.user);
+
     return (
         <>
             <div className="mr-0">
                 <BrowserRouter basename="/">
-                    <Nav />
+                    {user.id ? <Nav /> : null}
 
-                    <div className="mb-20 sm:mb-0 sm:ml-16 min-h-screen">
+                    <div
+                        className={`mb-20 sm:mb-0 ${
+                            user.id ? 'sm:ml-16' : 'sm:ml-0'
+                        } min-h-screen`}
+                    >
                         <Routes>
-                            {MenuList.map(({ path, Component }, index) => (
-                                <Route
-                                    path={path}
-                                    key={index}
-                                    element={<Component />}
-                                />
-                            ))}
-                            <Route
-                                path="/addtask"
-                                element={
-                                    <PrivateRoute>
-                                        <AddTask />
-                                    </PrivateRoute>
-                                }
-                            />
-
-                            <Route
-                                path="/user/home"
-                                element={
-                                    <PrivateRoute>
-                                        <UserHome />
-                                    </PrivateRoute>
-                                }
-                            />
-                            <Route
-                                path="/addproject"
-                                element={<AddProject />}
-                            />
+                            {MenuList.map(
+                                (
+                                    { path, Component }: MenuItem,
+                                    index: number
+                                ) => (
+                                    <Route
+                                        key={index}
+                                        path={path}
+                                        element={<Component />}
+                                    />
+                                )
+                            )}
 
                             <Route path="auth" element={<Auth />}>
-                                <Route path="login" element={<Login />} />
-                                <Route path="register" element={<Register />} />
+                                {MenuListAuth.map(
+                                    (
+                                        { path, Component }: MenuItem,
+                                        index: number
+                                    ) => (
+                                        <Route
+                                            key={index}
+                                            path={path}
+                                            element={<Component />}
+                                        />
+                                    )
+                                )}
                             </Route>
 
-                            <Route path="logout" element={<Logout />} />
+                            {MenuListProtected.map(
+                                (
+                                    { path, Component }: MenuItem,
+                                    index: number
+                                ) => (
+                                    <Route
+                                        key={index}
+                                        path={path}
+                                        element={
+                                            <PrivateRoute>
+                                                <Component />
+                                            </PrivateRoute>
+                                        }
+                                    />
+                                )
+                            )}
                         </Routes>
                     </div>
                 </BrowserRouter>

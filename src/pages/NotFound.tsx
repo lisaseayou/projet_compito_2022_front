@@ -1,7 +1,22 @@
-import Button from '../components/ui/Buttons/Button';
-import { ButtonTypeEnum, ButtonVariantEnum } from '../enums';
-import notFoundImage from '../assets/404.svg';
+// hooks
 import { Link } from 'react-router-dom';
+
+// components
+import Typography from '../components/ui/Typography';
+import Button from '../components/ui/Buttons/Button';
+
+// types, interfaces & enums
+import {
+    ButtonTypeEnum,
+    ButtonVariantEnum,
+    FontWeightEnum,
+    RouteEnum,
+    TextTransformEnum,
+    TypographyVariantEnum,
+} from '../enums';
+
+// images & icons
+import notFoundImage from '../assets/404.svg';
 
 const NotFound = () => {
     return (
@@ -11,17 +26,39 @@ const NotFound = () => {
                     <img src={notFoundImage} alt="404-error" />
                 </div>
                 <div className="flex flex-col justify-center items-center">
-                    <p className="text-6xl font-bold uppercase text-sky-600">
+                    <Typography
+                        variant={TypographyVariantEnum?.P}
+                        color="text-primary-main"
+                        fontSize="text-5xl sm:text-6xl"
+                        fontWeight={FontWeightEnum.BOLD}
+                        textTransform={TextTransformEnum.UPPERCASE}
+                        className="mb-4 text-center w-full"
+                    >
                         Oh non !!!
-                    </p>
-                    <p className="text-6xl font-bold uppercase text-sky-600">
+                    </Typography>
+
+                    <Typography
+                        variant={TypographyVariantEnum?.P}
+                        color="text-primary-main"
+                        fontSize="text-5xl sm:text-6xl"
+                        fontWeight={FontWeightEnum.BOLD}
+                        textTransform={TextTransformEnum.UPPERCASE}
+                        className="mb-10 text-center w-full"
+                    >
                         Error 404
-                    </p>
-                    <p className="mt-10 text-xl text-sky-500">
+                    </Typography>
+
+                    <Typography
+                        variant={TypographyVariantEnum?.P}
+                        color="text-primary-main"
+                        fontSize="text-md sm:text-xl"
+                        className="text-center w-full"
+                    >
                         Nous n'arrivons pas à trouver la page que vous
                         recherchez.
-                    </p>
-                    <Link className="mt-10" to="/user/home">
+                    </Typography>
+
+                    <Link className="mt-10" to={RouteEnum.USER_HOME}>
                         <Button
                             type={ButtonTypeEnum?.SUBMIT}
                             variant={ButtonVariantEnum.PRIMARY}

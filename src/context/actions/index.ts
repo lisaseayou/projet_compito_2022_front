@@ -1,5 +1,4 @@
-export const INCREMENT = "INCREMENT";
-export const DECREMENT = "DECREMENT";
-export const INCREMENT_BY_AMOUNT = "INCREMENT_BY_AMOUNT";
+import { createAction } from '@reduxjs/toolkit';
 
-export const LOGIN = "LOGIN";
+export const LOGIN = createAction("LOGIN").toString();
+export const LOGOUT = createAction("LOGOUT").toString();

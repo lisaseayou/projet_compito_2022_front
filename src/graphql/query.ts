@@ -68,10 +68,32 @@ export const GET_PROJECT = gql`
     }
 `;
 
+export const GET_LAST_PROJECTS_UPDATE_BY_USER = gql`
+    query LastProjectByUser($userId: String!, $limit: Float!) {
+        lastProjectByUser(userId: $userId, limit: $limit) {
+            id
+            name
+            description
+            createdAt
+            updatedAt
+            tasks {
+                id
+                subject
+                status
+                dueDate
+                initialSpentTime
+                additionalSpentTime
+                advancement
+                createdAt
+                updatedAt
+            }
+        }
+    }
+`;
 
-export const GET_LAST_PROJECTS_UPDATE = gql`
-    query LastProject($number: Float!) {
-        lastProject(number: $number) {
+export const GET_PROJECT_BY_USER = gql`
+    query ProjectsByUser($userId: String!) {
+        projectsByUser(userId: $userId) {
             id
             name
             description
@@ -95,6 +117,40 @@ export const GET_LAST_PROJECTS_UPDATE = gql`
 export const GET_ALL_TASKS = gql`
     query allTasks {
         allTasks {
+            id
+            subject
+            status
+            dueDate
+            initialSpentTime
+            additionalSpentTime
+            advancement
+            createdAt
+            updatedAt
+            project {
+                id
+                name
+            }
+            comments {
+                id
+                comment
+            }
+            documents {
+                id
+                name
+                size
+            }
+            users {
+                id
+                name
+                email
+            }
+        }
+    }
+`;
+
+export const GET_TASKS_BY_DAY_TODAY = gql`
+    query TasksByDay($limit: Float!, $userId: String!) {
+        tasksByDay(limit: $limit, userId: $userId) {
             id
             subject
             status
