@@ -95,7 +95,7 @@ const Register = () => {
                 containerClassName="w-full flex flex-col items-center"
                 containerStyle={{ maxWidth: 546 }}
                 formClassName="flex flex-col items-center w-full"
-                buttonSubmitLabel="S'incrire"
+                buttonSubmitLabel="S'inscrire"
                 isValid={isValid}
                 handleSubmit={handleSubmit}
                 onSubmit={onSubmit}
