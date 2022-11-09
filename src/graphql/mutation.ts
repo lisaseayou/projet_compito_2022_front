@@ -114,3 +114,13 @@ export const UPDATE_PROFILE = gql`
         }
     }
 `;
+
+export const UPDATE_TASK_STATUS = gql`
+    mutation Mutation($data: UpdateTaskInput!, $updateTaskId: String!) {
+        updateTask(data: $data, id: $updateTaskId) {
+            id
+            status
+            subject
+        }
+    }
+`;

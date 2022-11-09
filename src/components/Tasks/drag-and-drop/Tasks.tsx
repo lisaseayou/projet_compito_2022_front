@@ -5,12 +5,15 @@ import Column from './Column';
 import { DragDropContext } from 'react-beautiful-dnd';
 import './styles.css';
 import { StatusEnum } from '../../../enums';
+import { UPDATE_TASK_STATUS } from '../../../graphql/mutation';
+import { useMutation } from '@apollo/client';
 
 type TasksProps = {
     tasks: any;
+    projectId: any;
 };
 
-const Tasks = ({ tasks }: TasksProps) => {
+const Tasks = ({ tasks, projectId }: TasksProps) => {
     const getTasks = () => {
         let tasksList = {};
 
@@ -30,6 +33,19 @@ const Tasks = ({ tasks }: TasksProps) => {
         });
 
         return ids;
+    };
+
+    const getStatusByColumn = (columnId: any) => {
+        switch (columnId) {
+            case 'column-1':
+                return StatusEnum.TO_DO;
+            case 'column-2':
+                return StatusEnum.IN_PROGRESS;
+            case 'column-3':
+                return StatusEnum.FINISH;
+            default:
+                break;
+        }
     };
 
     const initialDatas = {
@@ -56,6 +72,12 @@ const Tasks = ({ tasks }: TasksProps) => {
     };
 
     const [datas, setDatas] = useState(initialDatas);
+
+    const [updateTaskStatus] = useMutation(UPDATE_TASK_STATUS, {
+        onCompleted: () => {},
+        onError: () => {},
+        // refetchQueries: [GET_ALL_TASKS],
+    });
 
     const onDragEnd = (result: any) => {
         const { destination, source, draggableId } = result;
@@ -119,6 +141,17 @@ const Tasks = ({ tasks }: TasksProps) => {
             ...finish,
             taskIds: finishTaskIds,
         };
+        updateTaskStatus({
+            variables: {
+                data: {
+                    status: getStatusByColumn(destination.droppableId),
+                    projectId,
+                },
+                updateTaskId: draggableId,
+            },
+        });
+
+        console.log(destination);
 
         const newState = {
             ...datas,

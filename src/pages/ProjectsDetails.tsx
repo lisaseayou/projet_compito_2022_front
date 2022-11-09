@@ -70,7 +70,10 @@ const ProjectsDetails = () => {
                     <ProjectMembersList />
                 </div>
 
-                <Tasks tasks={data?.project?.tasks} />
+                <Tasks
+                    tasks={data?.project?.tasks}
+                    projectId={data?.project?.id}
+                />
             </PrimaryLayout>
         </>
     );
