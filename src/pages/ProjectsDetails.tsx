@@ -56,7 +56,6 @@ const ProjectsDetails = () => {
                     </Typography>
                 </div>
 
-
                 <div className="w-full flex justify-start flex-col pl-10 my-1.5 mt-8">
                     <Typography
                         variant={TypographyVariantEnum?.H3}
@@ -71,7 +70,7 @@ const ProjectsDetails = () => {
                     <ProjectMembersList />
                 </div>
 
-                <Tasks />
+                <Tasks tasks={data?.project?.tasks} />
             </PrimaryLayout>
         </>
     );

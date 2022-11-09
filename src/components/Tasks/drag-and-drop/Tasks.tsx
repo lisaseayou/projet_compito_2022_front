@@ -4,40 +4,58 @@ import { useState } from 'react';
 import Column from './Column';
 import { DragDropContext } from 'react-beautiful-dnd';
 import './styles.css';
+import { StatusEnum } from '../../../enums';
 
-const initialDatas = {
-    tasks: {
-        'task-1': { id: 'task-1', content: 'Php', column: 'column-1' },
-        'task-2': { id: 'task-2', content: 'React' },
-        'task-3': { id: 'task-3', content: 'Symfony' },
-        'task-4': { id: 'task-4', content: 'Js' },
-        'task-5': { id: 'task-5', content: 'Angular' },
-    },
-    columns: {
-        'column-1': {
-            id: 'column-1',
-            title: 'A faire',
-            taskIds: ['task-1', 'task-2', 'task-3', 'task-4', 'task-5'],
-        },
-        'column-2': {
-            id: 'column-2',
-            title: 'En cours',
-            taskIds: [],
-        },
-        'column-3': {
-            id: 'column-3',
-            title: 'Terminées',
-            taskIds: [],
-        },
-    },
-    // pour mieux organiser les futurs colonnes
-    columnOrder: ['column-1', 'column-2', 'column-3'],
+type TasksProps = {
+    tasks: any;
 };
 
-const Tasks = () => {
-    const [datas, setDatas] = useState(initialDatas);
+const Tasks = ({ tasks }: TasksProps) => {
+    const getTasks = () => {
+        let tasksList = {};
 
-    
+        tasks?.forEach((task) => {
+            tasksList = { ...tasksList, [task.id]: task };
+        });
+
+        return tasksList;
+    };
+
+    const getTasksIdsByStatus = (status: StatusEnum) => {
+        const ids = [];
+        Object.values(getTasks())?.forEach((task) => {
+            if (task.status === status) {
+                ids.push(task.id);
+            }
+        });
+
+        return ids;
+    };
+
+    const initialDatas = {
+        tasks: getTasks(),
+        columns: {
+            'column-1': {
+                id: 'column-1',
+                title: 'A faire',
+                taskIds: getTasksIdsByStatus(StatusEnum.TO_DO),
+            },
+            'column-2': {
+                id: 'column-2',
+                title: 'En cours',
+                taskIds: getTasksIdsByStatus(StatusEnum.IN_PROGRESS),
+            },
+            'column-3': {
+                id: 'column-3',
+                title: 'Terminées',
+                taskIds: getTasksIdsByStatus(StatusEnum.FINISH),
+            },
+        },
+        // pour mieux organiser les futurs colonnes
+        columnOrder: ['column-1', 'column-2', 'column-3'],
+    };
+
+    const [datas, setDatas] = useState(initialDatas);
 
     const onDragEnd = (result: any) => {
         const { destination, source, draggableId } = result;

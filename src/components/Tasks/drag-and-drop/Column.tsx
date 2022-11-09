@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import Task from './Task';
 import { Droppable } from 'react-beautiful-dnd';
-import "./styles.css"
+import './styles.css';
 
 type ColumnsProps = {
     column: any;

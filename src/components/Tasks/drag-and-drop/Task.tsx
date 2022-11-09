@@ -17,7 +17,7 @@ const Task = ({ task, index, droppableProvided }: TaskProps) => {
                     ref={provided.innerRef}
                     className="task__item"
                 >
-                    {task.content}
+                    {task.subject}
                 </div>
             )}
         </Draggable>
