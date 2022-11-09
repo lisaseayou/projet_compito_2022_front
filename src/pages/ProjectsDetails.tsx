@@ -22,6 +22,7 @@ import {
 
 // utils && helpers
 import { firstLetterUpperCase } from '../utils';
+import Tasks from '../components/Tasks/drag-and-drop/Tasks';
 
 const ProjectsDetails = () => {
     const params = useParams();
@@ -55,6 +56,7 @@ const ProjectsDetails = () => {
                     </Typography>
                 </div>
 
+
                 <div className="w-full flex justify-start flex-col pl-10 my-1.5 mt-8">
                     <Typography
                         variant={TypographyVariantEnum?.H3}
@@ -68,6 +70,8 @@ const ProjectsDetails = () => {
 
                     <ProjectMembersList />
                 </div>
+
+                <Tasks />
             </PrimaryLayout>
         </>
     );
