@@ -9,6 +9,7 @@ import PrimaryLayout from '../layout/PrimaryLayout';
 // types, interfaces & enums
 import { IUser } from '../types/User';
 import { JustifyContentEnum } from '../enums';
+import SelectInput from '../components/ui/form/SelectInput';
 
 const Profil = () => {
     const user: IUser = useSelector((state: any) => state.user);
@@ -28,6 +29,7 @@ const Profil = () => {
                     <ProfilItem>{user.github}</ProfilItem>
                     <ProfilItem>{user.description}</ProfilItem>
                 </div>
+                <div><SelectInput/></div>
 
                 <div className="flex justify-center items-center m-5">
                     <Modal />
