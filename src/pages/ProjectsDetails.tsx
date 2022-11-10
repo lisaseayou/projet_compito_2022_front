@@ -22,6 +22,7 @@ import {
 
 // utils && helpers
 import { firstLetterUpperCase } from '../utils';
+import Tasks from '../components/Tasks/drag-and-drop/Tasks';
 
 const ProjectsDetails = () => {
     const params = useParams();
@@ -68,6 +69,11 @@ const ProjectsDetails = () => {
 
                     <ProjectMembersList />
                 </div>
+
+                <Tasks
+                    tasks={data?.project?.tasks}
+                    projectId={data?.project?.id}
+                />
             </PrimaryLayout>
         </>
     );

@@ -177,3 +177,9 @@ export enum AuthLayoutVariantEnum {
     LOGIN = "login",
     REGISTER = "register"
 }
+
+export enum StatusEnum {
+    TO_DO = "à faire",
+    IN_PROGRESS = "en cours",
+    FINISH = "terminé"
+}

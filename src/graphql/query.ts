@@ -181,3 +181,14 @@ export const GET_TASKS_BY_DAY_TODAY = gql`
         }
     }
 `;
+
+
+export const GET_TASKS_BY_PROJECT = gql`
+    query TasksByProject($projectId: String!) {
+        tasksByProject(projectId: $projectId) {
+            id
+            subject
+            status
+        }
+    }
+`;
