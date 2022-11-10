@@ -10,7 +10,7 @@ import { useQuery } from '@apollo/client';
 import { GET_ALL_TASKS } from '../graphql/query';
 import TasksList from '../components/Tasks/TasksList';
 import Typography from '../components/ui/Typography';
-import { ButtonVariantEnum, TypographyVariantEnum } from '../enums';
+import { ButtonVariantEnum, RouteEnum, TypographyVariantEnum } from '../enums';
 import { ITask } from '../types';
 import Button from '../components/ui/Buttons/Button';
 import SwitchButton from '../components/ui/Buttons/SwitchButton';
