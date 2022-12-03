@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import Task from './Task';
 import { Droppable } from 'react-beautiful-dnd';
 import './styles.css';
+import TaskCategory from '../TaskCategory';
 
 type ColumnsProps = {
     column: any;
@@ -23,9 +24,16 @@ const Column = ({ column, tasks }: ColumnsProps) => {
         return null;
     }
 
+    console.log(column);
+
     return (
         <div className="tasks__column">
-            <h2>{column.title}</h2>
+            <TaskCategory
+                title={column.title}
+                tasksLengthByStatus={tasks.length}
+                showBtn={column.id !== 'column-3'}
+            />
+
             <Droppable droppableId={column.id}>
                 {(provider) => (
                     <div

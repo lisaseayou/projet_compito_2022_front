@@ -6,6 +6,7 @@ import {
     LockClosedIcon,
     MailIcon,
     UserIcon,
+    PlusIcon,
 } from '@heroicons/react/solid';
 import {
     ChatAltIcon,
@@ -121,6 +122,16 @@ const Icon = ({
             case IconEnum.TRASH_OUTLINE:
                 return (
                     <TrashIcon
+                        className={`w-6 h-6 text-primary-main ${opacity} ${
+                            onClick ? 'cursor-pointer' : 'cursor-default'
+                        } ${className ?? ''}`}
+                        onClick={onClick}
+                    />
+                );
+
+            case IconEnum.PLUS:
+                return (
+                    <PlusIcon
                         className={`w-6 h-6 text-primary-main ${opacity} ${
                             onClick ? 'cursor-pointer' : 'cursor-default'
                         } ${className ?? ''}`}

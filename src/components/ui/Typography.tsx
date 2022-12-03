@@ -129,13 +129,11 @@ const Typography = ({
     if (variant === TypographyVariantEnum.P) {
         return (
             <p
-                className={`not-italic ${
-                    fontWeight ?? FontWeightEnum.NORMAL
-                } leading-${leading ?? TextLineHeightEnum.NONE} ${
-                    Array.isArray(fontSize) ? fontSize.join(' ') : fontSize
-                } ${textTransform ?? TextTransformEnum.NORMAL} ${
-                    color ?? 'text-white'
-                } ${className}`}
+                className={`not-italic ${fontWeight ?? FontWeightEnum.NORMAL} ${
+                    leading ?? TextLineHeightEnum.NONE
+                } ${Array.isArray(fontSize) ? fontSize.join(' ') : fontSize} ${
+                    textTransform ?? TextTransformEnum.NORMAL
+                } ${color ?? 'text-white'} ${className}`}
                 style={style}
             >
                 {children}

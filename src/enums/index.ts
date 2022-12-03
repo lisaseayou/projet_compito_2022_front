@@ -111,6 +111,7 @@ export enum IconEnum {
     TRASH_OUTLINE = 'TrashIcon',
     TRASH = 'TrashIcon',
     BRIEFCASE = ' BriefcaseIcon',
+    PLUS = "plus"
 }
 
 export enum OpacityEnum {
@@ -179,7 +180,7 @@ export enum AuthLayoutVariantEnum {
 }
 
 export enum StatusEnum {
-    TO_DO = "à faire",
-    IN_PROGRESS = "en cours",
-    FINISH = "terminé"
+    TO_DO = "TO_DO",
+    IN_PROGRESS = "IN_PROGRESS",
+    FINISH = "FINISH"
 }
