@@ -1,5 +1,6 @@
 import React from 'react';
 import { Draggable } from 'react-beautiful-dnd';
+import TaskCard from '../TaskCard';
 import './styles.css';
 
 type TaskProps = {
@@ -17,7 +18,7 @@ const Task = ({ task, index, droppableProvided }: TaskProps) => {
                     ref={provided.innerRef}
                     className="task__item"
                 >
-                    {task.subject}
+                    <TaskCard task={task} />
                 </div>
             )}
         </Draggable>

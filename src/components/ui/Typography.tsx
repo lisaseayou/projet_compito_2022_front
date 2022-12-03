@@ -130,7 +130,7 @@ const Typography = ({
         return (
             <p
                 className={`not-italic ${fontWeight ?? FontWeightEnum.NORMAL} ${
-                    leading ?? TextLineHeightEnum.NONE
+                    leading ?? TextLineHeightEnum.NORMAL
                 } ${Array.isArray(fontSize) ? fontSize.join(' ') : fontSize} ${
                     textTransform ?? TextTransformEnum.NORMAL
                 } ${color ?? 'text-white'} ${className}`}

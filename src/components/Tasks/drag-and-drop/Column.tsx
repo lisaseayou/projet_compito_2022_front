@@ -27,7 +27,7 @@ const Column = ({ column, tasks }: ColumnsProps) => {
     console.log(column);
 
     return (
-        <div className="tasks__column">
+        <div className="my-0 mx-4 flex-[1]">
             <TaskCategory
                 title={column.title}
                 tasksLengthByStatus={tasks.length}
