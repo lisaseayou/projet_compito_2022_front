@@ -13,7 +13,7 @@ type TypographyProps = {
     style?: object;
     className?: string;
     leading?: TextLineHeightEnum | string;
-    fontSize: string | FontSizeEnum | string[];
+    fontSize?: string | FontSizeEnum | string[];
     color?: string;
     textTransform?: TextTransformEnum | string;
     fontWeight?: FontWeightEnum | string;

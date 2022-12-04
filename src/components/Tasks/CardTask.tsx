@@ -32,7 +32,7 @@ const CardTask = ({
                     <h5 className="text-xl font-bold text-blue-700">
                         Task n° : {task.id}
                     </h5>
-                    <h6 className="text-xl text-blue-600">{task.subject}</h6>
+                    <h6 className="text-xl text-blue-600">{task.name}</h6>
                     <p className="mt-1 text-xs font-medium text-blue-500">
                         By : {task.name}
                     </p>

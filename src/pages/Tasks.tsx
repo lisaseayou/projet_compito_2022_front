@@ -92,7 +92,7 @@ const Tasks = () => {
                   ID
                 </th>
                 <th className="px-5 py-3 border-b-2 border-gray-200 text-center text-xs font-bold text-blue-600 tracking-wider">
-                  Subject
+                  Name
                 </th>
                 <th className="px-5 py-3 border-b-2 border-gray-200 text-center text-xs font-bold text-blue-600 tracking-wider">
                   Priority

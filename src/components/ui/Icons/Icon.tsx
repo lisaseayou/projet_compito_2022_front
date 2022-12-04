@@ -13,6 +13,8 @@ import {
     ClockIcon,
     PencilIcon,
     TrashIcon,
+    EyeIcon as EyeIconOutline,
+    EyeOffIcon as EyeOffIconOutline,
 } from '@heroicons/react/outline';
 
 type IconProps = {
@@ -42,6 +44,25 @@ const Icon = ({
             case IconEnum.EYE_OFF:
                 return (
                     <EyeOffIcon
+                        className={`w-6 h-6 text-primary-main ${opacity} ${
+                            onClick ? 'cursor-pointer' : 'cursor-default'
+                        }`}
+                        onClick={onClick}
+                    />
+                );
+
+            case IconEnum.EYE_OUTLINE:
+                return (
+                    <EyeIconOutline
+                        className={`w-6 h-6 text-primary-main ${opacity} ${
+                            onClick ? 'cursor-pointer' : 'cursor-default'
+                        }`}
+                        onClick={onClick}
+                    />
+                );
+            case IconEnum.EYE_OFF_OUTLINE:
+                return (
+                    <EyeOffIconOutline
                         className={`w-6 h-6 text-primary-main ${opacity} ${
                             onClick ? 'cursor-pointer' : 'cursor-default'
                         }`}

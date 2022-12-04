@@ -41,6 +41,7 @@ import { DotsVerticalIcon } from '@heroicons/react/solid';
 import avatar1 from '../../assets/avatar/avatar-1.jpg';
 import avatar2 from '../../assets/avatar/avatar-2.jpg';
 import { ITask } from '../../types/Task';
+import Chip from '../ui/chip/Chip';
 
 type TaskCardProps = {
     task: ITask;
@@ -70,7 +71,7 @@ const TaskCard = ({ task }: TaskCardProps) => {
     //     });
 
     return (
-        <div className="relative block col-span-12 sm:col-span-6 md:col-span-4 lg:col-span-3 p-5 mb-4 bg-primary-ultraLight w-full border border-gray-100 rounded-lg shadow-lg">
+        <div className="relative block col-span-12 sm:col-span-6 md:col-span-4 lg:col-span-3 p-4 mb-4 bg-primary-ultraLight w-full border border-gray-100 rounded-lg shadow-lg">
             <div className="flex flex-col justify-between h-full">
                 <div>
                     <div className="justify-between flex flex-col">
@@ -83,7 +84,7 @@ const TaskCard = ({ task }: TaskCardProps) => {
                                     fontWeight={FontWeightEnum.BOLD}
                                     textTransform={TextTransformEnum.NORMAL}
                                 >
-                                    {firstLetterUpperCase(task.subject)}
+                                    {firstLetterUpperCase(task.name)}
                                 </Typography>
                             </Link>
                         </div>
@@ -95,14 +96,17 @@ const TaskCard = ({ task }: TaskCardProps) => {
                                 className="mb-0"
                                 fontSize={FontSizeEnum.XS}
                             >
-                                {truncate(
-                                    'Jelly-o gummi bears apple pie gingerbread muffin danish brownie shortbread pie. Danish candy croissant pastry carrot cake. Candy canes muffin liquorice cookie candy cotton candy jelly-o. Candy carrot cake gingerbread donut icing soufflé fruitcake chocolate liquorice. Toffee chocolate cake shortbread bear claw tart lollipop jelly beans. Bonbon oat cake donut halvah soufflé tart cupcake wafer. Sweet roll chupa chups cake dessert toffee.',
-                                    15
-                                )}
+                                {truncate(task.description, 15)}
                             </Typography>
                         </div>
 
-                        <div></div>
+                        <div className="flex gap-2 mt-2 mb-4">
+                            {['front end', 'backend', 'webdesign'].map(
+                                (tag, i) => (
+                                    <Chip label={tag} />
+                                )
+                            )}
+                        </div>
 
                         {/* <div className="relative flex-shrink-0 ml-3 block">
                             <button
@@ -157,11 +161,11 @@ const TaskCard = ({ task }: TaskCardProps) => {
                         type={ProgressTypeEnum.TASK}
                     /> */}
 
-                    {/* <div className="flex justify-between items-center">
+                    <div className="flex justify-between items-center">
                         <div className="flex">
                             <Avatar src={avatar1} alt="user one" />
 
-                            {project?.users?.map(
+                            {task?.users?.map(
                                 (user: IUser, index: number) =>
                                     index > 0 &&
                                     index < 3 && (
@@ -174,30 +178,47 @@ const TaskCard = ({ task }: TaskCardProps) => {
                                     )
                             )}
 
-                            {project?.users?.length > 3 && (
+                            {task?.users?.length > 3 && (
                                 <AvatarEmpty
-                                    more={project?.users?.length - 3}
+                                    more={task?.users?.length - 3}
                                     className="-ml-3"
                                 />
                             )}
                         </div>
+                        <div className="flex gap-4">
+                            <div className="flex">
+                                <Icon
+                                    variant={IconEnum.EYE_OUTLINE}
+                                    opacity={OpacityEnum.OPACITY_100}
+                                    className="w-5 h-5"
+                                />
+                                <Typography
+                                    variant={TypographyVariantEnum?.P}
+                                    color="text-primary-main"
+                                    className="ml-1"
+                                    fontSize={FontSizeEnum.XS}
+                                >
+                                    {task.view}
+                                </Typography>
+                            </div>
 
-                        <div className="flex">
-                            <Icon
-                                variant={IconEnum.CHAT_ALT_OUTLINE}
-                                opacity={OpacityEnum.OPACITY_100}
-                                className="w-5 h-5"
-                            />
-                            <Typography
-                                variant={TypographyVariantEnum?.P}
-                                color="text-primary-main"
-                                className="ml-1"
-                                fontSize={FontSizeEnum.XS}
-                            >
-                                15
-                            </Typography>
+                            <div className="flex">
+                                <Icon
+                                    variant={IconEnum.CHAT_ALT_OUTLINE}
+                                    opacity={OpacityEnum.OPACITY_100}
+                                    className="w-5 h-5"
+                                />
+                                <Typography
+                                    variant={TypographyVariantEnum?.P}
+                                    color="text-primary-main"
+                                    className="ml-1"
+                                    fontSize={FontSizeEnum.XS}
+                                >
+                                    15
+                                </Typography>
+                            </div>
                         </div>
-                    </div> */}
+                    </div>
                 </div>
             </div>
 

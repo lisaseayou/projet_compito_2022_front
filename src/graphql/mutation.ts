@@ -74,7 +74,7 @@ export const ADD_TASK = gql`
         name
       }
       status
-      subject
+      name
       updatedAt
       users {
         id
@@ -94,7 +94,7 @@ export const ADD_PROJECT = gql`
       updatedAt
       tasks {
         id
-        subject
+        name
         status
       }
       users {
@@ -140,7 +140,7 @@ export const UPDATE_TASK_STATUS = gql`
     updateTask(data: $data, id: $updateTaskId) {
       id
       status
-      subject
+      name
     }
   }
 `;

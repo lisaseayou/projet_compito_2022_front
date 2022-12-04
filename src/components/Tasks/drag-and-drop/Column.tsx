@@ -24,8 +24,6 @@ const Column = ({ column, tasks }: ColumnsProps) => {
         return null;
     }
 
-    console.log(column);
-
     return (
         <div className="my-0 mx-4 flex-[1]">
             <TaskCategory

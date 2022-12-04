@@ -39,6 +39,7 @@ const ProjectsDetails = () => {
     if (loading) {
         return <Loader label="Chargement..." />;
     }
+    
 
     return (
         <>
@@ -97,7 +98,7 @@ const ProjectsDetails = () => {
                   initialSpentTime: 0,
                   projectId: "a0ab15ea-546b-49aa-b932-68aaab6fd564",
                   status: "à faire",
-                  subject: "faire des boutons",
+                  name: "faire des boutons",
                 },
               },
             })

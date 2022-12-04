@@ -34,8 +34,9 @@ export const GET_ALL_PROJECTS = gql`
             updatedAt
             tasks {
                 id
-                subject
+                name
                 status
+                description
             }
             users {
                 id
@@ -57,8 +58,10 @@ export const GET_PROJECT = gql`
             updatedAt
             tasks {
                 id
-                subject
+                name
                 status
+                description
+                view
             }
             users {
                 id
@@ -78,7 +81,8 @@ export const GET_LAST_PROJECTS_UPDATE_BY_USER = gql`
             updatedAt
             tasks {
                 id
-                subject
+                name
+                description
                 status
                 dueDate
                 initialSpentTime
@@ -101,7 +105,7 @@ export const GET_PROJECT_BY_USER = gql`
             updatedAt
             tasks {
                 id
-                subject
+                name
                 status
                 dueDate
                 initialSpentTime
@@ -118,7 +122,7 @@ export const GET_ALL_TASKS = gql`
     query allTasks {
         allTasks {
             id
-            subject
+            name
             status
             dueDate
             initialSpentTime
@@ -152,7 +156,7 @@ export const GET_TASKS_BY_DAY_TODAY = gql`
     query TasksByDay($limit: Float!, $userId: String!) {
         tasksByDay(limit: $limit, userId: $userId) {
             id
-            subject
+            name
             status
             dueDate
             initialSpentTime
@@ -187,7 +191,7 @@ export const GET_TASKS_BY_PROJECT = gql`
     query TasksByProject($projectId: String!) {
         tasksByProject(projectId: $projectId) {
             id
-            subject
+            name
             status
         }
     }

@@ -29,7 +29,7 @@ const CardList = ({ task, icon, children }: CardListProps) => {
                         fontWeight="font-semi-bold"
                         className="w-full"
                     >
-                        {task.subject}
+                        {task.name}
                     </Typography>
 
                     <Typography

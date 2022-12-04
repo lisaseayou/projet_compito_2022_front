@@ -102,6 +102,8 @@ export enum IconEnum {
     CHECK_CIRCLE = 'checkCircleIcon',
     EYE = 'EyeIcon',
     EYE_OFF = 'EyeOffIcon',
+    EYE_OUTLINE = 'EyeIconOutline',
+    EYE_OFF_OUTLINE = 'EyeOffIconOutline',
     LOCK_CLOSED = 'LockClosed',
     MAIL = 'MailIcon',
     USER = 'UserIcon',
@@ -180,7 +182,7 @@ export enum AuthLayoutVariantEnum {
 }
 
 export enum StatusEnum {
-    TO_DO = "TO_DO",
-    IN_PROGRESS = "IN_PROGRESS",
-    FINISH = "FINISH"
+    TO_DO = "à faire",
+    IN_PROGRESS = "en cours",
+    FINISH = "terminé"
 }

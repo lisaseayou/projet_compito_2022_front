@@ -57,6 +57,7 @@ module.exports = {
                 },
                 orange: {
                     primary: '#fed7aa',
+                    dark: '#c48b49',
                 },
                 purple: {
                     primary: '#e9d5ff',
