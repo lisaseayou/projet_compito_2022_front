@@ -141,31 +141,11 @@ const TaskCard = ({
                         <div className="flex gap-2 mt-2 mb-4">
                             {['front end', 'backend', 'webdesign'].map(
                                 (tag, i) => (
-                                    <Chip label={tag} />
+                                    <Chip key={i} label={tag} />
                                 )
                             )}
                         </div>
                     </div>
-
-                    {/* <div className="flex items-center mt-4">
-                        <Icon
-                            variant={IconEnum.CLOCK_OUTLINE}
-                            opacity={OpacityEnum.OPACITY_100}
-                            className="w-5 h-5 text-primary-main"
-                        />
-                        <Typography
-                            variant={TypographyVariantEnum?.P}
-                            color="text-primary-light"
-                            className="ml-2"
-                            fontSize={FontSizeEnum.XS}
-                        >
-                            Mise à jour le{' '}
-                            {formatDate(
-                                project.createdAt,
-                                'dd/MM/yyyy à hh:ss'
-                            )}
-                        </Typography>
-                    </div> */}
                 </div>
 
                 <div className="flex flex-col">

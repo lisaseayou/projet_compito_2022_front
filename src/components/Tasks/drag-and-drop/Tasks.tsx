@@ -39,11 +39,11 @@ const Tasks = ({ tasks, projectId }: TasksProps) => {
     const getStatusByColumn = (columnId: any) => {
         switch (columnId) {
             case 'column-1':
-                return StatusEnum.TO_DO;
+                return 'TO_DO';
             case 'column-2':
-                return StatusEnum.IN_PROGRESS;
+                return 'IN_PROGRESS';
             case 'column-3':
-                return StatusEnum.FINISH;
+                return 'FINISH';
             default:
                 break;
         }
@@ -151,8 +151,6 @@ const Tasks = ({ tasks, projectId }: TasksProps) => {
                 updateTaskId: draggableId,
             },
         });
-
-        console.log(destination);
 
         const newState = {
             ...datas,

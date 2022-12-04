@@ -19,6 +19,7 @@ import {
     TypographyVariantEnum,
     FontSizeEnum,
     FontWeightEnum,
+    StatusEnum,
 } from '../enums';
 
 // utils && helpers
@@ -39,7 +40,6 @@ const ProjectsDetails = () => {
     if (loading) {
         return <Loader label="Chargement..." />;
     }
-    
 
     return (
         <>

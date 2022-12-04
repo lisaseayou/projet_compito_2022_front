@@ -35,11 +35,7 @@ const Column = ({ column, tasks }: ColumnsProps) => {
 
             <Droppable droppableId={column.id}>
                 {(provider) => (
-                    <div
-                        {...provider.droppableProps}
-                        ref={provider.innerRef}
-                        className="tasks__list"
-                    >
+                    <div {...provider.droppableProps} ref={provider.innerRef}>
                         {tasks?.map((task: any, index: any) => (
                             <Task
                                 key={task.id}
