@@ -1,5 +1,3 @@
-import { DotsVerticalIcon } from '@heroicons/react/solid';
-import React from 'react';
 import {
     FontSizeEnum,
     FontWeightEnum,
@@ -16,12 +14,14 @@ type TaskCategoryProps = {
     title: string;
     tasksLengthByStatus: number;
     showBtn: boolean;
+    onClick: () => void;
 };
 
 const TaskCategory = ({
     title,
     tasksLengthByStatus,
     showBtn,
+    onClick,
 }: TaskCategoryProps) => {
     return (
         <>
@@ -54,7 +54,7 @@ const TaskCategory = ({
                 {showBtn && (
                     <button
                         className="flex items-center rounded-b-md p-1 hover:bg-primary-ultraLight"
-                        onClick={() => {}}
+                        onClick={onClick}
                     >
                         <Icon
                             variant={IconEnum.PLUS}

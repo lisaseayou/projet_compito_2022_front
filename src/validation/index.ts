@@ -89,6 +89,23 @@ const validation = {
             },
         },
     },
+    addTask: {
+        name: {
+            required: 'Le champ titre est requis',
+            minLength: {
+                value: 5,
+                message:
+                    'Le titre de la tache doit comporter 5 caractères minimum',
+            },
+        },
+        description: {
+            required: 'Le champ description est requis',
+            minLength: {
+                value: 10,
+                message: 'La description doit comporter 10 caractères minimum',
+            },
+        },
+    },
     profil: {
         url: {
             pattern: {

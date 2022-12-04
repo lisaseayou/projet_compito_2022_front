@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { Dispatch, SetStateAction, useEffect, useState } from 'react';
 import Task from './Task';
 import { Droppable } from 'react-beautiful-dnd';
 import './styles.css';
@@ -7,8 +7,10 @@ import TaskCategory from '../TaskCategory';
 type ColumnsProps = {
     column: any;
     tasks: any;
+    showModalNewTask: boolean;
+    setShowModalNewTask: Dispatch<SetStateAction<boolean>>;
 };
-const Column = ({ column, tasks }: ColumnsProps) => {
+const Column = ({ column, tasks, showModalNewTask, setShowModalNewTask }: ColumnsProps) => {
     const [enabled, setEnabled] = useState(false);
     const [modalUpdateOrDeleteID, setModalUpdateOrDeleteID] = useState('');
 
@@ -31,6 +33,7 @@ const Column = ({ column, tasks }: ColumnsProps) => {
                 title={column.title}
                 tasksLengthByStatus={tasks.length}
                 showBtn={column.id !== 'column-3'}
+                onClick={() => setShowModalNewTask(true)}
             />
 
             <Droppable droppableId={column.id}>

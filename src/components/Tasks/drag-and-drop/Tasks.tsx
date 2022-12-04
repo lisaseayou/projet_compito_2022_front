@@ -1,6 +1,6 @@
 // @ts-nocheck
 
-import { useState } from 'react';
+import { Dispatch, SetStateAction, useState } from 'react';
 import Column from './Column';
 import { DragDropContext } from 'react-beautiful-dnd';
 import './styles.css';
@@ -12,9 +12,16 @@ import { ToastContainer } from 'react-toastify';
 type TasksProps = {
     tasks: any;
     projectId: any;
+    showModalNewTask: boolean;
+    setShowModalNewTask: Dispatch<SetStateAction<boolean>>;
 };
 
-const Tasks = ({ tasks, projectId }: TasksProps) => {
+const Tasks = ({
+    tasks,
+    projectId,
+    showModalNewTask,
+    setShowModalNewTask,
+}: TasksProps) => {
     const getTasks = () => {
         let tasksList = {};
 
@@ -177,6 +184,8 @@ const Tasks = ({ tasks, projectId }: TasksProps) => {
                                 key={column.id}
                                 column={column}
                                 tasks={tasks}
+                                showModalNewTask={showModalNewTask}
+                                setShowModalNewTask={setShowModalNewTask}
                             />
                         );
                     })}

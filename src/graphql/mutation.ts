@@ -54,36 +54,6 @@ export const REQUEST_PASSWORD = gql`
   }
 `;
 
-export const ADD_TASK = gql`
-  mutation Mutation($data: AddTaskInput!) {
-    addTask(data: $data) {
-      additionalSpentTime
-      advancement
-      comments {
-        id
-      }
-      createdAt
-      documents {
-        id
-      }
-      dueDate
-      id
-      initialSpentTime
-      project {
-        id
-        name
-      }
-      status
-      name
-      updatedAt
-      users {
-        id
-        name
-      }
-    }
-  }
-`;
-
 export const ADD_PROJECT = gql`
   mutation Mutation($data: AddProjectInput!) {
     addProject(data: $data) {
@@ -136,7 +106,7 @@ export const UPDATE_PROFILE = gql`
 `;
 
 export const UPDATE_TASK_STATUS = gql`
-  mutation Mutation($data: UpdateTaskInput!, $updateTaskId: String!) {
+  mutation UpdateTask($data: UpdateTaskInput!, $updateTaskId: String!) {
     updateTask(data: $data, id: $updateTaskId) {
       id
       status
@@ -146,10 +116,22 @@ export const UPDATE_TASK_STATUS = gql`
 `;
 
 export const DELETE_TASK = gql`
-  mutation Mutation($deleteTaskId: String!) {
+  mutation DeleteTask($deleteTaskId: String!) {
   deleteTask(id: $deleteTaskId) {
     id
     name
+  }
+}
+`;
+
+export const ADD_TASK = gql`
+  mutation addTask($data: AddTaskInput!) {
+  addTask(data: $data) {
+    id
+    status
+    name
+    description
+    view
   }
 }
 `;

@@ -169,7 +169,7 @@ export enum RouteEnum {
     USER_HOME = '/user/home',
     PROJECTS = '/projects',
     ADD_PROJECT = '/addproject',
-    PROJECT_DETAILS = '/project-details/:projectId',
+    PROJECT_DETAILS = '/project-details',
     TASKS = '/tasks',
     ADD_TASK = '/addtask',
     DASHBOARD = '/dashboard',
