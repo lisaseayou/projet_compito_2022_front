@@ -7,31 +7,33 @@ import { Link } from 'react-router-dom';
 import Avatar from '../ui/avatar/Avatar';
 import AvatarEmpty from '../ui/avatar/AvatarEmpty';
 import Icon from '../ui/Icons/Icon';
-import Progress from '../ui/progress/Progress';
 import Typography from '../ui/Typography';
 import ActionBase from '../actions/ActionBase';
 import ModalDelete from '../modals/ModalDelete';
+import Chip from '../ui/chip/Chip';
 
 // utils & helpers
-import { firstLetterUpperCase, formatDate, truncate } from '../../utils';
+import { firstLetterUpperCase, truncate } from '../../utils';
 import { ToastError, ToastSuccess } from '../../utils/Toast';
 
 // graphql
 import {
+    GET_ALL_PROJECTS,
+    GET_ALL_TASKS,
     GET_LAST_PROJECTS_UPDATE_BY_USER,
+    GET_PROJECT,
     GET_PROJECT_BY_USER,
 } from '../../graphql/query';
-import { DELETE_PROJECT } from '../../graphql/mutation';
+import { DELETE_TASK } from '../../graphql/mutation';
 
 // types, interfaces & enums
-import { IDeleteProject, IProject } from '../../types/Project';
 import { IUser } from '../../types/User';
+import { ITask, IDeleteTask } from '../../types/Task';
 import {
     FontSizeEnum,
     FontWeightEnum,
     IconEnum,
     OpacityEnum,
-    ProgressTypeEnum,
     TextTransformEnum,
     TypographyVariantEnum,
 } from '../../enums';
@@ -40,42 +42,51 @@ import {
 import { DotsVerticalIcon } from '@heroicons/react/solid';
 import avatar1 from '../../assets/avatar/avatar-1.jpg';
 import avatar2 from '../../assets/avatar/avatar-2.jpg';
-import { ITask } from '../../types/Task';
-import Chip from '../ui/chip/Chip';
 
 type TaskCardProps = {
     task: ITask;
-    // modalUpdateOrDeleteID: string;
-    // setModalUpdateOrDeleteID: (value: string) => void;
+    modalUpdateOrDeleteID: string;
+    setModalUpdateOrDeleteID: (value: string) => void;
 };
 
-const TaskCard = ({ task }: TaskCardProps) => {
-    // const [showAction, setShowAction] = useState<boolean>(false);
-    // const [showDeleteProject, setShowDeleteProject] = useState<boolean>(false);
+const TaskCard = ({
+    task,
+    modalUpdateOrDeleteID,
+    setModalUpdateOrDeleteID,
+}: TaskCardProps) => {
+    const [showAction, setShowAction] = useState<boolean>(false);
+    const [showDeleteTask, setShowDeleteTask] = useState<boolean>(false);
 
-    // const [deleteProject] = useMutation<IDeleteProject>(DELETE_PROJECT, {
-    //     onCompleted: () => {
-    //         ToastSuccess('Votre projet a bien été supprimé ! 😊');
-    //     },
-    //     onError: () => {
-    //         ToastError("Votre projet n'a pas pu être supprimé :(");
-    //     },
-    //     refetchQueries: [GET_PROJECT_BY_USER, GET_LAST_PROJECTS_UPDATE_BY_USER],
-    // });
+    const [deleteTask] = useMutation<IDeleteTask>(DELETE_TASK, {
+        onCompleted: () => {
+            ToastSuccess('La tache a bien été supprimé ! 😊');
+            setShowDeleteTask(false);
+        },
+        onError: () => {
+            ToastError("La tache n'a pas pu être supprimé :(");
+        },
+        refetchQueries: [
+            GET_PROJECT,
+            GET_ALL_PROJECTS,
+            GET_ALL_TASKS,
+            GET_PROJECT_BY_USER,
+            GET_LAST_PROJECTS_UPDATE_BY_USER,
+        ],
+    });
 
-    // const handleDelete = () =>
-    //     deleteProject({
-    //         variables: {
-    //             deleteProjectId: project.id,
-    //         },
-    //     });
+    const handleDelete = () =>
+        deleteTask({
+            variables: {
+                deleteTaskId: task.id,
+            },
+        });
 
     return (
         <div className="relative block col-span-12 sm:col-span-6 md:col-span-4 lg:col-span-3 p-4 mb-4 bg-primary-ultraLight w-full border border-gray-100 rounded-lg shadow-lg">
             <div className="flex flex-col justify-between h-full">
                 <div>
                     <div className="justify-between flex flex-col">
-                        <div>
+                        <div className="flex justify-between">
                             <Link to="/">
                                 <Typography
                                     variant={TypographyVariantEnum?.H5}
@@ -87,6 +98,33 @@ const TaskCard = ({ task }: TaskCardProps) => {
                                     {firstLetterUpperCase(task.name)}
                                 </Typography>
                             </Link>
+
+                            <div className="relative flex-shrink-0 ml-3 block">
+                                <button
+                                    onClick={() => {
+                                        setShowAction(!showAction);
+                                        setModalUpdateOrDeleteID(
+                                            task.id !== modalUpdateOrDeleteID
+                                                ? task.id
+                                                : ''
+                                        );
+                                    }}
+                                >
+                                    <DotsVerticalIcon className="h-5 w-5 text-primary-main" />
+                                </button>
+
+                                {showAction &&
+                                    modalUpdateOrDeleteID === task.id && (
+                                        <ActionBase
+                                            className="top-8 right-2"
+                                            dataId={task.id}
+                                            setShowAction={setShowAction}
+                                            setShowDeleteData={
+                                                setShowDeleteTask
+                                            }
+                                        />
+                                    )}
+                            </div>
                         </div>
 
                         <div className="mt-2">
@@ -107,31 +145,6 @@ const TaskCard = ({ task }: TaskCardProps) => {
                                 )
                             )}
                         </div>
-
-                        {/* <div className="relative flex-shrink-0 ml-3 block">
-                            <button
-                                onClick={() => {
-                                    setShowAction(!showAction);
-                                    setModalUpdateOrDeleteID(
-                                        project.id !== modalUpdateOrDeleteID
-                                            ? project.id
-                                            : ''
-                                    );
-                                }}
-                            >
-                                <DotsVerticalIcon className="h-5 w-5 text-primary-main" />
-                            </button>
-
-                            {showAction &&
-                                modalUpdateOrDeleteID === project.id && (
-                                    <ActionBase
-                                        className="top-8 right-2"
-                                        dataId={project.id}
-                                        setShowAction={setShowAction}
-                                        setShowDeleteData={setShowDeleteProject}
-                                    />
-                                )}
-                        </div> */}
                     </div>
 
                     {/* <div className="flex items-center mt-4">
@@ -156,11 +169,6 @@ const TaskCard = ({ task }: TaskCardProps) => {
                 </div>
 
                 <div className="flex flex-col">
-                    {/* <Progress
-                        items={project?.tasks}
-                        type={ProgressTypeEnum.TASK}
-                    /> */}
-
                     <div className="flex justify-between items-center">
                         <div className="flex">
                             <Avatar src={avatar1} alt="user one" />
@@ -222,13 +230,13 @@ const TaskCard = ({ task }: TaskCardProps) => {
                 </div>
             </div>
 
-            {/* <ModalDelete
-                show={showDeleteProject}
-                setShow={setShowDeleteProject}
-                title="Supprimer le projet"
-                description="Êtes vous sûr de vouloir supprimer ce projet ? Cette action est irréversible."
+            <ModalDelete
+                show={showDeleteTask}
+                setShow={setShowDeleteTask}
+                title="Supprimer une tache"
+                description="Êtes vous sûr de vouloir supprimer cet tache ? Cette action est irréversible."
                 onDelete={handleDelete}
-            /> */}
+            />
         </div>
     );
 };

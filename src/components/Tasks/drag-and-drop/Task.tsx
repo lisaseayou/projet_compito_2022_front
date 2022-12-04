@@ -7,8 +7,16 @@ type TaskProps = {
     task: any;
     index: any;
     droppableProvided?: any;
+    modalUpdateOrDeleteID: string;
+    setModalUpdateOrDeleteID: (value: string) => void;
 };
-const Task = ({ task, index, droppableProvided }: TaskProps) => {
+const Task = ({
+    task,
+    index,
+    droppableProvided,
+    modalUpdateOrDeleteID,
+    setModalUpdateOrDeleteID,
+}: TaskProps) => {
     return (
         <Draggable draggableId={task.id} index={index}>
             {(provided) => (
@@ -18,7 +26,11 @@ const Task = ({ task, index, droppableProvided }: TaskProps) => {
                     ref={provided.innerRef}
                     className="task__item"
                 >
-                    <TaskCard task={task} />
+                    <TaskCard
+                        task={task}
+                        modalUpdateOrDeleteID={modalUpdateOrDeleteID}
+                        setModalUpdateOrDeleteID={setModalUpdateOrDeleteID}
+                    />
                 </div>
             )}
         </Draggable>

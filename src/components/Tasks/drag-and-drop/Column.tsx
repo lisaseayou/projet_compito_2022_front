@@ -10,6 +10,7 @@ type ColumnsProps = {
 };
 const Column = ({ column, tasks }: ColumnsProps) => {
     const [enabled, setEnabled] = useState(false);
+    const [modalUpdateOrDeleteID, setModalUpdateOrDeleteID] = useState('');
 
     useEffect(() => {
         const animation = requestAnimationFrame(() => setEnabled(true));
@@ -40,7 +41,15 @@ const Column = ({ column, tasks }: ColumnsProps) => {
                         className="tasks__list"
                     >
                         {tasks?.map((task: any, index: any) => (
-                            <Task key={task.id} task={task} index={index} />
+                            <Task
+                                key={task.id}
+                                task={task}
+                                index={index}
+                                modalUpdateOrDeleteID={modalUpdateOrDeleteID}
+                                setModalUpdateOrDeleteID={
+                                    setModalUpdateOrDeleteID
+                                }
+                            />
                         ))}
                         {provider.placeholder}
                     </div>

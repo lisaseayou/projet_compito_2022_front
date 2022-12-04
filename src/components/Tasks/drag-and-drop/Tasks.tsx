@@ -7,6 +7,7 @@ import './styles.css';
 import { StatusEnum } from '../../../enums';
 import { UPDATE_TASK_STATUS } from '../../../graphql/mutation';
 import { useMutation } from '@apollo/client';
+import { ToastContainer } from 'react-toastify';
 
 type TasksProps = {
     tasks: any;
@@ -165,19 +166,27 @@ const Tasks = ({ tasks, projectId }: TasksProps) => {
     };
 
     return (
-        <div className="tasks">
-            <DragDropContext onDragEnd={onDragEnd}>
-                {datas.columnOrder.map((columnId: any) => {
-                    const column = datas.columns[columnId];
-                    const tasks = column.taskIds.map(
-                        (taskId: any) => datas.tasks[taskId]
-                    );
-                    return (
-                        <Column key={column.id} column={column} tasks={tasks} />
-                    );
-                })}
-            </DragDropContext>
-        </div>
+        <>
+            <div className="tasks">
+                <DragDropContext onDragEnd={onDragEnd}>
+                    {datas.columnOrder.map((columnId: any) => {
+                        const column = datas.columns[columnId];
+                        const tasks = column.taskIds.map(
+                            (taskId: any) => datas.tasks[taskId]
+                        );
+                        return (
+                            <Column
+                                key={column.id}
+                                column={column}
+                                tasks={tasks}
+                            />
+                        );
+                    })}
+                </DragDropContext>
+            </div>
+
+            <ToastContainer />
+        </>
     );
 };
 

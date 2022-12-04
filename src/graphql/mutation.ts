@@ -144,3 +144,12 @@ export const UPDATE_TASK_STATUS = gql`
     }
   }
 `;
+
+export const DELETE_TASK = gql`
+  mutation Mutation($deleteTaskId: String!) {
+  deleteTask(id: $deleteTaskId) {
+    id
+    name
+  }
+}
+`;

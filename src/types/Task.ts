@@ -20,3 +20,7 @@ export interface ITask {
 export interface IAddTask {
     addProject: IProject;
 }
+
+export interface IDeleteTask {
+    addProject: Pick<ITask, 'id' | 'name'>;
+}

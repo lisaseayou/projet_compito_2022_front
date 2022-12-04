@@ -11,7 +11,7 @@ type ChipProps = {
 
 const Chip = ({ label }: ChipProps) => {
     return (
-        <div className="bg-orange-primary rounded px-2 py-0">
+        <div className="bg-orange-primary rounded px-2 py-0.5">
             <Typography
                 variant={TypographyVariantEnum?.P}
                 color="text-orange-dark"
