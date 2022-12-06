@@ -10,6 +10,7 @@ import {
     TypographyVariantEnum,
 } from '../../enums';
 import Icon from '../ui/Icons/Icon';
+import PanelTitle from '../ui/panels/PanelContent';
 import Typography from '../ui/Typography';
 
 type ProjectPanelProps = {
@@ -56,38 +57,7 @@ const ProjectPanel = ({
 
                         <hr className="mt-4" />
 
-                        <div className="flex gap-1 items-center mt-4">
-                            <Icon
-                                variant={IconEnum.DOCUMENT_TEXT}
-                                opacity={OpacityEnum.OPACITY_100}
-                                className="w-5 h-5"
-                            />
-                            <Typography
-                                variant={TypographyVariantEnum?.H5}
-                                color="text-primary-main"
-                                fontSize={'text-lg'}
-                                fontWeight={FontWeightEnum.SEMIBOLD}
-                                textTransform={TextTransformEnum.NORMAL}
-                                className="w-full"
-                            >
-                                Description
-                            </Typography>
-                        </div>
-
-                        <div className="mt-2">
-                            <div className="bg-primary-ultraLight p-2">
-                                <Typography
-                                    variant={TypographyVariantEnum?.P}
-                                    color="text-primary-main"
-                                    fontSize={FontSizeEnum.XS}
-                                    fontWeight={FontWeightEnum.NORMAL}
-                                    textTransform={TextTransformEnum.NORMAL}
-                                    className="w-full"
-                                >
-                                    {description}
-                                </Typography>
-                            </div>
-                        </div>
+                        <PanelTitle title="Description" content={description} />
                     </div>
                 </aside>
             )}
