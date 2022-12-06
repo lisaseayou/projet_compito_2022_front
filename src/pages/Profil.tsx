@@ -1,5 +1,6 @@
 // hooks
 import { useSelector } from 'react-redux';
+import { useForm } from 'react-hook-form';
 
 // components
 import Modal from '../components/Modal';
@@ -10,9 +11,16 @@ import SelectInput from '../components/ui/form/SelectInput';
 // types, interfaces & enums
 import { IUser } from '../types/User';
 import { JustifyContentEnum } from '../enums';
+import validation from '../validation';
 
 const Profil = () => {
     const user: IUser = useSelector((state: any) => state.user);
+
+    const {
+        control,
+        watch,
+        formState: { errors },
+    } = useForm({ mode: 'onBlur' });
 
     const options = [
         { value: 'jerem', label: 'Jeremy' },
@@ -45,6 +53,18 @@ const Profil = () => {
                         isMultiple
                     />
                 </div> */}
+                <div className="w-80">
+                    <SelectInput
+                        control={control}
+                        validation={validation.addTask.description}
+                        id="status"
+                        name="status"
+                        placeholder="Status"
+                        options={options}
+                        isClearable
+                        isMultiple
+                    />
+                </div>
 
                 <div className="flex justify-center items-center m-5">
                     <Modal />

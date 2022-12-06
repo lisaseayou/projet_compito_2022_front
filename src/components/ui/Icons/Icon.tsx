@@ -9,6 +9,8 @@ import {
     UserIcon,
     PlusIcon,
     XIcon,
+    DotsHorizontalIcon,
+    DocumentTextIcon,
 } from '@heroicons/react/solid';
 import {
     ChatAltIcon,
@@ -175,6 +177,26 @@ const Icon = ({
             case IconEnum.CHEVRON_DOWN:
                 return (
                     <ChevronDownIcon
+                        className={`w-6 h-6 text-primary-main ${opacity} ${
+                            onClick ? 'cursor-pointer' : 'cursor-default'
+                        } ${className ?? ''}`}
+                        onClick={onClick}
+                    />
+                );
+
+            case IconEnum.DOTS_HORIZONTAL:
+                return (
+                    <DotsHorizontalIcon
+                        className={`w-6 h-6 text-primary-main ${opacity} ${
+                            onClick ? 'cursor-pointer' : 'cursor-default'
+                        } ${className ?? ''}`}
+                        onClick={onClick}
+                    />
+                );
+
+            case IconEnum.DOCUMENT_TEXT:
+                return (
+                    <DocumentTextIcon
                         className={`w-6 h-6 text-primary-main ${opacity} ${
                             onClick ? 'cursor-pointer' : 'cursor-default'
                         } ${className ?? ''}`}

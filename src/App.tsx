@@ -19,14 +19,14 @@ function App() {
 
     return (
         <>
-            <div className="mr-0">
+            <div className="mr-0 relative">
                 <BrowserRouter basename="/">
                     {user.id ? <Nav /> : null}
 
                     <div
                         className={`mb-20 sm:mb-0 ${
                             user.id ? 'sm:ml-16' : 'sm:ml-0'
-                        } min-h-screen`}
+                        } min-h-screen `}
                     >
                         <Routes>
                             {MenuList.map(

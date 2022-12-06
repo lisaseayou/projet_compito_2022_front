@@ -20,6 +20,7 @@ import { IconEnum, OpacityEnum, RouteEnum } from '../enums';
 import { firstLetterUpperCase } from '../utils';
 import { DotsVerticalIcon } from '@heroicons/react/solid';
 import Icon from '../components/ui/Icons/Icon';
+import ProjectPanel from '../components/panels/ProjectPanel';
 
 const ProjectsDetails = () => {
     const params = useParams();
@@ -28,6 +29,7 @@ const ProjectsDetails = () => {
     const [showModalNewTask, setShowModalNewTask] = useState(false);
     const [status, setStatus] = useState('');
     const [expandInfoTask, setExpandInfoTask] = useState(true);
+    const [showPanel, setShowPanel] = useState(false);
 
     const { loading, error, data } = useQuery<IGetProject>(GET_PROJECT, {
         variables: { projectId: params.projectId },
@@ -48,7 +50,7 @@ const ProjectsDetails = () => {
                 }}
             >
                 <div className="flex flex-col justify-center w-full">
-                    <div className="mb-6">
+                    <div className="flex justify-between mb-6">
                         <button
                             className="flex items-center rounded-b-md p-1 hover:bg-primary-ultraLight"
                             onClick={() => setExpandInfoTask(!expandInfoTask)}
@@ -66,7 +68,20 @@ const ProjectsDetails = () => {
                                 }
                             />
                         </button>
-                        {/* top bar with filter, display filter etc.. */}
+
+                        <div className="relative">
+                            <button
+                                className="flex items-center rounded-b-md p-1 hover:bg-primary-ultraLight"
+                                onClick={() => setShowPanel(!showPanel)}
+                            >
+                                <Icon
+                                    variant={IconEnum.DOTS_HORIZONTAL}
+                                    opacity={OpacityEnum.OPACITY_100}
+                                    className="w-6 h-6 cursor-pointer"
+                                    onClick={() => setShowPanel(!showPanel)}
+                                />
+                            </button>
+                        </div>
                     </div>
                     <Tasks
                         tasks={data?.project?.tasks}
@@ -75,6 +90,18 @@ const ProjectsDetails = () => {
                         setShowModalNewTask={setShowModalNewTask}
                         setStatus={setStatus}
                         expandInfoTask={expandInfoTask}
+                    />
+                </div>
+                <div
+                    className={`absolute z-10 h-screen top-0 bottom-0 ${
+                        showPanel ? 'right-0' : 'left-0'
+                    }`}
+                >
+                    <ProjectPanel
+                        show={showPanel}
+                        onClose={() => setShowPanel(false)}
+                        title="Infos"
+                        description={data?.project?.description as string}
                     />
                 </div>
             </PrimaryLayout>

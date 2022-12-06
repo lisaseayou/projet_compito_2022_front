@@ -115,7 +115,9 @@ export enum IconEnum {
     BRIEFCASE = ' BriefcaseIcon',
     PLUS = "plus",
     X = "XIcon",
-    CHEVRON_DOWN = "ChevronDownIcon"
+    CHEVRON_DOWN = "ChevronDownIcon",
+    DOTS_HORIZONTAL = "DotsHorizontalIcon",
+    DOCUMENT_TEXT = "DocumentTextIcon"
 }
 
 export enum OpacityEnum {

@@ -33,7 +33,7 @@ const PrimaryLayout = ({
     children,
 }: PrimaryLayoutProps) => {
     return (
-        <div className="flex flex-col items-center px-4 py-6 sm:py-14 max-w-screen-xl min-h-screen sm:pl-10">
+        <div className="flex flex-col items-center px-4 py-6 sm:py-14 max-w-screen-xl min-h-screen sm:pl-10 overflow-x-hidden">
             <div
                 className={`flex flex-col sm:flex-row items-start ${titleBoxAlign} mb-12 w-full`}
             >
