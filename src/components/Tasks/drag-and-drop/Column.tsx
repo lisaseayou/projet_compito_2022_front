@@ -9,8 +9,17 @@ type ColumnsProps = {
     tasks: any;
     showModalNewTask: boolean;
     setShowModalNewTask: Dispatch<SetStateAction<boolean>>;
+    setStatus: Dispatch<SetStateAction<string>>;
+    expandInfoTask: boolean;
 };
-const Column = ({ column, tasks, showModalNewTask, setShowModalNewTask }: ColumnsProps) => {
+const Column = ({
+    column,
+    tasks,
+    showModalNewTask,
+    setShowModalNewTask,
+    setStatus,
+    expandInfoTask,
+}: ColumnsProps) => {
     const [enabled, setEnabled] = useState(false);
     const [modalUpdateOrDeleteID, setModalUpdateOrDeleteID] = useState('');
 
@@ -33,7 +42,14 @@ const Column = ({ column, tasks, showModalNewTask, setShowModalNewTask }: Column
                 title={column.title}
                 tasksLengthByStatus={tasks.length}
                 showBtn={column.id !== 'column-3'}
-                onClick={() => setShowModalNewTask(true)}
+                onClick={() => {
+                    setShowModalNewTask(true);
+                    setStatus(
+                        column.title.toLowerCase() !== 'a faire'
+                            ? 'IN_PROGRESS'
+                            : 'TO_DO'
+                    );
+                }}
             />
 
             <Droppable droppableId={column.id}>
@@ -48,6 +64,7 @@ const Column = ({ column, tasks, showModalNewTask, setShowModalNewTask }: Column
                                 setModalUpdateOrDeleteID={
                                     setModalUpdateOrDeleteID
                                 }
+                                expandInfoTask={expandInfoTask}
                             />
                         ))}
                         {provider.placeholder}

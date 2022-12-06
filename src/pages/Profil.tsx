@@ -35,7 +35,16 @@ const Profil = () => {
                     <ProfilItem>{user.github}</ProfilItem>
                     <ProfilItem>{user.description}</ProfilItem>
                 </div>
-                <div><SelectInput options={options}/></div>
+                {/* <div>
+                    <SelectInput
+                        name="user"
+                        placeholder="Utilisateurs"
+                        options={options}
+                        isClearable
+                        onChange={() => {}}
+                        isMultiple
+                    />
+                </div> */}
 
                 <div className="flex justify-center items-center m-5">
                     <Modal />

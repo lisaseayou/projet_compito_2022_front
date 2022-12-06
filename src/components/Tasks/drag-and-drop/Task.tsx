@@ -9,6 +9,7 @@ type TaskProps = {
     droppableProvided?: any;
     modalUpdateOrDeleteID: string;
     setModalUpdateOrDeleteID: (value: string) => void;
+     expandInfoTask: boolean;
 };
 const Task = ({
     task,
@@ -16,6 +17,7 @@ const Task = ({
     droppableProvided,
     modalUpdateOrDeleteID,
     setModalUpdateOrDeleteID,
+    expandInfoTask,
 }: TaskProps) => {
     return (
         <Draggable draggableId={task.id} index={index}>
@@ -30,6 +32,7 @@ const Task = ({
                         task={task}
                         modalUpdateOrDeleteID={modalUpdateOrDeleteID}
                         setModalUpdateOrDeleteID={setModalUpdateOrDeleteID}
+                        expandInfoTask={expandInfoTask}
                     />
                 </div>
             )}

@@ -47,12 +47,14 @@ type TaskCardProps = {
     task: ITask;
     modalUpdateOrDeleteID: string;
     setModalUpdateOrDeleteID: (value: string) => void;
+    expandInfoTask: boolean;
 };
 
 const TaskCard = ({
     task,
     modalUpdateOrDeleteID,
     setModalUpdateOrDeleteID,
+    expandInfoTask,
 }: TaskCardProps) => {
     const [showAction, setShowAction] = useState<boolean>(false);
     const [showDeleteTask, setShowDeleteTask] = useState<boolean>(false);
@@ -138,76 +140,80 @@ const TaskCard = ({
                             </Typography>
                         </div>
 
-                        <div className="flex gap-2 mt-2 mb-4">
-                            {['front end', 'backend', 'webdesign'].map(
-                                (tag, i) => (
-                                    <Chip key={i} label={tag} />
-                                )
-                            )}
-                        </div>
-                    </div>
-                </div>
-
-                <div className="flex flex-col">
-                    <div className="flex justify-between items-center">
-                        <div className="flex">
-                            <Avatar src={avatar1} alt="user one" />
-
-                            {task?.users?.map(
-                                (user: IUser, index: number) =>
-                                    index > 0 &&
-                                    index < 3 && (
-                                        <Avatar
-                                            key={index}
-                                            src={avatar2}
-                                            alt="user two"
-                                            className="-ml-3"
-                                        />
+                        {expandInfoTask && (
+                            <div className="flex gap-2 mt-2 mb-4">
+                                {['front end', 'backend', 'webdesign'].map(
+                                    (tag, i) => (
+                                        <Chip key={i} label={tag} />
                                     )
-                            )}
-
-                            {task?.users?.length > 3 && (
-                                <AvatarEmpty
-                                    more={task?.users?.length - 3}
-                                    className="-ml-3"
-                                />
-                            )}
-                        </div>
-                        <div className="flex gap-4">
-                            <div className="flex">
-                                <Icon
-                                    variant={IconEnum.EYE_OUTLINE}
-                                    opacity={OpacityEnum.OPACITY_100}
-                                    className="w-5 h-5"
-                                />
-                                <Typography
-                                    variant={TypographyVariantEnum?.P}
-                                    color="text-primary-main"
-                                    className="ml-1"
-                                    fontSize={FontSizeEnum.XS}
-                                >
-                                    {task.view}
-                                </Typography>
+                                )}
                             </div>
+                        )}
+                    </div>
+                </div>
 
+                {expandInfoTask && (
+                    <div className="flex flex-col">
+                        <div className="flex justify-between items-center">
                             <div className="flex">
-                                <Icon
-                                    variant={IconEnum.CHAT_ALT_OUTLINE}
-                                    opacity={OpacityEnum.OPACITY_100}
-                                    className="w-5 h-5"
-                                />
-                                <Typography
-                                    variant={TypographyVariantEnum?.P}
-                                    color="text-primary-main"
-                                    className="ml-1"
-                                    fontSize={FontSizeEnum.XS}
-                                >
-                                    15
-                                </Typography>
+                                <Avatar src={avatar1} alt="user one" />
+
+                                {task?.users?.map(
+                                    (user: IUser, index: number) =>
+                                        index > 0 &&
+                                        index < 3 && (
+                                            <Avatar
+                                                key={index}
+                                                src={avatar2}
+                                                alt="user two"
+                                                className="-ml-3"
+                                            />
+                                        )
+                                )}
+
+                                {task?.users?.length > 3 && (
+                                    <AvatarEmpty
+                                        more={task?.users?.length - 3}
+                                        className="-ml-3"
+                                    />
+                                )}
+                            </div>
+                            <div className="flex gap-4">
+                                <div className="flex">
+                                    <Icon
+                                        variant={IconEnum.EYE_OUTLINE}
+                                        opacity={OpacityEnum.OPACITY_100}
+                                        className="w-5 h-5"
+                                    />
+                                    <Typography
+                                        variant={TypographyVariantEnum?.P}
+                                        color="text-primary-main"
+                                        className="ml-1"
+                                        fontSize={FontSizeEnum.XS}
+                                    >
+                                        {task.view}
+                                    </Typography>
+                                </div>
+
+                                <div className="flex">
+                                    <Icon
+                                        variant={IconEnum.CHAT_ALT_OUTLINE}
+                                        opacity={OpacityEnum.OPACITY_100}
+                                        className="w-5 h-5"
+                                    />
+                                    <Typography
+                                        variant={TypographyVariantEnum?.P}
+                                        color="text-primary-main"
+                                        className="ml-1"
+                                        fontSize={FontSizeEnum.XS}
+                                    >
+                                        15
+                                    </Typography>
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
+                )}
             </div>
 
             <ModalDelete
