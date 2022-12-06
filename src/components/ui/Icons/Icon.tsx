@@ -1,12 +1,14 @@
 import { IconEnum, OpacityEnum } from '../../../enums';
 import {
     BriefcaseIcon,
+    ChevronDownIcon,
     EyeIcon,
     EyeOffIcon,
     LockClosedIcon,
     MailIcon,
     UserIcon,
     PlusIcon,
+    XIcon,
 } from '@heroicons/react/solid';
 import {
     ChatAltIcon,
@@ -153,6 +155,26 @@ const Icon = ({
             case IconEnum.PLUS:
                 return (
                     <PlusIcon
+                        className={`w-6 h-6 text-primary-main ${opacity} ${
+                            onClick ? 'cursor-pointer' : 'cursor-default'
+                        } ${className ?? ''}`}
+                        onClick={onClick}
+                    />
+                );
+
+            case IconEnum.X:
+                return (
+                    <XIcon
+                        className={`w-6 h-6 text-primary-main ${opacity} ${
+                            onClick ? 'cursor-pointer' : 'cursor-default'
+                        } ${className ?? ''}`}
+                        onClick={onClick}
+                    />
+                );
+
+            case IconEnum.CHEVRON_DOWN:
+                return (
+                    <ChevronDownIcon
                         className={`w-6 h-6 text-primary-main ${opacity} ${
                             onClick ? 'cursor-pointer' : 'cursor-default'
                         } ${className ?? ''}`}

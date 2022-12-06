@@ -14,6 +14,7 @@ type TasksProps = {
     projectId: any;
     showModalNewTask: boolean;
     setShowModalNewTask: Dispatch<SetStateAction<boolean>>;
+    setStatus: Dispatch<SetStateAction<string>>;
 };
 
 const Tasks = ({
@@ -21,6 +22,7 @@ const Tasks = ({
     projectId,
     showModalNewTask,
     setShowModalNewTask,
+    setStatus,
 }: TasksProps) => {
     const getTasks = () => {
         let tasksList = {};
@@ -186,6 +188,7 @@ const Tasks = ({
                                 tasks={tasks}
                                 showModalNewTask={showModalNewTask}
                                 setShowModalNewTask={setShowModalNewTask}
+                                setStatus={setStatus}
                             />
                         );
                     })}

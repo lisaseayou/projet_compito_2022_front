@@ -34,12 +34,14 @@ type ModalCreateTaskProps = {
     show: boolean;
     setShow: (value: boolean) => void;
     projectId: any;
+    status: string;
 };
 
 const ModalCreateTask = ({
     show,
     setShow,
     projectId,
+    status,
 }: ModalCreateTaskProps) => {
     const navigate = useNavigate();
     const user: IUser = useSelector((state: any) => state.user);
@@ -51,6 +53,8 @@ const ModalCreateTask = ({
     } = useForm({ mode: 'onBlur' });
 
     const [globalErrorMessage, setGlobalFormMessage] = useState('');
+
+    console.log(watch());
 
     const [addTask] = useMutation<IAddTask>(ADD_TASK, {
         onCompleted: () => {
@@ -113,11 +117,11 @@ const ModalCreateTask = ({
             mutationFn={addTask}
             formDatas={{
                 ...watch(),
+                status,
                 additionalSpentTime: [1, 2],
                 advancement: 0,
                 dueDate: '12/01/2022',
                 initialSpentTime: 0,
-                status: 'IN_PROGRESS',
                 projectId: projectId,
                 userId: user?.id,
             }}

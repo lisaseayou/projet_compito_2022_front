@@ -113,7 +113,9 @@ export enum IconEnum {
     TRASH_OUTLINE = 'TrashIcon',
     TRASH = 'TrashIcon',
     BRIEFCASE = ' BriefcaseIcon',
-    PLUS = "plus"
+    PLUS = "plus",
+    X = "XIcon",
+    CHEVRON_DOWN = "ChevronDownIcon"
 }
 
 export enum OpacityEnum {

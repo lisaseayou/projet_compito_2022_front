@@ -24,6 +24,7 @@ const ProjectsDetails = () => {
     const navigate = useNavigate();
 
     const [showModalNewTask, setShowModalNewTask] = useState(false);
+    const [status, setStatus] = useState('');
 
     const { loading, error, data } = useQuery<IGetProject>(GET_PROJECT, {
         variables: { projectId: params.projectId },
@@ -53,6 +54,7 @@ const ProjectsDetails = () => {
                         projectId={data?.project?.id}
                         showModalNewTask={showModalNewTask}
                         setShowModalNewTask={setShowModalNewTask}
+                        setStatus={setStatus}
                     />
                 </div>
             </PrimaryLayout>
@@ -61,6 +63,7 @@ const ProjectsDetails = () => {
                 show={showModalNewTask}
                 setShow={() => setShowModalNewTask(!showModalNewTask)}
                 projectId={data?.project?.id}
+                status={status}
             />
         </>
     );
