@@ -13,7 +13,7 @@ type TypographyProps = {
     style?: object;
     className?: string;
     leading?: TextLineHeightEnum | string;
-    fontSize: string | FontSizeEnum | string[];
+    fontSize?: string | FontSizeEnum | string[];
     color?: string;
     textTransform?: TextTransformEnum | string;
     fontWeight?: FontWeightEnum | string;
@@ -129,13 +129,11 @@ const Typography = ({
     if (variant === TypographyVariantEnum.P) {
         return (
             <p
-                className={`not-italic ${
-                    fontWeight ?? FontWeightEnum.NORMAL
-                } leading-${leading ?? TextLineHeightEnum.NONE} ${
-                    Array.isArray(fontSize) ? fontSize.join(' ') : fontSize
-                } ${textTransform ?? TextTransformEnum.NORMAL} ${
-                    color ?? 'text-white'
-                } ${className}`}
+                className={`not-italic ${fontWeight ?? FontWeightEnum.NORMAL} ${
+                    leading ?? TextLineHeightEnum.NORMAL
+                } ${Array.isArray(fontSize) ? fontSize.join(' ') : fontSize} ${
+                    textTransform ?? TextTransformEnum.NORMAL
+                } ${color ?? 'text-white'} ${className}`}
                 style={style}
             >
                 {children}

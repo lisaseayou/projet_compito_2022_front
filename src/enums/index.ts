@@ -102,6 +102,8 @@ export enum IconEnum {
     CHECK_CIRCLE = 'checkCircleIcon',
     EYE = 'EyeIcon',
     EYE_OFF = 'EyeOffIcon',
+    EYE_OUTLINE = 'EyeIconOutline',
+    EYE_OFF_OUTLINE = 'EyeOffIconOutline',
     LOCK_CLOSED = 'LockClosed',
     MAIL = 'MailIcon',
     USER = 'UserIcon',
@@ -111,6 +113,7 @@ export enum IconEnum {
     TRASH_OUTLINE = 'TrashIcon',
     TRASH = 'TrashIcon',
     BRIEFCASE = ' BriefcaseIcon',
+    PLUS = "plus"
 }
 
 export enum OpacityEnum {
@@ -166,7 +169,7 @@ export enum RouteEnum {
     USER_HOME = '/user/home',
     PROJECTS = '/projects',
     ADD_PROJECT = '/addproject',
-    PROJECT_DETAILS = '/project-details/:projectId',
+    PROJECT_DETAILS = '/project-details',
     TASKS = '/tasks',
     ADD_TASK = '/addtask',
     DASHBOARD = '/dashboard',

@@ -24,7 +24,7 @@ import Logout from '../pages/auth/Logout';
 import { RouteEnum } from '../enums';
 
 export interface Menu {
-    path: RouteEnum;
+    path: RouteEnum | string;
     title: string;
     Component: ComponentType;
 }
@@ -92,7 +92,7 @@ export const MenuListProtected: Menu[] = [
         Component: AddProject,
     },
     {
-        path: RouteEnum.PROJECT_DETAILS,
+        path: `${RouteEnum.PROJECT_DETAILS}/:projectId`,
         title: 'Détail du projet',
         Component: ProjectsDetails,
     },

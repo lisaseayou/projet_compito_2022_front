@@ -17,7 +17,7 @@ interface IUserDatas {
 }
 
 interface IFormDatas {
-    subject: string;
+    name: string;
     status: string;
     dueDate: string;
     initialSpentTime: number;
@@ -37,7 +37,7 @@ function AddTask() {
     });
 
     const [formData, setFormData] = useState<IFormDatas>({
-        subject: '',
+        name: '',
         status: '',
         dueDate: new Date('DD/MM/YYYY').toString(),
         initialSpentTime: 0,
@@ -51,7 +51,7 @@ function AddTask() {
         onCompleted: () => {
             ToastSuccess('Votre tâche est ajoutée!');
             setFormData({
-                subject: '',
+                name: '',
                 status: '',
                 dueDate: new Date('DD/MM/YYYY').toString(),
                 initialSpentTime: 0,
@@ -123,8 +123,8 @@ function AddTask() {
                     <input
                         type="text"
                         onChange={handleChange}
-                        name="subject"
-                        value={formData.subject}
+                        name="name"
+                        value={formData.name}
                         className="border border-pink-400 w-44 m-3"
                     />
                 </div>

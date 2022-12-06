@@ -1,13 +1,22 @@
 import React from 'react';
 import { Draggable } from 'react-beautiful-dnd';
+import TaskCard from '../TaskCard';
 import './styles.css';
 
 type TaskProps = {
     task: any;
     index: any;
     droppableProvided?: any;
+    modalUpdateOrDeleteID: string;
+    setModalUpdateOrDeleteID: (value: string) => void;
 };
-const Task = ({ task, index, droppableProvided }: TaskProps) => {
+const Task = ({
+    task,
+    index,
+    droppableProvided,
+    modalUpdateOrDeleteID,
+    setModalUpdateOrDeleteID,
+}: TaskProps) => {
     return (
         <Draggable draggableId={task.id} index={index}>
             {(provided) => (
@@ -17,7 +26,11 @@ const Task = ({ task, index, droppableProvided }: TaskProps) => {
                     ref={provided.innerRef}
                     className="task__item"
                 >
-                    {task.subject}
+                    <TaskCard
+                        task={task}
+                        modalUpdateOrDeleteID={modalUpdateOrDeleteID}
+                        setModalUpdateOrDeleteID={setModalUpdateOrDeleteID}
+                    />
                 </div>
             )}
         </Draggable>

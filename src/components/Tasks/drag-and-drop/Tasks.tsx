@@ -1,19 +1,27 @@
 // @ts-nocheck
 
-import { useState } from 'react';
+import { Dispatch, SetStateAction, useState } from 'react';
 import Column from './Column';
 import { DragDropContext } from 'react-beautiful-dnd';
 import './styles.css';
 import { StatusEnum } from '../../../enums';
 import { UPDATE_TASK_STATUS } from '../../../graphql/mutation';
 import { useMutation } from '@apollo/client';
+import { ToastContainer } from 'react-toastify';
 
 type TasksProps = {
     tasks: any;
     projectId: any;
+    showModalNewTask: boolean;
+    setShowModalNewTask: Dispatch<SetStateAction<boolean>>;
 };
 
-const Tasks = ({ tasks, projectId }: TasksProps) => {
+const Tasks = ({
+    tasks,
+    projectId,
+    showModalNewTask,
+    setShowModalNewTask,
+}: TasksProps) => {
     const getTasks = () => {
         let tasksList = {};
 
@@ -38,11 +46,11 @@ const Tasks = ({ tasks, projectId }: TasksProps) => {
     const getStatusByColumn = (columnId: any) => {
         switch (columnId) {
             case 'column-1':
-                return StatusEnum.TO_DO;
+                return 'TO_DO';
             case 'column-2':
-                return StatusEnum.IN_PROGRESS;
+                return 'IN_PROGRESS';
             case 'column-3':
-                return StatusEnum.FINISH;
+                return 'FINISH';
             default:
                 break;
         }
@@ -151,8 +159,6 @@ const Tasks = ({ tasks, projectId }: TasksProps) => {
             },
         });
 
-        console.log(destination);
-
         const newState = {
             ...datas,
             columns: {
@@ -165,19 +171,29 @@ const Tasks = ({ tasks, projectId }: TasksProps) => {
     };
 
     return (
-        <div className="tasks">
-            <DragDropContext onDragEnd={onDragEnd}>
-                {datas.columnOrder.map((columnId: any) => {
-                    const column = datas.columns[columnId];
-                    const tasks = column.taskIds.map(
-                        (taskId: any) => datas.tasks[taskId]
-                    );
-                    return (
-                        <Column key={column.id} column={column} tasks={tasks} />
-                    );
-                })}
-            </DragDropContext>
-        </div>
+        <>
+            <div className="tasks">
+                <DragDropContext onDragEnd={onDragEnd}>
+                    {datas.columnOrder.map((columnId: any) => {
+                        const column = datas.columns[columnId];
+                        const tasks = column.taskIds.map(
+                            (taskId: any) => datas.tasks[taskId]
+                        );
+                        return (
+                            <Column
+                                key={column.id}
+                                column={column}
+                                tasks={tasks}
+                                showModalNewTask={showModalNewTask}
+                                setShowModalNewTask={setShowModalNewTask}
+                            />
+                        );
+                    })}
+                </DragDropContext>
+            </div>
+
+            <ToastContainer />
+        </>
     );
 };
 

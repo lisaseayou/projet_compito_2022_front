@@ -1,14 +1,18 @@
-import React, { useEffect, useState } from 'react';
+import React, { Dispatch, SetStateAction, useEffect, useState } from 'react';
 import Task from './Task';
 import { Droppable } from 'react-beautiful-dnd';
 import './styles.css';
+import TaskCategory from '../TaskCategory';
 
 type ColumnsProps = {
     column: any;
     tasks: any;
+    showModalNewTask: boolean;
+    setShowModalNewTask: Dispatch<SetStateAction<boolean>>;
 };
-const Column = ({ column, tasks }: ColumnsProps) => {
+const Column = ({ column, tasks, showModalNewTask, setShowModalNewTask }: ColumnsProps) => {
     const [enabled, setEnabled] = useState(false);
+    const [modalUpdateOrDeleteID, setModalUpdateOrDeleteID] = useState('');
 
     useEffect(() => {
         const animation = requestAnimationFrame(() => setEnabled(true));
@@ -24,17 +28,27 @@ const Column = ({ column, tasks }: ColumnsProps) => {
     }
 
     return (
-        <div className="tasks__column">
-            <h2>{column.title}</h2>
+        <div className="my-0 mx-4 flex-[1]">
+            <TaskCategory
+                title={column.title}
+                tasksLengthByStatus={tasks.length}
+                showBtn={column.id !== 'column-3'}
+                onClick={() => setShowModalNewTask(true)}
+            />
+
             <Droppable droppableId={column.id}>
                 {(provider) => (
-                    <div
-                        {...provider.droppableProps}
-                        ref={provider.innerRef}
-                        className="tasks__list"
-                    >
+                    <div {...provider.droppableProps} ref={provider.innerRef}>
                         {tasks?.map((task: any, index: any) => (
-                            <Task key={task.id} task={task} index={index} />
+                            <Task
+                                key={task.id}
+                                task={task}
+                                index={index}
+                                modalUpdateOrDeleteID={modalUpdateOrDeleteID}
+                                setModalUpdateOrDeleteID={
+                                    setModalUpdateOrDeleteID
+                                }
+                            />
                         ))}
                         {provider.placeholder}
                     </div>

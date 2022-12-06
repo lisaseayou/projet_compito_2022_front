@@ -3,7 +3,9 @@ import { IUser } from './User';
 
 export interface ITask {
     id: string;
-    subject: string;
+    name: string;
+    description: string;
+    view: string
     status: string;
     dueDate: string;
     initialSpentTime: number;
@@ -17,4 +19,8 @@ export interface ITask {
 
 export interface IAddTask {
     addProject: IProject;
+}
+
+export interface IDeleteTask {
+    addProject: Pick<ITask, 'id' | 'name'>;
 }

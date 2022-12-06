@@ -25,7 +25,7 @@ const TableTask = ({
           {task.id}
         </td>
         <td className="px-5 py-5 border-b border-gray-200 bg-white text-center text-sm w-64">
-          {task.subject}
+          {task.name}
         </td>
         <td className="px-5 py-5 border-b border-gray-200 bg-white text-center text-sm w-64">
           {task.priority}
