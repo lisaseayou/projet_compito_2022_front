@@ -10,6 +10,7 @@ type ColumnsProps = {
     showModalNewTask: boolean;
     setShowModalNewTask: Dispatch<SetStateAction<boolean>>;
     setStatus: Dispatch<SetStateAction<string>>;
+    expandInfoTask: boolean;
 };
 const Column = ({
     column,
@@ -17,6 +18,7 @@ const Column = ({
     showModalNewTask,
     setShowModalNewTask,
     setStatus,
+    expandInfoTask,
 }: ColumnsProps) => {
     const [enabled, setEnabled] = useState(false);
     const [modalUpdateOrDeleteID, setModalUpdateOrDeleteID] = useState('');
@@ -62,6 +64,7 @@ const Column = ({
                                 setModalUpdateOrDeleteID={
                                     setModalUpdateOrDeleteID
                                 }
+                                expandInfoTask={expandInfoTask}
                             />
                         ))}
                         {provider.placeholder}

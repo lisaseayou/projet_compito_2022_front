@@ -54,8 +54,6 @@ const ModalCreateTask = ({
 
     const [globalErrorMessage, setGlobalFormMessage] = useState('');
 
-    console.log(watch());
-
     const [addTask] = useMutation<IAddTask>(ADD_TASK, {
         onCompleted: () => {
             ToastSuccess('La tache a bien été ajoutée !');

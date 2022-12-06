@@ -14,10 +14,12 @@ import { GET_PROJECT } from '../graphql/query';
 
 // types, interfaces && enums
 import { IGetProject } from '../types/Project';
-import { RouteEnum } from '../enums';
+import { IconEnum, OpacityEnum, RouteEnum } from '../enums';
 
 // utils && helpers
 import { firstLetterUpperCase } from '../utils';
+import { DotsVerticalIcon } from '@heroicons/react/solid';
+import Icon from '../components/ui/Icons/Icon';
 
 const ProjectsDetails = () => {
     const params = useParams();
@@ -25,6 +27,7 @@ const ProjectsDetails = () => {
 
     const [showModalNewTask, setShowModalNewTask] = useState(false);
     const [status, setStatus] = useState('');
+    const [expandInfoTask, setExpandInfoTask] = useState(true);
 
     const { loading, error, data } = useQuery<IGetProject>(GET_PROJECT, {
         variables: { projectId: params.projectId },
@@ -45,8 +48,24 @@ const ProjectsDetails = () => {
                 }}
             >
                 <div className="flex flex-col justify-center w-full">
-                    <div className="bg-red-500 mb-6">
-                        display filtrer
+                    <div className="mb-6">
+                        <button
+                            className="flex items-center rounded-b-md p-1 hover:bg-primary-ultraLight"
+                            onClick={() => setExpandInfoTask(!expandInfoTask)}
+                        >
+                            <Icon
+                                variant={
+                                    expandInfoTask
+                                        ? IconEnum.EYE
+                                        : IconEnum.EYE_OFF
+                                }
+                                opacity={OpacityEnum.OPACITY_100}
+                                className="w-4 h-4 cursor-pointer"
+                                onClick={() =>
+                                    setExpandInfoTask(!expandInfoTask)
+                                }
+                            />
+                        </button>
                         {/* top bar with filter, display filter etc.. */}
                     </div>
                     <Tasks
@@ -55,6 +74,7 @@ const ProjectsDetails = () => {
                         showModalNewTask={showModalNewTask}
                         setShowModalNewTask={setShowModalNewTask}
                         setStatus={setStatus}
+                        expandInfoTask={expandInfoTask}
                     />
                 </div>
             </PrimaryLayout>
