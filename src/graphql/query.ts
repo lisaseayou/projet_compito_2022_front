@@ -124,6 +124,10 @@ export const GET_PROJECT_BY_USER = gql`
                 createdAt
                 updatedAt
             }
+            users {
+                id
+                name
+            }
         }
     }
 `;

@@ -72,6 +72,8 @@ const CardProject = ({
             },
         });
 
+    console.log(project);
+
     return (
         <div className="relative block col-span-12 sm:col-span-6 md:col-span-4 lg:col-span-3 p-5 w-full h-96 border border-gray-100 rounded-lg shadow-lg">
             <div className="flex flex-col justify-between h-full">

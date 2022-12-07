@@ -40,7 +40,13 @@ const PanelContent = ({ id, title, content, list }: PanelContentProps) => {
 
     const getUsersOptions = () => {
         const listName = list?.map((user: any) => user.name);
-        return data?.allUsers?.filter((user) => !listName?.includes(user.name));
+        return data?.allUsers
+            ?.filter((user) => !listName?.includes(user.name))
+            ?.map((user: IUser) => ({
+                id: user.id,
+                value: user.name,
+                label: user.name,
+            })) as OptionsType[];
     };
 
     return (
@@ -88,30 +94,28 @@ const PanelContent = ({ id, title, content, list }: PanelContentProps) => {
             {list && (
                 <div className="mt-2">
                     <div className="p-2">
-                        <SelectInput
-                            id="users"
-                            name="users"
-                            placeholder="Liste des utilisateurs"
-                            options={
-                                getUsersOptions()?.map((user: IUser) => ({
-                                    id: user.id,
-                                    value: user.name,
-                                    label: user.name,
-                                })) as OptionsType[]
-                            }
-                            isClearable
-                            // isMultiple
-                            onChange={(user) => {
-                                updateUserToProject({
-                                    variables: {
-                                        data: {
-                                            userId: user?.id,
-                                        },
-                                        updateProjectId: id,
-                                    },
-                                });
-                            }}
-                        />
+                        {getUsersOptions().length ? (
+                            <div className="mb-3">
+                                <SelectInput
+                                    id="users"
+                                    name="users"
+                                    placeholder="Liste des utilisateurs"
+                                    options={getUsersOptions()}
+                                    isClearable
+                                    // isMultiple
+                                    onChange={(user) => {
+                                        updateUserToProject({
+                                            variables: {
+                                                data: {
+                                                    userId: user?.id,
+                                                },
+                                                updateProjectId: id,
+                                            },
+                                        });
+                                    }}
+                                />
+                            </div>
+                        ) : null}
                         {list.map((user: any) => (
                             <Typography
                                 key={user.id}
