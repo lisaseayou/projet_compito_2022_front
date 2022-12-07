@@ -18,7 +18,6 @@ import { IconEnum, OpacityEnum, RouteEnum } from '../enums';
 
 // utils && helpers
 import { firstLetterUpperCase } from '../utils';
-import { DotsVerticalIcon } from '@heroicons/react/solid';
 import Icon from '../components/ui/Icons/Icon';
 import ProjectPanel from '../components/panels/ProjectPanel';
 
@@ -102,6 +101,7 @@ const ProjectsDetails = () => {
                         onClose={() => setShowPanel(false)}
                         title="Infos"
                         description={data?.project?.description as string}
+                        users={data?.project?.users}
                     />
                 </div>
             </PrimaryLayout>

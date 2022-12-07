@@ -69,3 +69,10 @@ export interface IResetPassword {
         'id' | 'name' | 'email' | 'roles' | 'resetToken' | 'resetTokenExpiry'
     >;
 }
+
+export interface IGetAllUsers {
+    allUsers: Pick<
+        IUser,
+        'id' | 'name' | 'email'
+    >[];
+}

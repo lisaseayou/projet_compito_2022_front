@@ -35,6 +35,10 @@ export const firstLetterUpperCase = (value: string) => {
     return value.slice(0, 1).toUpperCase() + value.slice(1);
 };
 
+export const getNumberItems = (data: object[], bracket: boolean = false) => {
+    return bracket ? `(${data.length})` : data.length;
+}
+
 
 export const handleResetDefault = (e: ClipboardEvent<HTMLInputElement>) => {
     e.preventDefault();

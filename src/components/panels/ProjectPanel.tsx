@@ -1,7 +1,4 @@
-import { XCircleIcon } from '@heroicons/react/solid';
-import { useState } from 'react';
 import {
-    FontSizeEnum,
     FontWeightEnum,
     IconEnum,
     OpacityEnum,
@@ -10,13 +7,14 @@ import {
     TypographyVariantEnum,
 } from '../../enums';
 import Icon from '../ui/Icons/Icon';
-import PanelTitle from '../ui/panels/PanelContent';
+import PanelContent from '../ui/panels/PanelContent';
 import Typography from '../ui/Typography';
 
 type ProjectPanelProps = {
     show: boolean;
     title: string;
     description: string;
+    users: any;
     onClose: () => void;
 };
 
@@ -24,6 +22,7 @@ const ProjectPanel = ({
     show,
     title,
     description,
+    users,
     onClose,
 }: ProjectPanelProps) => {
     return (
@@ -57,7 +56,11 @@ const ProjectPanel = ({
 
                         <hr className="mt-4" />
 
-                        <PanelTitle title="Description" content={description} />
+                        <PanelContent
+                            title="Description"
+                            content={description}
+                        />
+                        <PanelContent title="Membre" list={users} />
                     </div>
                 </aside>
             )}
