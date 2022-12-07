@@ -10,7 +10,12 @@ import {
     TypographyVariantEnum,
 } from '../../../enums';
 import { UPDATE_USER_ON_PROJECT } from '../../../graphql/mutation';
-import { GET_ALL_USERS } from '../../../graphql/query';
+import {
+    GET_ALL_USERS,
+    GET_LAST_PROJECTS_UPDATE_BY_USER,
+    GET_PROJECT,
+    GET_PROJECT_BY_USER,
+} from '../../../graphql/query';
 import { IGetAllUsers, IUser } from '../../../types/User';
 import { getNumberItems, getPlural } from '../../../utils';
 import SelectInput, { OptionsType } from '../form/SelectInput';
@@ -31,7 +36,7 @@ const PanelContent = ({ id, title, content, list }: PanelContentProps) => {
     const [updateUserToProject] = useMutation(UPDATE_USER_ON_PROJECT, {
         onCompleted: () => {},
         onError: () => {},
-        // refetchQueries: [GET_PROJECT_BY_USER, GET_LAST_PROJECTS_UPDATE_BY_USER],
+        refetchQueries: [GET_PROJECT],
     });
 
     if (loading) {
@@ -102,7 +107,6 @@ const PanelContent = ({ id, title, content, list }: PanelContentProps) => {
                                     placeholder="Liste des utilisateurs"
                                     options={getUsersOptions()}
                                     isClearable
-                                    // isMultiple
                                     onChange={(user) => {
                                         updateUserToProject({
                                             variables: {
@@ -116,18 +120,30 @@ const PanelContent = ({ id, title, content, list }: PanelContentProps) => {
                                 />
                             </div>
                         ) : null}
-                        {list.map((user: any) => (
-                            <Typography
-                                key={user.id}
-                                variant={TypographyVariantEnum?.P}
-                                color="text-primary-main"
-                                fontSize={FontSizeEnum.XS}
-                                fontWeight={FontWeightEnum.NORMAL}
-                                textTransform={TextTransformEnum.NORMAL}
-                                className="w-full"
-                            >
-                                {user.name}
-                            </Typography>
+                        {list.map((user: any, index: number) => (
+                            <div className="flex items-center">
+                                {index === 0 && (
+                                    <Icon
+                                        variant={IconEnum.STAR}
+                                        opacity={OpacityEnum.OPACITY_100}
+                                        className="w-4 h-4 text-primary-main"
+                                    />
+                                )}
+
+                                <Typography
+                                    key={user.id}
+                                    variant={TypographyVariantEnum?.P}
+                                    color="text-primary-main"
+                                    fontSize={FontSizeEnum.XS}
+                                    fontWeight={FontWeightEnum.NORMAL}
+                                    textTransform={TextTransformEnum.NORMAL}
+                                    className={`w-full ${
+                                        index > 0 ? 'ml-4' : 'ml-0'
+                                    }`}
+                                >
+                                    {user.name}
+                                </Typography>
+                            </div>
                         ))}
                     </div>
                 </div>

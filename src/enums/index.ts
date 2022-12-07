@@ -117,7 +117,8 @@ export enum IconEnum {
     X = "XIcon",
     CHEVRON_DOWN = "ChevronDownIcon",
     DOTS_HORIZONTAL = "DotsHorizontalIcon",
-    DOCUMENT_TEXT = "DocumentTextIcon"
+    DOCUMENT_TEXT = "DocumentTextIcon",
+    STAR = "StarIcon"
 }
 
 export enum OpacityEnum {

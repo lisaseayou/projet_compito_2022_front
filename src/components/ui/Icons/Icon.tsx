@@ -11,6 +11,7 @@ import {
     XIcon,
     DotsHorizontalIcon,
     DocumentTextIcon,
+    StarIcon
 } from '@heroicons/react/solid';
 import {
     ChatAltIcon,
@@ -197,6 +198,16 @@ const Icon = ({
             case IconEnum.DOCUMENT_TEXT:
                 return (
                     <DocumentTextIcon
+                        className={`w-6 h-6 text-primary-main ${opacity} ${
+                            onClick ? 'cursor-pointer' : 'cursor-default'
+                        } ${className ?? ''}`}
+                        onClick={onClick}
+                    />
+                );
+
+            case IconEnum.STAR:
+                return (
+                    <StarIcon
                         className={`w-6 h-6 text-primary-main ${opacity} ${
                             onClick ? 'cursor-pointer' : 'cursor-default'
                         } ${className ?? ''}`}
