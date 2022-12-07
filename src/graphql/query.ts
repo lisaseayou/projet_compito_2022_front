@@ -1,5 +1,15 @@
 import { gql } from '@apollo/client';
 
+export const GET_ALL_USERS = gql`
+    query allUsers {
+        allUsers {
+            id
+            name
+            email
+        }
+    }
+`
+
 export const LOGIN = gql`
     query login($email: String!, $password: String!) {
         login(email: $email, password: $password) {
@@ -113,6 +123,10 @@ export const GET_PROJECT_BY_USER = gql`
                 advancement
                 createdAt
                 updatedAt
+            }
+            users {
+                id
+                name
             }
         }
     }

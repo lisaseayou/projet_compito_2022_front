@@ -213,50 +213,78 @@ const SelectInput = ({
     validation,
     containerClassName,
     error,
+    onChange,
 }: SelectInputProps) => {
     return (
         <div className={containerClassName}>
-            <Controller
-                control={control}
-                id={id}
-                name={name}
-                defaultValue=""
-                rules={validation}
-                render={({ field: { onChange, value } }) => {
-                    return (
-                        <Select
-                            components={{
-                                SelectContainer,
-                                Placeholder,
-                                Option,
-                                ClearIndicator,
-                                DropdownIndicator,
-                                MultiValueRemove,
-                                NoOptionsMessage,
-                            }}
-                            placeholder={placeholder}
-                            defaultValue={defaultValue}
-                            isDisabled={isDisabled}
-                            isLoading={isLoading}
-                            isClearable={isClearable}
-                            isSearchable={isSearchable}
-                            isMulti={isMultiple}
-                            name={name}
-                            options={options}
-                            styles={styles}
-                            onChange={onChange}
-                        />
-                    );
-                }}
-            />
+            {control ? (
+                <>
+                    <Controller
+                        control={control}
+                        id={id}
+                        name={name}
+                        defaultValue=""
+                        rules={validation}
+                        render={({ field: { onChange, value } }) => {
+                            return (
+                                <Select
+                                    components={{
+                                        SelectContainer,
+                                        Placeholder,
+                                        Option,
+                                        ClearIndicator,
+                                        DropdownIndicator,
+                                        MultiValueRemove,
+                                        NoOptionsMessage,
+                                    }}
+                                    placeholder={placeholder}
+                                    defaultValue={defaultValue}
+                                    isDisabled={isDisabled}
+                                    isLoading={isLoading}
+                                    isClearable={isClearable}
+                                    isSearchable={isSearchable}
+                                    isMulti={isMultiple}
+                                    name={name}
+                                    options={options}
+                                    styles={styles}
+                                    onChange={onChange}
+                                />
+                            );
+                        }}
+                    />
 
-            {error && (
-                <Alert
-                    variant={AlertVariantEnum.INPUT_ERROR}
-                    containerClassName="mt-2 mb-2"
-                >
-                    {error?.message as string}
-                </Alert>
+                    {error && (
+                        <Alert
+                            variant={AlertVariantEnum.INPUT_ERROR}
+                            containerClassName="mt-2 mb-2"
+                        >
+                            {error?.message as string}
+                        </Alert>
+                    )}
+                </>
+            ) : (
+                <Select
+                    components={{
+                        SelectContainer,
+                        Placeholder,
+                        Option,
+                        ClearIndicator,
+                        DropdownIndicator,
+                        MultiValueRemove,
+                        NoOptionsMessage,
+                    }}
+                    placeholder={placeholder}
+                    defaultValue={defaultValue}
+                    isDisabled={isDisabled}
+                    isLoading={isLoading}
+                    isClearable={isClearable}
+                    isSearchable={isSearchable}
+                    isMulti={isMultiple}
+                    name={name}
+                    options={options}
+                    styles={styles}
+                    onChange={onChange}
+                />
             )}
         </div>
     );

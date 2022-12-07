@@ -20,6 +20,8 @@ import { ADD_TASK } from '../../graphql/mutation';
 import {
     GET_PROJECT_BY_USER,
     GET_LAST_PROJECTS_UPDATE_BY_USER,
+    GET_PROJECT,
+    GET_ALL_TASKS,
 } from '../../graphql/query';
 
 // types, interfaces & enums

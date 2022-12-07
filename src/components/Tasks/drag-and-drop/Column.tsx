@@ -54,7 +54,11 @@ const Column = ({
 
             <Droppable droppableId={column.id}>
                 {(provider) => (
-                    <div {...provider.droppableProps} ref={provider.innerRef}>
+                    <div
+                        {...provider.droppableProps}
+                        ref={provider.innerRef}
+                        className="min-h-[100px]"
+                    >
                         {tasks?.map((task: any, index: any) => (
                             <Task
                                 key={task.id}
