@@ -11,6 +11,7 @@ import PanelContent from '../ui/panels/PanelContent';
 import Typography from '../ui/Typography';
 
 type ProjectPanelProps = {
+    id: string;
     show: boolean;
     title: string;
     description: string;
@@ -19,6 +20,7 @@ type ProjectPanelProps = {
 };
 
 const ProjectPanel = ({
+    id,
     show,
     title,
     description,
@@ -60,7 +62,7 @@ const ProjectPanel = ({
                             title="Description"
                             content={description}
                         />
-                        <PanelContent title="Membre" list={users} />
+                        <PanelContent title="Membre" list={users} id={id} />
                     </div>
                 </aside>
             )}

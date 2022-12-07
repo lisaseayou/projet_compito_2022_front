@@ -1,4 +1,5 @@
-import { useQuery } from '@apollo/client';
+// @ts-nocheck
+import { useMutation, useQuery } from '@apollo/client';
 import React from 'react';
 import {
     FontSizeEnum,
@@ -8,6 +9,7 @@ import {
     TextTransformEnum,
     TypographyVariantEnum,
 } from '../../../enums';
+import { UPDATE_USER_ON_PROJECT } from '../../../graphql/mutation';
 import { GET_ALL_USERS } from '../../../graphql/query';
 import { IGetAllUsers, IUser } from '../../../types/User';
 import { getNumberItems, getPlural } from '../../../utils';
@@ -17,13 +19,20 @@ import Loader from '../loader/Loader';
 import Typography from '../Typography';
 
 type PanelContentProps = {
+    id?: string;
     title: string;
     content?: string;
     list?: any;
     number?: number;
 };
-const PanelContent = ({ title, content, list }: PanelContentProps) => {
+const PanelContent = ({ id, title, content, list }: PanelContentProps) => {
     const { loading, error, data } = useQuery<IGetAllUsers>(GET_ALL_USERS);
+
+    const [updateUserToProject] = useMutation(UPDATE_USER_ON_PROJECT, {
+        onCompleted: () => {},
+        onError: () => {},
+        // refetchQueries: [GET_PROJECT_BY_USER, GET_LAST_PROJECTS_UPDATE_BY_USER],
+    });
 
     if (loading) {
         return <Loader label="Chargement..." />;
@@ -91,10 +100,21 @@ const PanelContent = ({ title, content, list }: PanelContentProps) => {
                                 })) as OptionsType[]
                             }
                             isClearable
-                            isMultiple
+                            // isMultiple
+                            onChange={(user) => {
+                                updateUserToProject({
+                                    variables: {
+                                        data: {
+                                            userId: user?.id,
+                                        },
+                                        updateProjectId: id,
+                                    },
+                                });
+                            }}
                         />
                         {list.map((user: any) => (
                             <Typography
+                                key={user.id}
                                 variant={TypographyVariantEnum?.P}
                                 color="text-primary-main"
                                 fontSize={FontSizeEnum.XS}

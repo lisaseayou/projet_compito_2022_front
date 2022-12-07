@@ -97,6 +97,7 @@ const ProjectsDetails = () => {
                     }`}
                 >
                     <ProjectPanel
+                        id={data?.project?.id as string}
                         show={showPanel}
                         onClose={() => setShowPanel(false)}
                         title="Infos"
