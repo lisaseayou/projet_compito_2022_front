@@ -43,7 +43,7 @@ const ProjectPanel = ({
                         />
                     </button>
 
-                    <div className="h-full overflow-y-auto py-4 px-3 bg-primary-ultraLight rounded">
+                    <div className="h-full overflow-y-auto py-4 px-3 bg-primary-ultraLight rounded border-l border-['#fafafd']">
                         <Typography
                             variant={TypographyVariantEnum?.H3}
                             color="text-primary-main"
