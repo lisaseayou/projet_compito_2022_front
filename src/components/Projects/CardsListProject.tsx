@@ -1,5 +1,5 @@
 // hooks
-import { useState } from "react";
+import { ChangeEvent, useState } from "react";
 import { useSelector } from "react-redux";
 import { useQuery } from "@apollo/client";
 
@@ -46,7 +46,7 @@ const CardsList = ({ setShowAddProject }: CardListProps) => {
   if (error) {
     return <p>error</p>;
   }
-  const handleSearchProject = (e: any) => {
+  const handleSearchProject = (e: ChangeEvent<HTMLInputElement>) => {
     let value = e.target.value;
     setSearchProject(value);
   };
@@ -70,6 +70,8 @@ const CardsList = ({ setShowAddProject }: CardListProps) => {
             data?.projectsByUser
               ?.filter((project: IProject) => {
                 return project?.name
+                .charAt(0)
+                .replace("é", "e")
                   .toLowerCase()
                   .includes(searchProject.toLowerCase());
               })
