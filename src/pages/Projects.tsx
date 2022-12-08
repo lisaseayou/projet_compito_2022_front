@@ -21,7 +21,7 @@ const Projects = () => {
                 labelCTA="Ajouter un projet"
                 onClickCTA={() => setShowAddProject(true)}
             >
-                <div className="flex justify-center w-full">
+                <div className="flex w-full">
                     <CardsListProject setShowAddProject={setShowAddProject} />
                 </div>
 
