@@ -39,7 +39,7 @@ type ModalProps = {
     icon: IconEnum;
 };
 
-ReactModal.setAppElement('#root');
+// ReactModal.setAppElement('#root');
 
 const Modal = ({
     show,
