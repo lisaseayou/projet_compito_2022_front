@@ -4,7 +4,7 @@ import { Dispatch, SetStateAction, useState } from 'react';
 import Column from './Column';
 import { DragDropContext } from 'react-beautiful-dnd';
 import './styles.css';
-import { StatusEnum } from '../../../enums';
+import { StatusEnum, StatusValueEnum } from '../../../enums';
 import { UPDATE_TASK_STATUS } from '../../../graphql/mutation';
 import { useMutation } from '@apollo/client';
 import { ToastContainer } from 'react-toastify';
@@ -51,11 +51,11 @@ const Tasks = ({
     const getStatusByColumn = (columnId: any) => {
         switch (columnId) {
             case 'column-1':
-                return 'TO_DO';
+                return StatusValueEnum.TO_DO;
             case 'column-2':
-                return 'IN_PROGRESS';
+                return StatusValueEnum.IN_PROGRESS;
             case 'column-3':
-                return 'FINISH';
+                return StatusValueEnum.FINISH;
             default:
                 break;
         }

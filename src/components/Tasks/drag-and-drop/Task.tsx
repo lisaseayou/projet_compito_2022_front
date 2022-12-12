@@ -9,7 +9,7 @@ type TaskProps = {
     droppableProvided?: any;
     modalUpdateOrDeleteID: string;
     setModalUpdateOrDeleteID: (value: string) => void;
-     expandInfoTask: boolean;
+    expandInfoTask: boolean;
 };
 const Task = ({
     task,

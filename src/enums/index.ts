@@ -191,3 +191,9 @@ export enum StatusEnum {
     IN_PROGRESS = "en cours",
     FINISH = "terminé"
 }
+
+export enum StatusValueEnum {
+    TO_DO = "TO_DO",
+    IN_PROGRESS = "IN_PROGRESS",
+    FINISH = "FINISH"
+}
