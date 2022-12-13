@@ -34,6 +34,8 @@ const ProjectsDetails = () => {
         variables: { projectId: params.projectId },
     });
 
+    console.log(data, params.projectId);
+
     if (loading) {
         return <Loader label="Chargement..." />;
     }

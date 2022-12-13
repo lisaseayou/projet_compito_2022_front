@@ -68,32 +68,6 @@ function Nav() {
                     <li>
                         <Link
                             variant={LinkVariantEnum.NAV}
-                            to={RouteEnum.TASKS}
-                            iconNav={
-                                <TagIcon className="text-primary-main w-8 sm:w-8" />
-                            }
-                            label="Tasks"
-                            navIsOpen={isOpen}
-                            setNavIsOpen={setIsOpen}
-                        />
-                    </li>
-
-                    <li>
-                        <Link
-                            variant={LinkVariantEnum.NAV}
-                            to={RouteEnum.DASHBOARD}
-                            iconNav={
-                                <TemplateIcon className="text-primary-main w-8 sm:w-8" />
-                            }
-                            label="Dashboard"
-                            navIsOpen={isOpen}
-                            setNavIsOpen={setIsOpen}
-                        />
-                    </li>
-
-                    <li>
-                        <Link
-                            variant={LinkVariantEnum.NAV}
                             to={RouteEnum.PROFIL}
                             iconNav={
                                 <UserIcon className="text-primary-main w-8 sm:w-8" />
