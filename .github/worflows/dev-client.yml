@@ -39,6 +39,6 @@ jobs:
               name: Build and push
               with:
                   context: ./
-                  file: ./client/Dockerfile
+                  file: ./Dockerfile
                   push: true
                   tags: ${{ secrets.DOCKERHUB_USERNAME }}/${{ secrets.DOCKER_CLIENT_IMAGE_NAME }}:latest
