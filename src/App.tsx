@@ -16,6 +16,7 @@ export type MenuItem = Pick<Menu, 'path' | 'Component'>;
 
 function App() {
     const user: IUser = useSelector((state: any) => state.user);
+    console.log('ok');
 
     return (
         <>

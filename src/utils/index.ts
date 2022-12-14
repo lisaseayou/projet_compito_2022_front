@@ -35,7 +35,7 @@ export const firstLetterUpperCase = (value: string) => {
     return value.slice(0, 1).toUpperCase() + value.slice(1);
 };
 
-export const getNumberItems = (data: object[], bracket: boolean = false) => {
+export const getNumberItems = (data: object[], bracket: boolean = false): string | number => {
     return bracket ? `(${data.length})` : data.length;
 }
 

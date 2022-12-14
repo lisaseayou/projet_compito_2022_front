@@ -11,18 +11,9 @@ type ChipProps = {
 
 const Chip = ({ label }: ChipProps) => {
     return (
-        <div className="bg-orange-primary rounded px-2 py-0.5">
-            <Typography
-                variant={TypographyVariantEnum?.P}
-                color="text-orange-dark"
-                className="mb-0"
-                fontSize="text-[10px]"
-                fontWeight={FontWeightEnum.SEMIBOLD}
-                textTransform={TextTransformEnum.UPPERCASE}
-            >
-                {label}
-            </Typography>
-        </div>
+<div className="bg-orange-primary rounded px-2 py-0.5">
+    {label}
+</div>
     );
 };
 
