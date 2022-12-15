@@ -136,6 +136,16 @@ export const ADD_TASK = gql`
 }
 `;
 
+export const UPDATE_PROJECT = gql`
+  mutation updateProject($data: UpdateProjectInput!, $updateProjectId: String!) {
+    updateProject(data: $data, id: $updateProjectId) {
+      id
+      name
+      description
+    }
+  }
+`;
+
 export const UPDATE_USER_ON_PROJECT = gql`
   mutation updateProject($data: UpdateProjectInput!, $updateProjectId: String!) {
     updateProject(data: $data, id: $updateProjectId) {

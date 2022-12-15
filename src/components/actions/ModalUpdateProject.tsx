@@ -9,13 +9,10 @@ import DialogActions from "@mui/material/DialogActions";
 import IconButton from "@mui/material/IconButton";
 import CloseIcon from "@mui/icons-material/Close";
 import TextField from "@material-ui/core/TextField";
-import { useSelector, useDispatch } from "react-redux";
 import { ChangeEvent, useState } from "react";
 import { useMutation } from "@apollo/client";
-import { UPDATE_PROFILE } from "../graphql/mutation";
-import { LOGIN } from "../graphql/query";
-import { IUser } from "../types/User";
-import { loginUser } from "../context/actions/user.action";
+import { UPDATE_PROJECT } from "../../graphql/mutation"
+import { GET_PROJECT_BY_USER } from "../../graphql/query";
 
 const BootstrapDialog = styled(Dialog)(({ theme }) => ({
   "& .MuiDialogContent-root": {
@@ -56,30 +53,22 @@ const BootstrapDialogTitle = (props: DialogTitleProps) => {
   );
 };
 
-export default function CustomizedDialogs() {
-  const user: IUser = useSelector((state: any) => state.user);
+export default function CustomizedDialogs({project } ) {
   const [open, setOpen] = React.useState<boolean>(false);
-  const dispatch = useDispatch();
   const [form, setForm] = useState({
-    name: user.name,
-    email: user.email,
-    url: user.url,
-    description: user.description,
-    linkedin: user.linkedin,
-    twitter: user.twitter,
-    github: user.github,
+    name: project.name,
+    description: project.description,
   });
 
-  const [updateProfile] = useMutation(UPDATE_PROFILE, {
+  const [updateProject] = useMutation(UPDATE_PROJECT, {
     onCompleted: (data) => {
       console.log("success", data);
-      dispatch(loginUser(data.updateUser));
       return "succes";
     },
     onError: () => {
       console.log("error");
     },
-    refetchQueries: [LOGIN],
+    refetchQueries: [GET_PROJECT_BY_USER],
   });
   const handleClickOpen = () => {
     setOpen(true);
@@ -95,7 +84,7 @@ export default function CustomizedDialogs() {
 
   const handleSubmit = (e: SubmitEvent) => {
     e.preventDefault();
-    updateProfile({ variables: { updateUserId: user.id, data: form } });
+    updateProject({ variables: { updateProjectId: project.id, data: form } });
     handleClose();
   };
 
@@ -113,8 +102,9 @@ export default function CustomizedDialogs() {
           id="customized-dialog-title"
           onClose={handleClose}
         >
-          Modifie ton profil
+          Modifie ton projet
         </BootstrapDialogTitle>
+
         <DialogContent dividers>
           <form onSubmit={handleSubmit}>
             <div className="flex">
@@ -124,56 +114,10 @@ export default function CustomizedDialogs() {
                   id="outlined-required"
                   label="Nom"
                   margin="dense"
-                  defaultValue={user.name}
+                  defaultValue={project.name}
                   name={"name"}
                   onChange={handleChange}
                 />
-                <TextField
-                  required
-                  id="outlined-required"
-                  label="E-mail"
-                  margin="dense"
-                  defaultValue={user.email}
-                  name={"email"}
-                  onChange={handleChange}
-                />
-                <TextField
-                  id="outlined-password-input"
-                  label="Site Web"
-                  type="Site Web"
-                  name="url"
-                  defaultValue={user.url}
-                  onChange={handleChange}
-                />
-              </div>
-              <div className="flex justify-center flex-col m-5">
-                <TextField
-                  id="outlined-password-input"
-                  label="LinkedIn"
-                  type="LinkedIn"
-                  name="linkedin"
-                  dafaultValue={user.linkedin}
-                  onChange={handleChange}
-                />
-                <TextField
-                  id="outlined-password-input"
-                  label="GitHub"
-                  type="GitHub"
-                  name="github"
-                  defaultValue={user.github}
-                  onChange={handleChange}
-                />
-                <TextField
-                  id="outlined-password-input"
-                  label="Twitter"
-                  type="Twitter"
-                  name="twitter"
-                  defaultValue={user.twitter}
-                  onChange={handleChange}
-                />
-              </div>{" "}
-            </div>
-            <div className="m-5">
               <TextField
                 fullWidth
                 id="outlined-multiline-static"
@@ -182,9 +126,10 @@ export default function CustomizedDialogs() {
                 rows={8}
                 margin="dense"
                 name="description"
-                defaultValue={user.description}
+                defaultValue={project.description}
                 onChange={handleChange}
               />
+            </div>
             </div>
             <DialogActions>
               <Button autoFocus type="submit">
