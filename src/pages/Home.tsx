@@ -35,7 +35,7 @@ const Home = () => {
                     textTransform={TextTransformEnum.NORMAL}
                     className="mb-4 sm:mb-0"
                 >
-                    Home Page
+                    Home Page super cool
                 </Typography>
 
                 {!user.id && (
