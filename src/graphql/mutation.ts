@@ -115,6 +115,20 @@ export const UPDATE_TASK_STATUS = gql`
   }
 `;
 
+export const UPDATE_TASK = gql`
+mutation Mutation($data: UpdateTaskInput!, $updateTaskId: String!) {
+  updateTask(data: $data, id: $updateTaskId) {
+    description
+    name
+    status
+    id
+    project {
+      id
+    }
+  }
+}
+`;
+
 export const DELETE_TASK = gql`
   mutation DeleteTask($deleteTaskId: String!) {
   deleteTask(id: $deleteTaskId) {

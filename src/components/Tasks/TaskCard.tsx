@@ -48,6 +48,7 @@ type TaskCardProps = {
     modalUpdateOrDeleteID: string;
     setModalUpdateOrDeleteID: (value: string) => void;
     expandInfoTask: boolean;
+    projectId: string;
 };
 
 const TaskCard = ({
@@ -55,6 +56,7 @@ const TaskCard = ({
     modalUpdateOrDeleteID,
     setModalUpdateOrDeleteID,
     expandInfoTask,
+    projectId
 }: TaskCardProps) => {
     const [showAction, setShowAction] = useState<boolean>(false);
     const [showDeleteTask, setShowDeleteTask] = useState<boolean>(false);
@@ -116,7 +118,7 @@ const TaskCard = ({
                                 </button>
 
                                 {showAction &&
-                                    modalUpdateOrDeleteID === task.id && (
+                                    modalUpdateOrDeleteID === task.id  && (
                                         <ActionBase
                                             className="top-8 right-2"
                                             dataId={task.id}
@@ -124,6 +126,8 @@ const TaskCard = ({
                                             setShowDeleteData={
                                                 setShowDeleteTask
                                             }
+                                            task={task}
+                                            projectId={projectId}
                                         />
                                     )}
                             </div>

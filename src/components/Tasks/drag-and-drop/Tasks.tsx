@@ -193,6 +193,7 @@ const Tasks = ({
                                 setShowModalNewTask={setShowModalNewTask}
                                 setStatus={setStatus}
                                 expandInfoTask={expandInfoTask}
+                                projectId={projectId}
                             />
                         );
                     })}

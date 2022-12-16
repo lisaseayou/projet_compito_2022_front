@@ -1,5 +1,6 @@
 import React from 'react';
 import { Draggable } from 'react-beautiful-dnd';
+import { IProject } from '../../../types/Project';
 import TaskCard from '../TaskCard';
 import './styles.css';
 
@@ -10,6 +11,7 @@ type TaskProps = {
     modalUpdateOrDeleteID: string;
     setModalUpdateOrDeleteID: (value: string) => void;
     expandInfoTask: boolean;
+    projectId: string;
 };
 const Task = ({
     task,
@@ -18,6 +20,7 @@ const Task = ({
     modalUpdateOrDeleteID,
     setModalUpdateOrDeleteID,
     expandInfoTask,
+    projectId
 }: TaskProps) => {
     return (
         <Draggable draggableId={task.id} index={index}>
@@ -33,6 +36,7 @@ const Task = ({
                         modalUpdateOrDeleteID={modalUpdateOrDeleteID}
                         setModalUpdateOrDeleteID={setModalUpdateOrDeleteID}
                         expandInfoTask={expandInfoTask}
+                        projectId={projectId}
                     />
                 </div>
             )}

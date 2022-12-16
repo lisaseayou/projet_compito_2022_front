@@ -18,6 +18,8 @@ import {
 import Icon from "../ui/Icons/Icon";
 import ModalUpdateProject from "./ModalUpdateProject";
 import { IProject } from "../../types/Project";
+import ModalUpdateTask from "./ModalUpdateTask";
+import { ITask } from "../../types/Task";
 
 type ActionBaseProps = {
   dataId: string;
@@ -25,6 +27,8 @@ type ActionBaseProps = {
   setShowAction: (value: boolean) => void;
   setShowDeleteData: (value: boolean) => void;
   project?: IProject;
+  task?: ITask;
+  projectId?: string;
 };
 const ActionBase = ({
   dataId,
@@ -32,7 +36,12 @@ const ActionBase = ({
   setShowAction,
   setShowDeleteData,
   project,
+  projectId,
+  task,
 }: ActionBaseProps) => {
+  const ProjectIdCondition = dataId === project?.id;
+  console.log(project)
+
   return (
     <div
       className={`absolute z-10 w-auto bg-white rounded-md drop-shadow-primary ${
@@ -44,18 +53,12 @@ const ActionBase = ({
         opacity={OpacityEnum.OPACITY_100}
         className="w-4 h-4 text-primary-main mr-2"
       />
-      <ModalUpdateProject project={project} />
-      {/* <Typography
-                    variant={TypographyVariantEnum?.H5}
-                    color="text-primary-main"
-                    className="mb-0"
-                    fontSize={FontSizeEnum.XS}
-                    fontWeight={FontWeightEnum.NORMAL}
-                    textTransform={TextTransformEnum.NORMAL}
-                >
-                    Modifier
-                </Typography> */}
 
+      {ProjectIdCondition ? (
+        <ModalUpdateProject project={project} />
+      ) : (
+        <ModalUpdateTask task={task} projectId={projectId} />
+      )}
       <button
         className="flex items-center rounded-b-md p-4 hover:bg-primary-ultraLight"
         onClick={() => {
