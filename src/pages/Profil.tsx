@@ -1,32 +1,17 @@
 // hooks
 import { useSelector } from 'react-redux';
-import { useForm } from 'react-hook-form';
 
 // components
 import Modal from '../components/Modal';
 import ProfilItem from '../components/profile/ProfilItem';
 import PrimaryLayout from '../layout/PrimaryLayout';
-import SelectInput from '../components/ui/form/SelectInput';
 
 // types, interfaces & enums
 import { IUser } from '../types/User';
 import { JustifyContentEnum } from '../enums';
-import validation from '../validation';
 
 const Profil = () => {
     const user: IUser = useSelector((state: any) => state.user);
-
-    const {
-        control,
-        watch,
-        formState: { errors },
-    } = useForm({ mode: 'onBlur' });
-
-    const options = [
-        { value: 'jerem', label: 'Jeremy' },
-        { value: 'anais', label: 'Anais' },
-        { value: 'alex', label: 'Alexandre' },
-    ];
 
     return (
         <>
