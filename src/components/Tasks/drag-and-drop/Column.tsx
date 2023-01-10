@@ -3,6 +3,7 @@ import Task from './Task';
 import { Droppable } from 'react-beautiful-dnd';
 import './styles.css';
 import TaskCategory from '../TaskCategory';
+import { IProject } from '../../../types/Project';
 
 type ColumnsProps = {
     column: any;
@@ -11,6 +12,7 @@ type ColumnsProps = {
     setShowModalNewTask: Dispatch<SetStateAction<boolean>>;
     setStatus: Dispatch<SetStateAction<string>>;
     expandInfoTask: boolean;
+    projectId: string;
 };
 const Column = ({
     column,
@@ -19,6 +21,7 @@ const Column = ({
     setShowModalNewTask,
     setStatus,
     expandInfoTask,
+    projectId
 }: ColumnsProps) => {
     const [enabled, setEnabled] = useState(false);
     const [modalUpdateOrDeleteID, setModalUpdateOrDeleteID] = useState('');
@@ -65,11 +68,9 @@ const Column = ({
                                 task={task}
                                 index={index}
                                 modalUpdateOrDeleteID={modalUpdateOrDeleteID}
-                                setModalUpdateOrDeleteID={
-                                    setModalUpdateOrDeleteID
-                                }
-                                expandInfoTask={expandInfoTask}
-                            />
+                                setModalUpdateOrDeleteID={setModalUpdateOrDeleteID}
+                                expandInfoTask={expandInfoTask} 
+                                projectId={projectId}                            />
                         ))}
                         {provider.placeholder}
                     </div>

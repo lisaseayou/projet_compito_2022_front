@@ -17,7 +17,7 @@ const CardList = ({ task, icon, children }: CardListProps) => {
     return (
         <div className="flex justify-start bg-white border-b border-primary-main border-opacity-40 py-5">
             <div className="flex justify-center items-center h-12 w-12 mr-2 bg-primary-main">
-                {icon}
+                {icon} 
             </div>
 
             <div className="flex justify-between items-center w-full">

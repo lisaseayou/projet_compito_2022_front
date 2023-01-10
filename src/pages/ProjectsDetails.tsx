@@ -30,11 +30,9 @@ const ProjectsDetails = () => {
     const [expandInfoTask, setExpandInfoTask] = useState(true);
     const [showPanel, setShowPanel] = useState(false);
 
-    const { loading, error, data } = useQuery<IGetProject>(GET_PROJECT, {
+    const { loading, data } = useQuery<IGetProject>(GET_PROJECT, {
         variables: { projectId: params.projectId },
     });
-
-    console.log(data, params.projectId);
 
     if (loading) {
         return <Loader label="Chargement..." />;

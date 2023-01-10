@@ -115,6 +115,20 @@ export const UPDATE_TASK_STATUS = gql`
   }
 `;
 
+export const UPDATE_TASK = gql`
+mutation Mutation($data: UpdateTaskInput!, $updateTaskId: String!) {
+  updateTask(data: $data, id: $updateTaskId) {
+    description
+    name
+    status
+    id
+    project {
+      id
+    }
+  }
+}
+`;
+
 export const DELETE_TASK = gql`
   mutation DeleteTask($deleteTaskId: String!) {
   deleteTask(id: $deleteTaskId) {
@@ -134,6 +148,16 @@ export const ADD_TASK = gql`
     view
   }
 }
+`;
+
+export const UPDATE_PROJECT = gql`
+  mutation updateProject($data: UpdateProjectInput!, $updateProjectId: String!) {
+    updateProject(data: $data, id: $updateProjectId) {
+      id
+      name
+      description
+    }
+  }
 `;
 
 export const UPDATE_USER_ON_PROJECT = gql`

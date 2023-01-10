@@ -81,8 +81,8 @@ const Tasks = () => {
                     </div> */}
                 </div>
             ) : (
-                <div className="col-start-1 col-end-13">
-                    <TasksList data={data?.allTasks} />
+                <div className="col-start-1 col-end-13">hellooooooo
+                    {/* <TasksList data={data?.allTasks} /> */}
                 </div>
             )}
             {/*<table className="m-4 leading-normal ">

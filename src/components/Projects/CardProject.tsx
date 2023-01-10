@@ -115,6 +115,7 @@ const CardProject = ({
                                         dataId={project.id}
                                         setShowAction={setShowAction}
                                         setShowDeleteData={setShowDeleteProject}
+                                        project={project}
                                     />
                                 )}
                         </div>
