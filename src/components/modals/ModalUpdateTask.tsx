@@ -9,13 +9,16 @@ import DialogActions from '@mui/material/DialogActions';
 import IconButton from '@mui/material/IconButton';
 import CloseIcon from '@mui/icons-material/Close';
 import TextField from '@material-ui/core/TextField';
-import { useSelector, useDispatch } from 'react-redux';
 import { ChangeEvent, useState } from 'react';
 import { useMutation } from '@apollo/client';
-import { UPDATE_PROFILE } from '../graphql/mutation';
-import { LOGIN } from '../graphql/query';
-import { IUser } from '../types/User';
-import { loginUser } from '../context/actions/user.action';
+import { UPDATE_TASK } from '../../graphql/mutation';
+import {
+    GET_PROJECT,
+    GET_ALL_PROJECTS,
+    GET_ALL_TASKS,
+    GET_PROJECT_BY_USER,
+    GET_LAST_PROJECTS_UPDATE_BY_USER,
+} from '../../graphql/query';
 
 const BootstrapDialog = styled(Dialog)(({ theme }) => ({
     '& .MuiDialogContent-root': {
@@ -56,27 +59,28 @@ const BootstrapDialogTitle = (props: DialogTitleProps) => {
     );
 };
 
-export default function CustomizedDialogs() {
-    const user: IUser = useSelector((state: any) => state.user);
+export default function CustomizedDialogs({ task, projectId }) {
     const [open, setOpen] = React.useState<boolean>(false);
-    const dispatch = useDispatch();
     const [form, setForm] = useState({
-        name: user.name,
-        email: user.email,
-        url: user.url,
-        description: user.description,
-        linkedin: user.linkedin,
-        twitter: user.twitter,
-        github: user.github,
+        name: task.name,
+        description: task.description,
+        projectId,
     });
 
-    const [updateProfile] = useMutation(UPDATE_PROFILE, {
+    const [updateTask] = useMutation(UPDATE_TASK, {
         onCompleted: (data) => {
-            dispatch(loginUser(data.updateUser));
             return 'succes';
         },
+
         onError: () => {},
-        refetchQueries: [LOGIN],
+
+        refetchQueries: [
+            GET_PROJECT,
+            GET_ALL_PROJECTS,
+            GET_ALL_TASKS,
+            GET_PROJECT_BY_USER,
+            GET_LAST_PROJECTS_UPDATE_BY_USER,
+        ],
     });
 
     const handleClickOpen = () => {
@@ -95,7 +99,7 @@ export default function CustomizedDialogs() {
 
     const handleSubmit = (e: SubmitEvent) => {
         e.preventDefault();
-        updateProfile({ variables: { updateUserId: user.id, data: form } });
+        updateTask({ variables: { updateTaskId: task.id, data: form } });
         handleClose();
     };
 
@@ -108,6 +112,7 @@ export default function CustomizedDialogs() {
             >
                 Modifier
             </Button>
+
             <BootstrapDialog
                 onClose={handleClose}
                 aria-labelledby="customized-dialog-title"
@@ -117,8 +122,9 @@ export default function CustomizedDialogs() {
                     id="customized-dialog-title"
                     onClose={handleClose}
                 >
-                    Modifie ton profil
+                    Modifie ta tache
                 </BootstrapDialogTitle>
+
                 <DialogContent dividers>
                     <form onSubmit={handleSubmit}>
                         <div className="flex">
@@ -128,69 +134,24 @@ export default function CustomizedDialogs() {
                                     id="outlined-required"
                                     label="Nom"
                                     margin="dense"
-                                    defaultValue={user.name}
+                                    defaultValue={task.name}
                                     name={'name'}
                                     onChange={handleChange}
                                 />
                                 <TextField
-                                    required
-                                    id="outlined-required"
-                                    label="E-mail"
+                                    fullWidth
+                                    id="outlined-multiline-static"
+                                    label="Description"
+                                    multiline
+                                    rows={8}
                                     margin="dense"
-                                    defaultValue={user.email}
-                                    name={'email'}
-                                    onChange={handleChange}
-                                />
-                                <TextField
-                                    id="outlined-password-input"
-                                    label="Site Web"
-                                    type="Site Web"
-                                    name="url"
-                                    defaultValue={user.url}
+                                    name="description"
+                                    defaultValue={task.description}
                                     onChange={handleChange}
                                 />
                             </div>
-                            <div className="flex justify-center flex-col m-5">
-                                <TextField
-                                    id="outlined-password-input"
-                                    label="LinkedIn"
-                                    type="LinkedIn"
-                                    name="linkedin"
-                                    dafaultValue={user.linkedin}
-                                    onChange={handleChange}
-                                />
-                                <TextField
-                                    id="outlined-password-input"
-                                    label="GitHub"
-                                    type="GitHub"
-                                    name="github"
-                                    defaultValue={user.github}
-                                    onChange={handleChange}
-                                />
-                                <TextField
-                                    id="outlined-password-input"
-                                    label="Twitter"
-                                    type="Twitter"
-                                    name="twitter"
-                                    defaultValue={user.twitter}
-                                    onChange={handleChange}
-                                />
-                            </div>{' '}
                         </div>
 
-                        <div className="m-5">
-                            <TextField
-                                fullWidth
-                                id="outlined-multiline-static"
-                                label="Description"
-                                multiline
-                                rows={8}
-                                margin="dense"
-                                name="description"
-                                defaultValue={user.description}
-                                onChange={handleChange}
-                            />
-                        </div>
                         <DialogActions>
                             <Button autoFocus type="submit">
                                 Sauvegarder

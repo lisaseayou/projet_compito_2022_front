@@ -24,7 +24,7 @@ import {
     GET_PROJECT,
     GET_PROJECT_BY_USER,
 } from '../../graphql/query';
-import { DELETE_TASK, UPDATE_TASK } from '../../graphql/mutation';
+import { DELETE_TASK } from '../../graphql/mutation';
 
 // types, interfaces & enums
 import { IUser } from '../../types/User';
@@ -64,12 +64,6 @@ const TaskCard = ({
     const [showDeleteTask, setShowDeleteTask] = useState<boolean>(false);
     const [showUpdateTask, setShowUpdateTask] = useState<boolean>(false);
 
-    console.log(
-        task.id,
-        modalUpdateOrDeleteID,
-        modalUpdateOrDeleteID === task.id
-    );
-
     const [deleteTask] = useMutation<IDeleteTask>(DELETE_TASK, {
         onCompleted: () => {
             ToastSuccess('La tache a bien été supprimé ! 😊');
@@ -102,17 +96,17 @@ const TaskCard = ({
                 <div>
                     <div className="justify-between flex flex-col">
                         <div className="flex justify-between">
-                            <Link to="/">
-                                <Typography
-                                    variant={TypographyVariantEnum?.H5}
-                                    color="text-primary-main"
-                                    fontSize={FontSizeEnum.BASE}
-                                    fontWeight={FontWeightEnum.BOLD}
-                                    textTransform={TextTransformEnum.NORMAL}
-                                >
-                                    {firstLetterUpperCase(task.name)}
-                                </Typography>
-                            </Link>
+                            {/* <Link to="/"> */}
+                            <Typography
+                                variant={TypographyVariantEnum?.H5}
+                                color="text-primary-main"
+                                fontSize={FontSizeEnum.BASE}
+                                fontWeight={FontWeightEnum.BOLD}
+                                textTransform={TextTransformEnum.NORMAL}
+                            >
+                                {firstLetterUpperCase(task.name)}
+                            </Typography>
+                            {/* </Link> */}
 
                             <div className="relative flex-shrink-0 ml-3 block">
                                 <button
@@ -137,6 +131,9 @@ const TaskCard = ({
                                         task={task}
                                         projectId={projectId}
                                         setShowUpdate={setShowUpdateTask}
+                                        setModalUpdateOrDeleteID={() =>
+                                            setModalUpdateOrDeleteID('')
+                                        }
                                     />
                                 )}
                             </div>

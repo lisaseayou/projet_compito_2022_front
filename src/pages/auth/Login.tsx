@@ -50,7 +50,6 @@ const Login = () => {
 
     const [login] = useLazyQuery(LOGIN, {
         onCompleted(data) {
-            console.log(data);
             // check if user is login
             document.cookie = 'signedin=true;path=/';
             const { success, ...user } = data.login;
@@ -63,7 +62,6 @@ const Login = () => {
             navigate('/user/home', { replace: true, state: { ...user } });
         },
         onError(error) {
-            console.log(error?.message);
             setGlobalFormMessage(error?.message);
         },
     });

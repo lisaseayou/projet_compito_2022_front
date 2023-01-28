@@ -1,6 +1,5 @@
 import React from 'react';
 import { Draggable } from 'react-beautiful-dnd';
-import { IProject } from '../../../types/Project';
 import TaskCard from '../TaskCard';
 import './styles.css';
 
@@ -20,7 +19,7 @@ const Task = ({
     modalUpdateOrDeleteID,
     setModalUpdateOrDeleteID,
     expandInfoTask,
-    projectId
+    projectId,
 }: TaskProps) => {
     return (
         <Draggable draggableId={task.id} index={index}>

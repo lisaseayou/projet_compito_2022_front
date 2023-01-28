@@ -11,7 +11,6 @@ import {
     ButtonVariantEnum,
 } from '../../enums';
 
-
 interface NoResultProps {
     image: string;
     text: string;
@@ -35,8 +34,8 @@ const NoResult = ({
 }: NoResultProps) => {
     return (
         <>
-            <div>
-                <img src={image} alt="no result" />
+            <div className="flex flex-col justify-center items-center">
+                <img src={image} className="max-w-lg" alt="no result" />
             </div>
 
             <div className="flex flex-col justify-center items-center">

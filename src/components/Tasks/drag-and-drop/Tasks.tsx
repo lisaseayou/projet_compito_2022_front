@@ -8,6 +8,12 @@ import { StatusEnum, StatusValueEnum } from '../../../enums';
 import { UPDATE_TASK_STATUS } from '../../../graphql/mutation';
 import { useMutation } from '@apollo/client';
 import { ToastContainer } from 'react-toastify';
+import {
+    GET_ALL_TASKS,
+    GET_LAST_PROJECTS_UPDATE_BY_USER,
+    GET_PROJECT,
+    GET_PROJECT_BY_USER,
+} from '../../../graphql/query';
 
 type TasksProps = {
     tasks: any;
@@ -87,15 +93,20 @@ const Tasks = ({
     const [datas, setDatas] = useState(initialDatas);
     const [modalUpdateOrDeleteID, setModalUpdateOrDeleteID] = useState('');
 
-    useEffect(() => {
-        setDatas(initialDatas);
-    }, [tasks]);
-
     const [updateTaskStatus] = useMutation(UPDATE_TASK_STATUS, {
         onCompleted: () => {},
         onError: () => {},
-        // refetchQueries: [GET_ALL_TASKS],
+        refetchQueries: [
+            GET_ALL_TASKS,
+            GET_PROJECT,
+            GET_PROJECT_BY_USER,
+            GET_LAST_PROJECTS_UPDATE_BY_USER,
+        ],
     });
+
+    useEffect(() => {
+        setDatas(initialDatas);
+    }, [tasks]);
 
     const onDragEnd = (result: any) => {
         const { destination, source, draggableId } = result;
@@ -119,8 +130,6 @@ const Tasks = ({
         const finish = datas.columns[destination.droppableId];
 
         if (start === finish) {
-            console.log('meme colonne');
-
             // on va chercher la colonne de tache qui nous interesse
             const column = datas.columns[source.droppableId];
             // on choppe les ids des taches actuelles

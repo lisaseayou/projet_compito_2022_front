@@ -61,7 +61,6 @@ const Register = () => {
             navigate('/user/home', { replace: true, state: { ...user } });
         },
         onError: (error) => {
-            console.log(error?.message);
             setGlobalFormMessage(error?.message);
         },
     });

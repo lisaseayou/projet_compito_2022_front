@@ -118,7 +118,8 @@ export enum IconEnum {
     CHEVRON_DOWN = "ChevronDownIcon",
     DOTS_HORIZONTAL = "DotsHorizontalIcon",
     DOCUMENT_TEXT = "DocumentTextIcon",
-    STAR = "StarIcon"
+    STAR = "StarIcon",
+    SEARCH = "SearchIcon"
 }
 
 export enum OpacityEnum {
@@ -153,7 +154,8 @@ export enum RoleEnum {
 }
 
 export enum ProgressTypeEnum {
-    TASK = 'task',
+    TASK = 'tache',
+    TASK_DONE = "terminée"
 }
 
 export enum AlertVariantEnum {

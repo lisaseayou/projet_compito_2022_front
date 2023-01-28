@@ -20,12 +20,7 @@ import {
 } from '../../graphql/query';
 
 // types, interfaces & enums
-import {
-    TypographyVariantEnum,
-    ProgressTypeEnum,
-    CrudTypeEnum,
-    RouteEnum,
-} from '../../enums';
+import { TypographyVariantEnum, CrudTypeEnum, RouteEnum } from '../../enums';
 import { IDeleteProject, IProject } from '../../types/Project';
 
 // images & icons
@@ -91,6 +86,9 @@ const CardSmall = ({
                             setShowDeleteData={setShowDeleteProject}
                             project={project}
                             setShowUpdate={setShowUpdateProject}
+                            setModalUpdateOrDeleteID={() =>
+                                setModalUpdateOrDeleteID('')
+                            }
                         />
                     )}
                 </div>
@@ -109,7 +107,7 @@ const CardSmall = ({
             </Link>
 
             <div className="w-full mt-2">
-                <Progress items={project?.tasks} type={ProgressTypeEnum.TASK} />
+                <Progress items={project?.tasks} />
             </div>
 
             <ModalDelete

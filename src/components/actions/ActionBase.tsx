@@ -14,8 +14,6 @@ import {
 // images & icons
 import Icon from '../ui/Icons/Icon';
 import { IProject } from '../../types/Project';
-import ModalUpdateProject from './ModalUpdateProject';
-import ModalUpdateTask from './ModalUpdateTask';
 import { ITask } from '../../types/Task';
 
 type ActionBaseProps = {
@@ -27,6 +25,7 @@ type ActionBaseProps = {
     task?: ITask;
     projectId?: string;
     setShowUpdate?: (value: boolean) => void;
+    setModalUpdateOrDeleteID: () => void;
 };
 const ActionBase = ({
     dataId,
@@ -37,9 +36,8 @@ const ActionBase = ({
     projectId,
     task,
     setShowUpdate,
+    setModalUpdateOrDeleteID,
 }: ActionBaseProps) => {
-    const ProjectIdCondition = dataId === project?.id;
-
     return (
         <>
             <div
@@ -52,6 +50,7 @@ const ActionBase = ({
                     onClick={() => {
                         setShowUpdate && setShowUpdate(true);
                         setShowAction(false);
+                        setModalUpdateOrDeleteID();
                     }}
                 >
                     <Icon
@@ -76,6 +75,7 @@ const ActionBase = ({
                     onClick={() => {
                         setShowDeleteData(true);
                         setShowAction(false);
+                        setModalUpdateOrDeleteID();
                     }}
                 >
                     <Icon

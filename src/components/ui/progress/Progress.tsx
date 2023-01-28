@@ -10,22 +10,58 @@ import {
     FontSizeEnum,
     FontWeightEnum,
     ProgressTypeEnum,
+    StatusEnum,
     TypographyVariantEnum,
 } from '../../../enums';
 
 type ProgressProps = {
     items: ITask[];
-    type: ProgressTypeEnum;
+    taskWording?: ProgressTypeEnum | string;
+    taskDoneWording?: ProgressTypeEnum | string;
+    showTaskDone?: boolean;
 };
 
-const Progress = ({ items, type }: ProgressProps) => {
+const Progress = ({
+    items,
+    showTaskDone = false,
+    taskWording = ProgressTypeEnum.TASK,
+    taskDoneWording = ProgressTypeEnum.TASK_DONE,
+}: ProgressProps) => {
     const getAdvancement = () => {
         if (items.length > 0) {
-            const tasksDone = items.filter((task) => task?.status === 'done');
-            return ((tasksDone.length / items.length) * 100).toFixed(2) || 0;
+            const tasksDone = items.filter(
+                (task) => task?.status === StatusEnum.FINISH
+            );
+            return ((tasksDone.length / items.length) * 100).toFixed(0) || 0;
         }
 
         return 0;
+    };
+
+    const getWordingTasksNumber = () => {
+        let wording = `${items.length.toString()} ${getPlural(
+            items,
+            taskWording
+        )}`;
+
+        if (items.length > 0) {
+            wording += ` | ${getAdvancement()} %`;
+        }
+
+        return wording;
+    };
+
+    const getWordingTasksDone = () => {
+        const taskDone = () => {
+            return items?.filter((e) => e.status === StatusEnum.FINISH);
+        };
+
+        if (items.length) {
+            return `(${taskDone().length} ${getPlural(
+                taskDone(),
+                taskWording
+            )} ${getPlural(taskDone(), taskDoneWording)})`;
+        }
     };
 
     return (
@@ -36,8 +72,10 @@ const Progress = ({ items, type }: ProgressProps) => {
                 fontSize={FontSizeEnum.XS}
                 fontWeight={FontWeightEnum.MEDIUM}
             >
-                {items.length} {getPlural(items, type)}
-                {items.length > 0 && ` | ${getAdvancement()} %`}
+                {getWordingTasksNumber()}
+                {showTaskDone ? (
+                    <span className="block">{getWordingTasksDone()}</span>
+                ) : null}
             </Typography>
 
             <div className="mt-2 overflow-hidden bg-gray-200 rounded-full">

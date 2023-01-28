@@ -32,7 +32,6 @@ import {
     FontWeightEnum,
     IconEnum,
     OpacityEnum,
-    ProgressTypeEnum,
     TextTransformEnum,
     TypographyVariantEnum,
     CrudTypeEnum,
@@ -119,6 +118,9 @@ const CardProject = ({
                                     setShowDeleteData={setShowDeleteProject}
                                     project={project}
                                     setShowUpdate={setShowUpdateProject}
+                                    setModalUpdateOrDeleteID={() =>
+                                        setModalUpdateOrDeleteID('')
+                                    }
                                 />
                             )}
                         </div>
@@ -157,10 +159,7 @@ const CardProject = ({
                 </div>
 
                 <div className="flex flex-col">
-                    <Progress
-                        items={project?.tasks}
-                        type={ProgressTypeEnum.TASK}
-                    />
+                    <Progress items={project?.tasks} showTaskDone />
 
                     <div className="flex justify-between items-center">
                         <div className="flex">
