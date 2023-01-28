@@ -1,5 +1,5 @@
 // hooks
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useMutation } from '@apollo/client';
 import { Link } from 'react-router-dom';
 
@@ -24,12 +24,13 @@ import {
     GET_PROJECT,
     GET_PROJECT_BY_USER,
 } from '../../graphql/query';
-import { DELETE_TASK } from '../../graphql/mutation';
+import { DELETE_TASK, UPDATE_TASK } from '../../graphql/mutation';
 
 // types, interfaces & enums
 import { IUser } from '../../types/User';
 import { ITask, IDeleteTask } from '../../types/Task';
 import {
+    CrudTypeEnum,
     FontSizeEnum,
     FontWeightEnum,
     IconEnum,
@@ -42,6 +43,7 @@ import {
 import { DotsVerticalIcon } from '@heroicons/react/solid';
 import avatar1 from '../../assets/avatar/avatar-1.jpg';
 import avatar2 from '../../assets/avatar/avatar-2.jpg';
+import ModalTask from '../modals/ModalTask';
 
 type TaskCardProps = {
     task: ITask;
@@ -56,10 +58,17 @@ const TaskCard = ({
     modalUpdateOrDeleteID,
     setModalUpdateOrDeleteID,
     expandInfoTask,
-    projectId
+    projectId,
 }: TaskCardProps) => {
     const [showAction, setShowAction] = useState<boolean>(false);
     const [showDeleteTask, setShowDeleteTask] = useState<boolean>(false);
+    const [showUpdateTask, setShowUpdateTask] = useState<boolean>(false);
+
+    console.log(
+        task.id,
+        modalUpdateOrDeleteID,
+        modalUpdateOrDeleteID === task.id
+    );
 
     const [deleteTask] = useMutation<IDeleteTask>(DELETE_TASK, {
         onCompleted: () => {
@@ -84,6 +93,8 @@ const TaskCard = ({
                 deleteTaskId: task.id,
             },
         });
+
+    useEffect(() => {}, [modalUpdateOrDeleteID]);
 
     return (
         <div className="relative block col-span-12 sm:col-span-6 md:col-span-4 lg:col-span-3 p-4 mb-4 bg-primary-ultraLight w-full border border-gray-100 rounded-lg shadow-lg">
@@ -117,19 +128,17 @@ const TaskCard = ({
                                     <DotsVerticalIcon className="h-5 w-5 text-primary-main" />
                                 </button>
 
-                                {showAction &&
-                                    modalUpdateOrDeleteID === task.id  && (
-                                        <ActionBase
-                                            className="top-8 right-2"
-                                            dataId={task.id}
-                                            setShowAction={setShowAction}
-                                            setShowDeleteData={
-                                                setShowDeleteTask
-                                            }
-                                            task={task}
-                                            projectId={projectId}
-                                        />
-                                    )}
+                                {modalUpdateOrDeleteID === task.id && (
+                                    <ActionBase
+                                        className="top-8 right-2"
+                                        dataId={task.id}
+                                        setShowAction={setShowAction}
+                                        setShowDeleteData={setShowDeleteTask}
+                                        task={task}
+                                        projectId={projectId}
+                                        setShowUpdate={setShowUpdateTask}
+                                    />
+                                )}
                             </div>
                         </div>
 
@@ -226,6 +235,15 @@ const TaskCard = ({
                 title="Supprimer une tache"
                 description="Êtes vous sûr de vouloir supprimer cet tache ? Cette action est irréversible."
                 onDelete={handleDelete}
+            />
+
+            <ModalTask
+                show={showUpdateTask}
+                setShow={() => setShowUpdateTask(!showUpdateTask)}
+                title="Modifier une tache"
+                projectId={projectId}
+                task={task}
+                mutationType={CrudTypeEnum.UPDATE}
             />
         </div>
     );

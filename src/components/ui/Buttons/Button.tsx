@@ -96,7 +96,7 @@ const Button = ({
         return (
             <button
                 onClick={onClick}
-                className={`relative mr-0 inline-flex items-center px-8 py-2.5 overflow-hidden text-primary-main bg-info-light rounded-lg group active:bg-primary-main focus:outline-none focus:shadow-none capitalize ${
+                className={`relative mr-0 inline-flex items-center px-8 py-2.5 overflow-hidden text-primary-main bg-info-light rounded-lg group active:bg-info-light focus:outline-none focus:shadow-none capitalize ${
                     className ?? ''
                 }`}
             >
@@ -109,7 +109,7 @@ const Button = ({
         return (
             <button
                 onClick={onClick}
-                className={`relative mr-0 inline-flex items-center px-8 py-2.5 overflow-hidden text-danger-main bg-danger-light rounded-lg group active:bg-primary-main focus:outline-none focus:shadow-none capitalize ${
+                className={`relative mr-0 inline-flex items-center px-8 py-2.5 overflow-hidden text-danger-main bg-danger-light rounded-lg group active:bg-danger-light focus:outline-none focus:shadow-none capitalize ${
                     className ?? ''
                 }`}
             >

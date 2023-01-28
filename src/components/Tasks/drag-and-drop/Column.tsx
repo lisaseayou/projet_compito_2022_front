@@ -13,6 +13,8 @@ type ColumnsProps = {
     setStatus: Dispatch<SetStateAction<string>>;
     expandInfoTask: boolean;
     projectId: string;
+    modalUpdateOrDeleteID: string;
+    setModalUpdateOrDeleteID: (value: string) => void;
 };
 const Column = ({
     column,
@@ -21,10 +23,11 @@ const Column = ({
     setShowModalNewTask,
     setStatus,
     expandInfoTask,
-    projectId
+    projectId,
+    modalUpdateOrDeleteID,
+    setModalUpdateOrDeleteID,
 }: ColumnsProps) => {
     const [enabled, setEnabled] = useState(false);
-    const [modalUpdateOrDeleteID, setModalUpdateOrDeleteID] = useState('');
 
     useEffect(() => {
         const animation = requestAnimationFrame(() => setEnabled(true));
@@ -68,9 +71,12 @@ const Column = ({
                                 task={task}
                                 index={index}
                                 modalUpdateOrDeleteID={modalUpdateOrDeleteID}
-                                setModalUpdateOrDeleteID={setModalUpdateOrDeleteID}
-                                expandInfoTask={expandInfoTask} 
-                                projectId={projectId}                            />
+                                setModalUpdateOrDeleteID={
+                                    setModalUpdateOrDeleteID
+                                }
+                                expandInfoTask={expandInfoTask}
+                                projectId={projectId}
+                            />
                         ))}
                         {provider.placeholder}
                     </div>

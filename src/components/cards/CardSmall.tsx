@@ -7,6 +7,7 @@ import Typography from '../ui/Typography';
 import Progress from '../ui/progress/Progress';
 import ActionBase from '../actions/ActionBase';
 import ModalDelete from '../modals/ModalDelete';
+import { Link } from 'react-router-dom';
 
 // utils & helpers
 import { ToastSuccess, ToastError } from '../../utils/Toast';
@@ -19,11 +20,17 @@ import {
 } from '../../graphql/query';
 
 // types, interfaces & enums
-import { TypographyVariantEnum, ProgressTypeEnum } from '../../enums';
+import {
+    TypographyVariantEnum,
+    ProgressTypeEnum,
+    CrudTypeEnum,
+    RouteEnum,
+} from '../../enums';
 import { IDeleteProject, IProject } from '../../types/Project';
 
 // images & icons
 import { DotsVerticalIcon, ColorSwatchIcon } from '@heroicons/react/solid';
+import ModalProject from '../modals/ModalProject';
 
 type CardSmallProps = {
     project: IProject;
@@ -38,6 +45,7 @@ const CardSmall = ({
 }: CardSmallProps) => {
     const [showAction, setShowAction] = useState<boolean>(false);
     const [showDeleteProject, setShowDeleteProject] = useState<boolean>(false);
+    const [showUpdateProject, setShowUpdateProject] = useState<boolean>(false);
 
     const [deleteProject] = useMutation<IDeleteProject>(DELETE_PROJECT, {
         onCompleted: () => {
@@ -75,26 +83,30 @@ const CardSmall = ({
                         <DotsVerticalIcon className="h-5 w-5 text-primary-main" />
                     </button>
 
-                    {showAction && modalUpdateOrDeleteID === project.id && (
+                    {modalUpdateOrDeleteID === project.id && (
                         <ActionBase
                             className="top-8 right-2"
                             dataId={project.id}
                             setShowAction={setShowAction}
                             setShowDeleteData={setShowDeleteProject}
+                            project={project}
+                            setShowUpdate={setShowUpdateProject}
                         />
                     )}
                 </div>
             </div>
 
-            <Typography
-                variant={TypographyVariantEnum.H5}
-                color="text-primary-main"
-                fontSize="text-1xl"
-                fontWeight="font-bold"
-                className="w-full"
-            >
-                {project.name}
-            </Typography>
+            <Link to={`${RouteEnum.PROJECT_DETAILS}/${project?.id}`}>
+                <Typography
+                    variant={TypographyVariantEnum.H5}
+                    color="text-primary-main"
+                    fontSize="text-1xl"
+                    fontWeight="font-bold"
+                    className="w-full"
+                >
+                    {project.name}
+                </Typography>
+            </Link>
 
             <div className="w-full mt-2">
                 <Progress items={project?.tasks} type={ProgressTypeEnum.TASK} />
@@ -106,6 +118,14 @@ const CardSmall = ({
                 title="Supprimer le projet"
                 description="Êtes vous sûr de vouloir supprimer ce projet ? Cette action est irréversible."
                 onDelete={handleDelete}
+            />
+
+            <ModalProject
+                show={showUpdateProject}
+                setShow={() => setShowUpdateProject(!showUpdateProject)}
+                title="Modifier le projet"
+                project={project}
+                mutationType={CrudTypeEnum.UPDATE}
             />
         </div>
     );

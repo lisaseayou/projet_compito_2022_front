@@ -15,6 +15,7 @@ type TextAreaFieldProps = {
     containerClassName?: string;
     handlePaste?: (e: ClipboardEvent<HTMLInputElement>) => boolean;
     handleCopy?: (e: ClipboardEvent<HTMLInputElement>) => boolean;
+    defaultValue?: string;
     error?: any;
 };
 
@@ -29,13 +30,13 @@ const TextAreaField = ({
     icon,
     containerClassName,
     error,
+    defaultValue,
 }: TextAreaFieldProps) => {
     return (
         <div className={containerClassName}>
             <Controller
                 control={control}
                 name={name}
-                defaultValue=""
                 rules={validation}
                 render={({ field: { onChange, value } }) => (
                     <div className={'relative'}>
@@ -49,6 +50,7 @@ const TextAreaField = ({
                             rows={row}
                             className={`w-full p-4 pl-12 font-display not-italic text-primary-main font-normal text-base leading-none normal-case bg-gray-light lightborder-gray-200 rounded-2lg shadow-sm focus-visible:outline-0 placeholder:italic placeholder:opacity-50 placeholder:text-base placeholder:text-primary-main outline-none`}
                             placeholder={placeholder}
+                            defaultValue={defaultValue}
                             value={value}
                             onChange={onChange}
                         />

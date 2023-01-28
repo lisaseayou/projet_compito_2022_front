@@ -1,5 +1,5 @@
 // hooks
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useMutation } from '@apollo/client';
 import { Link } from 'react-router-dom';
 
@@ -11,6 +11,7 @@ import Progress from '../ui/progress/Progress';
 import Typography from '../ui/Typography';
 import ActionBase from '../actions/ActionBase';
 import ModalDelete from '../modals/ModalDelete';
+import ModalProject from '../modals/ModalProject';
 
 // utils & helpers
 import { firstLetterUpperCase, formatDate, truncate } from '../../utils';
@@ -34,6 +35,7 @@ import {
     ProgressTypeEnum,
     TextTransformEnum,
     TypographyVariantEnum,
+    CrudTypeEnum,
 } from '../../enums';
 
 // images & icons
@@ -54,6 +56,7 @@ const CardProject = ({
 }: CardProjectProps) => {
     const [showAction, setShowAction] = useState<boolean>(false);
     const [showDeleteProject, setShowDeleteProject] = useState<boolean>(false);
+    const [showUpdateProject, setShowUpdateProject] = useState<boolean>(false);
 
     const [deleteProject] = useMutation<IDeleteProject>(DELETE_PROJECT, {
         onCompleted: () => {
@@ -72,7 +75,7 @@ const CardProject = ({
             },
         });
 
-    console.log(project);
+    useEffect(() => {}, [modalUpdateOrDeleteID]);
 
     return (
         <div className="relative block col-span-12 sm:col-span-6 md:col-span-4 lg:col-span-3 p-5 w-full h-96 border border-gray-100 rounded-lg shadow-lg">
@@ -108,16 +111,16 @@ const CardProject = ({
                                 <DotsVerticalIcon className="h-5 w-5 text-primary-main" />
                             </button>
 
-                            {showAction &&
-                                modalUpdateOrDeleteID === project.id && (
-                                    <ActionBase
-                                        className="top-8 right-2"
-                                        dataId={project.id}
-                                        setShowAction={setShowAction}
-                                        setShowDeleteData={setShowDeleteProject}
-                                        project={project}
-                                    />
-                                )}
+                            {modalUpdateOrDeleteID === project.id && (
+                                <ActionBase
+                                    className="top-8 right-2"
+                                    dataId={project.id}
+                                    setShowAction={setShowAction}
+                                    setShowDeleteData={setShowDeleteProject}
+                                    project={project}
+                                    setShowUpdate={setShowUpdateProject}
+                                />
+                            )}
                         </div>
                     </div>
 
@@ -209,6 +212,14 @@ const CardProject = ({
                 title="Supprimer le projet"
                 description="Êtes vous sûr de vouloir supprimer ce projet ? Cette action est irréversible."
                 onDelete={handleDelete}
+            />
+
+            <ModalProject
+                show={showUpdateProject}
+                setShow={() => setShowUpdateProject(!showUpdateProject)}
+                title="Modifier le projet"
+                project={project}
+                mutationType={CrudTypeEnum.UPDATE}
             />
         </div>
     );

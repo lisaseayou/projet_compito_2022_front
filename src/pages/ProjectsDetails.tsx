@@ -7,7 +7,7 @@ import { useQuery } from '@apollo/client';
 import PrimaryLayout from '../layout/PrimaryLayout';
 import Loader from '../components/ui/loader/Loader';
 import Tasks from '../components/Tasks/drag-and-drop/Tasks';
-import ModalCreateTask from '../components/modals/ModalCreateTask';
+import ModalTask from '../components/modals/ModalTask';
 
 // graphql
 import { GET_PROJECT } from '../graphql/query';
@@ -107,10 +107,11 @@ const ProjectsDetails = () => {
                 </div>
             </PrimaryLayout>
 
-            <ModalCreateTask
+            <ModalTask
                 show={showModalNewTask}
                 setShow={() => setShowModalNewTask(!showModalNewTask)}
                 projectId={data?.project?.id}
+                title="Créer une tache"
                 status={status}
             />
         </>

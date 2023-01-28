@@ -11,7 +11,7 @@ import Alert from '../../components/ui/Alert';
 import CardSmall from '../../components/cards/CardSmall';
 import CardAddSmall from '../../components/cards/CardAddSmall';
 import CardList from '../../components/cards/CardList';
-import ModalWithImage from '../../components/modals/ModalCreateProject';
+import ModalWithImage from '../../components/modals/ModalProject';
 import Loader from '../../components/ui/loader/Loader';
 import { ToastContainer } from 'react-toastify';
 
@@ -187,6 +187,7 @@ const UserHome = () => {
             <ModalWithImage
                 show={showModal}
                 setShow={() => setShowModal(!showModal)}
+                title="Créer un projet"
             />
         </>
     );

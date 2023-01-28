@@ -1,6 +1,6 @@
 // @ts-nocheck
 
-import { Dispatch, SetStateAction, useState } from 'react';
+import { Dispatch, SetStateAction, useEffect, useState } from 'react';
 import Column from './Column';
 import { DragDropContext } from 'react-beautiful-dnd';
 import './styles.css';
@@ -85,6 +85,11 @@ const Tasks = ({
     };
 
     const [datas, setDatas] = useState(initialDatas);
+    const [modalUpdateOrDeleteID, setModalUpdateOrDeleteID] = useState('');
+
+    useEffect(() => {
+        setDatas(initialDatas);
+    }, [tasks]);
 
     const [updateTaskStatus] = useMutation(UPDATE_TASK_STATUS, {
         onCompleted: () => {},
@@ -184,6 +189,7 @@ const Tasks = ({
                         const tasks = column.taskIds.map(
                             (taskId: any) => datas.tasks[taskId]
                         );
+
                         return (
                             <Column
                                 key={column.id}
@@ -194,6 +200,10 @@ const Tasks = ({
                                 setStatus={setStatus}
                                 expandInfoTask={expandInfoTask}
                                 projectId={projectId}
+                                modalUpdateOrDeleteID={modalUpdateOrDeleteID}
+                                setModalUpdateOrDeleteID={
+                                    setModalUpdateOrDeleteID
+                                }
                             />
                         );
                     })}

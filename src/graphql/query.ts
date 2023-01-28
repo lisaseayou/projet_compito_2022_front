@@ -207,6 +207,7 @@ export const GET_TASKS_BY_PROJECT = gql`
             id
             name
             status
+            description
         }
     }
 `;

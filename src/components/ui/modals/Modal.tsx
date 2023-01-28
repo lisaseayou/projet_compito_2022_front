@@ -14,12 +14,15 @@ import FormError from '../../Form/FormError';
 
 // types, interfaces & enums
 import { IUser } from '../../../types/User';
+import { IProject } from '../../../types/Project';
+import { ITask } from '../../../types/Task';
 import {
     FontSizeEnum,
     FontWeightEnum,
     IconEnum,
     TextTransformEnum,
     TypographyVariantEnum,
+    CrudTypeEnum,
 } from '../../../enums';
 
 // images & icons
@@ -33,10 +36,14 @@ type ModalProps = {
     buttonLabel: string;
     image: string;
     renderInputs: ReactNode;
-    mutationFn: (option: object) => void;
+    mutationCreateFn?: (option: object) => void;
+    mutationUpdateFn?: (option: object) => void;
+    mutationType?: CrudTypeEnum;
     formDatas: object;
     onSuccessRedirect: string;
     icon: IconEnum;
+    project?: IProject;
+    task?: ITask;
 };
 
 // ReactModal.setAppElement('#root');
@@ -49,10 +56,14 @@ const Modal = ({
     buttonLabel,
     renderInputs,
     image,
-    mutationFn,
+    mutationCreateFn,
+    mutationUpdateFn,
+    mutationType = CrudTypeEnum.CREATE,
     formDatas,
     onSuccessRedirect,
     icon,
+    project,
+    task,
 }: ModalProps) => {
     const navigate = useNavigate();
 
@@ -66,7 +77,32 @@ const Modal = ({
     const [globalErrorMessage, setGlobalFormMessage] = useState('');
 
     const onSubmit: SubmitHandler<FieldValues> = (data: FieldValues) => {
-        mutationFn({ variables: { data: { ...formDatas, userId: user?.id } } });
+        mutationCreateFn &&
+            mutationType === CrudTypeEnum.CREATE &&
+            mutationCreateFn({
+                variables: { data: { ...formDatas, userId: user?.id } },
+            });
+
+        mutationUpdateFn &&
+            project &&
+            mutationType === CrudTypeEnum.UPDATE &&
+            mutationUpdateFn({
+                variables: {
+                    data: formDatas,
+                    updateProjectId: project.id,
+                },
+            });
+
+        mutationUpdateFn &&
+            task &&
+            mutationType === CrudTypeEnum.UPDATE &&
+            mutationUpdateFn({
+                variables: {
+                    data: formDatas,
+                    updateTaskId: task?.id,
+                },
+            });
+
         navigate(onSuccessRedirect, { replace: true });
     };
 

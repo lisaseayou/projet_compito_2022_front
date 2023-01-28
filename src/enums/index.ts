@@ -197,3 +197,8 @@ export enum StatusValueEnum {
     IN_PROGRESS = "IN_PROGRESS",
     FINISH = "FINISH"
 }
+
+export enum CrudTypeEnum {
+    CREATE = "CREATE",
+    UPDATE = "UPDATE"
+}

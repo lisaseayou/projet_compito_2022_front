@@ -46,6 +46,7 @@ const CardsList = ({ setShowAddProject }: CardListProps) => {
   if (error) {
     return <p>error</p>;
   }
+
   const handleSearchProject = (e: ChangeEvent<HTMLInputElement>) => {
     let value = e.target.value;
     setSearchProject(value);

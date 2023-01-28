@@ -3,7 +3,7 @@ import { useState } from 'react';
 
 // components
 import CardsListProject from '../components/Projects/CardsListProject';
-import ModalCreateProject from '../components/modals/ModalCreateProject';
+import ModalCreateProject from '../components/modals/ModalProject';
 import PrimaryLayout from '../layout/PrimaryLayout';
 import { ToastContainer } from 'react-toastify';
 
@@ -21,7 +21,7 @@ const Projects = () => {
                 labelCTA="Ajouter un projet"
                 onClickCTA={() => setShowAddProject(true)}
             >
-                <div className="flex w-full">
+                <div className="flex justify-center w-full">
                     <CardsListProject setShowAddProject={setShowAddProject} />
                 </div>
 
@@ -31,6 +31,7 @@ const Projects = () => {
             <ModalCreateProject
                 show={showAddProject}
                 setShow={() => setShowAddProject(!showAddProject)}
+                title="Créer un projet"
             />
         </>
     );

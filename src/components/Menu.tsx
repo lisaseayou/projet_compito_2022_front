@@ -38,7 +38,7 @@ export const MenuList: Menu[] = [
     {
         path: RouteEnum.HOME,
         title: 'Home',
-        Component: Home,
+        Component: Login,
     },
 ];
 

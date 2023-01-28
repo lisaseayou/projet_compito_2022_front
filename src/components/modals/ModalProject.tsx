@@ -3,7 +3,6 @@ import { useState } from 'react';
 import { useMutation } from '@apollo/client';
 import { useNavigate } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
-import { useSelector } from 'react-redux';
 
 // components
 import TextField from '../ui/form/TextField';
@@ -16,51 +15,52 @@ import { ToastSuccess } from '../../utils/Toast';
 import validation from '../../validation';
 
 // graphql
-import { ADD_TASK } from '../../graphql/mutation';
+import { ADD_PROJECT, UPDATE_PROJECT } from '../../graphql/mutation';
 import {
     GET_PROJECT_BY_USER,
     GET_LAST_PROJECTS_UPDATE_BY_USER,
     GET_PROJECT,
-    GET_ALL_TASKS,
 } from '../../graphql/query';
 
 // types, interfaces & enums
-import { IUser } from '../../types/User';
-import { IAddTask } from '../../types/Task';
-import { IconEnum, OpacityEnum, RouteEnum } from '../../enums';
+import { IAddProject, IProject } from '../../types/Project';
+import { CrudTypeEnum, IconEnum, OpacityEnum, RouteEnum } from '../../enums';
 
 // images & icons
-import AddTaskImg from '../../assets/add-task.svg';
+import Work from '../../assets/work-pressure.svg';
 
-type ModalCreateTaskProps = {
+type ModalProjectProps = {
     show: boolean;
     setShow: (value: boolean) => void;
-    projectId: any;
-    status: string;
+    title: string;
+    project?: IProject;
+    mutationType?: CrudTypeEnum;
 };
 
-const ModalCreateTask = ({
+const ModalProject = ({
     show,
     setShow,
-    projectId,
-    status,
-}: ModalCreateTaskProps) => {
+    title,
+    project,
+    mutationType,
+}: ModalProjectProps) => {
     const navigate = useNavigate();
-    const user: IUser = useSelector((state: any) => state.user);
 
     const {
         control,
         watch,
+        reset,
         formState: { errors },
     } = useForm({ mode: 'onBlur' });
 
     const [globalErrorMessage, setGlobalFormMessage] = useState('');
 
-    const [addTask] = useMutation<IAddTask>(ADD_TASK, {
+    const [addProject] = useMutation<IAddProject>(ADD_PROJECT, {
         onCompleted: () => {
-            ToastSuccess('La tache a bien été ajoutée !');
+            ToastSuccess('Votre projet a bien été ajoutée!');
             setShow(false);
-            navigate(`${RouteEnum.PROJECT_DETAILS}/${projectId}`);
+            reset();
+            navigate(RouteEnum.PROJECTS);
         },
         onError: (error) => {
             setGlobalFormMessage(error?.message);
@@ -69,21 +69,33 @@ const ModalCreateTask = ({
         refetchQueries: [GET_PROJECT_BY_USER, GET_LAST_PROJECTS_UPDATE_BY_USER],
     });
 
+    const [updateProject] = useMutation(UPDATE_PROJECT, {
+        onCompleted: (data) => {
+            ToastSuccess('Votre projet a bien été mis à jour!');
+            setShow(false);
+            navigate(RouteEnum.PROJECTS);
+        },
+        onError: () => {
+            console.log('error');
+        },
+        refetchQueries: [GET_PROJECT_BY_USER, GET_LAST_PROJECTS_UPDATE_BY_USER],
+    });
+
     return (
         <Modal
             show={show}
             setShow={setShow}
-            title="Créer une tache"
+            title={title}
             description="Lorem ipsum dolor sit amet consectetur adipisicing elit. Et libero nulla eaque error neque ipsa culpa autem, at itaque nostrum!"
             renderInputs={
                 <>
                     <TextField
                         control={control}
-                        validation={validation.addTask.name}
+                        validation={validation.addProject.name}
                         type="text"
                         name="name"
                         id="name"
-                        placeholder="Titre de la tache"
+                        placeholder="Nom du projet"
                         icon={
                             <Icon
                                 variant={IconEnum.MAIL}
@@ -92,15 +104,16 @@ const ModalCreateTask = ({
                         }
                         containerClassName="mb-4 w-full max-w-sm"
                         error={errors?.name}
+                        defaultValue={project?.name}
                     />
 
                     <TextAreaField
                         control={control}
-                        validation={validation.addTask.description}
+                        validation={validation.addProject.description}
                         name="description"
                         id="description"
                         row={8}
-                        placeholder="Description de la tache"
+                        placeholder="Description du projet"
                         icon={
                             <Icon
                                 variant={IconEnum.MAIL}
@@ -109,26 +122,21 @@ const ModalCreateTask = ({
                         }
                         containerClassName="mb-4 w-full max-w-sm"
                         error={errors?.password}
+                        defaultValue={project?.description}
                     />
                 </>
             }
-            buttonLabel="Ajouter"
-            image={AddTaskImg}
-            mutationFn={addTask}
-            formDatas={{
-                ...watch(),
-                status,
-                additionalSpentTime: [1, 2],
-                advancement: 0,
-                dueDate: '12/01/2022',
-                initialSpentTime: 0,
-                projectId: projectId,
-                userId: user?.id,
-            }}
-            onSuccessRedirect={`${RouteEnum.PROJECT_DETAILS}/${projectId}`}
+            buttonLabel={title}
+            image={Work}
+            mutationCreateFn={addProject}
+            mutationUpdateFn={updateProject}
+            mutationType={mutationType}
+            project={project}
+            formDatas={watch()}
+            onSuccessRedirect="../projects"
             icon={IconEnum.BRIEFCASE}
         />
     );
 };
 
-export default ModalCreateTask;
+export default ModalProject;

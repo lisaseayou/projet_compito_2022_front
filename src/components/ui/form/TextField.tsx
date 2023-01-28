@@ -17,8 +17,8 @@ type TextFieldProps = {
     handlePaste?: (e: ClipboardEvent<HTMLInputElement>) => boolean;
     handleCopy?: (e: ClipboardEvent<HTMLInputElement>) => boolean;
     error?: any;
-
-    value?: any;
+    value?: string;
+    defaultValue?: string;
     handleChange?: any;
 };
 
@@ -36,13 +36,13 @@ const TextField = ({
     error,
     handlePaste,
     handleCopy,
+    defaultValue,
 }: TextFieldProps) => {
     return (
         <div className={containerClassName}>
             <Controller
                 control={control}
                 name={name}
-                defaultValue=""
                 rules={validation}
                 render={({ field: { onChange, value } }) => (
                     <div className={'relative'}>
@@ -57,6 +57,7 @@ const TextField = ({
                                 iconShow ? 'pr-12' : 'pr-4'
                             } font-display not-italic text-primary-main font-normal text-base leading-none normal-case bg-gray-light lightborder-gray-200 rounded-2lg shadow-sm focus-visible:outline-0 placeholder:italic placeholder:opacity-50 placeholder:text-base placeholder:text-primary-main outline-none`}
                             placeholder={placeholder}
+                            defaultValue={defaultValue}
                             value={value}
                             onChange={onChange}
                             onPaste={handlePaste}
