@@ -26,4 +26,4 @@ yarn-error.log*
 
 yarn.lock
 
-.github/workflows/develop-client.yml
+.github/workflows/
