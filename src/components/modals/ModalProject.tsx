@@ -34,12 +34,14 @@ type ModalProjectProps = {
     title: string;
     project?: IProject;
     mutationType?: CrudTypeEnum;
+    subtitle: string;
 };
 
 const ModalProject = ({
     show,
     setShow,
     title,
+    subtitle,
     project,
     mutationType,
 }: ModalProjectProps) => {
@@ -85,7 +87,7 @@ const ModalProject = ({
             show={show}
             setShow={setShow}
             title={title}
-            description="Lorem ipsum dolor sit amet consectetur adipisicing elit. Et libero nulla eaque error neque ipsa culpa autem, at itaque nostrum!"
+            subtitle={subtitle}
             renderInputs={
                 <>
                     <TextField

@@ -40,6 +40,7 @@ type ModalTaskProps = {
     projectId: string;
     status?: string;
     title: string;
+    subtitle: string;
     task?: ITask;
     mutationType?: CrudTypeEnum;
 };
@@ -50,6 +51,7 @@ const ModalTask = ({
     projectId,
     status,
     title,
+    subtitle,
     task,
     mutationType,
 }: ModalTaskProps) => {
@@ -101,7 +103,7 @@ const ModalTask = ({
             show={show}
             setShow={setShow}
             title={title}
-            description="Lorem ipsum dolor sit amet consectetur adipisicing elit. Et libero nulla eaque error neque ipsa culpa autem, at itaque nostrum!"
+            subtitle={subtitle}
             renderInputs={
                 <>
                     <TextField

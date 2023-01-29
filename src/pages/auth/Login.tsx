@@ -87,7 +87,7 @@ const Login = () => {
         <AuthLayout
             variant={AuthLayoutVariantEnum.LOGIN}
             title="Se connecter à Compito"
-            subtitle="ou utiliser votre adresse email"
+            subtitle="Veuillez vous connecter avec vos informations de connexion."
             secondaryTitle="Hello, friend"
             secondarySubtitle="Entrez vos informations personnelles et commencez votre voyage avec nous"
             secondaryBtnLabel="S'incrire"

@@ -113,6 +113,7 @@ const ProjectsDetails = () => {
                 setShow={() => setShowModalNewTask(!showModalNewTask)}
                 projectId={data?.project?.id as string}
                 title="Créer une tache"
+                subtitle="Veuillez prendre quelques minutes pour remplir ce formulaire afin de créer une nouvelle tache."
                 status={status}
             />
         </>

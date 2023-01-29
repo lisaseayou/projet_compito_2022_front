@@ -103,18 +103,18 @@ const AuthLayout = ({
                     {title}
                 </Typography>
 
-                <div className="flex gap-4 mb-4 sm:mb-6">
+                {/* <div className="flex gap-4 mb-4 sm:mb-6">
                     <SocialButton icon={faFacebookF} />
                     <SocialButton icon={faLinkedinIn} />
                     <SocialButton icon={faGoogle} />
-                </div>
+                </div> */}
 
                 <Typography
                     variant={TypographyVariantEnum?.H5}
                     color="text-primary-main"
                     fontSize={FontSizeEnum.LG}
                     leading={TextLineHeightEnum.LINE_HEIGHT_7}
-                    className="mb-6 sm:mb-8"
+                    className="mb-6 sm:mb-8 max-w-xs"
                 >
                     {subtitle}
                 </Typography>

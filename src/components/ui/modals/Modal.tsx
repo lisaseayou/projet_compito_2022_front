@@ -32,7 +32,7 @@ type ModalProps = {
     show: boolean;
     setShow: (value: boolean) => void;
     title: string;
-    description: string;
+    subtitle: string;
     buttonLabel: string;
     image: string;
     renderInputs: ReactNode;
@@ -52,7 +52,7 @@ const Modal = ({
     show,
     setShow,
     title,
-    description,
+    subtitle,
     buttonLabel,
     renderInputs,
     image,
@@ -123,7 +123,7 @@ const Modal = ({
                     </button>
 
                     <div className="flex flex-col justify-center w-full md:w-3/5 lg:w-1/2 text-center px-4">
-                        <div className="max-w-lg mx-auto text-center">
+                        <div className="max-w-[90%] mx-auto text-center">
                             <IconWithBg variant={icon} />
 
                             <Typography
@@ -145,7 +145,7 @@ const Modal = ({
                                 textTransform={TextTransformEnum.NORMAL}
                                 className="w-full mt-6"
                             >
-                                {description}
+                                {subtitle}
                             </Typography>
                         </div>
 

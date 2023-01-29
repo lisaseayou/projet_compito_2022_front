@@ -87,7 +87,7 @@ const Register = () => {
         <AuthLayout
             variant={AuthLayoutVariantEnum.REGISTER}
             title="Créer un compte"
-            subtitle="ou utiliser votre adresse email pour vous inscrire."
+            subtitle="Entrez vos informations personnelles et commencez votre voyage avec nous"
             secondaryTitle="Welcome Back"
             secondarySubtitle="Pour rester connecté, veuillez vous connecter avec vos informations de connexion."
             secondaryBtnLabel="Se connecter"

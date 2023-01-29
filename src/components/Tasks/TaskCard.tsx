@@ -238,6 +238,7 @@ const TaskCard = ({
                 show={showUpdateTask}
                 setShow={() => setShowUpdateTask(!showUpdateTask)}
                 title="Modifier une tache"
+                subtitle="Pour modifier les informations de votre tache, commencez par renseigner le formulaire ci-dessous."
                 projectId={projectId}
                 task={task}
                 mutationType={CrudTypeEnum.UPDATE}

@@ -122,6 +122,7 @@ const CardSmall = ({
                 show={showUpdateProject}
                 setShow={() => setShowUpdateProject(!showUpdateProject)}
                 title="Modifier le projet"
+                subtitle="Pour modifier les informations de votre projet, commencez par remplir le formulaire ci-dessous."
                 project={project}
                 mutationType={CrudTypeEnum.UPDATE}
             />

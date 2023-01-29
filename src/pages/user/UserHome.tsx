@@ -189,6 +189,7 @@ const UserHome = () => {
                 show={showModal}
                 setShow={() => setShowModal(!showModal)}
                 title="Créer un projet"
+                subtitle="Créez votre projet et commencez à le gérer dès aujourd'hui! Remplissez le formulaire ci-dessous pour commencer."
             />
         </>
     );
