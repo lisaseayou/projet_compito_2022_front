@@ -2,7 +2,12 @@
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useMutation } from '@apollo/client';
-import { FieldValues, SubmitHandler, useForm } from 'react-hook-form';
+import {
+    FieldError,
+    FieldValues,
+    SubmitHandler,
+    useForm,
+} from 'react-hook-form';
 
 // components
 import TextField from '../../components/ui/form/TextField';
@@ -98,7 +103,7 @@ const ForgotPassword = () => {
                         />
                     }
                     containerClassName="mb-4 w-full max-w-sm"
-                    error={errors?.email}
+                    error={errors?.email as FieldError | undefined}
                 />
             </Form>
         </ForgotPasswordLayout>

@@ -3,11 +3,11 @@ import Task from './Task';
 import { Droppable } from 'react-beautiful-dnd';
 import './styles.css';
 import TaskCategory from '../TaskCategory';
-import { IProject } from '../../../types/Project';
+import { ITask, ITaskColumn } from '../../../types/Task';
 
 type ColumnsProps = {
-    column: any;
-    tasks: any;
+    column: ITaskColumn;
+    tasks: ITask[];
     showModalNewTask: boolean;
     setShowModalNewTask: Dispatch<SetStateAction<boolean>>;
     setStatus: Dispatch<SetStateAction<string>>;
@@ -65,7 +65,7 @@ const Column = ({
                         ref={provider.innerRef}
                         className="min-h-[100px]"
                     >
-                        {tasks?.map((task: any, index: any) => (
+                        {tasks?.map((task: ITask, index: number) => (
                             <Task
                                 key={task.id}
                                 task={task}

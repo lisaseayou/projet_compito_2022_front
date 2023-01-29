@@ -1,6 +1,13 @@
 // @ts-nocheck
 
-import { Dispatch, SetStateAction, useEffect, useState } from 'react';
+import {
+    Dispatch,
+    SetStateAction,
+    useCallback,
+    useEffect,
+    useMemo,
+    useState,
+} from 'react';
 import Column from './Column';
 import { DragDropContext } from 'react-beautiful-dnd';
 import './styles.css';
@@ -14,10 +21,11 @@ import {
     GET_PROJECT,
     GET_PROJECT_BY_USER,
 } from '../../../graphql/query';
+import { ITask, ITaskColumn } from '../../../types/Task';
 
 type TasksProps = {
-    tasks: any;
-    projectId: any;
+    tasks: ITask[];
+    projectId: string;
     showModalNewTask: boolean;
     setShowModalNewTask: Dispatch<SetStateAction<boolean>>;
     setStatus: Dispatch<SetStateAction<string>>;
@@ -31,9 +39,8 @@ const Tasks = ({
     setShowModalNewTask,
     setStatus,
     expandInfoTask,
-    setExpandInfoTask,
 }: TasksProps) => {
-    const getTasks = () => {
+    const getTasks = useCallback(() => {
         let tasksList = {};
 
         tasks?.forEach((task) => {
@@ -41,20 +48,23 @@ const Tasks = ({
         });
 
         return tasksList;
-    };
+    }, [tasks]);
 
-    const getTasksIdsByStatus = (status: StatusEnum) => {
-        const ids = [];
-        Object.values(getTasks())?.forEach((task) => {
-            if (task.status === status) {
-                ids.push(task.id);
-            }
-        });
+    const getTasksIdsByStatus = useCallback(
+        (status: StatusEnum) => {
+            const ids = [];
+            Object.values(getTasks())?.forEach((task) => {
+                if (task.status === status) {
+                    ids.push(task.id);
+                }
+            });
 
-        return ids;
-    };
+            return ids;
+        },
+        [getTasks]
+    );
 
-    const getStatusByColumn = (columnId: any) => {
+    const getStatusByColumn = (columnId: string) => {
         switch (columnId) {
             case 'column-1':
                 return StatusValueEnum.TO_DO;
@@ -67,28 +77,31 @@ const Tasks = ({
         }
     };
 
-    const initialDatas = {
-        tasks: getTasks(),
-        columns: {
-            'column-1': {
-                id: 'column-1',
-                title: 'A faire',
-                taskIds: getTasksIdsByStatus(StatusEnum.TO_DO),
+    const initialDatas = useMemo(
+        () => ({
+            tasks: getTasks(),
+            columns: {
+                'column-1': {
+                    id: 'column-1',
+                    title: 'A faire',
+                    taskIds: getTasksIdsByStatus(StatusEnum.TO_DO),
+                },
+                'column-2': {
+                    id: 'column-2',
+                    title: 'En cours',
+                    taskIds: getTasksIdsByStatus(StatusEnum.IN_PROGRESS),
+                },
+                'column-3': {
+                    id: 'column-3',
+                    title: 'Terminées',
+                    taskIds: getTasksIdsByStatus(StatusEnum.FINISH),
+                },
             },
-            'column-2': {
-                id: 'column-2',
-                title: 'En cours',
-                taskIds: getTasksIdsByStatus(StatusEnum.IN_PROGRESS),
-            },
-            'column-3': {
-                id: 'column-3',
-                title: 'Terminées',
-                taskIds: getTasksIdsByStatus(StatusEnum.FINISH),
-            },
-        },
-        // pour mieux organiser les futurs colonnes
-        columnOrder: ['column-1', 'column-2', 'column-3'],
-    };
+            // pour mieux organiser les futurs colonnes
+            columnOrder: ['column-1', 'column-2', 'column-3'],
+        }),
+        [getTasks, getTasksIdsByStatus]
+    );
 
     const [datas, setDatas] = useState(initialDatas);
     const [modalUpdateOrDeleteID, setModalUpdateOrDeleteID] = useState('');
@@ -106,7 +119,7 @@ const Tasks = ({
 
     useEffect(() => {
         setDatas(initialDatas);
-    }, [tasks]);
+    }, [tasks, initialDatas]);
 
     const onDragEnd = (result: any) => {
         const { destination, source, draggableId } = result;
@@ -193,10 +206,10 @@ const Tasks = ({
         <>
             <div className="tasks">
                 <DragDropContext onDragEnd={onDragEnd}>
-                    {datas.columnOrder.map((columnId: any) => {
-                        const column = datas.columns[columnId];
-                        const tasks = column.taskIds.map(
-                            (taskId: any) => datas.tasks[taskId]
+                    {datas?.columnOrder?.map((columnId: string) => {
+                        const column: ITaskColumn = datas?.columns[columnId];
+                        const tasks: ITask[] = column?.taskIds?.map(
+                            (taskId: string) => datas.tasks[taskId]
                         );
 
                         return (

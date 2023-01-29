@@ -1,7 +1,8 @@
-import { createReducer } from '@reduxjs/toolkit';
+import { createReducer, PayloadAction } from '@reduxjs/toolkit';
+import { ConnectedUser } from '../../types/User';
 import { LOGIN, LOGOUT } from '../actions';
 
-const initialState = {
+const initialState: ConnectedUser = {
     id: '',
     name: '',
     email: '',
@@ -14,13 +15,13 @@ const initialState = {
 
 const userReducer = createReducer(initialState, (builder) => {
     builder
-        .addCase(LOGIN, (state: any, action: any) => {
+        .addCase(LOGIN, (state: ConnectedUser, action: PayloadAction<object>) => {
             return { ...state, ...action.payload };
         })
-        .addCase(LOGOUT, (state: any) => {
+        .addCase(LOGOUT, (state: ConnectedUser) => {
             return { ...state, ...initialState };
         })
-        .addDefaultCase((state) => {
+        .addDefaultCase((state: ConnectedUser) => {
             state = initialState;
         });
 });

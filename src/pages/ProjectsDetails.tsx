@@ -1,5 +1,5 @@
 // hooks
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { useQuery } from '@apollo/client';
 
@@ -20,6 +20,7 @@ import { IconEnum, OpacityEnum, RouteEnum } from '../enums';
 import { firstLetterUpperCase } from '../utils';
 import Icon from '../components/ui/Icons/Icon';
 import ProjectPanel from '../components/panels/ProjectPanel';
+import { ITask } from '../types/Task';
 
 const ProjectsDetails = () => {
     const params = useParams();
@@ -83,8 +84,8 @@ const ProjectsDetails = () => {
                         </div>
                     </div>
                     <Tasks
-                        tasks={data?.project?.tasks}
-                        projectId={data?.project?.id}
+                        tasks={data?.project?.tasks as ITask[]}
+                        projectId={data?.project?.id as string}
                         showModalNewTask={showModalNewTask}
                         setShowModalNewTask={setShowModalNewTask}
                         setStatus={setStatus}
@@ -110,7 +111,7 @@ const ProjectsDetails = () => {
             <ModalTask
                 show={showModalNewTask}
                 setShow={() => setShowModalNewTask(!showModalNewTask)}
-                projectId={data?.project?.id}
+                projectId={data?.project?.id as string}
                 title="Créer une tache"
                 status={status}
             />

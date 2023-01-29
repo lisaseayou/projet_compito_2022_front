@@ -16,6 +16,7 @@ import { UPDATE_PROFILE } from '../graphql/mutation';
 import { LOGIN } from '../graphql/query';
 import { IUser } from '../types/User';
 import { loginUser } from '../context/actions/user.action';
+import { IRootState } from '../types';
 
 const BootstrapDialog = styled(Dialog)(({ theme }) => ({
     '& .MuiDialogContent-root': {
@@ -57,7 +58,7 @@ const BootstrapDialogTitle = (props: DialogTitleProps) => {
 };
 
 export default function CustomizedDialogs() {
-    const user: IUser = useSelector((state: any) => state.user);
+    const user: IUser = useSelector((state: IRootState) => state.user);
     const [open, setOpen] = React.useState<boolean>(false);
     const dispatch = useDispatch();
     const [form, setForm] = useState({

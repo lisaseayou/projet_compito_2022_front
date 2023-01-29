@@ -1,11 +1,12 @@
 import React, { ClipboardEvent, ReactNode } from 'react';
-import { Controller } from 'react-hook-form';
+import { Control, Controller, FieldError, FieldValues } from 'react-hook-form';
 import { AlertVariantEnum } from '../../../enums';
+import { FormValidation } from '../../../types';
 import Alert from '../Alert';
 
 type TextAreaFieldProps = {
-    control?: any;
-    validation?: any;
+    control?: Control<FieldValues, string>;
+    validation?: FormValidation;
     name: string;
     id: string;
     placeholder: string;
@@ -16,7 +17,7 @@ type TextAreaFieldProps = {
     handlePaste?: (e: ClipboardEvent<HTMLInputElement>) => boolean;
     handleCopy?: (e: ClipboardEvent<HTMLInputElement>) => boolean;
     defaultValue?: string;
-    error?: any;
+    error?: FieldError;
 };
 
 const TextAreaField = ({

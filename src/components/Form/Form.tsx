@@ -1,6 +1,10 @@
 // hooks
 import { ReactNode } from 'react';
-import { FieldValues, SubmitHandler } from 'react-hook-form';
+import {
+    FieldValues,
+    SubmitHandler,
+    UseFormHandleSubmit,
+} from 'react-hook-form';
 
 // components
 import Button from '../ui/Buttons/Button';
@@ -17,7 +21,7 @@ type FormProps = {
     buttonSubmitLabel?: string;
     buttonSubmitVariant?: ButtonVariantEnum;
     isValid: boolean;
-    handleSubmit: any;
+    handleSubmit: SubmitHandler<FieldValues> | UseFormHandleSubmit<FieldValues>;
     onSubmit: SubmitHandler<FieldValues>;
 };
 

@@ -2,7 +2,7 @@
 import { useState } from 'react';
 import { useMutation } from '@apollo/client';
 import { useNavigate } from 'react-router-dom';
-import { useForm } from 'react-hook-form';
+import { FieldError, useForm } from 'react-hook-form';
 
 // components
 import TextField from '../ui/form/TextField';
@@ -19,7 +19,6 @@ import { ADD_PROJECT, UPDATE_PROJECT } from '../../graphql/mutation';
 import {
     GET_PROJECT_BY_USER,
     GET_LAST_PROJECTS_UPDATE_BY_USER,
-    GET_PROJECT,
 } from '../../graphql/query';
 
 // types, interfaces & enums
@@ -103,7 +102,7 @@ const ModalProject = ({
                             />
                         }
                         containerClassName="mb-4 w-full max-w-sm"
-                        error={errors?.name}
+                        error={errors?.name as FieldError | undefined}
                         defaultValue={project?.name}
                     />
 
@@ -121,7 +120,7 @@ const ModalProject = ({
                             />
                         }
                         containerClassName="mb-4 w-full max-w-sm"
-                        error={errors?.password}
+                        error={errors?.description as FieldError | undefined}
                         defaultValue={project?.description}
                     />
                 </>

@@ -1,12 +1,12 @@
 import React from 'react';
 import { Draggable } from 'react-beautiful-dnd';
+import { ITask } from '../../../types/Task';
 import TaskCard from '../TaskCard';
 import './styles.css';
 
 type TaskProps = {
-    task: any;
-    index: any;
-    droppableProvided?: any;
+    task: ITask;
+    index: number;
     modalUpdateOrDeleteID: string;
     setModalUpdateOrDeleteID: (value: string) => void;
     expandInfoTask: boolean;
@@ -15,7 +15,6 @@ type TaskProps = {
 const Task = ({
     task,
     index,
-    droppableProvided,
     modalUpdateOrDeleteID,
     setModalUpdateOrDeleteID,
     expandInfoTask,

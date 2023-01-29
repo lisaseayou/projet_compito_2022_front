@@ -1,6 +1,6 @@
 // @ts-nocheck
 
-import { Controller } from 'react-hook-form';
+import { Controller, FieldError } from 'react-hook-form';
 import Select, {
     components,
     ContainerProps,
@@ -23,6 +23,7 @@ import {
     TextTransformEnum,
     TypographyVariantEnum,
 } from '../../../enums';
+import { FormValidation } from '../../../types';
 import Alert from '../Alert';
 import Icon from '../Icons/Icon';
 import Typography from '../Typography';
@@ -34,8 +35,8 @@ export interface OptionsType {
 }
 
 type SelectInputProps = {
-    control?: any;
-    validation?: any;
+    control?: Control<FieldValues, string>;
+    validation?: FormValidation;
     id: string;
     name: string;
     options: OptionsType[];
@@ -47,7 +48,7 @@ type SelectInputProps = {
     isDisabled?: boolean;
     isMultiple?: boolean;
     containerClassName?: string;
-    error?: any;
+    error?: FieldError;
     onChange?:
         | ((
               newValue: MultiValue<boolean> | SingleValue<boolean>,

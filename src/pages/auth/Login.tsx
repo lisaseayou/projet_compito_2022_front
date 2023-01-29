@@ -1,7 +1,12 @@
 // hooks
 import { useEffect, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { FieldValues, SubmitHandler, useForm } from 'react-hook-form';
+import {
+    FieldError,
+    FieldValues,
+    SubmitHandler,
+    useForm,
+} from 'react-hook-form';
 import { useLazyQuery } from '@apollo/client';
 import { useDispatch } from 'react-redux';
 
@@ -119,7 +124,7 @@ const Login = () => {
                         />
                     }
                     containerClassName="mb-4 w-full max-w-sm"
-                    error={errors?.email}
+                    error={errors?.email as FieldError | undefined}
                 />
 
                 <TextField
@@ -147,7 +152,7 @@ const Login = () => {
                     containerClassName="mb-4 sm:mb-6 w-full max-w-sm"
                     handlePaste={handleResetDefault}
                     handleCopy={handleResetDefault}
-                    error={errors?.password}
+                    error={errors?.password as FieldError | undefined}
                 />
 
                 <Link to="/auth/forgot-password" className="hover:underline">

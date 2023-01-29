@@ -10,12 +10,13 @@ import { logoutUser } from '../../context/actions/user.action';
 // types, interfaces & enums
 import { RouteEnum } from '../../enums';
 import { IUser } from '../../types/User';
+import { IRootState } from '../../types';
 
 const Logout = () => {
     const navigate = useNavigate();
     const dispatch = useDispatch();
 
-    const user: IUser = useSelector((state: any) => state.user);
+    const user: IUser = useSelector((state: IRootState) => state.user);
 
     useEffect(() => {
         if (Cookies.get('signedin') || user.id) {

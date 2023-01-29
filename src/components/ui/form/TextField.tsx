@@ -1,11 +1,12 @@
-import { ClipboardEvent, ReactNode } from 'react';
-import { Controller } from 'react-hook-form';
+import { ChangeEvent, ClipboardEvent, ReactNode } from 'react';
+import { Control, Controller, FieldError, FieldValues } from 'react-hook-form';
 import { AlertVariantEnum } from '../../../enums';
+import { FormValidation } from '../../../types';
 import Alert from '../Alert';
 
 type TextFieldProps = {
-    control?: any;
-    validation?: any;
+    control?: Control<FieldValues, string>;
+    validation?: FormValidation;
     name: string;
     id: string;
     type: string;
@@ -16,10 +17,10 @@ type TextFieldProps = {
     containerClassName?: string;
     handlePaste?: (e: ClipboardEvent<HTMLInputElement>) => boolean;
     handleCopy?: (e: ClipboardEvent<HTMLInputElement>) => boolean;
-    error?: any;
+    error?: FieldError;
     value?: string;
     defaultValue?: string;
-    handleChange?: any;
+    handleChange?: (e: ChangeEvent<HTMLInputElement>) => void;
     onChange?: () => void;
 };
 
@@ -42,6 +43,7 @@ const TextField = ({
     handleChange,
 }: TextFieldProps) => {
     const renderInput = (value: string, onChange: any) => {
+        console.log(error);
         return (
             <div className={'relative'}>
                 <span className="absolute inset-y-0 inline-flex items-center left-4 text-primary-main">

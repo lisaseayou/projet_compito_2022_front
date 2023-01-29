@@ -20,6 +20,7 @@ import {
     TextTransformEnum,
     TypographyVariantEnum,
 } from '../enums';
+import { IRootState } from '../types';
 
 // images && icons
 import {
@@ -54,7 +55,7 @@ const AuthLayout = ({
     responsiveLinkRoute,
 }: AuthLayoutProps) => {
     const navigate = useNavigate();
-    const user: IUser = useSelector((state: any) => state.user);
+    const user: IUser = useSelector((state: IRootState) => state.user);
 
     useEffect(() => {
         if (user.email) {

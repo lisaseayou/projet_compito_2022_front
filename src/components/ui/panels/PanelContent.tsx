@@ -10,12 +10,7 @@ import {
     TypographyVariantEnum,
 } from '../../../enums';
 import { UPDATE_USER_ON_PROJECT } from '../../../graphql/mutation';
-import {
-    GET_ALL_USERS,
-    GET_LAST_PROJECTS_UPDATE_BY_USER,
-    GET_PROJECT,
-    GET_PROJECT_BY_USER,
-} from '../../../graphql/query';
+import { GET_ALL_USERS, GET_PROJECT } from '../../../graphql/query';
 import { IGetAllUsers, IUser } from '../../../types/User';
 import { getNumberItems, getPlural } from '../../../utils';
 import SelectInput, { OptionsType } from '../form/SelectInput';

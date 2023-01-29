@@ -3,7 +3,12 @@ import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useMutation } from '@apollo/client';
 import { useDispatch } from 'react-redux';
-import { FieldValues, SubmitHandler, useForm } from 'react-hook-form';
+import {
+    FieldError,
+    FieldValues,
+    SubmitHandler,
+    useForm,
+} from 'react-hook-form';
 
 // components
 import TextField from '../../components/ui/form/TextField';
@@ -119,7 +124,7 @@ const Register = () => {
                         />
                     }
                     containerClassName="mb-4 w-full max-w-sm"
-                    error={errors?.name}
+                    error={errors?.name as FieldError | undefined}
                 />
 
                 <TextField
@@ -136,7 +141,7 @@ const Register = () => {
                         />
                     }
                     containerClassName="mb-4 w-full max-w-sm"
-                    error={errors?.email}
+                    error={errors?.email as FieldError | undefined}
                 />
 
                 <TextField
@@ -171,7 +176,7 @@ const Register = () => {
                     containerClassName="mb-4 w-full max-w-sm"
                     handlePaste={handleResetDefault}
                     handleCopy={handleResetDefault}
-                    error={errors?.password}
+                    error={errors?.password as FieldError | undefined}
                 />
 
                 <TextField
@@ -207,7 +212,7 @@ const Register = () => {
                     containerClassName="mb-6 sm:mb-8 w-full max-w-sm"
                     handlePaste={handleResetDefault}
                     handleCopy={handleResetDefault}
-                    error={errors?.passwordConfirm}
+                    error={errors?.passwordConfirm as FieldError | undefined}
                 />
             </Form>
         </AuthLayout>

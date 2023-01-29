@@ -76,3 +76,7 @@ export interface IGetAllUsers {
         'id' | 'name' | 'email'
     >[];
 }
+
+export type ConnectedUser = Pick<IUser, "id" | 'name' | 'email' | 'url' | "description" | "github" | "linkedin" | "twitter">
+
+export type PanelListUsers = Pick<IUser, "id" | 'name'>[]

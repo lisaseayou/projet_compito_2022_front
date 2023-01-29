@@ -9,9 +9,10 @@ import PrimaryLayout from '../layout/PrimaryLayout';
 // types, interfaces & enums
 import { IUser } from '../types/User';
 import { JustifyContentEnum } from '../enums';
+import { IRootState } from '../types';
 
 const Profil = () => {
-    const user: IUser = useSelector((state: any) => state.user);
+    const user: IUser = useSelector((state: IRootState) => state.user);
 
     return (
         <>

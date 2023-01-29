@@ -11,11 +11,12 @@ import {
 } from './components/Menu';
 import { useSelector } from 'react-redux';
 import { IUser } from './types/User';
+import { IRootState } from './types';
 
 export type MenuItem = Pick<Menu, 'path' | 'Component'>;
 
 function App() {
-    const user: IUser = useSelector((state: any) => state.user);
+    const user: IUser = useSelector((state: IRootState) => state.user);
 
     return (
         <>

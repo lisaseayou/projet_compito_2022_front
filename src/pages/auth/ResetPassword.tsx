@@ -2,7 +2,12 @@
 import { ClipboardEvent, useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { useMutation, useQuery } from '@apollo/client';
-import { FieldValues, SubmitHandler, useForm } from 'react-hook-form';
+import {
+    FieldError,
+    FieldValues,
+    SubmitHandler,
+    useForm,
+} from 'react-hook-form';
 
 // components
 import TextField from '../../components/ui/form/TextField';
@@ -172,7 +177,7 @@ const ResetPassword = () => {
                     containerClassName="mb-4 sm:mb-4 mt-0 w-full max-w-sm"
                     handlePaste={handlePaste}
                     handleCopy={handleCopy}
-                    error={errors?.password}
+                    error={errors?.password as FieldError | undefined}
                 />
 
                 <TextField
@@ -208,7 +213,7 @@ const ResetPassword = () => {
                     containerClassName="mb-4 sm:mb-4 mt-0 w-full max-w-sm"
                     handlePaste={handlePaste}
                     handleCopy={handleCopy}
-                    error={errors?.passwordConfirm}
+                    error={errors?.passwordConfirm as FieldError | undefined}
                 />
             </Form>
         </ForgotPasswordLayout>

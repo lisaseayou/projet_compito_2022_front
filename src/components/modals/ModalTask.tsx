@@ -2,7 +2,7 @@
 import { useState } from 'react';
 import { useMutation } from '@apollo/client';
 import { useNavigate } from 'react-router-dom';
-import { useForm } from 'react-hook-form';
+import { FieldError, useForm } from 'react-hook-form';
 import { useSelector } from 'react-redux';
 
 // components
@@ -29,6 +29,7 @@ import {
 import { IUser } from '../../types/User';
 import { IAddTask, ITask } from '../../types/Task';
 import { CrudTypeEnum, IconEnum, OpacityEnum, RouteEnum } from '../../enums';
+import { IRootState } from '../../types';
 
 // images & icons
 import AddTaskImg from '../../assets/add-task.svg';
@@ -36,7 +37,7 @@ import AddTaskImg from '../../assets/add-task.svg';
 type ModalTaskProps = {
     show: boolean;
     setShow: (value: boolean) => void;
-    projectId: any;
+    projectId: string;
     status?: string;
     title: string;
     task?: ITask;
@@ -53,7 +54,7 @@ const ModalTask = ({
     mutationType,
 }: ModalTaskProps) => {
     const navigate = useNavigate();
-    const user: IUser = useSelector((state: any) => state.user);
+    const user: IUser = useSelector((state: IRootState) => state.user);
 
     const {
         control,
@@ -117,7 +118,7 @@ const ModalTask = ({
                             />
                         }
                         containerClassName="mb-4 w-full max-w-sm"
-                        error={errors?.name}
+                        error={errors?.name as FieldError | undefined}
                         defaultValue={task?.name}
                     />
 
@@ -135,12 +136,12 @@ const ModalTask = ({
                             />
                         }
                         containerClassName="mb-4 w-full max-w-sm"
-                        error={errors?.password}
+                        error={errors?.description as FieldError | undefined}
                         defaultValue={task?.description}
                     />
                 </>
             }
-            buttonLabel="Ajouter"
+            buttonLabel={title}
             image={AddTaskImg}
             mutationCreateFn={addTask}
             mutationUpdateFn={updateTask}

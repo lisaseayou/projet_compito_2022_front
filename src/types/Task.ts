@@ -1,3 +1,4 @@
+import { StatusEnum } from './../enums/index';
 import { IProject } from './Project';
 import { IUser } from './User';
 
@@ -23,4 +24,10 @@ export interface IAddTask {
 
 export interface IDeleteTask {
     addProject: Pick<ITask, 'id' | 'name'>;
+}
+
+export interface ITaskColumn {
+    id: string
+    title: StatusEnum,
+    taskIds: string[],
 }

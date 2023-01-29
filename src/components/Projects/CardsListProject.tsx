@@ -14,6 +14,7 @@ import { GET_PROJECT_BY_USER } from '../../graphql/query';
 // types, interfaces & enums
 import { IGetProjectsByUser, IProject } from '../../types/Project';
 import { IUser } from '../../types/User';
+import { IRootState } from '../../types';
 import {
     TypographyVariantEnum,
     TextTransformEnum,
@@ -32,7 +33,7 @@ interface CardListProps {
 }
 
 const CardsList = ({ setShowAddProject }: CardListProps) => {
-    const user: IUser = useSelector((state: any) => state.user);
+    const user: IUser = useSelector((state: IRootState) => state.user);
     const [modalUpdateOrDeleteID, setModalUpdateOrDeleteID] = useState('');
     const [searchProject, setSearchProject] = useState('');
 

@@ -9,6 +9,7 @@ import Cookies from 'js-cookie';
 // types, interfaces & enums
 import { RouteEnum } from '../enums';
 import { IUser } from '../types/User';
+import { IRootState } from '../types';
 
 interface IProtectedAreaProps {
     children: JSX.Element;
@@ -16,7 +17,7 @@ interface IProtectedAreaProps {
 
 const PrivateRoute = ({ children }: IProtectedAreaProps) => {
     const navigate = useNavigate();
-    const user: IUser = useSelector((state: any) => state.user);
+    const user: IUser = useSelector((state: IRootState) => state.user);
 
     useEffect(() => {
         if (!Cookies.get('signedin') && !user.id) {

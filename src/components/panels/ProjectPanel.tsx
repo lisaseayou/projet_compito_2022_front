@@ -6,6 +6,7 @@ import {
     TextTransformEnum,
     TypographyVariantEnum,
 } from '../../enums';
+import { PanelListUsers } from '../../types/User';
 import Icon from '../ui/Icons/Icon';
 import PanelContent from '../ui/panels/PanelContent';
 import Typography from '../ui/Typography';
@@ -27,6 +28,7 @@ const ProjectPanel = ({
     users,
     onClose,
 }: ProjectPanelProps) => {
+    console.log(users);
     return (
         <>
             {show && (

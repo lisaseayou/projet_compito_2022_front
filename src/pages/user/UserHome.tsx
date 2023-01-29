@@ -29,6 +29,7 @@ import { IProject } from '../../types/Project';
 import { IUser } from '../../types/User';
 import { ITask } from '../../types/Task';
 import { TypographyVariantEnum, AlertVariantEnum } from '../../enums';
+import { IRootState } from '../../types';
 
 // images & icons
 import {
@@ -43,7 +44,7 @@ const UserHome = () => {
     const [showModal, setShowModal] = useState<boolean>(false);
     const [modalUpdateOrDeleteID, setModalUpdateOrDeleteID] = useState('');
 
-    const user: IUser = useSelector((state: any) => state.user);
+    const user: IUser = useSelector((state: IRootState) => state.user);
 
     const { loading, error, data } = useQuery(
         GET_LAST_PROJECTS_UPDATE_BY_USER,
